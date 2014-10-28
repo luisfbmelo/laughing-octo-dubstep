@@ -3,80 +3,119 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
+use common\models\repair;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
-use common\models\LoginForm;
+use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-class RepairController extends \yii\web\Controller
+/**
+ * RepairController implements the CRUD actions for repair model.
+ */
+class RepairController extends Controller
 {
-	/**
-     * @inheritdoc
-     */
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout', 'index'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'delete' => ['post'],
                 ],
             ],
         ];
     }
 
     /**
-     * @inheritdoc
+     * Lists all repair models.
+     * @return mixed
      */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-        ];
-    }
-
     public function actionIndex()
     {
-        return $this->render('index');
+        $dataProvider = new ActiveDataProvider([
+            'query' => repair::find(),
+        ]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
-    public function actionLogin()
+    /**
+     * Displays a single repair model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionView($id)
     {
-        if (!\Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+    /**
+     * Creates a new repair model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $model = new repair();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id_repair]);
         } else {
-            return $this->render('login', [
+            return $this->render('create', [
                 'model' => $model,
             ]);
         }
     }
 
-    public function actionLogout()
+    /**
+     * Updates an existing repair model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate($id)
     {
-        Yii::$app->user->logout();
+        $model = $this->findModel($id);
 
-        return $this->goHome();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id_repair]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
     }
 
+    /**
+     * Deletes an existing repair model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Finds the repair model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return repair the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = repair::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
 }

@@ -1,0 +1,89 @@
+#leftMenu{
+    height:100%;
+    background-color: $menu-item-bg; 
+    .accordion-group {
+        margin-bottom: 0px;
+        border:0px;
+        @include border-radius(0px);
+
+        /*Heading*/
+        .accordion-heading,
+        .accordion-inner ul li{
+            height: 35px;
+            border-bottom: 1px solid $menuB-first-line;
+            list-style-type:none;
+            padding:5px;
+            @include transition(all, .4s, ease, 0s);
+        }
+
+            
+        .accordion-heading {
+            background-color: $menu-item-bg; 
+            @include box-shadow(0px, 1px, 0px, $menuB-second-line);
+            margin-bottom: 1px;
+
+                a{  
+                    color: #fff;                
+                    text-decoration:none;
+                    display:block;
+                    font-size:1em;
+                    padding:0 5px;
+                    line-height:1.5em;
+
+                    position: relative;
+
+                    span{
+                        padding-right:10px;
+                    }
+
+                    .secondGliph{
+                        position:absolute;
+                        right:0;
+                        top:50%;
+                        @include translate(0,-50%);
+
+                        padding:0;
+                    }
+                }
+
+
+                .active {
+                    width: 182px;
+                    height: 34px;
+                    border: 1px solid #5b5b5b;
+                    background-color: #353535;
+                    @include background-gradient(90deg, #4b4b4b, 0%, #555, 100%);
+                }
+        }
+
+        .accordion-heading:hover{  
+            background-color:#414957;    
+        }
+
+
+        /*Accordion*/
+        .accordion-inner{
+            ul{
+                li{
+                    background-color: $dropMenu-item-bg; 
+                    @include box-shadow(0px, 0px, 0px, $menuDrop-second-line);
+
+                    a{
+                        display:block;
+                        width:100%;
+                        text-decoration:none;
+                        color:#fff;
+                        font-size:0.8em;
+                        padding-left:10px;
+                    }
+                }
+
+                li:hover{
+                    background-color:#414957;
+                }
+            } 
+        }
+         
+    }
+
+}

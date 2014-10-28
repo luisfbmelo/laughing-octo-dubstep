@@ -19,10 +19,24 @@
 	background-color:#fff;
 }
 
+@mixin transition($prop, $time, $timing, $delay){
+	-webkit-transition:$prop $time $timing $delay;
+	   -moz-transition:$prop $time $timing $delay;
+	     -o-transition:$prop $time $timing $delay;
+	        transition:$prop $time $timing $delay;
+}
+
 @mixin translate($x, $y){
 	-moz-transform:  translate($x,$y);
 	  -ms-transform:  translate($x,$y);
 	    -webkit-transform:  translate($x,$y); 
 	      transform: translate($x,$y);
+}
+
+@mixin background-gradient($deg, $color1, $percent1, $color2, $percent2){
+	background-image: -moz-linear-gradient($deg, $color1 $percent1, $color2 $percent2); /* gradient overlay */
+    background-image: -o-linear-gradient($deg, $color1 $percent1, $color2 $percent2); /* gradient overlay */
+    background-image: -webkit-linear-gradient($deg, $color1 $percent1, $color2 $percent2); /* gradient overlay */
+    background-image: linear-gradient($deg, $color1 $percent1, $color2 $percent2); /* gradient overlay */
 }
 

@@ -7,6 +7,7 @@ use yii\web\Controller;
 use common\models\LoginForm;
 use yii\filters\VerbFilter;
 
+
 /**
  * Site controller
  */
@@ -66,7 +67,8 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            //return $this->goBack();
+            return $this->redirect(Yii::$app->urlManager->createUrl(['repair/index']));
         } else {
             return $this->render('login', [
                 'model' => $model,

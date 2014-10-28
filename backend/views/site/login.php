@@ -14,9 +14,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="bigTitle">Efetue o login</div>
 
     <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-        <?= $form->field($model, 'username') ?>
-        <?= $form->field($model, 'password')->passwordInput() ?>
-        <?= $form->field($model, 'rememberMe')->checkbox() ?>
+        <?= $form->field($model, 'username',['labelOptions'=>['label'=>'Nome de Utilizador']])->textInput(array('placeholder' => 'Nome de utilizador')); ?>
+        <?= $form->field($model, 'password',['labelOptions'=>['label'=>'Password']])->passwordInput(array('placeholder' => 'Password')) ?>
+
+        <a href="#">Recuperar password</a>
+
+        <?= $form->field($model, 'rememberMe',['labelOptions'=>['label'=>'Lembrar-me']])->checkbox() ?>
         <div class="form-group">
             <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
         </div>

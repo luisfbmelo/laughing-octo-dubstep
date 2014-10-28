@@ -24,3 +24,11 @@
 	top:50%;
 	@include translate(0, -50%);
 }
+
+.clearPad{
+	padding:0!important;
+}
+
+.clearMag{
+	margin:0!important;
+}
