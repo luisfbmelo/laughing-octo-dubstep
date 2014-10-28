@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\controllers;
 
 use Yii;
@@ -7,12 +8,9 @@ use yii\web\Controller;
 use common\models\LoginForm;
 use yii\filters\VerbFilter;
 
-/**
- * Site controller
- */
-class SiteController extends Controller
+class RepairController extends \yii\web\Controller
 {
-    /**
+	/**
      * @inheritdoc
      */
     public function behaviors()
@@ -35,7 +33,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    //'logout' => ['post'],
+                    'logout' => ['post'],
                 ],
             ],
         ];
@@ -80,4 +78,5 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+
 }

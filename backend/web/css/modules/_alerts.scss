@@ -1,0 +1,14 @@
+%alert{
+	padding: 15px;
+
+	@include border-radius(3px);
+	@include box-shadow(1px, 1px, 3px, $shadow-color);
+
+	p{
+		margin: 0;
+	}
+}
+
+.alert{
+	@extend %alert;
+}

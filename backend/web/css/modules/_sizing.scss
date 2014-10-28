@@ -1,0 +1,26 @@
+.fWidth{
+	width:100%;
+}
+
+.fHeight{
+	height:100%;
+}
+
+.clearAll{
+	clear:both;
+}
+
+.fLeft{
+	float:left;
+}
+
+.fRight{
+	float:right;
+}
+
+.midPage{
+	margin:0 auto;
+	position:relative;
+	top:50%;
+	@include translate(0, -50%);
+}

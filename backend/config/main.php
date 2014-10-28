@@ -12,6 +12,7 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
+    //'defaultRoute' => 'repair/index',
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
@@ -28,6 +29,12 @@ return [
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
+        ],
+
+        'assetManager' => [
+            'assetMap' => [
+                'jquery.js' => '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js',
+            ],
         ],
     ],
     'params' => $params,
