@@ -10,7 +10,7 @@ $this->title = 'Repairs';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="col-lg-10">
+<div class="col-lg-10 col-xs-12 col-sm-8 col-md-8">
     <div class="repair-index">
 
         <h1><?= Html::encode($this->title) ?></h1>

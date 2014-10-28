@@ -1,3 +1,21 @@
+.navbar-toggle{
+    background-color:white;
+    @include transition(all, .4s, ease, 0s);
+
+    &.collapsed{
+        background-color:transparent;  
+        border: 1px solid white;
+
+        .icon-bar{
+            background-color: white;
+        }
+    }
+
+    .icon-bar{
+        background-color: $dark-blue-bg;
+    }
+}
+
 #leftMenu{
     height:100%;
     background-color: $menu-item-bg; 
