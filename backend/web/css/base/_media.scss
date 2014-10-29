@@ -1,6 +1,13 @@
-
-@media all and (max-width: 750px){
+@media all and (max-width: 768px){
   .profileBox {
-    text-align:left!important;
+    a{
+    	display:inline!important;
+    	float:right;
+    	clear:none!important;
+    }
+
+    .userInfo{
+    	float:left!important;
+    }
   }
 }

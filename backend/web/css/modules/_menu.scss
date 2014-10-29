@@ -1,9 +1,9 @@
 .navbar-toggle{
     background-color:white;
-    @include transition(all, .4s, ease, 0s);
+    @include transition(all, .2s, ease, 0s);
 
     &.collapsed{
-        background-color:transparent;  
+        background-color:#6f7d94;  
         border: 1px solid white;
 
         .icon-bar{
@@ -31,7 +31,7 @@
             border-bottom: 1px solid $menuB-first-line;
             list-style-type:none;
             padding:5px;
-            @include transition(all, .4s, ease, 0s);
+            @include transition(all, .2s, ease, 0s);
         }
 
             

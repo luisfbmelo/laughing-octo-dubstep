@@ -14,9 +14,13 @@ li {
   margin: 0;
   padding: 0; }
 
-@media all and (max-width: 750px) {
-  .profileBox {
-    text-align: left !important; } }
+@media all and (max-width: 768px) {
+  .profileBox a {
+    display: inline !important;
+    float: right;
+    clear: none !important; }
+  .profileBox .userInfo {
+    float: left !important; } }
 body {
   font-family: Open Sans, sans-serif; }
 
@@ -50,19 +54,25 @@ body {
   color: white; }
 
 .brandHeader .profileBox {
-  text-align: right; }
-  .brandHeader .profileBox .notifications {
+  text-align: right;
+  padding-top: 0.5em; }
+  .brandHeader .profileBox .userInfo .notifications {
+    float: right;
     margin-right: 10px;
     border: 1px solid #7f0000;
     background-color: #b90000; }
-    .brandHeader .profileBox .notifications span {
+    .brandHeader .profileBox .userInfo .notifications span {
       padding: 5px; }
-  .brandHeader .profileBox .notifications:hover {
+  .brandHeader .profileBox .userInfo .notifications:hover {
     background-color: #7f0000;
     cursor: pointer; }
-  .brandHeader .profileBox .userLoged strong {
-    font-style: italic; }
+  .brandHeader .profileBox .userInfo .userLoged {
+    float: right; }
+    .brandHeader .profileBox .userInfo .userLoged strong {
+      font-style: italic; }
   .brandHeader .profileBox a {
+    display: block;
+    clear: both;
     color: white; }
 
 .isGuest {
@@ -113,12 +123,12 @@ body {
 
 .navbar-toggle {
   background-color: white;
-  -webkit-transition: all 0.4s ease 0s;
-  -moz-transition: all 0.4s ease 0s;
-  -o-transition: all 0.4s ease 0s;
-  transition: all 0.4s ease 0s; }
+  -webkit-transition: all 0.2s ease 0s;
+  -moz-transition: all 0.2s ease 0s;
+  -o-transition: all 0.2s ease 0s;
+  transition: all 0.2s ease 0s; }
   .navbar-toggle.collapsed {
-    background-color: transparent;
+    background-color: #6f7d94;
     border: 1px solid white; }
     .navbar-toggle.collapsed .icon-bar {
       background-color: white; }
@@ -144,10 +154,10 @@ body {
       border-bottom: 1px solid #677489;
       list-style-type: none;
       padding: 5px;
-      -webkit-transition: all 0.4s ease 0s;
-      -moz-transition: all 0.4s ease 0s;
-      -o-transition: all 0.4s ease 0s;
-      transition: all 0.4s ease 0s; }
+      -webkit-transition: all 0.2s ease 0s;
+      -moz-transition: all 0.2s ease 0s;
+      -o-transition: all 0.2s ease 0s;
+      transition: all 0.2s ease 0s; }
     #leftMenu .accordion-group .accordion-heading {
       background-color: #6f7d94;
       -webkit-box-shadow: 0px 1px 0px #899cbc;

@@ -7,29 +7,36 @@
 .brandHeader{
 	.profileBox{
 		text-align:right;
+		padding-top: 0.5em;
 
-		.notifications{
-			margin-right:10px;			
-			border: 1px solid $not-border;
-			background-color:$not-bg;
+		.userInfo{
+			.notifications{
+				float:right;
+				margin-right:10px;			
+				border: 1px solid $not-border;
+				background-color:$not-bg;
 
-			span{
-				padding:5px;
+				span{
+					padding:5px;
+				}
 			}
-		}
 
-		.notifications:hover{
-			background-color:$not-bg-hover;
-			cursor:pointer;
-		}
+			.notifications:hover{
+				background-color:$not-bg-hover;
+				cursor:pointer;
+			}
 
-		.userLoged{
-			strong{
-				font-style:italic;
+			.userLoged{
+				float:right;
+				strong{
+					font-style:italic;
+				}
 			}
 		}
 
 		a{
+			display:block;
+			clear:both;
 			color:white;
 		}
 	}

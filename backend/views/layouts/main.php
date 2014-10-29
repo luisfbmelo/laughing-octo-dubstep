@@ -46,11 +46,13 @@ AppAsset::register($this);
                     </div>
 
                     <div class="col-lg-5 col-xs-12 col-sm-5 col-md-5 profileBox">
-                        <div class="userLoged fRight">Bem vindo <strong>Paulo Belém</strong>.</div>
-                        <div class="notifications fRight">
-                            <span>4</span>
+                        <div class="userInfo">
+                            <div class="userLoged">Bem vindo <strong>Paulo Belém</strong>.</div>
+                            <div class="notifications">
+                                <span>4</span>
+                            </div>
                         </div>
-                        <div class="clearAll"></div>
+                       
                         <a href="<?php echo Yii::$app->getUrlManager()->createUrl('site/logout'); ?>" class="logout">Sair</a>
                     </div>
                     
