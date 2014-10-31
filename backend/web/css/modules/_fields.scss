@@ -7,8 +7,18 @@
 
 	form{
 		div{
-			padding-left: 0!important;
+			/*padding-left: 0!important;*/
 			padding-bottom:0.3em;
+
+			label{
+				font-size:1em;
+				color:$text-color;
+				font-weight:normal!important;
+			}
+
+			input:not(.newClient){
+				background-color:$topBtn-bg-active-color;
+			}
 		}
 	}
 }

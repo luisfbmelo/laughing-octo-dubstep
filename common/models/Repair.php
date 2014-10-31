@@ -26,7 +26,7 @@ use Yii;
  * @property Inventory $inve
  * @property RepairType $type
  * @property Stores $store
- * @property Users $user
+ * @property User $user
  * @property RepairAccessory[] $repairAccessories
  * @property Accessories[] $accessories
  * @property RepairParts[] $repairParts
@@ -63,19 +63,19 @@ class Repair extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_repair' => 'Id Repair',
-            'type_id' => 'Type ID',
-            'client_id' => 'Client ID',
-            'inve_id' => 'Inve ID',
+            'id_repair' => 'Nº Reparação',
+            'type_id' => 'Tipo de reparação',
+            'client_id' => 'Cliente',
+            'inve_id' => 'Inventário',
             'status' => 'Status',
-            'user_id' => 'User ID',
-            'repair_desc' => 'Repair Desc',
-            'date_entry' => 'Date Entry',
-            'date_close' => 'Date Close',
-            'store_id' => 'Store ID',
-            'priority' => 'Priority',
-            'budget' => 'Budget',
-            'maxBudget' => 'Max Budget',
+            'user_id' => 'Utilizador',
+            'repair_desc' => 'Descrição',
+            'date_entry' => 'Entrada',
+            'date_close' => 'Fecho',
+            'store_id' => 'Loja',
+            'priority' => 'Prioridade',
+            'budget' => 'Orçamento',
+            'maxBudget' => 'Orçamento máximo',
             'total' => 'Total',
         ];
     }
@@ -117,7 +117,7 @@ class Repair extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(Users::className(), ['id_users' => 'user_id']);
+        return $this->hasOne(User::className(), ['id_users' => 'user_id']);
     }
 
     /**

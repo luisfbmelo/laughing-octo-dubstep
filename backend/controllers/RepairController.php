@@ -3,12 +3,19 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\repair;
+use common\models\repair;
+use common\models\client;
+use common\models\brands;
+use common\models\equipaments;
+use common\models\models;
+use common\models\stores;
+
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 
 /**
  * RepairController implements the CRUD actions for repair model.
@@ -85,18 +92,68 @@ class RepairController extends Controller
      */
     public function actionCreate()
     {
-        $model = new repair();
 
-        /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_repair]);
-        } else {
+        /*START MODELS*/
+        $modelRepair = new repair();
+        $modelClient = new client();
+        $modelStores = new stores();
+        $modelBrands = new brands();
+        $modelEquip = new equipaments();
+        $modelModels = new models();
+
+        /*GET EXISTING DATA*/
+        $allStores=ArrayHelper::map(stores::find()->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc');
+        //$allStores = stores::find()->asArray()->orderBy('storeDesc ASC')->all();
+
+        $allBrands = brands::find()->asArray()->indexBy('storeDesc')->all();
+
+        $allEquip = equipaments::find()->asArray()->indexBy('storeDesc')->all();
+
+        $allModels = models::find()->asArray()->indexBy('storeDesc')->all();
+
+        /*LOGIC PROCESS*/
+        //if it is canceled
+        if (isset($_POST['cancelar'])){
+            $this->redirect(['index']);
+        }else{
+
+            //try saving
+            if ($modelRepair->load(Yii::$app->request->post()) && $modelRepair->save()) {
+                return $this->redirect(['view', 'id' => $modelRepair->id_repair]);
+
+            //if didn't save
+            } else {
+                return $this->render('create', [
+                    'modelRepair' => $modelRepair,
+                    'modelClient' => $modelClient,
+                    'allStores' => $allStores,
+                    'allBrands' => $allBrands,
+                    'allEquip' => $allEquip,
+                    'allModels' => $allModels,
+                    'modelStores' => $modelStores,
+                    'modelBrands' => $modelBrands,
+                    'modelEquip' => $modelEquip,
+                    'modelModels' => $modelModels
+                ]);
+            }
+
+            //normal form representation
             return $this->render('create', [
-                'model' => $model,
+                'modelRepair' => $modelRepair,
+                'modelClient' => $modelClient,
+                'allStores' => $allStores,
+                'allBrands' => $allBrands,
+                'allEquip' => $allEquip,
+                'allModels' => $allModels,
+                'modelStores' => $modelStores,
+                'modelBrands' => $modelBrands,
+                'modelEquip' => $modelEquip,
+                'modelModels' => $modelModels
             ]);
-        }*/
-        return $this->render('create', [
-                'model' => $model,
-            ]);
+        }
+       
+
+        
     }
 
     /**

@@ -44,6 +44,20 @@ body {
   padding-bottom: 15px;
   font-weight: bold; }
 
+.createSubTitle {
+  color: #414957;
+  font-size: 1.2em;
+  text-align: center;
+  font-weight: bold; }
+
+.smallDivider {
+  width: 20px;
+  height: 1px;
+  margin: 0 auto 15px !important;
+  padding: 0 !important;
+  background-color: #414957;
+  margin: 0 auto; }
+
 .alert {
   padding: 15px;
   -webkit-border-radius: 3px;
@@ -254,6 +268,9 @@ a.topBtn {
   a.topBtn:hover {
     background-color: #fcfcfc !important; }
 
+.deleteBtn {
+  margin-bottom: 15px; }
+
 .gridView .listHeader {
   background-color: #414957; }
   .gridView .listHeader a {
@@ -269,5 +286,11 @@ a.topBtn {
   .createFields .sectionTitle {
     padding-left: 0 !important; }
   .createFields form div {
-    padding-left: 0 !important;
+    /*padding-left: 0!important;*/
     padding-bottom: 0.3em; }
+    .createFields form div label {
+      font-size: 1em;
+      color: #424242;
+      font-weight: normal !important; }
+    .createFields form div input:not(.newClient) {
+      background-color: #fcfcfc; }

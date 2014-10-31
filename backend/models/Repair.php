@@ -64,7 +64,7 @@ class Repair extends \yii\db\ActiveRecord
     {
         return [
             'id_repair' => 'Nº Reparação',
-            'type_id' => 'Tipo',
+            'type_id' => 'Tipo de reparação',
             'client_id' => 'Cliente',
             'inve_id' => 'Inventário',
             'status' => 'Status',

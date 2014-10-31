@@ -52,17 +52,17 @@ class Client extends \yii\db\ActiveRecord
     {
         return [
             'id_client' => 'Id Client',
-            'cliName' => 'Cli Name',
-            'cliAdress' => 'Cli Adress',
-            'cliPostalCode' => 'Cli Postal Code',
-            'cliPostalSuffix' => 'Cli Postal Suffix',
-            'cliDoorNum' => 'Cli Door Num',
-            'cliCC' => 'Cli Cc',
-            'cliNIF' => 'Cli Nif',
-            'cliConFix' => 'Cli Con Fix',
-            'cliConMov1' => 'Cli Con Mov1',
-            'cliConMov2' => 'Cli Con Mov2',
-            'cliBirthday' => 'Cli Birthday',
+            'cliName' => 'Nome do Cliente',
+            'cliAdress' => 'Morada',
+            'cliPostalCode' => 'Código Postal',
+            'cliPostalSuffix' => 'CP - Sufixo',
+            'cliDoorNum' => 'Nº da porta',
+            'cliCC' => 'Cartão de Cidadão',
+            'cliNIF' => 'NIF',
+            'cliConFix' => 'Contato Fixo',
+            'cliConMov1' => 'Contato Móvel 1',
+            'cliConMov2' => 'Contato Móvel 2',
+            'cliBirthday' => 'Aniversário',
         ];
     }
 

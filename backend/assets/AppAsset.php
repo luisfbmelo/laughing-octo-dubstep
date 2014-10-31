@@ -32,6 +32,10 @@ class AppAsset extends AssetBundle
         'yii\bootstrap\BootstrapAsset',
     ];
 
+    public $jsOptions = array(
+        'position' => \yii\web\View::POS_HEAD
+    );
+
     //STOP BOOTSTRAP FROM LOADING
     /*public function init()
     {

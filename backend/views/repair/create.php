@@ -24,7 +24,16 @@ $this->params['breadcrumbs'][] = $this->title;
 			<h1 class="sectionTitle col-lg-12"><?= Html::encode($this->title) ?></h1>
 
 		    <?= $this->render('_form', [
-		        'model' => $model,
+		        'modelRepair' => $modelRepair,
+		        'modelClient' => $modelClient,
+                'stores' => $allStores,
+                'brands' => $allBrands,
+                'equip' => $allEquip,
+                'models' => $allModels,
+                'modelStores' => $modelStores,
+                'modelBrands' => $modelBrands,
+                'modelEquip' => $modelEquip,
+                'modelModels' => $modelModels
 		    ]) ?>
 
 		</div>

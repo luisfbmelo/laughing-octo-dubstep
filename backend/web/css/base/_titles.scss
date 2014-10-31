@@ -12,3 +12,20 @@
 	padding-bottom:15px;
 	font-weight:bold;
 }
+
+.createSubTitle{
+	color:$section-title-color;
+	font-size:1.2em;
+	text-align:center;
+	font-weight:bold;
+}
+
+.smallDivider{
+	width:20px;
+	height:1px;
+	margin:0 auto 15px!important;
+	padding:0!important;
+	background-color:$section-title-color;
+	margin:0 auto;
+
+}
