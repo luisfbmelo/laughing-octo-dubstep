@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <section class="col-lg-10 col-xs-12 col-sm-8 col-md-8">
     <div class="row">
-        <div class="col-lg-4 col-xs-4 col-sm-4 col-md-4">
+        <div class="col-lg-2 col-xs-4 col-sm-4 col-md-4">
             <a href="<?php echo Url::to(['repair/create']); ?>" class="topBtn">
                 <div class="btnEl">
 
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 
             </a>
         </div>
-        <div class="col-lg-4 col-xs-4 col-sm-4 col-md-4">
+        <div class="col-lg-2 col-xs-4 col-sm-4 col-md-4">
             <a href="<?php echo Url::to(['repair/create']); ?>" class="topBtn">
                 <div class="btnEl">
 
