@@ -12,7 +12,7 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
-    //'defaultRoute' => 'repair/index',
+    'defaultRoute' => 'repair/index',
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',

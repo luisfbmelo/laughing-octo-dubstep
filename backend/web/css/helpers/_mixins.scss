@@ -40,3 +40,14 @@
     background-image: linear-gradient($deg, $color1 $percent1, $color2 $percent2); /* gradient overlay */
 }
 
+@mixin calc($key, $value) {
+  #{$key}: -webkit-calc(#{$value});
+  #{$key}: -moz-calc(#{$value});
+  #{$key}: calc(#{$value});
+}
+
+@mixin min-calc($key, $value) {
+  min-#{$key}: -webkit-calc(#{$value});
+  min-#{$key}: -moz-calc(#{$value});
+  min-#{$key}: calc(#{$value});
+}

@@ -1,0 +1,16 @@
+.gridView{
+	.listHeader{
+		background-color:$dark-blue-bg;
+
+		a{
+			color:white;
+			font-weight:normal;
+			font-size:0.87em;
+		}	
+
+		th{
+			border:none!important;
+			text-align:center;
+		}
+	}
+}

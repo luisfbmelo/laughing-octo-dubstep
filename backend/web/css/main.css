@@ -15,12 +15,16 @@ li {
   padding: 0; }
 
 @media all and (max-width: 768px) {
-  .profileBox a {
-    display: inline !important;
-    float: right;
-    clear: none !important; }
-  .profileBox .userInfo {
-    float: left !important; } }
+  .profileBox {
+    border-top: 1px solid white; }
+    .profileBox .logoutButton {
+      text-align: left;
+      margin-top: 5px; }
+    .profileBox .userInfo {
+      float: left !important; }
+
+  .menuContainer {
+    height: auto !important; } }
 body {
   font-family: Open Sans, sans-serif; }
 
@@ -32,6 +36,13 @@ body {
   color: #6f7d94;
   border-bottom: 1px solid #6f7d94;
   margin-bottom: 30px; }
+
+.sectionTitle {
+  color: #414957;
+  font-size: 1.5em;
+  border-bottom: 1px solid #414957;
+  padding-bottom: 15px;
+  font-weight: bold; }
 
 .alert {
   padding: 15px;
@@ -70,9 +81,7 @@ body {
     float: right; }
     .brandHeader .profileBox .userInfo .userLoged strong {
       font-style: italic; }
-  .brandHeader .profileBox a {
-    display: block;
-    clear: both;
+  .brandHeader .profileBox .logoutButton a {
     color: white; }
 
 .isGuest {
@@ -86,7 +95,7 @@ body {
   .loginContainer .loginBox {
     border: 1px solid #b7b7b7;
     background-color: #fff;
-    width: 20%;
+    width: 30%;
     padding: 30px; }
     .loginContainer .loginBox .field-loginform-rememberme {
       padding-top: 15px; }
@@ -121,6 +130,15 @@ body {
 .clearMag {
   margin: 0 !important; }
 
+.menuBox {
+  min-height: -webkit-calc(100% - 110px);
+  min-height: -moz-calc(100% - 110px);
+  min-height: calc(100% - 110px); }
+  .menuBox .menuContainer {
+    background-color: #6f7d94;
+    height: 100%; }
+
+/*MENU ICON*/
 .navbar-toggle {
   background-color: white;
   -webkit-transition: all 0.2s ease 0s;
@@ -185,19 +203,11 @@ body {
           -webkit-transform: translate(0, -50%);
           transform: translate(0, -50%);
           padding: 0; }
-      #leftMenu .accordion-group .accordion-heading .active {
-        width: 182px;
-        height: 34px;
-        border: 1px solid #5b5b5b;
-        background-color: #353535;
-        background-image: -moz-linear-gradient(90deg, #4b4b4b 0%, #555555 100%);
-        /* gradient overlay */
-        background-image: -o-linear-gradient(90deg, #4b4b4b 0%, #555555 100%);
-        /* gradient overlay */
-        background-image: -webkit-linear-gradient(90deg, #4b4b4b 0%, #555555 100%);
-        /* gradient overlay */
-        background-image: linear-gradient(90deg, #4b4b4b 0%, #555555 100%);
-        /* gradient overlay */ }
+      #leftMenu .accordion-group .accordion-heading.active {
+        background-color: #414957 !important; }
+      #leftMenu .accordion-group .accordion-heading.activeTop {
+        background-color: #414957 !important;
+        border-top: 1px solid #899cbc; }
     #leftMenu .accordion-group .accordion-heading:hover {
       background-color: #414957; }
     #leftMenu .accordion-group .accordion-inner ul li {
@@ -206,7 +216,8 @@ body {
       -moz-box-shadow: 0px 0px 0px #687791;
       -ms-box-shadow: 0px 0px 0px #687791;
       -o-box-shadow: 0px 0px 0px #687791;
-      box-shadow: 0px 0px 0px #687791; }
+      box-shadow: 0px 0px 0px #687791;
+      line-height: 1.5em; }
       #leftMenu .accordion-group .accordion-inner ul li a {
         display: block;
         width: 100%;
@@ -216,3 +227,47 @@ body {
         padding-left: 10px; }
     #leftMenu .accordion-group .accordion-inner ul li:hover {
       background-color: #414957; }
+
+/*TOP BUTTONS*/
+a.topBtn {
+  display: block;
+  height: 5em;
+  text-decoration: none;
+  color: #424242;
+  background-color: #eaeaea;
+  border: 1px solid #d6d6d6;
+  margin-top: 15px; }
+  a.topBtn .btnEl {
+    position: relative;
+    top: 50%;
+    -moz-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%); }
+    a.topBtn .btnEl div {
+      display: block;
+      text-align: center; }
+    a.topBtn .btnEl .glyphicon {
+      font-size: 1.3em; }
+    a.topBtn .btnEl .bButtonTitle {
+      padding-top: 15px; }
+  a.topBtn:hover {
+    background-color: #fcfcfc !important; }
+
+.gridView .listHeader {
+  background-color: #414957; }
+  .gridView .listHeader a {
+    color: white;
+    font-weight: normal;
+    font-size: 0.87em; }
+  .gridView .listHeader th {
+    border: none !important;
+    text-align: center; }
+
+.createFields {
+  margin: 0 !important; }
+  .createFields .sectionTitle {
+    padding-left: 0 !important; }
+  .createFields form div {
+    padding-left: 0 !important;
+    padding-bottom: 0.3em; }

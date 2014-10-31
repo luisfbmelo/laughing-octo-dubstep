@@ -25,11 +25,11 @@ AppAsset::register($this);
         <?php
             if (!Yii::$app->user->isGuest) {            
         ?>
-            <div class="container-fluid">
+            <div class="container-fluid fHeight">
                 
-                <div class="row brandHeader">
+                <nav class="row brandHeader">
                     <div class="col-lg-5 col-xs-10 col-sm-5 col-md-5">
-                        <img src="img/logo.jpg" alt="" class="src">
+                        <a href="<?php echo Yii::$app->getUrlManager()->createUrl('repair/index'); ?>"><img src="img/logo.jpg" alt="" class="src"></a>
                     </div>
 
                     <div class="col-lg-2 col-xs-2 col-sm-2 col-md-2">
@@ -52,20 +52,23 @@ AppAsset::register($this);
                                 <span>4</span>
                             </div>
                         </div>
-                       
-                        <a href="<?php echo Yii::$app->getUrlManager()->createUrl('site/logout'); ?>" class="logout">Sair</a>
+                       <div class="clearAll"></div>
+                        <div class="logoutButton">
+                            <a href="<?php echo Yii::$app->getUrlManager()->createUrl('site/logout'); ?>" class="logout">Sair</a>
+                        </div>
+                        
                     </div>
                     
-                </div>
+                </nav>
             
-                <div class="row">
-                    <div class="col-lg-2 col-xs-12 col-sm-4 col-md-4 clearPad">
+                <aside class="row menuBox">
+                    <div class="col-lg-2 col-xs-12 col-sm-4 col-md-4 clearPad menuContainer">
                         
 
                         <!-- Side Menu -->
                         <div class="accordion collapse navbar-collapse clearPad" id="leftMenu">
                             <div class="accordion-group">
-                                <div class="accordion-heading">
+                                <div class="accordion-heading <?php echo Yii::$app->controller->isActive(); ?>">
                                     <a class="accordion-toggle" data-parent="#leftMenu" href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['repair/index']); ?>">
                                           <span class="glyphicon glyphicon-home"></span> 
                                           <span>Início</span>
@@ -142,7 +145,7 @@ AppAsset::register($this);
 
             
                     <?= $content ?>
-                </div>
+                </aside>
             </div>
         <?php }else{?>
             <div class="container-fluid loginContainer">

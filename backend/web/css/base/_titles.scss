@@ -4,3 +4,11 @@
 	border-bottom:1px solid $big-title-color;
 	margin-bottom: 30px;
 }
+
+.sectionTitle{
+	color:$section-title-color;
+	font-size:1.5em;
+	border-bottom:1px solid $section-title-color;
+	padding-bottom:15px;
+	font-weight:bold;
+}

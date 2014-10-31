@@ -1,13 +1,20 @@
 @media all and (max-width: 768px){
   .profileBox {
-    a{
-    	display:inline!important;
-    	float:right;
-    	clear:none!important;
+    .logoutButton{
+    	text-align:left;
+        margin-top:5px;
     }
+
+    border-top:1px solid white;
 
     .userInfo{
     	float:left!important;
     }
   }
+
+  .menuContainer{
+        height:auto!important;
+    }
+
+
 }
