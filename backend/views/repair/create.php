@@ -11,7 +11,7 @@ $this->title = 'Nova Reparação';
 $this->params['breadcrumbs'][] = ['label' => 'Reparações', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<section class="col-lg-10 col-xs-12 col-sm-8 col-md-8">
+<section class="col-lg-10 col-xs-12 col-sm-9 col-md-9">
 <div class="row">
 	<div class="col-lg-12">
 		<?= Breadcrumbs::widget([
@@ -30,10 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'brands' => $allBrands,
                 'equip' => $allEquip,
                 'models' => $allModels,
+                'types' => $allTypes,
                 'modelStores' => $modelStores,
                 'modelBrands' => $modelBrands,
                 'modelEquip' => $modelEquip,
-                'modelModels' => $modelModels
+                'modelModels' => $modelModels,
+                'modelTypes' => $modelTypes,
+                'modelInv' => $modelInv
 		    ]) ?>
 
 		</div>

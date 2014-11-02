@@ -5,27 +5,22 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "inventory".
+ * This is the model class for table "equip_brand".
  *
- * @property integer $id_inve
  * @property integer $equip_id
  * @property integer $brand_id
- * @property integer $model_id
- * @property string $inveSN
  *
  * @property Brands $brand
  * @property Equipaments $equip
- * @property Models $model
- * @property Repair[] $repairs
  */
-class Inventory extends \yii\db\ActiveRecord
+class EquipBrand extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'inventory';
+        return 'equip_brand';
     }
 
     /**
@@ -34,9 +29,8 @@ class Inventory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['equip_id', 'brand_id', 'model_id', 'inveSN'], 'required'],
-            [['equip_id', 'brand_id', 'model_id'], 'integer'],
-            [['inveSN'], 'string']
+            [['equip_id', 'brand_id'], 'required'],
+            [['equip_id', 'brand_id'], 'integer']
         ];
     }
 
@@ -46,11 +40,8 @@ class Inventory extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_inve' => 'Id Inve',
             'equip_id' => 'Equip ID',
             'brand_id' => 'Brand ID',
-            'model_id' => 'Model ID',
-            'inveSN' => 'Serial Number',
         ];
     }
 
@@ -68,21 +59,5 @@ class Inventory extends \yii\db\ActiveRecord
     public function getEquip()
     {
         return $this->hasOne(Equipaments::className(), ['id_equip' => 'equip_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getModel()
-    {
-        return $this->hasOne(Models::className(), ['id_model' => 'model_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRepairs()
-    {
-        return $this->hasMany(Repair::className(), ['inve_id' => 'id_inve']);
     }
 }

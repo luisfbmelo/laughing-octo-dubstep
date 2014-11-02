@@ -10,6 +10,8 @@ use Yii;
  * @property integer $id_equip
  * @property string $equipDesc
  *
+ * @property EquipBrand[] $equipBrands
+ * @property Brands[] $brands
  * @property Inventory[] $inventories
  */
 class Equipaments extends \yii\db\ActiveRecord
@@ -42,6 +44,22 @@ class Equipaments extends \yii\db\ActiveRecord
             'id_equip' => 'Id Equip',
             'equipDesc' => 'Equip Desc',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEquipBrands()
+    {
+        return $this->hasMany(EquipBrand::className(), ['equip_id' => 'id_equip']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBrands()
+    {
+        return $this->hasMany(Brands::className(), ['id_brand' => 'brand_id'])->viaTable('equip_brand', ['equip_id' => 'id_equip']);
     }
 
     /**

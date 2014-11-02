@@ -67,7 +67,7 @@ class Repair extends \yii\db\ActiveRecord
             'type_id' => 'Tipo de reparação',
             'client_id' => 'Cliente',
             'inve_id' => 'Inventário',
-            'status' => 'Status',
+            'status_id' => 'Status',
             'user_id' => 'Utilizador',
             'repair_desc' => 'Descrição',
             'date_entry' => 'Entrada',
@@ -94,6 +94,14 @@ class Repair extends \yii\db\ActiveRecord
     public function getInve()
     {
         return $this->hasOne(Inventory::className(), ['id_inve' => 'inve_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStatus()
+    {
+        return $this->hasOne(status::className(), ['id_status' => 'status_id']);
     }
 
     /**

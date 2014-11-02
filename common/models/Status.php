@@ -5,21 +5,21 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "repair_type".
+ * This is the model class for table "status".
  *
- * @property integer $id_type
- * @property string $typeDesc
+ * @property integer $id_status
+ * @property string $statusDesc
  *
  * @property Repair[] $repairs
  */
-class RepairType extends \yii\db\ActiveRecord
+class Status extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'repair_type';
+        return 'status';
     }
 
     /**
@@ -28,8 +28,8 @@ class RepairType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_type, typeDesc'], 'required'],
-            [['typeDesc'], 'string', 'max' => 250]
+            [['statusDesc'], 'required'],
+            [['statusDesc'], 'string', 'max' => 250]
         ];
     }
 
@@ -39,8 +39,8 @@ class RepairType extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_type' => 'Id Type',
-            'typeDesc' => 'Type Desc',
+            'id_status' => 'Id Status',
+            'statusDesc' => 'Status Desc',
         ];
     }
 
@@ -49,6 +49,6 @@ class RepairType extends \yii\db\ActiveRecord
      */
     public function getRepairs()
     {
-        return $this->hasMany(Repair::className(), ['type_id' => 'id_type']);
+        return $this->hasMany(Repair::className(), ['status_id' => 'id_status']);
     }
 }

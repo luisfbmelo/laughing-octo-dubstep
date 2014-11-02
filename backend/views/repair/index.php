@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <!--END ACTION MESSAGES-->
 
-<section class="col-lg-10 col-xs-12 col-sm-8 col-md-8">
+<section class="col-lg-10 col-xs-12 col-sm-9 col-md-9">
     <div class="row">
         <div class="col-lg-2 col-xs-4 col-sm-4 col-md-4">
             <a href="<?php echo Url::to(['repair/create']); ?>" class="topBtn">
@@ -84,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         //'type_id',
                         //'client_id',
                         //'inve_id',
-                        'status',
+                        'status_id',
                         'user_id',
                         'repair_desc:ntext',
                         'date_entry',

@@ -9,6 +9,9 @@ use common\models\brands;
 use common\models\equipaments;
 use common\models\models;
 use common\models\stores;
+use common\models\repairtype;
+use common\models\inventory;
+use common\models\equipbrand;
 
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -100,16 +103,25 @@ class RepairController extends Controller
         $modelBrands = new brands();
         $modelEquip = new equipaments();
         $modelModels = new models();
+        $modelTypes = new repairtype();
+        $modelInv = new inventory();
+
+        //print_r(repairtype::find()->joinwith('status'));
+        //facebook_posts::find()->joinwith('fans')->joinWith(['comments', 'comments.fan'])->all();
+
 
         /*GET EXISTING DATA*/
         $allStores=ArrayHelper::map(stores::find()->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc');
         //$allStores = stores::find()->asArray()->orderBy('storeDesc ASC')->all();
 
-        $allBrands = brands::find()->asArray()->indexBy('storeDesc')->all();
+        $allBrands = ArrayHelper::map(brands::find()->asArray()->orderBy('brandName ASC')->all(), 'id_brand', 'brandName');        
 
-        $allEquip = equipaments::find()->asArray()->indexBy('storeDesc')->all();
+        $allEquip = ArrayHelper::map(equipaments::find()->asArray()->orderBy('equipDesc ASC')->all(), 'id_equip', 'equipDesc');        
 
-        $allModels = models::find()->asArray()->indexBy('storeDesc')->all();
+        $allModels = ArrayHelper::map(models::find()->asArray()->orderBy('modelName ASC')->all(), 'id_model', 'modelName'); 
+
+        $allTypes = ArrayHelper::map(repairtype::find()->asArray()->orderBy('typeDesc ASC')->all(), 'id_type', 'typeDesc');
+
 
         /*LOGIC PROCESS*/
         //if it is canceled
@@ -130,10 +142,13 @@ class RepairController extends Controller
                     'allBrands' => $allBrands,
                     'allEquip' => $allEquip,
                     'allModels' => $allModels,
+                    'allTypes' => $allTypes,
                     'modelStores' => $modelStores,
                     'modelBrands' => $modelBrands,
                     'modelEquip' => $modelEquip,
-                    'modelModels' => $modelModels
+                    'modelModels' => $modelModels,
+                    'modelTypes' => $modelTypes,
+                    'modelInv' => $modelInv
                 ]);
             }
 
@@ -145,15 +160,32 @@ class RepairController extends Controller
                 'allBrands' => $allBrands,
                 'allEquip' => $allEquip,
                 'allModels' => $allModels,
+                'allTypes' => $allTypes,
                 'modelStores' => $modelStores,
                 'modelBrands' => $modelBrands,
                 'modelEquip' => $modelEquip,
-                'modelModels' => $modelModels
+                'modelModels' => $modelModels,
+                'modelTypes' => $modelTypes,
+                'modelInv' => $modelInv
             ]);
         }
        
 
         
+    }
+
+    /**
+     * Get all brands from given equipment
+     * @return [json] [all brands of that equipment]
+     */
+    public function actionGetbrands(){
+        $brands = ArrayHelper::map(brands::find()->joinwith('equipBrands','equipBrands.brand_id')->where(['equip_id' => $_POST['id']])->all(), 'id_brand', 'brandName');
+        return json_encode($brands);
+    }
+
+    public function actionGetmodels(){
+        $models = ArrayHelper::map(models::find()->joinwith('brand')->where(['brand_id' => $_POST['brandId'],'equip_id' => $_POST['equipId']])->all(), 'id_model', 'modelName');
+        return json_encode($models);
     }
 
     /**

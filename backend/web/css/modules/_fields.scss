@@ -6,6 +6,13 @@
 	}
 
 	form{
+
+		.required label:after{
+			content:"*";
+			width:10px;
+			height:10%;
+		}
+
 		div{
 			/*padding-left: 0!important;*/
 			padding-bottom:0.3em;
@@ -14,11 +21,50 @@
 				font-size:1em;
 				color:$text-color;
 				font-weight:normal!important;
+				font-style:italic;
 			}
 
 			input:not(.newClient){
 				background-color:$topBtn-bg-active-color;
 			}
 		}
+
+		.normalType{
+			margin-bottom:15px;
+			.row{
+				box-sizing: border-box;
+				margin:0!important;
+				background-color:$topBtn-bg-color;
+
+				.maxBudget{
+					padding: 15px 15px 0!important;
+				}
+
+				.wantMaxBox{
+					input{
+						margin-right:10px;
+					}
+				}
+			}
+
+			&:before{
+				content: "";
+				position: absolute;
+				top: -15px;
+				left: 35px;
+				border-style: solid;
+				border-width: 0 15px 15px;
+				border-color: $topBtn-bg-color transparent;
+				display: block;
+				width: 0;
+				z-index: 0;
+			}
+			
+			
+		}
+	}
+
+	.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
+		background-color:#aaa!important;
 	}
 }

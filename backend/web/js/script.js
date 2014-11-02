@@ -14,4 +14,12 @@ $(document).ready(function(){
 	});
 
 	setFullHeight($('.menuBox'),$('.menuContainer'));
+
+	$('.accordion').on('shown.bs.collapse', function(e){ 
+		$(e.target).prev('.accordion-heading').find('.glyphicon-plus').toggleClass("glyphicon-plus glyphicon-minus");
+	});
+
+	$('.accordion').on('hide.bs.collapse', function(e){ 
+		$(e.target).prev('.accordion-heading').find('.glyphicon-minus').toggleClass("glyphicon-minus glyphicon-plus");
+	});
 });

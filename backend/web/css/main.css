@@ -285,12 +285,40 @@ a.topBtn {
   margin: 0 !important; }
   .createFields .sectionTitle {
     padding-left: 0 !important; }
+  .createFields form .required label:after {
+    content: "*";
+    width: 10px;
+    height: 10%; }
   .createFields form div {
     /*padding-left: 0!important;*/
     padding-bottom: 0.3em; }
     .createFields form div label {
       font-size: 1em;
       color: #424242;
-      font-weight: normal !important; }
+      font-weight: normal !important;
+      font-style: italic; }
     .createFields form div input:not(.newClient) {
       background-color: #fcfcfc; }
+  .createFields form .normalType {
+    margin-bottom: 15px; }
+    .createFields form .normalType .row {
+      box-sizing: border-box;
+      margin: 0 !important;
+      background-color: #eaeaea; }
+      .createFields form .normalType .row .maxBudget {
+        padding: 15px 15px 0 !important; }
+      .createFields form .normalType .row .wantMaxBox input {
+        margin-right: 10px; }
+    .createFields form .normalType:before {
+      content: "";
+      position: absolute;
+      top: -15px;
+      left: 35px;
+      border-style: solid;
+      border-width: 0 15px 15px;
+      border-color: #eaeaea transparent;
+      display: block;
+      width: 0;
+      z-index: 0; }
+  .createFields .form-control[disabled], .createFields .form-control[readonly], .createFields fieldset[disabled] .form-control {
+    background-color: #aaaaaa !important; }
