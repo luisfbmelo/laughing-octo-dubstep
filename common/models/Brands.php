@@ -31,7 +31,7 @@ class Brands extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['brandName'], 'required'],
+            [['id_brand'], 'required'],
             [['brandName'], 'string']
         ];
     }
@@ -42,7 +42,7 @@ class Brands extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_brand' => 'Id Brand',
+            'id_brand' => 'Marca',
             'brandName' => 'Brand Name',
         ];
     }

@@ -13,6 +13,7 @@ use Yii;
  * @property EquipBrand[] $equipBrands
  * @property Brands[] $brands
  * @property Inventory[] $inventories
+ * @property Models[] $models
  */
 class Equipaments extends \yii\db\ActiveRecord
 {
@@ -30,7 +31,7 @@ class Equipaments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['equipDesc'], 'required'],
+            [['id_equip'], 'required'],
             [['equipDesc'], 'string']
         ];
     }
@@ -41,7 +42,7 @@ class Equipaments extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_equip' => 'Id Equip',
+            'id_equip' => 'Equipamento',
             'equipDesc' => 'Equip Desc',
         ];
     }
@@ -68,5 +69,13 @@ class Equipaments extends \yii\db\ActiveRecord
     public function getInventories()
     {
         return $this->hasMany(Inventory::className(), ['equip_id' => 'id_equip']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getModels()
+    {
+        return $this->hasMany(Models::className(), ['equip_id' => 'id_equip']);
     }
 }

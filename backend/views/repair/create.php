@@ -31,12 +31,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'equip' => $allEquip,
                 'models' => $allModels,
                 'types' => $allTypes,
+                'accessories' => $allAccess,
                 'modelStores' => $modelStores,
                 'modelBrands' => $modelBrands,
                 'modelEquip' => $modelEquip,
                 'modelModels' => $modelModels,
                 'modelTypes' => $modelTypes,
-                'modelInv' => $modelInv
+                'modelInv' => $modelInv,
+                'modelAccess' => $modelAccess,
+                'modelRepairAccess' => $modelRepairAccess
 		    ]) ?>
 
 		</div>

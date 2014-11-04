@@ -20,12 +20,29 @@
 			label{
 				font-size:1em;
 				color:$text-color;
-				font-weight:normal!important;
+				font-weight:bold;
 				font-style:italic;
 			}
 
-			input:not(.newClient){
+			.checkboxList{
+				label{
+					font-weight:normal!important;
+					font-style:normal!important;
+					font-size:0.9em;
+				}
+			}
+
+			input:not(.newClient), select{
 				background-color:$topBtn-bg-active-color;
+			}
+
+			
+		}
+
+		.pageButtons{
+			padding-top:15px;
+			button{
+				margin-right:30px;
 			}
 		}
 
@@ -61,6 +78,15 @@
 			}
 			
 			
+		}
+
+		.accessoriesListing{
+			.required label{
+				display:none;
+			}
+
+			padding-left:0!important;
+			padding-right:0!important;
 		}
 	}
 

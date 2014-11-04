@@ -12,6 +12,8 @@ use common\models\stores;
 use common\models\repairtype;
 use common\models\inventory;
 use common\models\equipbrand;
+use common\models\accessories;
+use common\models\repairaccessory;
 
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -19,6 +21,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
+use yii\base\Exception;
 
 /**
  * RepairController implements the CRUD actions for repair model.
@@ -105,6 +108,11 @@ class RepairController extends Controller
         $modelModels = new models();
         $modelTypes = new repairtype();
         $modelInv = new inventory();
+        $modelAccess = new accessories();
+        $modelRepairAccess = new repairaccessory();
+        $modelEquipBrand = new equipbrand();
+
+        //$modelAccess->id_accessories = array(2);
 
         //print_r(repairtype::find()->joinwith('status'));
         //facebook_posts::find()->joinwith('fans')->joinWith(['comments', 'comments.fan'])->all();
@@ -122,34 +130,83 @@ class RepairController extends Controller
 
         $allTypes = ArrayHelper::map(repairtype::find()->asArray()->orderBy('typeDesc ASC')->all(), 'id_type', 'typeDesc');
 
+        //$allAccess = ArrayHelper::map(accessories::find()->where('accessType != :id', [':id' => '2'])->asArray()->orderBy('accessDesc ASC')->all(), 'id_accessories', 'accessDesc');
+        $allAccess = ArrayHelper::map(accessories::find()->asArray()->orderBy('accessDesc ASC')->all(), 'id_accessories', 'accessDesc');
+
 
         /*LOGIC PROCESS*/
         //if it is canceled
         if (isset($_POST['cancelar'])){
             $this->redirect(['index']);
-        }else{
-
+        }else if (isset($_POST['submit'])){
+            
             //try saving
-            if ($modelRepair->load(Yii::$app->request->post()) && $modelRepair->save()) {
-                return $this->redirect(['view', 'id' => $modelRepair->id_repair]);
+           /* if ($modelRepair->load(Yii::$app->request->post()) && $modelRepair->save()) {
+                //return $this->redirect(['view', 'id' => $modelRepair->id_repair]);
 
             //if didn't save
             } else {
-                return $this->render('create', [
-                    'modelRepair' => $modelRepair,
-                    'modelClient' => $modelClient,
-                    'allStores' => $allStores,
-                    'allBrands' => $allBrands,
-                    'allEquip' => $allEquip,
-                    'allModels' => $allModels,
-                    'allTypes' => $allTypes,
-                    'modelStores' => $modelStores,
-                    'modelBrands' => $modelBrands,
-                    'modelEquip' => $modelEquip,
-                    'modelModels' => $modelModels,
-                    'modelTypes' => $modelTypes,
-                    'modelInv' => $modelInv
-                ]);
+                
+            }*/
+
+             
+
+            $connection = \Yii::$app->db;
+            $transaction = $connection->beginTransaction();
+            try {
+                $errorStatus = false;
+
+                if ($modelClient->load(Yii::$app->request->post()) && $modelClient->save()) {
+
+                    $modelRepair->client_id = Yii::$app->db->getLastInsertID();                    
+                    
+                } else {
+                    $errorStatus = true;
+                }
+
+                if ($modelEquip->load(Yii::$app->request->post()) && !$modelEquip->validate()) {
+                    
+                    // throw new Exception('Unable to save record.');
+                }
+
+                if ($modelBrands->load(Yii::$app->request->post()) && !$modelBrands->validate()) {
+                    
+                    // throw new Exception('Unable to save record.');         
+                }  
+
+                if ($modelModels->load(Yii::$app->request->post()) && !$modelModels->validate()) {
+                    
+                    // throw new Exception('Unable to save record.');     
+                } 
+
+                if ($modelInv->load(Yii::$app->request->post()) && !$modelInv->validate()) {
+                    $errorStatus = true;
+                    // throw new Exception('Unable to save record.');
+                }
+
+                if (!$errorStatus){
+                        echo "a";
+                    //ADD INVENTORY
+                    $modelInv->id_inve=NULL;
+                    $modelInv->isNewRecord=TRUE;
+                    $modelInv->equip_id = $modelEquip->id_equip;
+                    $modelInv->brand_id = $modelBrands->id_brand;
+                    $modelInv->model_id = $modelModels->id_model;
+                    $modelInv->inveSN = $modelInv->inveSN;
+                    $modelInv->save();
+
+                    $modelRepair->inve_id = Yii::$app->db->getLastInsertID();
+                }
+ 
+
+                $transaction->commit();
+
+                
+
+                //return $this->redirect(['view', 'id' => $model->name]);
+
+            } catch(Exception $e) {
+                $transaction->rollback();
             }
 
             //normal form representation
@@ -161,12 +218,34 @@ class RepairController extends Controller
                 'allEquip' => $allEquip,
                 'allModels' => $allModels,
                 'allTypes' => $allTypes,
+                'allAccess' => $allAccess,
                 'modelStores' => $modelStores,
                 'modelBrands' => $modelBrands,
                 'modelEquip' => $modelEquip,
                 'modelModels' => $modelModels,
                 'modelTypes' => $modelTypes,
-                'modelInv' => $modelInv
+                'modelInv' => $modelInv,
+                'modelAccess' => $modelAccess,
+                'modelRepairAccess' => $modelRepairAccess
+            ]);
+        }else{
+            return $this->render('create', [
+                'modelRepair' => $modelRepair,
+                'modelClient' => $modelClient,
+                'allStores' => $allStores,
+                'allBrands' => $allBrands,
+                'allEquip' => $allEquip,
+                'allModels' => $allModels,
+                'allTypes' => $allTypes,
+                'allAccess' => $allAccess,
+                'modelStores' => $modelStores,
+                'modelBrands' => $modelBrands,
+                'modelEquip' => $modelEquip,
+                'modelModels' => $modelModels,
+                'modelTypes' => $modelTypes,
+                'modelInv' => $modelInv,
+                'modelAccess' => $modelAccess,
+                'modelRepairAccess' => $modelRepairAccess
             ]);
         }
        

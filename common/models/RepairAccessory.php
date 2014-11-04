@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $repair_id
  * @property integer $accessory_id
+ * @property string $otherDesc
  *
  * @property Accessories $accessory
  * @property Repair $repair
@@ -29,8 +30,9 @@ class RepairAccessory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['repair_id', 'accessory_id'], 'required'],
-            [['repair_id', 'accessory_id'], 'integer']
+            [['repair_id', 'accessory_id', 'otherDesc'], 'required'],
+            [['repair_id', 'accessory_id'], 'integer'],
+            [['otherDesc'], 'string']
         ];
     }
 
@@ -42,6 +44,7 @@ class RepairAccessory extends \yii\db\ActiveRecord
         return [
             'repair_id' => 'Repair ID',
             'accessory_id' => 'Accessory ID',
+            'otherDesc' => 'Other Desc',
         ];
     }
 

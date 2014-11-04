@@ -10,9 +10,11 @@ use Yii;
  * @property integer $id_model
  * @property string $modelName
  * @property integer $brand_id
+ * @property integer $equip_id
  *
  * @property Inventory[] $inventories
  * @property Brands $brand
+ * @property Equipaments $equip
  */
 class Models extends \yii\db\ActiveRecord
 {
@@ -30,9 +32,9 @@ class Models extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['modelName', 'brand_id'], 'required'],
+            [['id_model'], 'required'],
             [['modelName'], 'string'],
-            [['brand_id'], 'integer']
+            [['brand_id', 'equip_id'], 'integer']
         ];
     }
 
@@ -42,9 +44,10 @@ class Models extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_model' => 'Id Model',
+            'id_model' => 'Modelo',
             'modelName' => 'Model Name',
             'brand_id' => 'Brand ID',
+            'equip_id' => 'Equip ID',
         ];
     }
 
@@ -62,5 +65,13 @@ class Models extends \yii\db\ActiveRecord
     public function getBrand()
     {
         return $this->hasOne(Brands::className(), ['id_brand' => 'brand_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEquip()
+    {
+        return $this->hasOne(Equipaments::className(), ['id_equip' => 'equip_id']);
     }
 }

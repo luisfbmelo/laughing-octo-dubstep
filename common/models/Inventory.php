@@ -34,7 +34,8 @@ class Inventory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['equip_id', 'brand_id', 'model_id', 'inveSN'], 'required'],
+            //[['equip_id', 'brand_id', 'model_id', 'inveSN'], 'required'],
+            [['inveSN'], 'required'],
             [['equip_id', 'brand_id', 'model_id'], 'integer'],
             [['inveSN'], 'string']
         ];

@@ -10,14 +10,12 @@ use yii\widgets\ActiveForm;
 
 
         <?php $form = ActiveForm::begin(['enableClientValidation' => false]); ?>
-            <?php echo $form->errorSummary([$modelClient,$modelRepair]); ?>
+            <?php echo $form->errorSummary([$modelClient,$modelRepair,$modelStores, $modelBrands, $modelEquip, $modelModels, $modelTypes, $modelInv, $modelAccess]); ?>
             <div class="row">
                 <div class="col-lg-12">
                     <p class="note">Campos com <span class="required">*</span> são obrigatórios.</p>
                 </div>
             </div>
-
-
 
 
 
@@ -55,23 +53,28 @@ use yii\widgets\ActiveForm;
             <div class="smallDivider"></div>
         </div>
 
-        <div class="row repairData">
+        <div class="repairData">
 
 
             <!--EQUIPMENT-->
-            <?= $form->field($modelEquip, 'id_equip', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->dropDownList($equip,['id'=>'equipID','prompt'=>'--'])->label('Equipamentos')?>
+            <div class="row equipList">
+                <?= $form->field($modelEquip, 'id_equip', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->dropDownList($equip,['id'=>'equipID','prompt'=>'--'])->label('Equipamentos')?>
 
             <?= $form->field($modelBrands, 'id_brand', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($brands,['id'=>'brandID','prompt'=>'--','disabled'=>'true'])->label('Marcas')?>
 
             <?= $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'--','disabled'=>'true'])->label('Modelos')?>
 
             <?= $form->field($modelInv, 'inveSN', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3']])->textInput(['maxlength' => 10]) ?>
-
+            </div>
             
+
+         <div class="row">
+  
             <!-- REPAIR TYPE -->
             <?= $form->field($modelTypes, 'id_type', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->dropDownList($types,['id'=>'typeID','empty'=>'--'])->label('Tipo de reparação')?>
             <?= $form->field($modelRepair, 'priority', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList(['0'=>'--','1' => 'Alta', '2' => 'Média', '3' => 'Baixa'],['id'=>'priorityID']) ?>
              
+            <!--BUDGET SELECTION-->
             <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 normalType" style="display:none;">
                 <div class="row">
                     <?= $form->field($modelRepair, 'maxBudget', ['options' => ['class' => 'col-lg-12 maxBudget']])->textInput(['maxlength' => 10]) ?>
@@ -85,13 +88,24 @@ use yii\widgets\ActiveForm;
                 
             </div>
 
-            <?= $form->field($modelRepair, 'repair_desc', ['options' => ['class' => 'col-lg-12']])->textarea(['rows' => 4])->label("Descrição da Avaria") ?>
+            <!--DESCRIPTIONS-->
+            <?= $form->field($modelRepair, 'repair_desc', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-3']])->textarea(['rows' => 4])->label("Descrição da Avaria") ?>
+            <?= $form->field($modelRepair, 'obs', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-3']])->textarea(['rows' => 4])->label("Outras observações") ?>
+      
+            <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 accessoriesListing">
+                <!--ACCESSORIES-->
+            <?= $form->field($modelAccess, 'id_accessories', ['options' => ['class' => 'col-lg-12 col-xs-12 col-sm-12 col-md-12']])->checkboxList($accessories,['unselect'=> 0,'separator'=>'<br/>','class'=>'checkboxList'])->label("Acessórios") ?>
+            
+            <?= $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-4 col-xs-4 col-sm-4 col-md-4']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("") ?>
+            </div>
+            
+
 
             
 
 
-            <div class="form-group col-lg-12 col-xs-12 col-sm-12 col-md-12">
-                <?= Html::submitButton($modelRepair->isNewRecord ? 'Create' : 'Update', ['class' => $modelRepair->isNewRecord ? 'btn btn-success col-lg-1' : 'btn btn-primary col-lg-1']) ?>
+            <div class="form-group col-lg-12 col-xs-12 col-sm-12 col-md-12 pageButtons">
+                <?= Html::submitButton($modelRepair->isNewRecord ? 'Create' : 'Update', ['class' => $modelRepair->isNewRecord ? 'btn btn-success col-lg-1' : 'btn btn-primary col-lg-1','name'=>'submit']) ?>
                 <?= Html::submitButton('Cancelar',array('class'=>'btn btn-danger col-lg-1','name'=>'cancelar','id'=>'cancelar')); ?>
             </div>
         </div>
@@ -103,6 +117,9 @@ use yii\widgets\ActiveForm;
 
 <script>
     $(document).ready(function(){
+
+        if ($("#equipID"))
+
         $("#typeID").on('change',function(){
             var state = $(this).val();
             var desc = $('option:selected', $(this)).text();
@@ -144,7 +161,7 @@ use yii\widgets\ActiveForm;
                     dataType: 'json',
                     data:{ id: equipId},
                     success: function(data){
-                        opt = '<option>--</option>'
+                        opt = '<option value>--</option>'
 
                         $.each( data, function( key, value ) {
                             opt+= '<option value="'+key+'">'+value+'</option>';
@@ -185,7 +202,7 @@ use yii\widgets\ActiveForm;
                     data:{ brandId: brandId, equipId: equipId},
                     success: function(data){
                         console.log(data);
-                        opt = '<option>--</option>'
+                        opt = '<option value>--</option>'
                         
                         $.each( data, function( key, value ) {
                             opt+= '<option value="'+key+'">'+value+'</option>';
