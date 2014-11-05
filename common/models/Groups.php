@@ -10,7 +10,7 @@ use Yii;
  * @property integer $id_group
  * @property string $groupType
  *
- * @property Users[] $users
+ * @property User[] $users
  */
 class Groups extends \yii\db\ActiveRecord
 {
@@ -49,6 +49,6 @@ class Groups extends \yii\db\ActiveRecord
      */
     public function getUsers()
     {
-        return $this->hasMany(Users::className(), ['group_id' => 'id_group']);
+        return $this->hasMany(User::className(), ['group_id' => 'id_group']);
     }
 }

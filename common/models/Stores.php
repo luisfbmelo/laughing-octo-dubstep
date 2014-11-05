@@ -28,7 +28,7 @@ class Stores extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['storeDesc'], 'required'],
+            [['id_store','storeDesc'], 'required'],
             [['storeDesc'], 'string']
         ];
     }
@@ -39,8 +39,8 @@ class Stores extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_store' => 'Id Store',
-            'storeDesc' => 'Loja',
+            'id_store' => 'Loja',
+            'storeDesc' => 'Store Desc',
         ];
     }
 
@@ -50,5 +50,13 @@ class Stores extends \yii\db\ActiveRecord
     public function getRepairs()
     {
         return $this->hasMany(Repair::className(), ['store_id' => 'id_store']);
+    }
+
+    /**
+     * Returns all stores
+     * @return [array] [stores data]
+     */
+    public function getAllStores(){
+        return $this->find()->asArray()->orderBy('storeDesc ASC')->all();  
     }
 }

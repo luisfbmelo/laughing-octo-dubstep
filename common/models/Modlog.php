@@ -13,7 +13,7 @@ use Yii;
  * @property integer $logType
  * @property integer $user_id
  *
- * @property Users $user
+ * @property User $user
  */
 class Modlog extends \yii\db\ActiveRecord
 {
@@ -57,6 +57,6 @@ class Modlog extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(Users::className(), ['id_users' => 'user_id']);
+        return $this->hasOne(User::className(), ['id_users' => 'user_id']);
     }
 }

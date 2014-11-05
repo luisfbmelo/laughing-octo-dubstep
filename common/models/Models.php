@@ -32,7 +32,7 @@ class Models extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_model'], 'required'],
+            [['id_model','modelName', 'brand_id', 'equip_id'], 'required'],
             [['modelName'], 'string'],
             [['brand_id', 'equip_id'], 'integer']
         ];
@@ -73,5 +73,23 @@ class Models extends \yii\db\ActiveRecord
     public function getEquip()
     {
         return $this->hasOne(Equipaments::className(), ['id_equip' => 'equip_id']);
+    }
+
+    /**
+     * Returns all models
+     * @return [array] [models data]
+     */
+    public function getAllModels(){
+        return $this->find()->asArray()->orderBy('modelName ASC')->all();
+    }
+
+    /**
+     * Returns models of given equipment and brand
+     * @param  [id] $equipId [equipment id]
+     * @param  [id] $brandId [brand id]
+     * @return [array]          [models data]
+     */
+    public function getModelsOfEqBr($equipId,$brandId){
+        return $this->find()->where(['brand_id' => $brandId,'equip_id' => $equipId])->asArray()->orderBy('modelName ASC')->all();
     }
 }

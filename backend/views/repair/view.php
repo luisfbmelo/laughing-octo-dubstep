@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'type_id',
                 'client_id',
                 'inve_id',
-                'status',
+                'status_id',
                 'user_id',
                 'repair_desc:ntext',
                 'date_entry',
@@ -43,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'budget',
                 'maxBudget',
                 'total',
+                'obs'
             ],
         ]) ?>
 

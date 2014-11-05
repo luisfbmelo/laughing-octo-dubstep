@@ -22,4 +22,11 @@ $(document).ready(function(){
 	$('.accordion').on('hide.bs.collapse', function(e){ 
 		$(e.target).prev('.accordion-heading').find('.glyphicon-minus').toggleClass("glyphicon-minus glyphicon-plus");
 	});
+
+	$("*").on("focus",function(){
+		if ($(this).parent().hasClass("has-error")){
+			$(this).parent().removeClass("has-error");
+			$(this).parent().find(".help-block").empty();
+		}
+	});
 });

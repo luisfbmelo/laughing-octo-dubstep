@@ -1,7 +1,0 @@
-@media all and (max-width: 768px) {
-  .profileBox .logoutButton {
-    display: inline !important;
-    float: right;
-    clear: none !important; }
-  .profileBox .userInfo {
-    float: left !important; } }

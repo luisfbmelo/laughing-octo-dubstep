@@ -28,7 +28,7 @@ class RepairType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_type, typeDesc'], 'required'],
+            [['id_type','typeDesc'], 'required'],
             [['typeDesc'], 'string', 'max' => 250]
         ];
     }
@@ -39,7 +39,7 @@ class RepairType extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_type' => 'Id Type',
+            'id_type' => 'Tipo de reparação',
             'typeDesc' => 'Type Desc',
         ];
     }
@@ -50,5 +50,13 @@ class RepairType extends \yii\db\ActiveRecord
     public function getRepairs()
     {
         return $this->hasMany(Repair::className(), ['type_id' => 'id_type']);
+    }
+
+    /**
+     * Returns all repair types
+     * @return [array] [types data]
+     */
+    public function getAllTypes(){
+        return $this->find()->asArray()->orderBy('typeDesc ASC')->all();
     }
 }

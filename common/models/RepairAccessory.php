@@ -30,7 +30,7 @@ class RepairAccessory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['repair_id', 'accessory_id', 'otherDesc'], 'required'],
+            [['repair_id', 'accessory_id'], 'required'],
             [['repair_id', 'accessory_id'], 'integer'],
             [['otherDesc'], 'string']
         ];

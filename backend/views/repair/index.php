@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\grid\CheckboxColumn;
 use yii\helpers\Url;
+use common\models\status;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -35,11 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     </div>
 <?php endif; ?>
-<div class="statusBox ajaxMes">
+<!-- <div class="statusBox ajaxMes">
     <div class="statusMessage flash-success">
         Projeto eliminado com sucesso.
     </div>
-</div>
+</div> -->
 <!--END ACTION MESSAGES-->
 
 <section class="col-lg-10 col-xs-12 col-sm-9 col-md-9">
@@ -84,10 +85,23 @@ $this->params['breadcrumbs'][] = $this->title;
                         //'type_id',
                         //'client_id',
                         //'inve_id',
-                        'status_id',
-                        'user_id',
+                        
+                        [
+                            'attribute' => 'user_id',
+                            'label' => 'Entrada por:',
+                            'value' => function($model, $index, $dataColumn) {
+                                return $model->getUserName()["username"];
+                            }
+                        ],
                         'repair_desc:ntext',
                         'date_entry',
+                        [
+                            'attribute' => 'status_id',
+                            'label' => 'Estado',
+                            'value' => function($model, $index, $dataColumn) {
+                                return $model->getStatusDesc()["statusDesc"];
+                            }
+                        ],
                         // 'date_close',
                         // 'store_id',
                         // 'priority',

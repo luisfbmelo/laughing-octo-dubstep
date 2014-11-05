@@ -14,6 +14,8 @@ use common\models\inventory;
 use common\models\equipbrand;
 use common\models\accessories;
 use common\models\repairaccessory;
+use common\models\user;
+use common\models\status;
 
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -111,27 +113,22 @@ class RepairController extends Controller
         $modelAccess = new accessories();
         $modelRepairAccess = new repairaccessory();
         $modelEquipBrand = new equipbrand();
-
-        //$modelAccess->id_accessories = array(2);
-
-        //print_r(repairtype::find()->joinwith('status'));
-        //facebook_posts::find()->joinwith('fans')->joinWith(['comments', 'comments.fan'])->all();
-
+        
 
         /*GET EXISTING DATA*/
-        $allStores=ArrayHelper::map(stores::find()->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc');
+        $allStores=ArrayHelper::map($modelStores->getAllStores(), 'id_store', 'storeDesc');
         //$allStores = stores::find()->asArray()->orderBy('storeDesc ASC')->all();
 
-        $allBrands = ArrayHelper::map(brands::find()->asArray()->orderBy('brandName ASC')->all(), 'id_brand', 'brandName');        
+        $allBrands = ArrayHelper::map($modelBrands->getAllBrands(), 'id_brand', 'brandName');        
 
-        $allEquip = ArrayHelper::map(equipaments::find()->asArray()->orderBy('equipDesc ASC')->all(), 'id_equip', 'equipDesc');        
+        $allEquip = ArrayHelper::map($modelEquip->getAllEquip(), 'id_equip', 'equipDesc');      
 
-        $allModels = ArrayHelper::map(models::find()->asArray()->orderBy('modelName ASC')->all(), 'id_model', 'modelName'); 
+        $allModels = ArrayHelper::map($modelModels->getAllModels(), 'id_model', 'modelName'); 
 
-        $allTypes = ArrayHelper::map(repairtype::find()->asArray()->orderBy('typeDesc ASC')->all(), 'id_type', 'typeDesc');
+        $allTypes = ArrayHelper::map($modelTypes->getAllTypes(), 'id_type', 'typeDesc');
 
         //$allAccess = ArrayHelper::map(accessories::find()->where('accessType != :id', [':id' => '2'])->asArray()->orderBy('accessDesc ASC')->all(), 'id_accessories', 'accessDesc');
-        $allAccess = ArrayHelper::map(accessories::find()->asArray()->orderBy('accessDesc ASC')->all(), 'id_accessories', 'accessDesc');
+        $allAccess = ArrayHelper::map($modelAccess->getAllAccess(), 'id_accessories', 'accessDesc');
 
 
         /*LOGIC PROCESS*/
@@ -140,6 +137,10 @@ class RepairController extends Controller
             $this->redirect(['index']);
         }else if (isset($_POST['submit'])){
             
+            /*WAITING CODING LINES*/
+            //$modelAccess->id_accessories = array(2);
+            //
+            //
             //try saving
            /* if ($modelRepair->load(Yii::$app->request->post()) && $modelRepair->save()) {
                 //return $this->redirect(['view', 'id' => $modelRepair->id_repair]);
@@ -149,64 +150,115 @@ class RepairController extends Controller
                 
             }*/
 
-             
+            //
+
 
             $connection = \Yii::$app->db;
             $transaction = $connection->beginTransaction();
             try {
                 $errorStatus = false;
+                $valid = false;
+                $validDropdowns = false;
+                $isOk = [];
+                $isOk[0]=false;
+                $isOk[1]=false;
 
-                if ($modelClient->load(Yii::$app->request->post()) && $modelClient->save()) {
+                //validate client
+                $valid = $modelClient->load(Yii::$app->request->post()) && $modelClient->validate(['cliName','cliAdress','cliDoorNum','cliPostalCode','cliPostalSuffix','cliConFix','cliConMov1','cliConMov2']);
 
-                    $modelRepair->client_id = Yii::$app->db->getLastInsertID();                    
+                //start dropdownlists validation
+                //if equip is ok, give only the brands of that equip
+                $validDropdowns = $modelEquip->load(Yii::$app->request->post()) && $modelEquip->validate(['id_equip']);
+                if ($validDropdowns){
+                    $allBrands = ArrayHelper::map($modelBrands->getBrandsOfEquip(Yii::$app->request->post('Equipaments')['id_equip']), 'id_brand', 'brandName');
+
+                    $isOk[0]=true;
                     
-                } else {
-                    $errorStatus = true;
+                } else{
+                    $isOk[0]=false;
                 }
 
-                if ($modelEquip->load(Yii::$app->request->post()) && !$modelEquip->validate()) {
-                    
-                    // throw new Exception('Unable to save record.');
+
+                //if brand is ok, give only the models of that brand
+                $validDropdowns = $modelBrands->load(Yii::$app->request->post()) && $modelBrands->validate(['id_brand']) && $validDropdowns;
+                if ($validDropdowns){
+                    $allModels = ArrayHelper::map($modelModels->getModelsOfEqBr(Yii::$app->request->post('Equipaments')['id_equip'],Yii::$app->request->post('Brands')['id_brand']), 'id_model', 'modelName');
+                    $isOk[1]=true;
+                } else{
+                    $isOk[1]=false;
                 }
 
-                if ($modelBrands->load(Yii::$app->request->post()) && !$modelBrands->validate()) {
-                    
-                    // throw new Exception('Unable to save record.');         
-                }  
-
-                if ($modelModels->load(Yii::$app->request->post()) && !$modelModels->validate()) {
-                    
-                    // throw new Exception('Unable to save record.');     
-                } 
-
-                if ($modelInv->load(Yii::$app->request->post()) && !$modelInv->validate()) {
-                    $errorStatus = true;
-                    // throw new Exception('Unable to save record.');
-                }
-
-                if (!$errorStatus){
-                        echo "a";
-                    //ADD INVENTORY
-                    $modelInv->id_inve=NULL;
-                    $modelInv->isNewRecord=TRUE;
-                    $modelInv->equip_id = $modelEquip->id_equip;
-                    $modelInv->brand_id = $modelBrands->id_brand;
-                    $modelInv->model_id = $modelModels->id_model;
-                    $modelInv->inveSN = $modelInv->inveSN;
-                    $modelInv->save();
-
-                    $modelRepair->inve_id = Yii::$app->db->getLastInsertID();
-                }
- 
-
-                $transaction->commit();
-
+                //continue validate
+                $validDropdowns = ($modelModels->load(Yii::$app->request->post()) && $modelModels->validate(['id_model']) && $validDropdowns) ? $isOk[2]=true : $isOk[2]=false;
                 
+                $valid = $modelInv->load(Yii::$app->request->post()) && $modelInv->validate(['inveSN']) && $valid;
+
+                $valid = $modelTypes->load(Yii::$app->request->post()) && $modelTypes->validate(['id_type']) && $valid;
+
+                $valid = $modelStores->load(Yii::$app->request->post()) && $modelStores->validate(['id_store']) && $valid;
+
+                $valid = $modelRepair->load(Yii::$app->request->post()) && $modelRepair->validate(['repair_desc','priority']) && $valid;
+
+
+                if ($valid && $validDropdowns){
+                    //ADD ACCESSORIES!!!!!!!!!!!!!!!!!!!
+                    //!empty(Yii::$app->request->post('Accessories')['id_accessories'])
+                    
+                    //ADD INVENTORY
+                    $invArray = [
+                        'id_inve' => NULL,
+                        'isNewRecord' => TRUE,
+                        'equip_id' => $modelEquip->id_equip,
+                        'brand_id' => $modelBrands->id_brand,
+                        'model_id' => $modelModels->id_model,
+                        'inveSN' =>$modelInv->inveSN
+
+                    ];
+                    //add to model
+                    $invId = $modelRepair->addModelData($modelInv,$invArray);
+
+                    //ADD CLIENT
+                    $clientArray = [
+                        'id_client' => NULL,
+                        'isNewRecord' => TRUE
+                    ];
+                    //add to model
+                    $clientId = $modelRepair->addModelData($modelClient,$clientArray);
+
+
+                    if (Yii::$app->request->post('maxBudgetHidden')=="hidden" || Yii::$app->request->post('wantMax')!="on" || $modelRepair->maxBudget==""){
+                        $modelRepair->maxBudget = NULL;
+                    }
+
+                    //set final vars
+                    $modelRepair->attributeToRepair([
+                        'status_id' => 1,
+                        'store_id' => $modelStores->id_store,
+                        'user_id' => \Yii::$app->user->getId(),
+                        'date_entry' => date('Y-m-d H:i:s'),
+                        'type_id' => $modelTypes->id_type,
+                        'client_id' => $clientId,
+                        'inve_id' => $invId
+                    ]);
+                    
+                    /*VALIDATE REPAIR MODEl*/
+                    if ($modelRepair->save()){
+                        $transaction->commit();
+                        return $this->redirect(['index']);
+                        //throw new Exception('STOP.');
+                    }else{
+                        //throw new Exception('Unable to save record1.');
+                    }
+                                       
+                }else{
+                    //throw new Exception('Unable to save record2.');
+                }                     
 
                 //return $this->redirect(['view', 'id' => $model->name]);
 
             } catch(Exception $e) {
                 $transaction->rollback();
+                echo $e->getMessage(); exit;
             }
 
             //normal form representation
@@ -226,31 +278,30 @@ class RepairController extends Controller
                 'modelTypes' => $modelTypes,
                 'modelInv' => $modelInv,
                 'modelAccess' => $modelAccess,
-                'modelRepairAccess' => $modelRepairAccess
-            ]);
-        }else{
-            return $this->render('create', [
-                'modelRepair' => $modelRepair,
-                'modelClient' => $modelClient,
-                'allStores' => $allStores,
-                'allBrands' => $allBrands,
-                'allEquip' => $allEquip,
-                'allModels' => $allModels,
-                'allTypes' => $allTypes,
-                'allAccess' => $allAccess,
-                'modelStores' => $modelStores,
-                'modelBrands' => $modelBrands,
-                'modelEquip' => $modelEquip,
-                'modelModels' => $modelModels,
-                'modelTypes' => $modelTypes,
-                'modelInv' => $modelInv,
-                'modelAccess' => $modelAccess,
-                'modelRepairAccess' => $modelRepairAccess
+                'modelRepairAccess' => $modelRepairAccess,
+                'isOk' => $isOk
             ]);
         }
-       
 
-        
+        return $this->render('create', [
+            'modelRepair' => $modelRepair,
+            'modelClient' => $modelClient,
+            'allStores' => $allStores,
+            'allBrands' => $allBrands,
+            'allEquip' => $allEquip,
+            'allModels' => $allModels,
+            'allTypes' => $allTypes,
+            'allAccess' => $allAccess,
+            'modelStores' => $modelStores,
+            'modelBrands' => $modelBrands,
+            'modelEquip' => $modelEquip,
+            'modelModels' => $modelModels,
+            'modelTypes' => $modelTypes,
+            'modelInv' => $modelInv,
+            'modelAccess' => $modelAccess,
+            'modelRepairAccess' => $modelRepairAccess,
+            'isOk' => false
+        ]);        
     }
 
     /**

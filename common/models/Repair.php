@@ -48,12 +48,11 @@ class Repair extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type_id', 'client_id', 'inve_id', 'status', 'user_id', 'repair_desc', 'date_entry', 'store_id', 'priority'], 'required'],
-            [['type_id', 'client_id', 'inve_id', 'user_id', 'store_id', 'priority'], 'integer'],
-            [['repair_desc'], 'string'],
+            [['type_id', 'client_id', 'inve_id', 'status_id', 'user_id', 'repair_desc', 'date_entry', 'store_id', 'priority'], 'required'],
+            [['type_id', 'client_id', 'inve_id', 'user_id', 'store_id', 'priority','status_id'], 'integer'],
+            [['repair_desc','obs'], 'string'],
             [['date_entry', 'date_close'], 'safe'],
-            [['budget', 'maxBudget', 'total'], 'number'],
-            [['status'], 'string', 'max' => 45]
+            [['budget', 'maxBudget', 'total'], 'number']
         ];
     }
 
@@ -67,7 +66,7 @@ class Repair extends \yii\db\ActiveRecord
             'type_id' => 'Tipo de reparação',
             'client_id' => 'Cliente',
             'inve_id' => 'Inventário',
-            'status_id' => 'Status',
+            'status_id' => 'Estado',
             'user_id' => 'Utilizador',
             'repair_desc' => 'Descrição',
             'date_entry' => 'Entrada',
@@ -77,6 +76,7 @@ class Repair extends \yii\db\ActiveRecord
             'budget' => 'Orçamento',
             'maxBudget' => 'Orçamento máximo',
             'total' => 'Total',
+            'obs' => 'Observações'
         ];
     }
 
@@ -158,5 +158,55 @@ class Repair extends \yii\db\ActiveRecord
     public function getParts()
     {
         return $this->hasMany(Parts::className(), ['id_part' => 'part_id'])->viaTable('repair_parts', ['repair_id' => 'id_repair']);
+    }
+
+    /**
+     * returns current repair status description
+     * @return [array] [array with status data]
+     */
+    public function getStatusDesc(){
+        return Status::find()->joinWith("repairs")->where(['status.id_status'=>$this->status_id])->asArray()->one();
+    }
+
+    /**
+     * returns repair username that created the repair
+     * @return [array] [user data]
+     */
+    public function getUserName(){
+        return User::find()->joinWith("repairs")->where(['user.id_users'=>$this->user_id])->asArray()->one();
+    }
+
+    /**
+     * sets final variables to save, making them default and not from form
+     * @param  [array] $elements [array of elements to set as default]
+     */
+    public function attributeToRepair($elements){
+        $arrayKeys = array_keys($elements);
+
+        for ($a=0;$a<sizeof($elements);$a++){
+            $this->$arrayKeys[$a] = $elements[$arrayKeys[$a]];
+        }
+
+    }
+
+    /**
+     * creates new data that will be saved for the new repair
+     * @param [array] $model    [model that will be take the data and will be saved]
+     * @param [array] $elements [array of elements to save]
+     * @return  [id] [id with the last inserted ID in order to save the repair]
+     */
+    public function addModelData($model,$elements){
+        $arrayKeys = array_keys($elements);
+
+        for ($a=0;$a<sizeof($elements);$a++){
+            $model->$arrayKeys[$a] = $elements[$arrayKeys[$a]];
+        }
+
+        if ($model->save()){
+            return Yii::$app->db->getLastInsertID();
+        }else{
+            return false;
+        }
+
     }
 }

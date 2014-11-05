@@ -31,7 +31,7 @@ class Brands extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_brand'], 'required'],
+            [['id_brand' ,'brandName'], 'required'],
             [['brandName'], 'string']
         ];
     }
@@ -77,5 +77,22 @@ class Brands extends \yii\db\ActiveRecord
     public function getModels()
     {
         return $this->hasMany(Models::className(), ['brand_id' => 'id_brand']);
+    }
+
+    /**
+     * Returns all brands
+     * @return [array] [brands data]
+     */
+    public function getAllBrands(){
+        return $this->find()->asArray()->orderBy('brandName ASC')->all();
+    }
+
+    /**
+     * Returns brands of given equipment
+     * @param  [int] $equipId [equipment id]
+     * @return [array]          [equipments data]
+     */
+    public function getBrandsOfEquip($equipId){
+        return $this->find()->joinWith("equipBrands")->where(['equip_brand.equip_id' => $equipId])->asArray()->orderBy('brandName ASC')->all();
     }
 }

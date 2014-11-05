@@ -31,7 +31,7 @@ class Equipaments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_equip'], 'required'],
+            [['id_equip','equipDesc'], 'required'],
             [['equipDesc'], 'string']
         ];
     }
@@ -77,5 +77,13 @@ class Equipaments extends \yii\db\ActiveRecord
     public function getModels()
     {
         return $this->hasMany(Models::className(), ['equip_id' => 'id_equip']);
+    }
+
+    /**
+     * Returns all equipments
+     * @return [array] [equipments data]
+     */
+    public function getAllEquip(){
+        return $this->find()->asArray()->orderBy('equipDesc ASC')->all();  
     }
 }

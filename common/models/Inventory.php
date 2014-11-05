@@ -34,8 +34,7 @@ class Inventory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            //[['equip_id', 'brand_id', 'model_id', 'inveSN'], 'required'],
-            [['inveSN'], 'required'],
+            [['equip_id', 'brand_id', 'model_id', 'inveSN'], 'required'],
             [['equip_id', 'brand_id', 'model_id'], 'integer'],
             [['inveSN'], 'string']
         ];
@@ -51,7 +50,7 @@ class Inventory extends \yii\db\ActiveRecord
             'equip_id' => 'Equip ID',
             'brand_id' => 'Brand ID',
             'model_id' => 'Model ID',
-            'inveSN' => 'Serial Number',
+            'inveSN' => 'Número de série',
         ];
     }
 

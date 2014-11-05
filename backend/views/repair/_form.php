@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-
+<div class="clearAll"></div>
         <?php $form = ActiveForm::begin(['enableClientValidation' => false]); ?>
             <?php echo $form->errorSummary([$modelClient,$modelRepair,$modelStores, $modelBrands, $modelEquip, $modelModels, $modelTypes, $modelInv, $modelAccess]); ?>
             <div class="row">
@@ -34,7 +34,7 @@ use yii\widgets\ActiveForm;
 
             <!--CLIENT INITIAL DATA-->
             <?= $form->field($modelClient, 'cliName', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6'],])->textInput() ?>
-            <?= $form->field($modelStores, 'storeDesc', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList($stores,['id'=>'storesId','prompt'=>' '])->label('Loja')?>
+            <?= $form->field($modelStores, 'id_store', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList($stores,['id'=>'storesId','prompt'=>' '])->label('Loja')?>
 
             <!--ADDRESS-->
             <?= $form->field($modelClient, 'cliAdress', ['options' => ['class' => 'col-lg-12']])->textArea(['rows' => 4]) ?>
@@ -58,11 +58,12 @@ use yii\widgets\ActiveForm;
 
             <!--EQUIPMENT-->
             <div class="row equipList">
-                <?= $form->field($modelEquip, 'id_equip', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->dropDownList($equip,['id'=>'equipID','prompt'=>'--'])->label('Equipamentos')?>
+            <?= $form->field($modelEquip, 'id_equip', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->dropDownList($equip,['id'=>'equipID','prompt'=>'--'])->label('Equipamentos')?>
 
-            <?= $form->field($modelBrands, 'id_brand', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($brands,['id'=>'brandID','prompt'=>'--','disabled'=>'true'])->label('Marcas')?>
+            
+            <?= (isset($isOk) && $isOk[0]) ? $form->field($modelBrands, 'id_brand', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($brands,['id'=>'brandID','prompt'=>'--'])->label('Marcas') : $form->field($modelBrands, 'id_brand', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($brands,['id'=>'brandID','prompt'=>'--','disabled'=>'true'])->label('Marcas')?>
 
-            <?= $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'--','disabled'=>'true'])->label('Modelos')?>
+            <?= (isset($isOk) && $isOk[1]) ? $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'--'])->label('Modelos') : $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'--','disabled'=>'true'])->label('Modelos')?>
 
             <?= $form->field($modelInv, 'inveSN', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3']])->textInput(['maxlength' => 10]) ?>
             </div>
@@ -71,15 +72,15 @@ use yii\widgets\ActiveForm;
          <div class="row">
   
             <!-- REPAIR TYPE -->
-            <?= $form->field($modelTypes, 'id_type', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->dropDownList($types,['id'=>'typeID','empty'=>'--'])->label('Tipo de reparação')?>
-            <?= $form->field($modelRepair, 'priority', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList(['0'=>'--','1' => 'Alta', '2' => 'Média', '3' => 'Baixa'],['id'=>'priorityID']) ?>
+            <?= $form->field($modelTypes, 'id_type', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->dropDownList($types,['id'=>'typeID','prompt'=>'--'])->label('Tipo de reparação')?>
+            <?= $form->field($modelRepair, 'priority', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList([''=>'--','1' => 'Alta', '2' => 'Média', '3' => 'Baixa'],['id'=>'priorityID']) ?>
              
             <!--BUDGET SELECTION-->
             <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 normalType" style="display:none;">
                 <div class="row">
                     <?= $form->field($modelRepair, 'maxBudget', ['options' => ['class' => 'col-lg-12 maxBudget']])->textInput(['maxlength' => 10]) ?>
                     <div class="wantMaxBox col-lg-12">
-                        <input type="checkbox" name="wantMax[]" id="wantMax">Pretende orçamento máximo
+                        <input type="checkbox" name="wantMax" id="wantMax">Pretende orçamento máximo
                     </div>
                     
                     

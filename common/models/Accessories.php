@@ -63,4 +63,12 @@ class Accessories extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Repair::className(), ['id_repair' => 'repair_id'])->viaTable('repair_accessory', ['accessory_id' => 'id_accessories']);
     }
+
+    /**
+     * Returns all accessories
+     * @return [array] [accessories data]
+     */
+    public function getAllAccess(){
+        return $this->find()->asArray()->orderBy('accessDesc ASC')->all();
+    }
 }

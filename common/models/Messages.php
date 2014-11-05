@@ -14,7 +14,7 @@ use Yii;
  * @property string $messDate
  *
  * @property UsersMessages[] $usersMessages
- * @property Users[] $users
+ * @property User[] $users
  */
 class Messages extends \yii\db\ActiveRecord
 {
@@ -66,6 +66,6 @@ class Messages extends \yii\db\ActiveRecord
      */
     public function getUsers()
     {
-        return $this->hasMany(Users::className(), ['id_users' => 'user_id'])->viaTable('users_messages', ['message_id' => 'id_message']);
+        return $this->hasMany(User::className(), ['id_users' => 'user_id'])->viaTable('users_messages', ['message_id' => 'id_message']);
     }
 }
