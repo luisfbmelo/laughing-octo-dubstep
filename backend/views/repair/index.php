@@ -4,7 +4,12 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\grid\CheckboxColumn;
 use yii\helpers\Url;
-use common\models\status;
+use common\models;
+
+
+setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
+date_default_timezone_set('Atlantic/Azores');
+
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -76,7 +81,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <input type="button" value="Eliminar" class="btn btn-danger deleteBtn"/>      
 
-                <?= GridView::widget([
+                <?= 
+
+                GridView::widget([
                     'dataProvider' => $dataProvider,
                     'columns' => [
                         //['class' => 'yii\grid\SerialColumn'],
@@ -85,22 +92,40 @@ $this->params['breadcrumbs'][] = $this->title;
                         //'type_id',
                         //'client_id',
                         //'inve_id',
-                        
+                        'repair_desc:ntext',
+                        [
+                            'attribute' => 'store_id',
+                            'label' => 'Local',
+                            'content' => function($model, $index, $dataColumn) {
+                                return $model->getStoreDesc()["storeDesc"];
+                            },
+
+                        ],
                         [
                             'attribute' => 'user_id',
                             'label' => 'Entrada por:',
-                            'value' => function($model, $index, $dataColumn) {
+                            'content' => function($model, $index, $dataColumn) {
                                 return $model->getUserName()["username"];
                             }
+
                         ],
-                        'repair_desc:ntext',
-                        'date_entry',
+
+                        [
+                            'attribute' => 'date_entry',
+                            'label' => 'Entrada',
+                            'content' => function($model, $index, $dataColumn){
+                                return $model->getArrangedDate();
+                            }
+                        ],
+                        
+                        //'date_entry',
                         [
                             'attribute' => 'status_id',
                             'label' => 'Estado',
-                            'value' => function($model, $index, $dataColumn) {
-                                return $model->getStatusDesc()["statusDesc"];
-                            }
+                            'content' => function($model, $index, $dataColumn) {
+                                return $status = "<div class='status_".$model->status_id."'><span class='circle'></span><span>".$model->getStatusDesc()["statusDesc"]."</span><span class='clearAll'></span></div>";
+                            },                           
+                            
                         ],
                         // 'date_close',
                         // 'store_id',
@@ -111,10 +136,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         ['class' => 'yii\grid\ActionColumn'],
                     ],
+
+                    /*'rowOptions' => function ($model, $index, $widget, $grid){
+                        return ['class' => 'status_'.$model->status_id];
+                    },*/
                     'filterModel' => $dataProvider,
                     'headerRowOptions' =>['class'=>'listHeader'],
                     'options' => [
-                        'class' => 'gridView',
+                        'class' => 'repairsGrid',
                     ]
                 ]); ?>
 

@@ -1,4 +1,4 @@
-.gridView{
+.repairsGrid{
 	.listHeader{
 		background-color:$dark-blue-bg;
 
@@ -12,5 +12,65 @@
 			border:none!important;
 			text-align:center;
 		}
+
+		
 	}
+
+	tbody{
+		tr{ 
+			text-align:center;
+			td{
+				vertical-align:middle!important;
+				font-size:0.87em;
+			}
+
+			td:nth-child(7){
+
+				div{
+					width:70%;
+					display:inline-block;
+					background-color:$dark-blue-bg;
+
+					@include border-radius(15px);
+					padding:5px 10px;
+
+					color:white;
+
+					span{
+						display:block;
+						float:left;
+					}
+
+					.circle{
+						margin-top: 2px;
+						background: #f00;
+					    width: 15px;
+					    height: 15px;
+					    @include border-radius(50%); 
+					    margin-right:10px;
+					}
+
+					&.status_1 .circle{
+						background-color:$status1;			    		    			
+		    		}
+
+		    		&.status_2 .circle{
+						background-color:$status2;			    		    			
+		    		}
+
+		    		&.status_3 .circle{
+						background-color:$status3;			    		    			
+		    		}
+
+		    		&.status_4 .circle{
+						background-color:$status4;			    		    			
+		    		}
+
+		    		&.status_5 .circle{
+						background-color:$status5;			    		    			
+		    		}
+				}				  		
+	    	}    		
+    	}
+    }		
 }

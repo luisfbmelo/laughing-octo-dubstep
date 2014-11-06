@@ -25,6 +25,8 @@ use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\base\Exception;
 
+date_default_timezone_set("Atlantic/Azores");
+
 /**
  * RepairController implements the CRUD actions for repair model.
  */
@@ -74,6 +76,10 @@ class RepairController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => repair::find(),
+            'sort'=> ['defaultOrder' => ['date_entry'=>SORT_DESC]],
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         return $this->render('index', [
@@ -199,10 +205,7 @@ class RepairController extends Controller
 
                 $valid = $modelRepair->load(Yii::$app->request->post()) && $modelRepair->validate(['repair_desc','priority']) && $valid;
 
-
                 if ($valid && $validDropdowns){
-                    //ADD ACCESSORIES!!!!!!!!!!!!!!!!!!!
-                    //!empty(Yii::$app->request->post('Accessories')['id_accessories'])
                     
                     //ADD INVENTORY
                     $invArray = [
@@ -243,6 +246,34 @@ class RepairController extends Controller
                     
                     /*VALIDATE REPAIR MODEl*/
                     if ($modelRepair->save()){
+                        $repairId = Yii::$app->db->getLastInsertID();
+
+
+                        //save accessories
+                        if (empty(Yii::$app->request->post('Accessories')['id_accessories'])!=1){
+
+                            for ($accInc=0;$accInc<sizeof(Yii::$app->request->post('Accessories')['id_accessories']);$accInc++){
+                                $accessArray = [];
+
+                                if (Yii::$app->request->post('Accessories')['id_accessories'][$accInc]==3){
+                                    $otherDesc = Yii::$app->request->post('RepairAccessory')['otherDesc'];
+                                }else{
+                                    $otherDesc = NULL;
+                                }
+
+                                $accessArray = [
+                                    'isNewRecord' => TRUE,
+                                    'repair_id' => $repairId,
+                                    'accessory_id' => Yii::$app->request->post('Accessories')['id_accessories'][$accInc],
+                                    'otherDesc' => $otherDesc
+                                ];
+
+                                $modelRepair->addModelData($modelRepairAccess,$accessArray);
+                            }
+                            
+                        }
+
+                        //commit all saves
                         $transaction->commit();
                         return $this->redirect(['index']);
                         //throw new Exception('STOP.');

@@ -68,7 +68,7 @@ class Repair extends \yii\db\ActiveRecord
             'inve_id' => 'Inventário',
             'status_id' => 'Estado',
             'user_id' => 'Utilizador',
-            'repair_desc' => 'Descrição',
+            'repair_desc' => 'Problema',
             'date_entry' => 'Entrada',
             'date_close' => 'Fecho',
             'store_id' => 'Loja',
@@ -176,6 +176,10 @@ class Repair extends \yii\db\ActiveRecord
         return User::find()->joinWith("repairs")->where(['user.id_users'=>$this->user_id])->asArray()->one();
     }
 
+    public function getStoreDesc(){
+        return Stores::find()->joinWith("repairs")->where(['stores.id_store'=>$this->store_id])->asArray()->one();
+    }
+
     /**
      * sets final variables to save, making them default and not from form
      * @param  [array] $elements [array of elements to set as default]
@@ -207,6 +211,61 @@ class Repair extends \yii\db\ActiveRecord
         }else{
             return false;
         }
+    }
 
+    /**
+     * Converts month number to text
+     * @param $month
+     * @return string
+     */
+    public function monthConverter($month)
+    {
+        switch($month){
+            case 1:
+                return 'Janeiro';
+            break;
+            case 2:
+                return 'Fevereiro';
+                break;
+            case 3:
+                return 'Março';
+                break;
+            case 4:
+                return 'Abril';
+                break;
+            case 5:
+                return 'Maio';
+                break;
+            case 6:
+                return 'Junho';
+                break;
+            case 7:
+                return 'Julho';
+                break;
+            case 8:
+                return 'Agosto';
+                break;
+            case 9:
+                return 'Setembro';
+                break;
+            case 10:
+                return 'Outubro';
+                break;
+            case 11:
+                return 'Novembro';
+                break;
+            case 12:
+                return 'Dezembro';
+                break;
+        }
+    }
+
+    /**
+     * Arrange date to beauty present
+     * @return [string] [arranged date]
+     */
+    public function getArrangedDate(){
+        $date = strtotime($this->date_entry);
+        return date('j', $date).' de '.$this->monthConverter(date('n', $date)).' de '.date('Y', $date).' pelas '.date('H:i:s',$date);
     }
 }

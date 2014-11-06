@@ -73,4 +73,6 @@ class Client extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Repair::className(), ['client_id' => 'id_client']);
     }
+
+    
 }

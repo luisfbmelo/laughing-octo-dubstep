@@ -119,7 +119,6 @@ use yii\widgets\ActiveForm;
 <script>
     $(document).ready(function(){
 
-        if ($("#equipID"))
 
         $("#typeID").on('change',function(){
             var state = $(this).val();
@@ -225,6 +224,31 @@ use yii\widgets\ActiveForm;
                 $("#modelID").append(opt);
                 $("#modelID").attr("disabled", "disabled");
             }
+
+        });
+        
+
+        //AUTOCOMPLETE CLIENT
+        var urlBaseAuto = '<?php echo Yii::$app->request->baseUrl;?>';
+        var urlDestAuto = urlBaseAuto+'/index.php?r=client%2Fallclients';
+
+        $('#client-cliname').autocomplete({
+            source: urlDestAuto,
+            minLength: 2,
+            select: function(event, ui) {
+
+            },
+            response: function( event, ui ) {
+                console.log(ui);
+            },
+     
+            html: true, // optional (jquery.ui.autocomplete.html.js required)
+     
+          // optional (if other layers overlap autocomplete list)
+            open: function(event, ui) {
+                
+            }
+
 
         });
     });

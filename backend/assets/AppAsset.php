@@ -22,10 +22,14 @@ class AppAsset extends AssetBundle
         '//normalize-css.googlecode.com/svn/trunk/normalize.css',
         'css/site.css',
         'css/main.css',
+        'css/jquery-ui.css',
     ];
     public $js = [
         'https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js',
         'js/script.js',
+        '//code.jquery.com/ui/1.11.2/jquery-ui.js',
+        'js/jquery.ui.autocomplete.html.js',
+        
     ];
     public $depends = [
         'yii\web\YiiAsset',

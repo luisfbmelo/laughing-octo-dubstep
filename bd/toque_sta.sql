@@ -8,8 +8,6 @@ USE `toque_sta` ;
 -- -----------------------------------------------------
 -- Table `toque_sta`.`client`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`client` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`client` (
   `id_client` INT NOT NULL AUTO_INCREMENT ,
   `cliName` VARCHAR(250) NOT NULL ,
@@ -30,8 +28,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `toque_sta`.`repair_type`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`repair_type` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`repair_type` (
   `id_type` INT NOT NULL AUTO_INCREMENT ,
   `typeDesc` VARCHAR(250) NOT NULL ,
@@ -42,8 +38,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `toque_sta`.`groups`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`groups` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`groups` (
   `id_group` INT NOT NULL AUTO_INCREMENT ,
   `groupType` TEXT NOT NULL ,
@@ -54,8 +48,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `toque_sta`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`user` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`user` (
   `id_users` INT NOT NULL AUTO_INCREMENT ,
   `username` VARCHAR(45) NOT NULL ,
@@ -81,8 +73,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `toque_sta`.`equipaments`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`equipaments` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`equipaments` (
   `id_equip` INT NOT NULL AUTO_INCREMENT ,
   `equipDesc` TEXT NOT NULL ,
@@ -93,8 +83,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `toque_sta`.`brands`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`brands` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`brands` (
   `id_brand` INT NOT NULL AUTO_INCREMENT ,
   `brandName` TEXT NOT NULL ,
@@ -105,20 +93,30 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `toque_sta`.`models`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`models` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`models` (
   `id_model` INT NOT NULL AUTO_INCREMENT ,
   `modelName` TEXT NOT NULL ,
-  PRIMARY KEY (`id_model`) )
+  `brand_id` INT NOT NULL ,
+  `equip_id` INT NOT NULL ,
+  PRIMARY KEY (`id_model`) ,
+  INDEX `fk_models_brands1` (`brand_id` ASC) ,
+  INDEX `fk_models_equipaments1` (`equip_id` ASC) ,
+  CONSTRAINT `fk_models_brands1`
+    FOREIGN KEY (`brand_id` )
+    REFERENCES `toque_sta`.`brands` (`id_brand` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_models_equipaments1`
+    FOREIGN KEY (`equip_id` )
+    REFERENCES `toque_sta`.`equipaments` (`id_equip` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `toque_sta`.`inventory`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`inventory` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`inventory` (
   `id_inve` INT NOT NULL AUTO_INCREMENT ,
   `equip_id` INT NOT NULL ,
@@ -150,8 +148,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `toque_sta`.`stores`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`stores` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`stores` (
   `id_store` INT NOT NULL AUTO_INCREMENT ,
   `storeDesc` TEXT NOT NULL ,
@@ -160,16 +156,24 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `toque_sta`.`status`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `toque_sta`.`status` (
+  `id_status` INT NOT NULL AUTO_INCREMENT ,
+  `statusDesc` VARCHAR(250) NOT NULL ,
+  PRIMARY KEY (`id_status`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `toque_sta`.`repair`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`repair` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`repair` (
   `id_repair` INT NOT NULL AUTO_INCREMENT ,
   `type_id` INT NOT NULL ,
   `client_id` INT NOT NULL ,
   `inve_id` INT NOT NULL ,
-  `status` VARCHAR(45) NOT NULL ,
+  `status_id` INT NOT NULL ,
   `user_id` INT NOT NULL ,
   `repair_desc` TEXT NOT NULL ,
   `date_entry` DATETIME NOT NULL ,
@@ -179,12 +183,14 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`repair` (
   `budget` DECIMAL NULL ,
   `maxBudget` DECIMAL NULL ,
   `total` DECIMAL NULL ,
+  `obs` TEXT NULL ,
   PRIMARY KEY (`id_repair`) ,
   INDEX `fk_repair_client` (`client_id` ASC) ,
   INDEX `fk_repair_repair_type1` (`type_id` ASC) ,
   INDEX `fk_repair_users1` (`user_id` ASC) ,
   INDEX `fk_repair_inventory1` (`inve_id` ASC) ,
   INDEX `fk_repair_stores1` (`store_id` ASC) ,
+  INDEX `fk_repair_status1` (`status_id` ASC) ,
   CONSTRAINT `fk_repair_client`
     FOREIGN KEY (`client_id` )
     REFERENCES `toque_sta`.`client` (`id_client` )
@@ -209,6 +215,11 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`repair` (
     FOREIGN KEY (`store_id` )
     REFERENCES `toque_sta`.`stores` (`id_store` )
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_repair_status1`
+    FOREIGN KEY (`status_id` )
+    REFERENCES `toque_sta`.`status` (`id_status` )
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -216,8 +227,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `toque_sta`.`user_session`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`user_session` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`user_session` (
   `id_session` INT NOT NULL AUTO_INCREMENT ,
   `user_id` INT NOT NULL ,
@@ -235,8 +244,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `toque_sta`.`accessories`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`accessories` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`accessories` (
   `id_accessories` INT NOT NULL AUTO_INCREMENT ,
   `accessDesc` VARCHAR(45) NOT NULL ,
@@ -248,8 +255,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `toque_sta`.`repair_accessory`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`repair_accessory` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`repair_accessory` (
   `repair_id` INT NOT NULL ,
   `accessory_id` INT NOT NULL ,
@@ -272,8 +277,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `toque_sta`.`parts`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`parts` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`parts` (
   `id_part` INT NOT NULL ,
   `partDesc` VARCHAR(45) NOT NULL ,
@@ -286,8 +289,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `toque_sta`.`repair_parts`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`repair_parts` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`repair_parts` (
   `repair_id` INT NOT NULL ,
   `part_id` INT NOT NULL ,
@@ -311,8 +312,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `toque_sta`.`modLog`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`modLog` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`modLog` (
   `id_log` INT NOT NULL AUTO_INCREMENT ,
   `logDate` DATETIME NOT NULL ,
@@ -332,8 +331,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `toque_sta`.`messages`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`messages` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`messages` (
   `id_message` INT NOT NULL AUTO_INCREMENT ,
   `user_id` INT NOT NULL ,
@@ -347,8 +344,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `toque_sta`.`users_messages`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `toque_sta`.`users_messages` ;
-
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`users_messages` (
   `user_id` INT NOT NULL ,
   `message_id` INT NOT NULL ,
@@ -364,6 +359,28 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`users_messages` (
   CONSTRAINT `fk_users_messages_messages1`
     FOREIGN KEY (`message_id` )
     REFERENCES `toque_sta`.`messages` (`id_message` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `toque_sta`.`equip_brand`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `toque_sta`.`equip_brand` (
+  `equip_id` INT NOT NULL ,
+  `brand_id` INT NOT NULL ,
+  PRIMARY KEY (`equip_id`, `brand_id`) ,
+  INDEX `fk_equip_brand_equipaments1` (`equip_id` ASC) ,
+  INDEX `fk_equip_brand_brands1` (`brand_id` ASC) ,
+  CONSTRAINT `fk_equip_brand_equipaments1`
+    FOREIGN KEY (`equip_id` )
+    REFERENCES `toque_sta`.`equipaments` (`id_equip` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_equip_brand_brands1`
+    FOREIGN KEY (`brand_id` )
+    REFERENCES `toque_sta`.`brands` (`id_brand` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

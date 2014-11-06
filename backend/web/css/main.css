@@ -6,6 +6,7 @@
 /*Buttons*/
 /*Text colors*/
 /*Border line colors*/
+/*Status colors*/
 body {
   font-size: 16px; }
 
@@ -286,15 +287,55 @@ a.topBtn {
 .deleteBtn {
   margin-bottom: 15px; }
 
-.gridView .listHeader {
+.repairsGrid .listHeader {
   background-color: #414957; }
-  .gridView .listHeader a {
+  .repairsGrid .listHeader a {
     color: white;
     font-weight: normal;
     font-size: 0.87em; }
-  .gridView .listHeader th {
+  .repairsGrid .listHeader th {
     border: none !important;
     text-align: center; }
+.repairsGrid tbody tr {
+  text-align: center; }
+  .repairsGrid tbody tr td {
+    vertical-align: middle !important;
+    font-size: 0.87em; }
+  .repairsGrid tbody tr td:nth-child(7) div {
+    width: 70%;
+    display: inline-block;
+    background-color: #414957;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    border-radius: 15px;
+    padding: 5px 10px;
+    color: white; }
+    .repairsGrid tbody tr td:nth-child(7) div span {
+      display: block;
+      float: left; }
+    .repairsGrid tbody tr td:nth-child(7) div .circle {
+      margin-top: 2px;
+      background: #f00;
+      width: 15px;
+      height: 15px;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+      border-radius: 50%;
+      margin-right: 10px; }
+    .repairsGrid tbody tr td:nth-child(7) div.status_1 .circle {
+      background-color: #8db4e3; }
+    .repairsGrid tbody tr td:nth-child(7) div.status_2 .circle {
+      background-color: #fac090; }
+    .repairsGrid tbody tr td:nth-child(7) div.status_3 .circle {
+      background-color: yellow; }
+    .repairsGrid tbody tr td:nth-child(7) div.status_4 .circle {
+      background-color: #92d050; }
+    .repairsGrid tbody tr td:nth-child(7) div.status_5 .circle {
+      background-color: #7f7f7f; }
 
 .createFields {
   margin: 0 !important; }
@@ -350,3 +391,29 @@ a.topBtn {
       display: none; }
   .createFields .form-control[disabled], .createFields .form-control[readonly], .createFields fieldset[disabled] .form-control {
     background-color: #aaaaaa !important; }
+
+/* highlight results */
+.ui-autocomplete span.hl_results {
+  background-color: #ffff66; }
+
+/* loading - the AJAX indicator */
+.ui-autocomplete-loading {
+  background: white url("../img/ui-anim_basic_16x16.gif") right center no-repeat; }
+
+/* scroll results */
+.ui-autocomplete {
+  max-height: 250px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+  /* add padding for vertical scrollbar */
+  padding-right: 5px; }
+
+.ui-autocomplete li {
+  font-size: 16px; }
+
+/* IE 6 doesn't support max-height
+* we use height instead, but this forces the menu to always be this tall
+*/
+* html .ui-autocomplete {
+  height: 250px; }
