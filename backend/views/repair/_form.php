@@ -236,7 +236,22 @@ use yii\widgets\ActiveForm;
             source: urlDestAuto,
             minLength: 2,
             select: function(event, ui) {
+                $("#client-cliadress").val(ui.item.address);
+                $("#client-clidoornum").val(ui.item.door);
+                $("#client-clipostalcode").val(ui.item.pc);
+                $("#client-clipostalsuffix").val(ui.item.pcsufix);
+                $("#client-cliconfix").val(ui.item.hometel);
+                $("#client-cliconmov1").val(ui.item.mo1);
+                $("#client-cliconmov2").val(ui.item.mo2);
 
+                /*$("[id^='client-']:not('#client-cliname')").each(function(index){
+                    if ($(this).val()!=""){
+                        $(this).attr("disabled","disabled");
+                    }
+                });*/
+                $("[id^='client-']:not('#client-cliname')").attr("disabled","disabled");
+
+                console.log($("[id^='client-']").attr("class"));
             },
             response: function( event, ui ) {
                 console.log(ui);
@@ -249,6 +264,10 @@ use yii\widgets\ActiveForm;
                 
             }
 
+
+        }).on('change',function(){
+            $("[id^='client-']:not('#client-cliname')").val(null);
+            $("[id^='client-']:not('#client-cliname')").attr("disabled",false);
 
         });
     });

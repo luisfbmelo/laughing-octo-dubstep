@@ -152,10 +152,17 @@ class ClientController extends Controller
     public function actionAllclients(){
     	
     	$data = client::find()->where('cliName LIKE CONCAT(\'%\',:stringSearch,\'%\')', ['stringSearch'=>$_GET['term']])->asArray()->orderBy('cliName ASC')->all();
-    
+        $retrieve = [];
     	foreach ($data as $content){
-    		$retrieve[$content['id_client']]['value'] = $content['id_client'];
-    		$retrieve[$content['id_client']]['label'] = $content['cliName'];
+    		$retrieve[$content['id_client']]['id'] = $content['id_client'];
+            $retrieve[$content['id_client']]['address'] = $content['cliAdress'];
+            $retrieve[$content['id_client']]['pc'] = $content['cliPostalCode'];
+            $retrieve[$content['id_client']]['pcsufix'] = $content['cliPostalSuffix'];
+            $retrieve[$content['id_client']]['door'] = $content['cliDoorNum'];
+            $retrieve[$content['id_client']]['hometel'] = $content['cliConFix'];
+            $retrieve[$content['id_client']]['mo1'] = $content['cliConMov1'];
+            $retrieve[$content['id_client']]['mo2'] = $content['cliConMov2'];
+    		$retrieve[$content['id_client']]['value'] = $content['cliName'];
 
     	}
         return json_encode($retrieve); 
