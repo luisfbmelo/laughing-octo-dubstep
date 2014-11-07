@@ -11,12 +11,13 @@ use yii\web\AssetBundle;
 
 /**
  * @author Qiang Xue <qiang.xue@gmail.com>
+ * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 2.0
  */
 class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
-    public $baseUrl = '@web';
+    public $baseUrl = '@web/frontend/assets';
     public $css = [
         'css/site.css',
     ];

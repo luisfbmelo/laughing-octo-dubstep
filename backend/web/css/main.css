@@ -337,60 +337,71 @@ a.topBtn {
     .repairsGrid tbody tr td:nth-child(7) div.status_5 .circle {
       background-color: #7f7f7f; }
 
-.createFields {
+.repairFields {
   margin: 0 !important; }
-  .createFields .sectionTitle {
+  .repairFields .sectionTitle {
     padding-left: 0 !important; }
-  .createFields form .required label:after {
-    content: "*";
-    width: 10px;
-    height: 10%; }
-  .createFields form div {
-    /*padding-left: 0!important;*/
-    padding-bottom: 0.3em; }
-    .createFields form div label {
-      font-size: 1em;
-      color: #424242;
-      font-weight: bold;
-      font-style: italic; }
-    .createFields form div .checkboxList label {
-      font-weight: normal !important;
-      font-style: normal !important;
-      font-size: 0.9em; }
-    .createFields form div input:not(.newClient), .createFields form div select {
-      background-color: #fcfcfc; }
-  .createFields form .pageButtons {
-    padding-top: 15px; }
-    .createFields form .pageButtons button {
-      margin-right: 30px; }
-  .createFields form .normalType {
-    margin-bottom: 15px; }
-    .createFields form .normalType .row {
-      box-sizing: border-box;
-      margin: 0 !important;
-      background-color: #eaeaea; }
-      .createFields form .normalType .row .maxBudget {
-        padding: 15px 15px 0 !important; }
-      .createFields form .normalType .row .wantMaxBox input {
-        margin-right: 10px; }
-    .createFields form .normalType:before {
-      content: "";
-      position: absolute;
-      top: -15px;
-      left: 35px;
-      border-style: solid;
-      border-width: 0 15px 15px;
-      border-color: #eaeaea transparent;
-      display: block;
-      width: 0;
-      z-index: 0; }
-  .createFields form .accessoriesListing {
-    padding-left: 0 !important;
-    padding-right: 0 !important; }
-    .createFields form .accessoriesListing .required label {
+  .repairFields form {
+    /*ACCESSORIES ERROR BOX*/
+    /*OTHER ACCESSORIES DESC*/ }
+    .repairFields form .required label:after {
+      content: "*";
+      width: 10px;
+      height: 10%; }
+    .repairFields form .form-control {
+      border-radius: 0 !important; }
+    .repairFields form div {
+      /*padding-left: 0!important;*/
+      padding-bottom: 0.3em; }
+      .repairFields form div label {
+        font-size: 1em;
+        color: #424242;
+        font-weight: bold;
+        font-style: italic; }
+      .repairFields form div .checkboxList label {
+        font-weight: normal !important;
+        font-style: normal !important;
+        font-size: 0.9em; }
+      .repairFields form div input:not(.newClient), .repairFields form div select {
+        background-color: #fcfcfc; }
+    .repairFields form .field-accessories-id_accessories > .help-block {
       display: none; }
-  .createFields .form-control[disabled], .createFields .form-control[readonly], .createFields fieldset[disabled] .form-control {
-    background-color: #aaaaaa !important; }
+    .repairFields form .field-repairaccessory-otherdesc, .repairFields form .field-repairaccessory-otherdesc label {
+      display: none; }
+    .repairFields form .pageButtons {
+      padding-top: 15px; }
+      .repairFields form .pageButtons button {
+        margin-right: 30px; }
+    .repairFields form .normalType {
+      margin-bottom: 15px; }
+      .repairFields form .normalType .row {
+        box-sizing: border-box;
+        margin: 0 !important;
+        background-color: #eaeaea; }
+        .repairFields form .normalType .row .maxBudget {
+          padding: 15px 15px 0 !important; }
+        .repairFields form .normalType .row .wantMaxBox input {
+          margin-right: 10px; }
+      .repairFields form .normalType:before {
+        content: "";
+        position: absolute;
+        top: -15px;
+        left: 35px;
+        border-style: solid;
+        border-width: 0 15px 15px;
+        border-color: #eaeaea transparent;
+        display: block;
+        width: 0;
+        z-index: 0; }
+    .repairFields form .accessoriesListing {
+      padding-left: 0 !important;
+      padding-right: 0 !important; }
+      .repairFields form .accessoriesListing .required label {
+        display: none; }
+  .repairFields .form-control[disabled], .repairFields .form-control[readonly], .repairFields fieldset[disabled] .form-control {
+    background-color: #ddd !important;
+    color: #aaa;
+    font-style: italic; }
 
 /* highlight results */
 .ui-autocomplete span.hl_results {

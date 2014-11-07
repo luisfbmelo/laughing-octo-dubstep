@@ -1,54 +1,5 @@
 [
     {
-        "name": "yiisoft/yii2-composer",
-        "version": "2.0.0",
-        "version_normalized": "2.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/yiisoft/yii2-composer.git",
-            "reference": "4ccbb7dd1cc7c5d2da316bb92db784e3b3e403fb"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/4ccbb7dd1cc7c5d2da316bb92db784e3b3e403fb",
-            "reference": "4ccbb7dd1cc7c5d2da316bb92db784e3b3e403fb",
-            "shasum": ""
-        },
-        "require": {
-            "composer-plugin-api": "1.0.0"
-        },
-        "time": "2014-10-12 17:09:06",
-        "type": "composer-plugin",
-        "extra": {
-            "class": "yii\\composer\\Plugin",
-            "branch-alias": {
-                "dev-master": "2.0.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "yii\\composer\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Qiang Xue",
-                "email": "qiang.xue@gmail.com"
-            }
-        ],
-        "description": "The composer plugin for Yii extension installer",
-        "keywords": [
-            "composer",
-            "extension installer",
-            "yii2"
-        ]
-    },
-    {
         "name": "swiftmailer/swiftmailer",
         "version": "v5.3.0",
         "version_normalized": "5.3.0.0",
@@ -177,17 +128,17 @@
     },
     {
         "name": "bower-asset/punycode",
-        "version": "v1.3.2",
-        "version_normalized": "1.3.2.0",
+        "version": "v1.3.1",
+        "version_normalized": "1.3.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/bestiejs/punycode.js.git",
-            "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
+            "reference": "de452f89aea23f126f7b219f576abda1c0823825"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/38c8d3131a82567bfef18da09f7f4db68c84f8a3",
-            "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3",
+            "url": "https://api.github.com/repos/bestiejs/punycode.js/zipball/de452f89aea23f126f7b219f576abda1c0823825",
+            "reference": "de452f89aea23f126f7b219f576abda1c0823825",
             "shasum": ""
         },
         "type": "bower-asset-library",
@@ -207,17 +158,17 @@
     },
     {
         "name": "bower-asset/jquery.inputmask",
-        "version": "3.1.33",
-        "version_normalized": "3.1.33.0",
+        "version": "3.1.31",
+        "version_normalized": "3.1.31.0",
         "source": {
             "type": "git",
             "url": "https://github.com/RobinHerbots/jquery.inputmask.git",
-            "reference": "0c6ce85c1bc12e81ecb0df62fbc62db116b7b53d"
+            "reference": "2b485a3f9329c829b40872e4463c42143b0c6405"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/0c6ce85c1bc12e81ecb0df62fbc62db116b7b53d",
-            "reference": "0c6ce85c1bc12e81ecb0df62fbc62db116b7b53d",
+            "url": "https://api.github.com/repos/RobinHerbots/jquery.inputmask/zipball/2b485a3f9329c829b40872e4463c42143b0c6405",
+            "reference": "2b485a3f9329c829b40872e4463c42143b0c6405",
             "shasum": ""
         },
         "require": {
@@ -261,17 +212,17 @@
     },
     {
         "name": "cebe/markdown",
-        "version": "1.0.1",
-        "version_normalized": "1.0.1.0",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/cebe/markdown.git",
-            "reference": "9d6c36d6623497523ed421a31d940bc1d7435578"
+            "reference": "4f6b35cc5cc1025ed946839fd24e05ace617867a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/cebe/markdown/zipball/9d6c36d6623497523ed421a31d940bc1d7435578",
-            "reference": "9d6c36d6623497523ed421a31d940bc1d7435578",
+            "url": "https://api.github.com/repos/cebe/markdown/zipball/4f6b35cc5cc1025ed946839fd24e05ace617867a",
+            "reference": "4f6b35cc5cc1025ed946839fd24e05ace617867a",
             "shasum": ""
         },
         "require": {
@@ -283,7 +234,7 @@
             "facebook/xhprof": "*@dev",
             "phpunit/phpunit": "3.7.*"
         },
-        "time": "2014-10-25 16:16:49",
+        "time": "2014-10-10 20:54:29",
         "bin": [
             "bin/markdown"
         ],
@@ -366,6 +317,55 @@
         "homepage": "http://htmlpurifier.org/",
         "keywords": [
             "html"
+        ]
+    },
+    {
+        "name": "yiisoft/yii2-composer",
+        "version": "2.0.0",
+        "version_normalized": "2.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-composer.git",
+            "reference": "4ccbb7dd1cc7c5d2da316bb92db784e3b3e403fb"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/4ccbb7dd1cc7c5d2da316bb92db784e3b3e403fb",
+            "reference": "4ccbb7dd1cc7c5d2da316bb92db784e3b3e403fb",
+            "shasum": ""
+        },
+        "require": {
+            "composer-plugin-api": "1.0.0"
+        },
+        "time": "2014-10-12 17:09:06",
+        "type": "composer-plugin",
+        "extra": {
+            "class": "yii\\composer\\Plugin",
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii\\composer\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Qiang Xue",
+                "email": "qiang.xue@gmail.com"
+            }
+        ],
+        "description": "The composer plugin for Yii extension installer",
+        "keywords": [
+            "composer",
+            "extension installer",
+            "yii2"
         ]
     },
     {
@@ -848,7 +848,9 @@
         "time": "2014-06-04 14:43:02",
         "type": "library",
         "extra": {
-            "branch-alias": []
+            "branch-alias": [
+
+            ]
         },
         "installation-source": "dist",
         "autoload": {

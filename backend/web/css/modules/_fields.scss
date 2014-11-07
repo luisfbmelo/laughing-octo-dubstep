@@ -1,4 +1,4 @@
-.createFields{
+.repairFields{
 	margin:0!important;
 
 	.sectionTitle{
@@ -11,6 +11,10 @@
 			content:"*";
 			width:10px;
 			height:10%;
+		}
+
+		.form-control{
+			border-radius: 0!important;
 		}
 
 		div{
@@ -37,6 +41,16 @@
 			}
 
 			
+		}
+
+		/*ACCESSORIES ERROR BOX*/
+		.field-accessories-id_accessories > .help-block{
+			display:none;
+		}
+
+		/*OTHER ACCESSORIES DESC*/
+		.field-repairaccessory-otherdesc, .field-repairaccessory-otherdesc label{
+			display:none;
 		}
 
 		.pageButtons{
@@ -91,6 +105,9 @@
 	}
 
 	.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
-		background-color:#aaa!important;
+		background-color: #ddd !important;
+		color: #aaa;
+		font-style: italic;
+
 	}
 }

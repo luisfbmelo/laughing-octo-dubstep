@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\client;
+use common\models\Client;
 
 
 use yii\data\ActiveDataProvider;

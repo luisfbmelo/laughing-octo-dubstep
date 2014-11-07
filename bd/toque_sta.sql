@@ -177,7 +177,7 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`repair` (
   `user_id` INT NOT NULL ,
   `repair_desc` TEXT NOT NULL ,
   `date_entry` DATETIME NOT NULL ,
-  `date_close` DATETIME NULL ,
+  `date_close` INT NULL ,
   `store_id` INT NOT NULL ,
   `priority` INT NOT NULL ,
   `budget` DECIMAL NULL ,
@@ -258,6 +258,7 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`repair_accessory` (
   `repair_id` INT NOT NULL ,
   `accessory_id` INT NOT NULL ,
+  `otherDesc` TEXT NULL ,
   PRIMARY KEY (`repair_id`, `accessory_id`) ,
   INDEX `fk_repair_accessory_repair1` (`repair_id` ASC) ,
   INDEX `fk_repair_accessory_accessories1` (`accessory_id` ASC) ,

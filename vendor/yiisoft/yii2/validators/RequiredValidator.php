@@ -57,8 +57,8 @@ class RequiredValidator extends Validator
     {
         parent::init();
         if ($this->message === null) {
-            $this->message = $this->requiredValue === null ? Yii::t('yii', '{attribute} não pode ser vazio.')
-                : Yii::t('yii', '{attribute} deve ser "{requiredValue}".');
+            $this->message = $this->requiredValue === null ? Yii::t('yii', '{attribute} cannot be blank.')
+                : Yii::t('yii', '{attribute} must be "{requiredValue}".');
         }
     }
 

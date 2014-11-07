@@ -53,7 +53,8 @@ abstract class Parser
 			return '';
 		}
 
-		$text = str_replace(["\r\n", "\n\r", "\r"], "\n", $text);
+		// http://stackoverflow.com/a/18992691/1106908
+		$text = preg_replace('~\R~', "\n", $text);
 
 		$this->prepareMarkers($text);
 
@@ -78,7 +79,8 @@ abstract class Parser
 			return '';
 		}
 
-		$text = str_replace(["\r\n", "\n\r", "\r"], "\n", $text);
+		// http://stackoverflow.com/a/18992691/1106908
+		$text = preg_replace('~\R~', "\n", $text);
 
 		$this->prepareMarkers($text);
 
