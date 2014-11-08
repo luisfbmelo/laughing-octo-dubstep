@@ -31,6 +31,7 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`repair_type` (
   `id_type` INT NOT NULL AUTO_INCREMENT ,
   `typeDesc` VARCHAR(250) NOT NULL ,
+  `extraData` INT NULL ,
   PRIMARY KEY (`id_type`) )
 ENGINE = InnoDB;
 

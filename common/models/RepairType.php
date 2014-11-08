@@ -29,7 +29,8 @@ class RepairType extends \yii\db\ActiveRecord
     {
         return [
             [['id_type','typeDesc'], 'required'],
-            [['typeDesc'], 'string', 'max' => 250]
+            [['typeDesc'], 'string', 'max' => 250],
+            [['extraData'], 'integer']
         ];
     }
 
@@ -41,6 +42,7 @@ class RepairType extends \yii\db\ActiveRecord
         return [
             'id_type' => 'Tipo de reparação',
             'typeDesc' => 'Type Desc',
+            'extraData' => 'Type extra data',
         ];
     }
 

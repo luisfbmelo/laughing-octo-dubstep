@@ -391,36 +391,50 @@ class RepairController extends Controller
         $allAccess = ArrayHelper::map($modelAccess->getAllAccess(), 'id_accessories', 'accessDesc');
 
         /*SET DEFAULT DATA*/
+        //stores
         $modelStores->id_store = $modelRepair->store_id;
+        //client
         $modelClient = $modelClient->findOne($modelRepair->client_id);
-        $modelAccess->id_accessories = $modelRepairAccess->find()->select('accessory_id')->where(['repair_id' => $modelRepair->id_repair])->asArray()->all();
+
+        //accessories
+        $modelAccess->id_accessories = $modelRepair->getThisAccess($modelRepair->id_repair);
+        $modelRepairAccess->otherDesc = $modelRepair->getThisOtherDesc($modelRepair->id_repair);
+
+        //repair type
+        $modelTypes = $modelTypes->findOne($modelRepair->type_id);
+
+        //inventory
+        $modelInv = $modelInv->findOne($modelRepair->inve_id);
+        $modelEquip->id_equip = $modelInv->equip_id;
+        $modelBrands->id_brand = $modelInv->brand_id;
+        $modelModels->id_model = $modelInv->model_id;
+
+        if (isset($_POST['cancelar'])){
+            return $this->goBack();
+        }else if (isset($_POST['submit'])){
+            return $this->goBack();
+        }
 
 
-        /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_repair]);
-        } else {
-           
-        }*/
-
-         return $this->render('update', [
-                'modelRepair' => $modelRepair,
-                'modelClient' => $modelClient,
-                'allStores' => $allStores,
-                'allBrands' => $allBrands,
-                'allEquip' => $allEquip,
-                'allModels' => $allModels,
-                'allTypes' => $allTypes,
-                'allAccess' => $allAccess,
-                'modelStores' => $modelStores,
-                'modelBrands' => $modelBrands,
-                'modelEquip' => $modelEquip,
-                'modelModels' => $modelModels,
-                'modelTypes' => $modelTypes,
-                'modelInv' => $modelInv,
-                'modelAccess' => $modelAccess,
-                'modelRepairAccess' => $modelRepairAccess,
-                'isOk' => false
-            ]);
+        return $this->render('update', [
+            'modelRepair' => $modelRepair,
+            'modelClient' => $modelClient,
+            'allStores' => $allStores,
+            'allBrands' => $allBrands,
+            'allEquip' => $allEquip,
+            'allModels' => $allModels,
+            'allTypes' => $allTypes,
+            'allAccess' => $allAccess,
+            'modelStores' => $modelStores,
+            'modelBrands' => $modelBrands,
+            'modelEquip' => $modelEquip,
+            'modelModels' => $modelModels,
+            'modelTypes' => $modelTypes,
+            'modelInv' => $modelInv,
+            'modelAccess' => $modelAccess,
+            'modelRepairAccess' => $modelRepairAccess,
+            'isOk' => false
+        ]);
     }
 
     /**
@@ -431,9 +445,28 @@ class RepairController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
 
+        $this->findModel($id)->delete();
         return $this->redirect(['index']);
+        
+        
+    }
+
+    public function actionDelajax(){
+        if (isset($_POST['list']) && $_POST['list']!=""){
+            $listarray = $_POST['list'];
+            $error = false;
+
+            //removes all projects
+            foreach($listarray as $repair){
+                repair::find()->where(['id_repair'=>$repair])->one()->delete();
+            }
+
+            echo json_encode("done");
+            
+        }else{
+            echo json_encode("error");
+        }
     }
 
     /**

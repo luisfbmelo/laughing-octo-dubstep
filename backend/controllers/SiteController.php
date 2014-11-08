@@ -5,6 +5,7 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use common\models\LoginForm;
+use common\models\User;
 use yii\filters\VerbFilter;
 
 
@@ -67,6 +68,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            \Yii::$app->session->set('user.group',User::findOne(Yii::$app->user->getId())->group_id);
             //return $this->goBack();
             return $this->redirect(Yii::$app->urlManager->createUrl(['repair/index']));
         } else {

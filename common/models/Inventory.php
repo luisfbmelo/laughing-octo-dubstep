@@ -85,4 +85,6 @@ class Inventory extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Repair::className(), ['inve_id' => 'id_inve']);
     }
+
+    
 }

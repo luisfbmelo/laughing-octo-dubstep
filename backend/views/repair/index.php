@@ -17,39 +17,11 @@ date_default_timezone_set('Atlantic/Azores');
 $this->title = 'Lista de reparações';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<!--ACTION MESSAGES-->
-<?php if(Yii::$app->session->hasFlash('addedProj')): ?>
-<div class="statusBox">
-    <div class="statusMessage flash-success">
-        <?php echo Yii::app()->session->getFlash('addedProj'); ?>
-    </div>
-</div>
-<?php endif; ?>
-
-<?php if(Yii::$app->session->hasFlash('updatedProj')): ?>
-<div class="statusBox">
-    <div class="statusMessage flash-success">
-        <?php echo Yii::$app->session->getFlash('updatedProj'); ?>
-    </div>
-</div>
-<?php endif; ?>
-
-<?php if(Yii::$app->session->hasFlash('deleteProj')): ?>
-    <div class="statusBox">
-    <div class="statusMessage flash-success">
-        <?php echo Yii::$app->session->getFlash('deleteProj'); ?>
-    </div>
-    </div>
-<?php endif; ?>
-<!-- <div class="statusBox ajaxMes">
-    <div class="statusMessage flash-success">
-        Projeto eliminado com sucesso.
-    </div>
-</div> -->
-<!--END ACTION MESSAGES-->
 
 <section class="col-lg-10 col-xs-12 col-sm-9 col-md-9">
     <div class="row">
+
+
         <div class="col-lg-2 col-xs-4 col-sm-4 col-md-4">
             <a href="<?php echo Url::to(['repair/create']); ?>" class="topBtn">
                 <div class="btnEl">
@@ -153,21 +125,20 @@ $this->params['breadcrumbs'][] = $this->title;
    
 </section>
 
-
 <script>
     $(document).ready(function(){
         $(".deleteBtn").click(function(){
             var urlBase = '<?php echo Yii::$app->request->baseUrl;?>';
-            var urlDest = urlBase+'/repair/delete';
+            var urlDest = urlBase+'/repair/delajax';
 
             //get all selected elements
-            var idList = $('input[type=checkbox]:checked').map(function () {
+            var idList = $('input[type=checkbox][name="selection\\[\\]"]:checked').map(function () {
                 return $(this).val();
             }).get();
             //var idList = $("input[type=checkbox]:checked").val();
-
+            console.log(idList);
             //if exists
-            if(idList1="")
+            if(idList!="")
             {
                 if(confirm("Deseja realmente excluir este item?"))
                 {
@@ -177,7 +148,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         dataType: 'json',
                         data:{ list: idList},
                         success: function(data){
+                            console.log(data);
                             if (data=="done"){
+                                $(".overlay").css("display","block");
                                 $(".ajaxMes").css("display","block");
                                 $(".ajaxMes").delay(2000).fadeOut(500,function(){
                                     window.location = window.location.href;

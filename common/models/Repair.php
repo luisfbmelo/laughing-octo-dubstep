@@ -268,4 +268,69 @@ class Repair extends \yii\db\ActiveRecord
         $date = strtotime($this->date_entry);
         return date('j', $date).' de '.$this->monthConverter(date('n', $date)).' de '.date('Y', $date).' pelas '.date('H:i:s',$date);
     }
+
+    /**
+     * Returns all accessories that a repair has
+     * @param  [int] $id [repair identification]
+     * @return [array]     [array of accessories ids]
+     */
+    public function getThisAccess($id){
+        $accessories = RepairAccessory::find()->select('accessory_id')->where(['repair_id' => $id])->asArray()->all();
+
+        $returnArray = array();
+        foreach ($accessories as $row){
+            $returnArray[] = $row['accessory_id'];
+        }
+
+        return $returnArray;
+
+    }
+
+    /**
+     * Returns the description of other accessories
+     * @param  [int] $id [repair identification]
+     * @return [string]     [description of other accessories]
+     */
+    public function getThisOtherDesc($id){
+        $desc = RepairAccessory::find()->select('repair_accessory.otherDesc')->innerJoin('accessories','repair_accessory.accessory_id = accessories.id_accessories')->where(['accessories.accessType' => 2,'repair_accessory.repair_id' => $id])->one();
+ 
+        if (!$desc){
+            $returnValue=false;
+        }else{
+            $returnValue = $desc->otherDesc;
+        }
+
+        return $returnValue;
+
+    }
+
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete()) {
+            $connection = \Yii::$app->db;
+            $transaction = $connection->beginTransaction();
+            try {
+                //delete accessories
+                $accessories = RepairAccessory::find()->where('repair_id = :id',['id'=>$this->id_repair])->all();
+                foreach ($accessories as $accessory) {
+                    $accessory->delete();
+                } 
+
+                //delete inventory
+                Inventory::findOne($this->inve_id)->delete();
+
+                $transaction->commit();
+                return true;             
+                
+            } catch(Exception $e) {
+                $transaction->rollback();
+                echo $e->getMessage(); exit;
+                return false;
+            }
+
+            
+        } else {
+            return false;
+        }
+    }
 }

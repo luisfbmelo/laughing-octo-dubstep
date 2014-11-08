@@ -34,7 +34,7 @@ use yii\widgets\ActiveForm;
 
             <!--CLIENT INITIAL DATA-->
             <?= $form->field($modelClient, 'cliName', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6'],])->textInput() ?>
-            <?= $form->field($modelStores, 'id_store', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList($stores,['id'=>'storesId','prompt'=>' '])->label('Loja')?>
+            <?= $form->field($modelStores, 'id_store', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList($stores,['id'=>'storesId','prompt'=>'--'])->label('Loja')?>
 
             <!--ADDRESS-->
             <?= $form->field($modelClient, 'cliAdress', ['options' => ['class' => 'col-lg-12']])->textArea(['rows' => 4]) ?>
@@ -106,7 +106,7 @@ use yii\widgets\ActiveForm;
 
 
             <div class="form-group col-lg-12 col-xs-12 col-sm-12 col-md-12 pageButtons">
-                <?= Html::submitButton($modelRepair->isNewRecord ? 'Create' : 'Update', ['class' => $modelRepair->isNewRecord ? 'btn btn-success col-lg-1' : 'btn btn-primary col-lg-1','name'=>'submit']) ?>
+                <?= Html::submitButton($modelRepair->isNewRecord ? 'Criar' : 'Atualizar', ['class' => $modelRepair->isNewRecord ? 'btn btn-success col-lg-1' : 'btn btn-primary col-lg-1','name'=>'submit']) ?>
                 <?= Html::submitButton('Cancelar',array('class'=>'btn btn-danger col-lg-1','name'=>'cancelar','id'=>'cancelar')); ?>
             </div>
         </div>
@@ -153,7 +153,7 @@ use yii\widgets\ActiveForm;
                 var opt="";
                 var equipId = $('option:selected', $(this)).val();
                 var urlBase = '<?php echo Yii::$app->request->baseUrl;?>';
-                var urlDest = urlBase+'/index.php?r=repair%2Fgetbrands';
+                var urlDest = urlBase+'/repair/getbrands';
 
                 $.ajax({
                     url: urlDest,
@@ -193,7 +193,7 @@ use yii\widgets\ActiveForm;
                 var brandId = $('option:selected', $(this)).val();
                 var equipId = $('option:selected', $("#equipID")).val();
                 var urlBase = '<?php echo Yii::$app->request->baseUrl;?>';
-                var urlDest = urlBase+'/index.php?r=repair%2Fgetmodels';
+                var urlDest = urlBase+'/repair/getmodels';
 
                 $.ajax({
                     url: urlDest,
@@ -230,7 +230,7 @@ use yii\widgets\ActiveForm;
 
         //AUTOCOMPLETE CLIENT
         var urlBaseAuto = '<?php echo Yii::$app->request->baseUrl;?>';
-        var urlDestAuto = urlBaseAuto+'/index.php?r=client%2Fallclients';
+        var urlDestAuto = urlBaseAuto+'/client/allclients';
 
         $('#client-cliname').autocomplete({
             source: urlDestAuto,

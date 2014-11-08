@@ -34,7 +34,7 @@ use yii\widgets\ActiveForm;
 
             <!--CLIENT INITIAL DATA-->
             <?= $form->field($modelClient, 'cliName', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6'],])->textInput() ?>
-            <?= $form->field($modelStores, 'id_store', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList($stores,['id'=>'storesId','prompt'=>' '])->label('Loja')?>
+            <?= $form->field($modelStores, 'id_store', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList($stores,['id'=>'storesId','prompt'=>'--'])->label('Loja')?>
 
             <!--ADDRESS-->
             <?= $form->field($modelClient, 'cliAdress', ['options' => ['class' => 'col-lg-12']])->textArea(['rows' => 4]) ?>
@@ -62,9 +62,9 @@ use yii\widgets\ActiveForm;
             <?= $form->field($modelEquip, 'id_equip', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->dropDownList($equip,['id'=>'equipID','prompt'=>'--'])->label('Equipamentos')?>
 
             
-            <?= (isset($isOk) && $isOk[0]) ? $form->field($modelBrands, 'id_brand', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($brands,['id'=>'brandID','prompt'=>'--'])->label('Marcas') : $form->field($modelBrands, 'id_brand', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($brands,['id'=>'brandID','prompt'=>'--','disabled'=>'true'])->label('Marcas')?>
+            <?= (isset($isOk) && $isOk[0]) ? $form->field($modelBrands, 'id_brand', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($brands,['id'=>'brandID','prompt'=>'--'])->label('Marcas') : $form->field($modelBrands, 'id_brand', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($brands,['id'=>'brandID','prompt'=>'--'])->label('Marcas')?>
 
-            <?= (isset($isOk) && $isOk[1]) ? $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'--'])->label('Modelos') : $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'--','disabled'=>'true'])->label('Modelos')?>
+            <?= (isset($isOk) && $isOk[1]) ? $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'--'])->label('Modelos') : $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'--'])->label('Modelos')?>
 
             <?= $form->field($modelInv, 'inveSN', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3']])->textInput(['maxlength' => 10]) ?>
             </div>
@@ -75,9 +75,18 @@ use yii\widgets\ActiveForm;
             <!-- REPAIR TYPE -->
             <?= $form->field($modelTypes, 'id_type', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->dropDownList($types,['id'=>'typeID','prompt'=>'--'])->label('Tipo de reparação')?>
             <?= $form->field($modelRepair, 'priority', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList([''=>'--','1' => 'Alta', '2' => 'Média', '3' => 'Baixa'],['id'=>'priorityID']) ?>
+
+            <?php
+            if ($modelTypes->extraData == 1){
+                $showBar = true;
+            }else{
+                $showBar = false;
+            }
+          
+            ?>
              
             <!--BUDGET SELECTION-->
-            <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 normalType" style="display:none;">
+            <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 normalType" <?= (!$showBar) ? 'style="display:none;"' : null ?>>
                 <div class="row">
                     <?= $form->field($modelRepair, 'maxBudget', ['options' => ['class' => 'col-lg-12 maxBudget']])->textInput(['maxlength' => 10]) ?>                    
                     
@@ -89,7 +98,7 @@ use yii\widgets\ActiveForm;
             <!--DESCRIPTIONS-->
             <?= $form->field($modelRepair, 'repair_desc', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-3']])->textarea(['rows' => 4])->label("Descrição da Avaria") ?>
             <?= $form->field($modelRepair, 'obs', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-3']])->textarea(['rows' => 4])->label("Outras observações") ?>
-      
+
             <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 accessoriesListing">
                 <!--ACCESSORIES-->
                 <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
@@ -97,16 +106,20 @@ use yii\widgets\ActiveForm;
                         <?= $form->field($modelAccess, 'id_accessories', ['options' => ['class' => 'clearPad']])->checkboxList($accessories,['unselect'=> 0,'separator'=>'<br/>','class'=>'checkboxList'])->label("Acessórios") ?>
                     </label>
                 </div>
-                <?= $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-4 col-xs-4 col-sm-4 col-md-4']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("") ?>
+
+                <?php 
+                    if (isset($modelAccess->id_accessories) && in_array(3,$modelAccess->id_accessories)){
+                       echo $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-4 col-xs-4 col-sm-4 col-md-4','style'=>'display:block']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("");
+                    }else{
+                       echo $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-4 col-xs-4 col-sm-4 col-md-4']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("");
+                    }
+                ?> 
+
+                
             </div>
-            
-
-
-            
-
 
             <div class="form-group col-lg-12 col-xs-12 col-sm-12 col-md-12 pageButtons">
-                <?= Html::submitButton($modelRepair->isNewRecord ? 'Create' : 'Update', ['class' => $modelRepair->isNewRecord ? 'btn btn-success col-lg-1' : 'btn btn-primary col-lg-1','name'=>'submit']) ?>
+                <?= Html::submitButton($modelRepair->isNewRecord ? 'Criar' : 'Atualizar', ['class' => $modelRepair->isNewRecord ? 'btn btn-success col-lg-1' : 'btn btn-primary col-lg-1','name'=>'submit']) ?>
                 <?= Html::submitButton('Cancelar',array('class'=>'btn btn-danger col-lg-1','name'=>'cancelar','id'=>'cancelar')); ?>
             </div>
         </div>
@@ -153,7 +166,7 @@ use yii\widgets\ActiveForm;
                 var opt="";
                 var equipId = $('option:selected', $(this)).val();
                 var urlBase = '<?php echo Yii::$app->request->baseUrl;?>';
-                var urlDest = urlBase+'/index.php?r=repair%2Fgetbrands';
+                var urlDest = urlBase+'/repair/getbrands';
 
                 $.ajax({
                     url: urlDest,
@@ -193,7 +206,7 @@ use yii\widgets\ActiveForm;
                 var brandId = $('option:selected', $(this)).val();
                 var equipId = $('option:selected', $("#equipID")).val();
                 var urlBase = '<?php echo Yii::$app->request->baseUrl;?>';
-                var urlDest = urlBase+'/index.php?r=repair%2Fgetmodels';
+                var urlDest = urlBase+'/repair/getmodels';
 
                 $.ajax({
                     url: urlDest,
@@ -230,7 +243,7 @@ use yii\widgets\ActiveForm;
 
         //AUTOCOMPLETE CLIENT
         var urlBaseAuto = '<?php echo Yii::$app->request->baseUrl;?>';
-        var urlDestAuto = urlBaseAuto+'/index.php?r=client%2Fallclients';
+        var urlDestAuto = urlBaseAuto+'/client/allclients';
 
         $('#client-cliname').autocomplete({
             source: urlDestAuto,
@@ -270,7 +283,12 @@ use yii\widgets\ActiveForm;
         //OTHER DESC SHOWUP
         $('#accessories-id_accessories input[type=checkbox]').change(function(){
             if($(this).val()==3){
-                $(".field-repairaccessory-otherdesc").toggle();
+                var el = $(".field-repairaccessory-otherdesc");
+
+
+                el.toggle();
+                
+                
             }
         });
     });

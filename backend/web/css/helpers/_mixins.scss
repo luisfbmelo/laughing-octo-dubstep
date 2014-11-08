@@ -51,3 +51,9 @@
   min-#{$key}: -moz-calc(#{$value});
   min-#{$key}: calc(#{$value});
 }
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}

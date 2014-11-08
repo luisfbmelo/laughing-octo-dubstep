@@ -29,7 +29,7 @@ AppAsset::register($this);
                 
                 <nav class="row brandHeader">
                     <div class="col-lg-5 col-xs-10 col-sm-5 col-md-5">
-                        <a href="<?php echo Yii::$app->getUrlManager()->createUrl('repair/index'); ?>"><img src="img/logo.jpg" alt="" class="src"></a>
+                        <a href="<?php echo Yii::$app->getUrlManager()->createUrl('repair/index'); ?>"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt="" class="src"></a>
                     </div>
 
                     <div class="col-lg-2 col-xs-2 col-sm-2 col-md-2">
@@ -94,6 +94,8 @@ AppAsset::register($this);
                                 </div>
                             </div>
 
+                            <!-- RESTRICTED -->
+                            <?php if (\Yii::$app->session->get('user.group')==1){ ?>
                             <div class="accordion-group">
                                 <div class="accordion-heading">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#">
@@ -102,6 +104,7 @@ AppAsset::register($this);
                                     </a>
                                 </div>       
                             </div>
+                            
 
                             <div class="accordion-group">
                                 <div class="accordion-heading">
@@ -139,7 +142,7 @@ AppAsset::register($this);
                                     </a>
                                 </div>
                             </div>
-
+                            <?php } ?>
                         </div>
                     </div>
 
@@ -153,7 +156,38 @@ AppAsset::register($this);
             </div>
         <?php } ?>
 
-        
+<!--ACTION MESSAGES-->
+        <?php if(Yii::$app->session->hasFlash('addedProj')): ?>
+
+        <div class="statusBox">
+            <div class="statusMessage flash-success">
+                <?php echo Yii::app()->session->getFlash('addedProj'); ?>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <?php if(Yii::$app->session->hasFlash('updatedProj')): ?>
+        <div class="statusBox">
+            <div class="statusMessage flash-success">
+                <?php echo Yii::$app->session->getFlash('updatedProj'); ?>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <?php if(Yii::$app->session->hasFlash('deleteProj')): ?>
+            <div class="statusBox">
+            <div class="statusMessage flash-success">
+                <?php echo Yii::$app->session->getFlash('deleteProj'); ?>
+            </div>
+            </div>
+        <?php endif; ?>
+        <div class="overlay"></div>
+        <div class="statusBox ajaxMes">
+            <div class="statusMessage flash-success">
+                Projeto eliminado com sucesso.
+            </div>
+        </div> 
+        <!--END ACTION MESSAGES-->        
 
     <?php $this->endBody() ?>
 </body>

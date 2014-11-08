@@ -10,11 +10,11 @@
 body {
   font-size: 16px; }
 
-ul,
-li {
-  margin: 0;
-  padding: 0; }
-
+/*ul,
+li{
+	margin:0;
+	padding:0;
+}*/
 *::-webkit-input-placeholder {
   font-style: italic; }
 
@@ -88,6 +88,47 @@ body {
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); }
   .alert p {
     margin: 0; }
+
+.overlay,
+.ajaxMes {
+  display: none; }
+
+/*
+----
+Status Message
+----
+*/
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: black;
+  opacity: 0.8;
+  filter: alpha(opacity=80); }
+
+.statusBox {
+  width: 100%;
+  position: fixed !important;
+  top: 50% !important;
+  z-index: 9999;
+  text-align: center;
+  font-size: 0.87em;
+  transform: translateY(-50%); }
+
+.statusMessage {
+  display: inline-block;
+  width: auto;
+  margin: 0 auto;
+  font-size: 1.4em;
+  text-align: center;
+  padding: 5px; }
+
+.flash-success {
+  background: #e7ffe4;
+  border: 2px solid #adffa2;
+  color: #2b6423; }
 
 .brandHeader {
   background-color: #414957;
@@ -302,7 +343,7 @@ a.topBtn {
     vertical-align: middle !important;
     font-size: 0.87em; }
   .repairsGrid tbody tr td:nth-child(7) div {
-    width: 70%;
+    min-width: 130px;
     display: inline-block;
     background-color: #414957;
     -webkit-border-radius: 15px;
