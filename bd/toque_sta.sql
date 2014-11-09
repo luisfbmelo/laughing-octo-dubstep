@@ -21,6 +21,7 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`client` (
   `cliConMov1` INT NOT NULL ,
   `cliConMov2` INT NULL ,
   `cliBirthday` DATE NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`id_client`) )
 ENGINE = InnoDB;
 
@@ -32,6 +33,7 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`repair_type` (
   `id_type` INT NOT NULL AUTO_INCREMENT ,
   `typeDesc` VARCHAR(250) NOT NULL ,
   `extraData` INT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`id_type`) )
 ENGINE = InnoDB;
 
@@ -56,7 +58,7 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`user` (
   `password_hash` VARCHAR(250) NOT NULL ,
   `group_id` INT NOT NULL ,
   `password_reset_token` VARCHAR(250) NULL ,
-  `status` INT NOT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
   `auth_key` VARCHAR(250) NOT NULL ,
   `role` INT NOT NULL ,
   `created_at` DATETIME NULL ,
@@ -77,6 +79,7 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`equipaments` (
   `id_equip` INT NOT NULL AUTO_INCREMENT ,
   `equipDesc` TEXT NOT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`id_equip`) )
 ENGINE = InnoDB;
 
@@ -87,6 +90,7 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`brands` (
   `id_brand` INT NOT NULL AUTO_INCREMENT ,
   `brandName` TEXT NOT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`id_brand`) )
 ENGINE = InnoDB;
 
@@ -99,6 +103,7 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`models` (
   `modelName` TEXT NOT NULL ,
   `brand_id` INT NOT NULL ,
   `equip_id` INT NOT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`id_model`) ,
   INDEX `fk_models_brands1` (`brand_id` ASC) ,
   INDEX `fk_models_equipaments1` (`equip_id` ASC) ,
@@ -124,6 +129,7 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`inventory` (
   `brand_id` INT NOT NULL ,
   `model_id` INT NOT NULL ,
   `inveSN` TEXT NOT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
   INDEX `fk_inventory_equipaments1` (`equip_id` ASC) ,
   INDEX `fk_inventory_brands1` (`brand_id` ASC) ,
   INDEX `fk_inventory_models1` (`model_id` ASC) ,
@@ -152,6 +158,7 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`stores` (
   `id_store` INT NOT NULL AUTO_INCREMENT ,
   `storeDesc` TEXT NOT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`id_store`) )
 ENGINE = InnoDB;
 
@@ -162,6 +169,7 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`status` (
   `id_status` INT NOT NULL AUTO_INCREMENT ,
   `statusDesc` VARCHAR(250) NOT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`id_status`) )
 ENGINE = InnoDB;
 
@@ -185,6 +193,7 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`repair` (
   `maxBudget` DECIMAL NULL ,
   `total` DECIMAL NULL ,
   `obs` TEXT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`id_repair`) ,
   INDEX `fk_repair_client` (`client_id` ASC) ,
   INDEX `fk_repair_repair_type1` (`type_id` ASC) ,
@@ -195,32 +204,32 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`repair` (
   CONSTRAINT `fk_repair_client`
     FOREIGN KEY (`client_id` )
     REFERENCES `toque_sta`.`client` (`id_client` )
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_repair_repair_type1`
     FOREIGN KEY (`type_id` )
     REFERENCES `toque_sta`.`repair_type` (`id_type` )
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_repair_users1`
     FOREIGN KEY (`user_id` )
     REFERENCES `toque_sta`.`user` (`id_users` )
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_repair_inventory1`
     FOREIGN KEY (`inve_id` )
     REFERENCES `toque_sta`.`inventory` (`id_inve` )
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_repair_stores1`
     FOREIGN KEY (`store_id` )
     REFERENCES `toque_sta`.`stores` (`id_store` )
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_repair_status1`
     FOREIGN KEY (`status_id` )
     REFERENCES `toque_sta`.`status` (`id_status` )
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -249,6 +258,7 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`accessories` (
   `id_accessories` INT NOT NULL AUTO_INCREMENT ,
   `accessDesc` VARCHAR(45) NOT NULL ,
   `accessType` INT NOT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`id_accessories`) )
 ENGINE = InnoDB;
 
@@ -260,6 +270,7 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`repair_accessory` (
   `repair_id` INT NOT NULL ,
   `accessory_id` INT NOT NULL ,
   `otherDesc` TEXT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`repair_id`, `accessory_id`) ,
   INDEX `fk_repair_accessory_repair1` (`repair_id` ASC) ,
   INDEX `fk_repair_accessory_accessories1` (`accessory_id` ASC) ,
@@ -284,6 +295,7 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`parts` (
   `partDesc` VARCHAR(45) NOT NULL ,
   `partDoce` VARCHAR(250) NOT NULL ,
   `partPrice` DECIMAL NOT NULL ,
+  `status` INT NOT NULL ,
   PRIMARY KEY (`id_part`) )
 ENGINE = InnoDB;
 
@@ -295,6 +307,7 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`repair_parts` (
   `repair_id` INT NOT NULL ,
   `part_id` INT NOT NULL ,
   `partQuant` INT NOT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`repair_id`, `part_id`) ,
   INDEX `fk_repair_parts_repair1` (`repair_id` ASC) ,
   INDEX `fk_repair_parts_parts1` (`part_id` ASC) ,
@@ -320,6 +333,7 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`modLog` (
   `logMessage` TEXT NOT NULL ,
   `logType` INT NOT NULL ,
   `user_id` INT NOT NULL ,
+  `status` INT NOT NULL ,
   PRIMARY KEY (`id_log`) ,
   INDEX `fk_modLog_users1` (`user_id` ASC) ,
   CONSTRAINT `fk_modLog_users1`
@@ -339,6 +353,7 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`messages` (
   `messPriority` INT NULL ,
   `messMessage` TEXT NOT NULL ,
   `messDate` DATETIME NOT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`id_message`) )
 ENGINE = InnoDB;
 
@@ -349,7 +364,7 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`users_messages` (
   `user_id` INT NOT NULL ,
   `message_id` INT NOT NULL ,
-  `status` INT NOT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`user_id`, `message_id`) ,
   INDEX `fk_users_messages_users1` (`user_id` ASC) ,
   INDEX `fk_users_messages_messages1` (`message_id` ASC) ,
@@ -372,6 +387,7 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`equip_brand` (
   `equip_id` INT NOT NULL ,
   `brand_id` INT NOT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (`equip_id`, `brand_id`) ,
   INDEX `fk_equip_brand_equipaments1` (`equip_id` ASC) ,
   INDEX `fk_equip_brand_brands1` (`brand_id` ASC) ,

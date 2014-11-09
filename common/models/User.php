@@ -60,7 +60,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'email', 'password_hash', 'group_id', 'status', 'auth_key', 'role'], 'required'],
+            [['username', 'email', 'password_hash', 'group_id', 'auth_key', 'role'], 'required'],
             [['group_id', 'status', 'role'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['username', 'email'], 'string', 'max' => 45],
@@ -273,6 +273,8 @@ class User extends ActiveRecord implements IdentityInterface
 
         if (parent::beforeSave($insert)) {
             $this->role = 50;
+            $this->group_id = 1;
+            $this->status = 1;
             return true;
         } else {
             return false;

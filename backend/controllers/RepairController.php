@@ -247,7 +247,7 @@ class RepairController extends Controller
                        }
 
                        if (Yii::$app->request->post('brandId')!="new"){
-                           $modelEquip->id_brand = Yii::$app->request->post('brand ID'); 
+                           $modelBrands->id_brand = Yii::$app->request->post('brandId'); 
                        }else{
                             $brandArray = [
                                 'id_brand' => NULL,
