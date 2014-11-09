@@ -54,7 +54,7 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($modelClient, 'cliConMov1', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
                 <?= $form->field($modelClient, 'cliConMov2', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
             </div>            
-            <input type="hidden" name="clientDataHidden" id="clientDataHidden" value="new"/>
+            <input type="hidden" name="clientDataHidden" id="clientDataHidden" value="<?= (isset($modelClient->id_client)) ? $modelClient->id_client : 'new' ?>"/>
         </div>
 
         <div class="row">
@@ -70,14 +70,22 @@ use yii\widgets\ActiveForm;
 
             <!--EQUIPMENT-->
             <div class="row equipList">
-            <?= $form->field($modelEquip, 'id_equip', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->dropDownList($equip,['id'=>'equipID','prompt'=>'--'])->label('Equipamentos')?>
+            <?= $form->field($modelEquip, 'equipDesc', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->textInput()->label('Equipamentos') ?>
+                <input type="hidden" name="equipId" id="equipId" value="<?= $modelEquip->id_equip ?>"/>
+                <?= $form->field($modelBrands, 'brandName', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->textInput()->label('Marcas') ?>
+                <input type="hidden" name="brandId" id="brandId" value="<?= $modelBrands->id_brand ?>"/>
+                <?= $form->field($modelModels, 'modelName', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->textInput()->label('Modelos') ?>
+                <input type="hidden" name="modelId" id="modelId" value="<?= $modelModels->id_model ?>"/>
+
+                <?= $form->field($modelInv, 'inveSN', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3']])->textInput(['maxlength' => 10]) ?>
+             <!-- $form->field($modelEquip, 'id_equip', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->dropDownList($equip,['id'=>'equipID','prompt'=>'\-\-'])->label('Equipamentos') 
 
             
-            <?= (isset($isOk) && $isOk[0]) ? $form->field($modelBrands, 'id_brand', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($brands,['id'=>'brandID','prompt'=>'--'])->label('Marcas') : $form->field($modelBrands, 'id_brand', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($brands,['id'=>'brandID','prompt'=>'--'])->label('Marcas')?>
+             (isset($isOk) && $isOk[0]) ? $form->field($modelBrands, 'id_brand', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($brands,['id'=>'brandID','prompt'=>'\-\-'])->label('Marcas') : $form->field($modelBrands, 'id_brand', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($brands,['id'=>'brandID','prompt'=>'\-\-','disabled'=>'true'])->label('Marcas')
 
-            <?= (isset($isOk) && $isOk[1]) ? $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'--'])->label('Modelos') : $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'--'])->label('Modelos')?>
+             (isset($isOk) && $isOk[1]) ? $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'\-\-'])->label('Modelos') : $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'\-\-','disabled'=>'true'])->label('Modelos')
 
-            <?= $form->field($modelInv, 'inveSN', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3']])->textInput(['maxlength' => 10]) ?>
+              -->
             </div>
             
 
@@ -89,6 +97,7 @@ use yii\widgets\ActiveForm;
         </div>
 
             <?php
+
             if ($modelTypes->extraData == 1){
                 $showBar = true;
             }else{
@@ -258,12 +267,12 @@ use yii\widgets\ActiveForm;
         });
         
 
-        //AUTOCOMPLETE CLIENT
-        var urlBaseAuto = '<?php echo Yii::$app->request->baseUrl;?>';
-        var urlDestAuto = urlBaseAuto+'/client/allclients';
+        //AUTOCOMPLETES
+        var urlBaseCli = '<?php echo Yii::$app->request->baseUrl;?>';
+        var urlDestCli = urlBaseCli+'/client/allclients';
 
         $('#client-cliname').autocomplete({
-            source: urlDestAuto,
+            source: urlDestCli,
             minLength: 2,
             select: function(event, ui) {
                 $("#client-cliadress").val(ui.item.address);
@@ -274,7 +283,7 @@ use yii\widgets\ActiveForm;
                 $("#client-cliconmov1").val(ui.item.mo1);
                 $("#client-cliconmov2").val(ui.item.mo2);
 
-
+                //say that it must be updated only
                 $("#clientDataHidden").val(ui.item.id);
             },
             response: function( event, ui ) {
@@ -288,10 +297,108 @@ use yii\widgets\ActiveForm;
                 
             }
 
-
+            //say it's a new client
         }).on('change',function(){
             $("[id^='client-']:not('#client-cliname')").val(null);
             $("#clientDataHidden").val("new");
+
+        });
+
+        //equips
+        var urlBaseEquip = '<?php echo Yii::$app->request->baseUrl;?>';
+        var urlDestEquip = urlBaseEquip+'/equipaments/allequips';
+
+        $('#equipaments-equipdesc').autocomplete({
+            source: urlDestEquip,
+            minLength: 2,
+            select: function(event, ui) {
+                $("#equipaments-equipdesc").val(ui.item.equipDesc);
+
+                //say that it must be updated only
+                $("#equipId").val(ui.item.id);
+            },
+            response: function( event, ui ) {
+                console.log(ui);
+            },
+     
+            html: true, // optional (jquery.ui.autocomplete.html.js required)
+     
+            // optional (if other layers overlap autocomplete list)
+            open: function(event, ui) {
+                
+            }
+
+            //say it's a new client
+        }).on('change',function(){
+            $("#equipId").val("new");
+
+        });
+
+        //brands
+        var urlBaseBrand = '<?php echo Yii::$app->request->baseUrl;?>';
+        var urlDestBrand = urlBaseBrand+'/brands/allbrands';
+
+        $('#brands-brandname').autocomplete({
+            source: urlDestBrand,
+            minLength: 2,
+            select: function(event, ui) {
+                console.log(ui);
+                $("#brands-brandname").val(ui.item.brandName);
+
+                //say that it must be updated only
+                $("#brandId").val(ui.item.id);
+            },
+            response: function( event, ui ) {
+                //console.log(ui);
+            },
+     
+            html: true, // optional (jquery.ui.autocomplete.html.js required)
+     
+            // optional (if other layers overlap autocomplete list)
+            open: function(event, ui) {
+                
+            }
+
+            //say it's a new client
+        }).on('change',function(){
+            $("#brandId").val("new");
+
+        });
+
+        //models
+        var urlBaseModel = '<?php echo Yii::$app->request->baseUrl;?>';
+        var urlDestModel = urlBaseModel+'/models/allmodels';
+
+        $('#models-modelname').autocomplete({
+            source: urlDestModel,
+            minLength: 2,
+            select: function(event, ui) {
+                console.log(ui);
+                $("#models-modelname").val(ui.item.modeName);
+
+                //say that it must be updated only
+                $("#modelId").val(ui.item.id);
+
+                //CHANGE ALL
+                $("#brands-brandname").val(ui.item.brandName);
+                $("#brandId").val(ui.item.brandId);
+                $("#equipaments-equipdesc").val(ui.item.equipName);
+                $("#equipId").val(ui.item.equipId);
+            },
+            response: function( event, ui ) {
+                //console.log(ui);
+            },
+     
+            html: true, // optional (jquery.ui.autocomplete.html.js required)
+     
+            // optional (if other layers overlap autocomplete list)
+            open: function(event, ui) {
+                
+            }
+
+            //say it's a new client
+        }).on('change',function(){
+            $("#modelId").val("new");
 
         });
 

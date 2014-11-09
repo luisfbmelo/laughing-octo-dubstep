@@ -206,7 +206,7 @@ class Repair extends \yii\db\ActiveRecord
             $model->$arrayKeys[$a] = $elements[$arrayKeys[$a]];
         }
 
-        if ($model->save()){
+        if ($model->save(false)){
             return Yii::$app->db->getLastInsertID();
         }else{
             return false;

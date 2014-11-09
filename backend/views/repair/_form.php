@@ -55,7 +55,7 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($modelClient, 'cliConMov2', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
             </div>
             
-            <input type="hidden" name="clientDataHidden" id="clientDataHidden" value="new"/>
+            <input type="hidden" name="clientDataHidden" id="clientDataHidden" value="<?= (isset($modelClient->id_client)) ? $modelClient->id_client : 'new' ?>"/>
         </div>
 
         <div class="row">
@@ -73,7 +73,13 @@ use yii\widgets\ActiveForm;
             <div class="row equipList">
 
                 <?= $form->field($modelEquip, 'equipDesc', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->textInput()->label('Equipamentos') ?>
-                <input type="hidden" name="equipId" id="equipId" value="new"/>
+                <input type="hidden" name="equipId" id="equipId" value="<?= (isset($modelEquip->id_equip)) ? $modelEquip->id_equip : 'new' ?>"/>
+                <?= $form->field($modelBrands, 'brandName', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->textInput()->label('Marcas') ?>
+                <input type="hidden" name="brandId" id="brandId" value="<?= (isset($modelBrands->id_brand)) ? $modelBrands->id_brand : 'new' ?>"/>
+                <?= $form->field($modelModels, 'modelName', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->textInput()->label('Modelos') ?>
+                <input type="hidden" name="modelId" id="modelId" value="<?= (isset($modelModels->id_model)) ? $modelModels->id_model : 'new' ?>"/>
+
+                <?= $form->field($modelInv, 'inveSN', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3']])->textInput(['maxlength' => 10]) ?>
              <!-- $form->field($modelEquip, 'id_equip', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->dropDownList($equip,['id'=>'equipID','prompt'=>'\-\-'])->label('Equipamentos') 
 
             
@@ -81,7 +87,7 @@ use yii\widgets\ActiveForm;
 
              (isset($isOk) && $isOk[1]) ? $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'\-\-'])->label('Modelos') : $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'\-\-','disabled'=>'true'])->label('Modelos')
 
-             $form->field($modelInv, 'inveSN', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3']])->textInput(['maxlength' => 10]) -->
+              -->
             </div>
             
 
@@ -94,9 +100,20 @@ use yii\widgets\ActiveForm;
 
 
         <div class="row">
-             
+             <?php
+            if (isset($modelTypes->id_type)){
+                $newModel = $modelTypes->findOne($modelTypes->id_type);
+            }
+
+            if (isset($newModel) && $newModel->extraData == 1){
+                $showBar = true;
+            }else{
+                $showBar = false;
+            }
+          
+            ?>
             <!--BUDGET SELECTION-->
-            <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 normalType" style="display:none;">
+            <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 normalType" <?= (!$showBar) ? 'style="display:none;"' : null ?>>
                 <div class="row">
                     <?= $form->field($modelRepair, 'maxBudget', ['options' => ['class' => 'col-lg-12 maxBudget']])->textInput(['maxlength' => 10]) ?>                    
                     
@@ -313,6 +330,74 @@ use yii\widgets\ActiveForm;
             //say it's a new client
         }).on('change',function(){
             $("#equipId").val("new");
+
+        });
+
+        //brands
+        var urlBaseBrand = '<?php echo Yii::$app->request->baseUrl;?>';
+        var urlDestBrand = urlBaseBrand+'/brands/allbrands';
+
+        $('#brands-brandname').autocomplete({
+            source: urlDestBrand,
+            minLength: 2,
+            select: function(event, ui) {
+                console.log(ui);
+                $("#brands-brandname").val(ui.item.brandName);
+
+                //say that it must be updated only
+                $("#brandId").val(ui.item.id);
+            },
+            response: function( event, ui ) {
+                //console.log(ui);
+            },
+     
+            html: true, // optional (jquery.ui.autocomplete.html.js required)
+     
+            // optional (if other layers overlap autocomplete list)
+            open: function(event, ui) {
+                
+            }
+
+            //say it's a new client
+        }).on('change',function(){
+            $("#brandId").val("new");
+
+        });
+
+        //models
+        var urlBaseModel = '<?php echo Yii::$app->request->baseUrl;?>';
+        var urlDestModel = urlBaseModel+'/models/allmodels';
+
+        $('#models-modelname').autocomplete({
+            source: urlDestModel,
+            minLength: 2,
+            select: function(event, ui) {
+                console.log(ui);
+                $("#models-modelname").val(ui.item.modeName);
+
+                //say that it must be updated only
+                $("#modelId").val(ui.item.id);
+
+                //CHANGE ALL
+                $("#brands-brandname").val(ui.item.brandName);
+                $("#brandId").val(ui.item.brandId);
+                $("#equipaments-equipdesc").val(ui.item.equipName);
+                $("#equipId").val(ui.item.equipId);
+            },
+            response: function( event, ui ) {
+                //console.log(ui);
+            },
+     
+            html: true, // optional (jquery.ui.autocomplete.html.js required)
+     
+            // optional (if other layers overlap autocomplete list)
+            open: function(event, ui) {
+                
+            }
+
+            //say it's a new client
+        }).on('change',function(){
+            $("#modelId").val("new");
 
         });
 

@@ -125,11 +125,11 @@ class RepairController extends Controller
         $allStores=ArrayHelper::map($modelStores->getAllStores(), 'id_store', 'storeDesc');
         //$allStores = stores::find()->asArray()->orderBy('storeDesc ASC')->all();
 
-        $allBrands = ArrayHelper::map($modelBrands->getAllBrands(), 'id_brand', 'brandName');        
+        /*$allBrands = ArrayHelper::map($modelBrands->getAllBrands(), 'id_brand', 'brandName');        
 
         $allEquip = ArrayHelper::map($modelEquip->getAllEquip(), 'id_equip', 'equipDesc');      
 
-        $allModels = ArrayHelper::map($modelModels->getAllModels(), 'id_model', 'modelName'); 
+        $allModels = ArrayHelper::map($modelModels->getAllModels(), 'id_model', 'modelName'); */
 
         $allTypes = ArrayHelper::map($modelTypes->getAllTypes(), 'id_type', 'typeDesc');
 
@@ -170,11 +170,31 @@ class RepairController extends Controller
                 //validate client
                 $valid = $modelClient->load(Yii::$app->request->post()) && $modelClient->validate(['cliName','cliAdress','cliDoorNum','cliPostalCode','cliPostalSuffix','cliConFix','cliConMov1','cliConMov2']);
 
+                //equipments validation
+                $valid = $modelEquip->load(Yii::$app->request->post()) && $modelEquip->validate(['equipDesc']) && $valid;
+                $valid = $modelBrands->load(Yii::$app->request->post()) && $modelBrands->validate(['brandName']) && $valid;
+                $valid = $modelModels->load(Yii::$app->request->post()) && $modelModels->validate(['modelName']) && $valid;
 
+                if (Yii::$app->request->post('equipId')!="new"){
+                    $modelEquip->id_equip = Yii::$app->request->post('equipId'); 
+                }
+
+                if (Yii::$app->request->post('brandId')!="new"){
+                    $modelBrands->id_brand = Yii::$app->request->post('brandId');
+                }
+
+                if (Yii::$app->request->post('modelId')!='new'){
+                    $modelModels->id_model = Yii::$app->request->post('modelId');
+                }
+
+                if (Yii::$app->request->post('clientDataHidden')!="new"){
+                    $modelClient->id_client = Yii::$app->request->post('clientDataHidden');
+                }
+                
 
                 //start dropdownlists validation
                 //if equip is ok, give only the brands of that equip
-                $validDropdowns = $modelEquip->load(Yii::$app->request->post()) && $modelEquip->validate(['id_equip']);
+                /*$validDropdowns = $modelEquip->load(Yii::$app->request->post()) && $modelEquip->validate(['id_equip']);
                 if ($validDropdowns){
                     $allBrands = ArrayHelper::map($modelBrands->getBrandsOfEquip(Yii::$app->request->post('Equipaments')['id_equip']), 'id_brand', 'brandName');
 
@@ -196,7 +216,7 @@ class RepairController extends Controller
 
                 //continue validate
                 $validDropdowns = ($modelModels->load(Yii::$app->request->post()) && $modelModels->validate(['id_model']) && $validDropdowns) ? $isOk[2]=true : $isOk[2]=false;
-                
+                */
                 $valid = $modelInv->load(Yii::$app->request->post()) && $modelInv->validate(['inveSN']) && $valid;
 
                 $valid = $modelTypes->load(Yii::$app->request->post()) && $modelTypes->validate(['id_type']) && $valid;
@@ -205,7 +225,50 @@ class RepairController extends Controller
 
                 $valid = $modelRepair->load(Yii::$app->request->post()) && $modelRepair->validate(['repair_desc','priority']) && $valid;
 
-                if ($valid && $validDropdowns){
+                if ($valid){
+
+                    //RESOLVE INV ID's
+                    if (Yii::$app->request->post('modelId')!='new' && Yii::$app->request->post('equipId')!="new" && Yii::$app->request->post('brandId')!="new"){
+                        $modelEquip->id_equip = Yii::$app->request->post('equipId');
+                        $modelBrands->id_brand = Yii::$app->request->post('brandId');
+                        $modelModels->id_model = Yii::$app->request->post('modelId');
+                    }else{
+                        //add equip
+                        if (Yii::$app->request->post('equipId')!="new"){
+                           $modelEquip->id_equip = Yii::$app->request->post('equipId'); 
+                       }else{
+                            $equipArray = [
+                                'id_equip' => NULL,
+                                'isNewRecord' => TRUE,
+                                'equipDesc' => Yii::$app->request->post('Equipaments')['equipDesc'],
+                                'status' => 1
+                            ];
+                            $modelEquip->id_equip = $modelRepair->addModelData($modelEquip,$equipArray);
+                       }
+
+                       if (Yii::$app->request->post('brandId')!="new"){
+                           $modelEquip->id_brand = Yii::$app->request->post('brand ID'); 
+                       }else{
+                            $brandArray = [
+                                'id_brand' => NULL,
+                                'isNewRecord' => TRUE,
+                                'brandName' => Yii::$app->request->post('Brands')['brandName'],
+                                'status' => 1
+                            ];
+                            $modelBrands->id_brand = $modelRepair->addModelData($modelBrands,$brandArray);
+                       }
+
+                        $modelArray = [
+                            'id_model' => NULL,
+                            'isNewRecord' => TRUE,
+                            'modelName' => Yii::$app->request->post('Models')['modelName'],
+                            'equip_id' => $modelEquip->id_equip,
+                            'brand_id' => $modelBrands->id_brand,
+                            'status' => 1
+                        ];
+                        $modelModels->id_model = $modelRepair->addModelData($modelModels,$modelArray);
+                    }
+
                     
                     //ADD INVENTORY
                     $invArray = [
@@ -306,9 +369,6 @@ class RepairController extends Controller
                 'modelRepair' => $modelRepair,
                 'modelClient' => $modelClient,
                 'allStores' => $allStores,
-                'allBrands' => $allBrands,
-                'allEquip' => $allEquip,
-                'allModels' => $allModels,
                 'allTypes' => $allTypes,
                 'allAccess' => $allAccess,
                 'modelStores' => $modelStores,
@@ -327,9 +387,6 @@ class RepairController extends Controller
             'modelRepair' => $modelRepair,
             'modelClient' => $modelClient,
             'allStores' => $allStores,
-            'allBrands' => $allBrands,
-            'allEquip' => $allEquip,
-            'allModels' => $allModels,
             'allTypes' => $allTypes,
             'allAccess' => $allAccess,
             'modelStores' => $modelStores,
@@ -384,11 +441,11 @@ class RepairController extends Controller
         $allStores=ArrayHelper::map($modelStores->getAllStores(), 'id_store', 'storeDesc');
         //$allStores = stores::find()->asArray()->orderBy('storeDesc ASC')->all();
 
-        $allBrands = ArrayHelper::map($modelBrands->getAllBrands(), 'id_brand', 'brandName');        
+        /*$allBrands = ArrayHelper::map($modelBrands->getAllBrands(), 'id_brand', 'brandName');        
 
         $allEquip = ArrayHelper::map($modelEquip->getAllEquip(), 'id_equip', 'equipDesc');      
 
-        $allModels = ArrayHelper::map($modelModels->getAllModels(), 'id_model', 'modelName'); 
+        $allModels = ArrayHelper::map($modelModels->getAllModels(), 'id_model', 'modelName'); */
 
         $allTypes = ArrayHelper::map($modelTypes->getAllTypes(), 'id_type', 'typeDesc');
 
@@ -409,9 +466,9 @@ class RepairController extends Controller
 
         //inventory
         $modelInv = $modelInv->findOne($modelRepair->inve_id);
-        $modelEquip->id_equip = $modelInv->equip_id;
-        $modelBrands->id_brand = $modelInv->brand_id;
-        $modelModels->id_model = $modelInv->model_id;
+        $modelEquip = $modelEquip->findOne($modelInv->equip_id);
+        $modelBrands = $modelBrands->findOne($modelInv->brand_id);
+        $modelModels = $modelModels->findOne($modelInv->model_id);
 
         if (isset($_POST['cancelar'])){
             return $this->goBack();
@@ -424,9 +481,6 @@ class RepairController extends Controller
             'modelRepair' => $modelRepair,
             'modelClient' => $modelClient,
             'allStores' => $allStores,
-            'allBrands' => $allBrands,
-            'allEquip' => $allEquip,
-            'allModels' => $allModels,
             'allTypes' => $allTypes,
             'allAccess' => $allAccess,
             'modelStores' => $modelStores,
