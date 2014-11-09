@@ -84,6 +84,6 @@ class Equipaments extends \yii\db\ActiveRecord
      * @return [array] [equipments data]
      */
     public function getAllEquip(){
-        return $this->find()->asArray()->orderBy('equipDesc ASC')->all();  
+        return $this->find()->where('status=1')->asArray()->orderBy('equipDesc ASC')->all();  
     }
 }

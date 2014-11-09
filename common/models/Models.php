@@ -80,7 +80,7 @@ class Models extends \yii\db\ActiveRecord
      * @return [array] [models data]
      */
     public function getAllModels(){
-        return $this->find()->asArray()->orderBy('modelName ASC')->all();
+        return $this->find()->where('status=1')->asArray()->orderBy('modelName ASC')->all();
     }
 
     /**
@@ -90,6 +90,6 @@ class Models extends \yii\db\ActiveRecord
      * @return [array]          [models data]
      */
     public function getModelsOfEqBr($equipId,$brandId){
-        return $this->find()->where(['brand_id' => $brandId,'equip_id' => $equipId])->asArray()->orderBy('modelName ASC')->all();
+        return $this->find()->where(['brand_id' => $brandId,'equip_id' => $equipId,'stauts'=>1])->asArray()->orderBy('modelName ASC')->all();
     }
 }

@@ -93,6 +93,6 @@ class Brands extends \yii\db\ActiveRecord
      * @return [array]          [equipments data]
      */
     public function getBrandsOfEquip($equipId){
-        return $this->find()->joinWith("equipBrands")->where(['equip_brand.equip_id' => $equipId])->asArray()->orderBy('brandName ASC')->all();
+        return $this->find()->joinWith("equipBrands")->where(['equip_brand.equip_id' => $equipId,'status'=>1])->asArray()->orderBy('brandName ASC')->all();
     }
 }

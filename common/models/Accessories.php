@@ -69,6 +69,6 @@ class Accessories extends \yii\db\ActiveRecord
      * @return [array] [accessories data]
      */
     public function getAllAccess(){
-        return $this->find()->asArray()->orderBy('accessDesc ASC')->all();
+        return $this->find()->where('status=1')->asArray()->orderBy('accessDesc ASC')->all();
     }
 }

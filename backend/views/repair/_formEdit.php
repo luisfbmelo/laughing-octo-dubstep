@@ -29,30 +29,41 @@ use yii\widgets\ActiveForm;
             <input type="button" value="Novo" class="btn btn-danger newClient col-lg-1"/> 
         </div> -->
 
-        <div class="row clientData">
+        <div class="clientData">
             
+            <div class="row">
+               <!--CLIENT INITIAL DATA-->
+                <?= $form->field($modelClient, 'cliName', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6'],])->textInput() ?>
+                <?= $form->field($modelStores, 'id_store', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList($stores,['id'=>'storesId','prompt'=>'--'])->label('Loja')?> 
+            </div>
+            
+            <div class="row">
+                <!--ADDRESS-->
+                <?= $form->field($modelClient, 'cliAdress', ['options' => ['class' => 'col-lg-12']])->textArea(['rows' => 4]) ?>
+            </div>
 
-            <!--CLIENT INITIAL DATA-->
-            <?= $form->field($modelClient, 'cliName', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6'],])->textInput() ?>
-            <?= $form->field($modelStores, 'id_store', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList($stores,['id'=>'storesId','prompt'=>'--'])->label('Loja')?>
-
-            <!--ADDRESS-->
-            <?= $form->field($modelClient, 'cliAdress', ['options' => ['class' => 'col-lg-12']])->textArea(['rows' => 4]) ?>
-            <?= $form->field($modelClient, 'cliDoorNum', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
-            <?= $form->field($modelClient, 'cliPostalCode', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
-            <?= $form->field($modelClient, 'cliPostalSuffix', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
-
-            <!--CONTACTS-->
-            <?= $form->field($modelClient, 'cliConFix', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
-            <?= $form->field($modelClient, 'cliConMov1', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
-            <?= $form->field($modelClient, 'cliConMov2', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
+            <div class="row">
+                <?= $form->field($modelClient, 'cliDoorNum', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
+                <?= $form->field($modelClient, 'cliPostalCode', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
+                <?= $form->field($modelClient, 'cliPostalSuffix', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
+            </div>
+            
+            <div class="row">
+                <!--CONTACTS-->
+                <?= $form->field($modelClient, 'cliConFix', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
+                <?= $form->field($modelClient, 'cliConMov1', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
+                <?= $form->field($modelClient, 'cliConMov2', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
+            </div>            
             <input type="hidden" name="clientDataHidden" id="clientDataHidden" value="new"/>
         </div>
 
-        <div class="col-lg-12">
-            <h1 class="createSubTitle">Informação de Reparação</h1>
-            <div class="smallDivider"></div>
+        <div class="row">
+           <div class="col-lg-12">
+                <h1 class="createSubTitle">Informação de Reparação</h1>
+                <div class="smallDivider"></div>
+            </div> 
         </div>
+        
 
         <div class="repairData">
 
@@ -75,6 +86,7 @@ use yii\widgets\ActiveForm;
             <!-- REPAIR TYPE -->
             <?= $form->field($modelTypes, 'id_type', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->dropDownList($types,['id'=>'typeID','prompt'=>'--'])->label('Tipo de reparação')?>
             <?= $form->field($modelRepair, 'priority', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList([''=>'--','1' => 'Alta', '2' => 'Média', '3' => 'Baixa'],['id'=>'priorityID']) ?>
+        </div>
 
             <?php
             if ($modelTypes->extraData == 1){
@@ -84,7 +96,7 @@ use yii\widgets\ActiveForm;
             }
           
             ?>
-             
+        <div class="row">
             <!--BUDGET SELECTION-->
             <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 normalType" <?= (!$showBar) ? 'style="display:none;"' : null ?>>
                 <div class="row">
@@ -94,12 +106,16 @@ use yii\widgets\ActiveForm;
                 </div>               
                 
             </div>
-
+        </div>
+            
+        <div class="row">
             <!--DESCRIPTIONS-->
-            <?= $form->field($modelRepair, 'repair_desc', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-3']])->textarea(['rows' => 4])->label("Descrição da Avaria") ?>
-            <?= $form->field($modelRepair, 'obs', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-3']])->textarea(['rows' => 4])->label("Outras observações") ?>
+            <?= $form->field($modelRepair, 'repair_desc', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Descrição da Avaria") ?>
+            <?= $form->field($modelRepair, 'obs', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Outras observações") ?>
+        </div>
 
-            <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 accessoriesListing">
+        <div class="row">
+             <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 accessoriesListing">
                 <!--ACCESSORIES-->
                 <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
                     <label>
@@ -117,14 +133,15 @@ use yii\widgets\ActiveForm;
 
                 
             </div>
-
+        </div>
+            
+           
+        <div class="row">
             <div class="form-group col-lg-12 col-xs-12 col-sm-12 col-md-12 pageButtons">
                 <?= Html::submitButton($modelRepair->isNewRecord ? 'Criar' : 'Atualizar', ['class' => $modelRepair->isNewRecord ? 'btn btn-success col-lg-1' : 'btn btn-primary col-lg-1','name'=>'submit']) ?>
                 <?= Html::submitButton('Cancelar',array('class'=>'btn btn-danger col-lg-1','name'=>'cancelar','id'=>'cancelar')); ?>
             </div>
-        </div>
-
-        
+        </div>      
         
 
         <?php ActiveForm::end(); ?>
@@ -257,7 +274,6 @@ use yii\widgets\ActiveForm;
                 $("#client-cliconmov1").val(ui.item.mo1);
                 $("#client-cliconmov2").val(ui.item.mo2);
 
-                $("[id^='client-']:not('#client-cliname')").attr("readonly","readonly");
 
                 $("#clientDataHidden").val(ui.item.id);
             },
@@ -275,7 +291,6 @@ use yii\widgets\ActiveForm;
 
         }).on('change',function(){
             $("[id^='client-']:not('#client-cliname')").val(null);
-            $("[id^='client-']:not('#client-cliname')").attr("readonly",false);
             $("#clientDataHidden").val("new");
 
         });

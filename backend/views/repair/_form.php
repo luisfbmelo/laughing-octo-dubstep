@@ -29,44 +29,59 @@ use yii\widgets\ActiveForm;
             <input type="button" value="Novo" class="btn btn-danger newClient col-lg-1"/> 
         </div> -->
 
-        <div class="row clientData">
+        <div class="clientData">
             
+            <div class="row">
+                <!--CLIENT INITIAL DATA-->
+                <?= $form->field($modelClient, 'cliName', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6'],])->textInput() ?>
+                <?= $form->field($modelStores, 'id_store', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList($stores,['id'=>'storesId','prompt'=>'--'])->label('Loja')?>
+            </div>
 
-            <!--CLIENT INITIAL DATA-->
-            <?= $form->field($modelClient, 'cliName', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6'],])->textInput() ?>
-            <?= $form->field($modelStores, 'id_store', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList($stores,['id'=>'storesId','prompt'=>'--'])->label('Loja')?>
+            <div class="row">
+                <!--ADDRESS-->
+                <?= $form->field($modelClient, 'cliAdress', ['options' => ['class' => 'col-lg-12']])->textArea(['rows' => 4]) ?>
+            </div>  
 
-            <!--ADDRESS-->
-            <?= $form->field($modelClient, 'cliAdress', ['options' => ['class' => 'col-lg-12']])->textArea(['rows' => 4]) ?>
-            <?= $form->field($modelClient, 'cliDoorNum', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
-            <?= $form->field($modelClient, 'cliPostalCode', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
-            <?= $form->field($modelClient, 'cliPostalSuffix', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
-
-            <!--CONTACTS-->
-            <?= $form->field($modelClient, 'cliConFix', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
-            <?= $form->field($modelClient, 'cliConMov1', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
-            <?= $form->field($modelClient, 'cliConMov2', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
+            <div class="row">
+                <?= $form->field($modelClient, 'cliDoorNum', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
+                <?= $form->field($modelClient, 'cliPostalCode', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
+                <?= $form->field($modelClient, 'cliPostalSuffix', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
+            </div>  
+          
+            <div class="row">
+                <!--CONTACTS-->
+                <?= $form->field($modelClient, 'cliConFix', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
+                <?= $form->field($modelClient, 'cliConMov1', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
+                <?= $form->field($modelClient, 'cliConMov2', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
+            </div>
+            
             <input type="hidden" name="clientDataHidden" id="clientDataHidden" value="new"/>
         </div>
 
-        <div class="col-lg-12">
-            <h1 class="createSubTitle">Informação de Reparação</h1>
-            <div class="smallDivider"></div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="createSubTitle">Informação de Reparação</h1>
+                <div class="smallDivider"></div>
+            </div>  
         </div>
+        
 
         <div class="repairData">
 
 
             <!--EQUIPMENT-->
             <div class="row equipList">
-            <?= $form->field($modelEquip, 'id_equip', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->dropDownList($equip,['id'=>'equipID','prompt'=>'--'])->label('Equipamentos')?>
+
+                <?= $form->field($modelEquip, 'equipDesc', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->textInput()->label('Equipamentos') ?>
+                <input type="hidden" name="equipId" id="equipId" value="new"/>
+             <!-- $form->field($modelEquip, 'id_equip', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->dropDownList($equip,['id'=>'equipID','prompt'=>'\-\-'])->label('Equipamentos') 
 
             
-            <?= (isset($isOk) && $isOk[0]) ? $form->field($modelBrands, 'id_brand', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($brands,['id'=>'brandID','prompt'=>'--'])->label('Marcas') : $form->field($modelBrands, 'id_brand', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($brands,['id'=>'brandID','prompt'=>'--','disabled'=>'true'])->label('Marcas')?>
+             (isset($isOk) && $isOk[0]) ? $form->field($modelBrands, 'id_brand', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($brands,['id'=>'brandID','prompt'=>'\-\-'])->label('Marcas') : $form->field($modelBrands, 'id_brand', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($brands,['id'=>'brandID','prompt'=>'\-\-','disabled'=>'true'])->label('Marcas')
 
-            <?= (isset($isOk) && $isOk[1]) ? $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'--'])->label('Modelos') : $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'--','disabled'=>'true'])->label('Modelos')?>
+             (isset($isOk) && $isOk[1]) ? $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'\-\-'])->label('Modelos') : $form->field($modelModels, 'id_model', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->dropDownList($models,['id'=>'modelID','prompt'=>'\-\-','disabled'=>'true'])->label('Modelos')
 
-            <?= $form->field($modelInv, 'inveSN', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3']])->textInput(['maxlength' => 10]) ?>
+             $form->field($modelInv, 'inveSN', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3']])->textInput(['maxlength' => 10]) -->
             </div>
             
 
@@ -75,6 +90,10 @@ use yii\widgets\ActiveForm;
             <!-- REPAIR TYPE -->
             <?= $form->field($modelTypes, 'id_type', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->dropDownList($types,['id'=>'typeID','prompt'=>'--'])->label('Tipo de reparação')?>
             <?= $form->field($modelRepair, 'priority', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList([''=>'--','1' => 'Alta', '2' => 'Média', '3' => 'Baixa'],['id'=>'priorityID']) ?>
+        </div>
+
+
+        <div class="row">
              
             <!--BUDGET SELECTION-->
             <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 normalType" style="display:none;">
@@ -85,12 +104,17 @@ use yii\widgets\ActiveForm;
                 </div>               
                 
             </div>
+        </div>
 
-            <!--DESCRIPTIONS-->
-            <?= $form->field($modelRepair, 'repair_desc', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-3']])->textarea(['rows' => 4])->label("Descrição da Avaria") ?>
-            <?= $form->field($modelRepair, 'obs', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-3']])->textarea(['rows' => 4])->label("Outras observações") ?>
-      
-            <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 accessoriesListing">
+        <div class="row">
+             <!--DESCRIPTIONS-->
+            <?= $form->field($modelRepair, 'repair_desc', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Descrição da Avaria") ?>
+            <?= $form->field($modelRepair, 'obs', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Outras observações") ?>
+
+        </div>
+
+        <div class="row">
+             <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 accessoriesListing">
                 <!--ACCESSORIES-->
                 <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
                     <label>
@@ -98,20 +122,17 @@ use yii\widgets\ActiveForm;
                     </label>
                 </div>
                 <?= $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-4 col-xs-4 col-sm-4 col-md-4']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("") ?>
-            </div>
-            
-
-
-            
-
-
+            </div>            
+        </div>
+                    
+        
+        <div class="row">
             <div class="form-group col-lg-12 col-xs-12 col-sm-12 col-md-12 pageButtons">
                 <?= Html::submitButton($modelRepair->isNewRecord ? 'Criar' : 'Atualizar', ['class' => $modelRepair->isNewRecord ? 'btn btn-success col-lg-1' : 'btn btn-primary col-lg-1','name'=>'submit']) ?>
                 <?= Html::submitButton('Cancelar',array('class'=>'btn btn-danger col-lg-1','name'=>'cancelar','id'=>'cancelar')); ?>
             </div>
-        </div>
 
-        
+        </div>
         
 
         <?php ActiveForm::end(); ?>
@@ -228,12 +249,12 @@ use yii\widgets\ActiveForm;
         });
         
 
-        //AUTOCOMPLETE CLIENT
-        var urlBaseAuto = '<?php echo Yii::$app->request->baseUrl;?>';
-        var urlDestAuto = urlBaseAuto+'/client/allclients';
+        //AUTOCOMPLETES
+        var urlBaseCli = '<?php echo Yii::$app->request->baseUrl;?>';
+        var urlDestCli = urlBaseCli+'/client/allclients';
 
         $('#client-cliname').autocomplete({
-            source: urlDestAuto,
+            source: urlDestCli,
             minLength: 2,
             select: function(event, ui) {
                 $("#client-cliadress").val(ui.item.address);
@@ -244,8 +265,7 @@ use yii\widgets\ActiveForm;
                 $("#client-cliconmov1").val(ui.item.mo1);
                 $("#client-cliconmov2").val(ui.item.mo2);
 
-                $("[id^='client-']:not('#client-cliname')").attr("readonly","readonly");
-
+                //say that it must be updated only
                 $("#clientDataHidden").val(ui.item.id);
             },
             response: function( event, ui ) {
@@ -259,11 +279,40 @@ use yii\widgets\ActiveForm;
                 
             }
 
-
+            //say it's a new client
         }).on('change',function(){
             $("[id^='client-']:not('#client-cliname')").val(null);
-            $("[id^='client-']:not('#client-cliname')").attr("readonly",false);
             $("#clientDataHidden").val("new");
+
+        });
+
+        //equips
+        var urlBaseEquip = '<?php echo Yii::$app->request->baseUrl;?>';
+        var urlDestEquip = urlBaseEquip+'/equipaments/allequips';
+
+        $('#equipaments-equipdesc').autocomplete({
+            source: urlDestEquip,
+            minLength: 2,
+            select: function(event, ui) {
+                $("#equipaments-equipdesc").val(ui.item.equipDesc);
+
+                //say that it must be updated only
+                $("#equipId").val(ui.item.id);
+            },
+            response: function( event, ui ) {
+                console.log(ui);
+            },
+     
+            html: true, // optional (jquery.ui.autocomplete.html.js required)
+     
+            // optional (if other layers overlap autocomplete list)
+            open: function(event, ui) {
+                
+            }
+
+            //say it's a new client
+        }).on('change',function(){
+            $("#equipId").val("new");
 
         });
 

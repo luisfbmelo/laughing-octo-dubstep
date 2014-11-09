@@ -229,6 +229,10 @@ class RepairController extends Controller
                         //add to model
                         $clientId = $modelRepair->addModelData($modelClient,$clientArray);
                     }else{
+                        $newModel = $modelClient->findOne(Yii::$app->request->post('clientDataHidden'));
+                        $newModel->load(Yii::$app->request->post());
+                        $newModel->save();
+
                         $clientId = Yii::$app->request->post('clientDataHidden');
                     }                 
                     
@@ -345,12 +349,12 @@ class RepairController extends Controller
      * @return [json] [all brands of that equipment]
      */
     public function actionGetbrands(){
-        $brands = ArrayHelper::map(brands::find()->joinwith('equipBrands','equipBrands.brand_id')->where(['equip_id' => $_POST['id']])->all(), 'id_brand', 'brandName');
+        $brands = ArrayHelper::map(brands::find()->joinwith('equipBrands','equipBrands.brand_id')->where(['equip_id' => $_POST['id'],'status'=>1])->all(), 'id_brand', 'brandName');
         return json_encode($brands);
     }
 
     public function actionGetmodels(){
-        $models = ArrayHelper::map(models::find()->joinwith('brand')->where(['brand_id' => $_POST['brandId'],'equip_id' => $_POST['equipId']])->all(), 'id_model', 'modelName');
+        $models = ArrayHelper::map(models::find()->joinwith('brand')->where(['brand_id' => $_POST['brandId'],'equip_id' => $_POST['equipId'],'status'=>1])->all(), 'id_model', 'modelName');
         return json_encode($models);
     }
 
