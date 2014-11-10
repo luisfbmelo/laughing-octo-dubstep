@@ -70,6 +70,11 @@ body {
   text-align: center;
   font-weight: bold; }
 
+.smallSectionTitle {
+  color: #414957;
+  font-size: 1em;
+  font-weight: bold; }
+
 .smallDivider {
   width: 20px;
   height: 1px;
@@ -332,21 +337,22 @@ a.topBtn {
 .deleteBtn {
   margin-bottom: 15px; }
 
-.repairsGrid .listHeader {
-  background-color: #414957; }
-  .repairsGrid .listHeader a {
+.repairsGrid .listHeader, .partsInsert .listHeader {
+  background-color: #414957;
+  color: white; }
+  .repairsGrid .listHeader a, .partsInsert .listHeader a {
     color: white;
     font-weight: normal;
     font-size: 0.87em; }
-  .repairsGrid .listHeader th {
+  .repairsGrid .listHeader th, .partsInsert .listHeader th {
     border: none !important;
     text-align: center; }
-.repairsGrid tbody tr {
+.repairsGrid tbody tr, .partsInsert tbody tr {
   text-align: center; }
-  .repairsGrid tbody tr td {
+  .repairsGrid tbody tr td, .partsInsert tbody tr td {
     vertical-align: middle !important;
     font-size: 0.87em; }
-  .repairsGrid tbody tr td:nth-child(7) div {
+  .repairsGrid tbody tr td:nth-child(7) div, .partsInsert tbody tr td:nth-child(7) div {
     min-width: 130px;
     display: inline-block;
     background-color: #414957;
@@ -357,10 +363,10 @@ a.topBtn {
     border-radius: 15px;
     padding: 5px 10px;
     color: white; }
-    .repairsGrid tbody tr td:nth-child(7) div span {
+    .repairsGrid tbody tr td:nth-child(7) div span, .partsInsert tbody tr td:nth-child(7) div span {
       display: block;
       float: left; }
-    .repairsGrid tbody tr td:nth-child(7) div .circle {
+    .repairsGrid tbody tr td:nth-child(7) div .circle, .partsInsert tbody tr td:nth-child(7) div .circle {
       margin-top: 2px;
       background: #f00;
       width: 15px;
@@ -371,16 +377,26 @@ a.topBtn {
       -o-border-radius: 50%;
       border-radius: 50%;
       margin-right: 10px; }
-    .repairsGrid tbody tr td:nth-child(7) div.status_1 .circle {
+    .repairsGrid tbody tr td:nth-child(7) div.status_1 .circle, .partsInsert tbody tr td:nth-child(7) div.status_1 .circle {
       background-color: #8db4e3; }
-    .repairsGrid tbody tr td:nth-child(7) div.status_2 .circle {
+    .repairsGrid tbody tr td:nth-child(7) div.status_2 .circle, .partsInsert tbody tr td:nth-child(7) div.status_2 .circle {
       background-color: #fac090; }
-    .repairsGrid tbody tr td:nth-child(7) div.status_3 .circle {
+    .repairsGrid tbody tr td:nth-child(7) div.status_3 .circle, .partsInsert tbody tr td:nth-child(7) div.status_3 .circle {
       background-color: yellow; }
-    .repairsGrid tbody tr td:nth-child(7) div.status_4 .circle {
+    .repairsGrid tbody tr td:nth-child(7) div.status_4 .circle, .partsInsert tbody tr td:nth-child(7) div.status_4 .circle {
       background-color: #92d050; }
-    .repairsGrid tbody tr td:nth-child(7) div.status_5 .circle {
+    .repairsGrid tbody tr td:nth-child(7) div.status_5 .circle, .partsInsert tbody tr td:nth-child(7) div.status_5 .circle {
       background-color: #7f7f7f; }
+
+.partsInsert .form-group {
+  margin-bottom: 0 !important; }
+  .partsInsert .form-group .help-block {
+    /*display:none;*/ }
+
+.addButton {
+  display: inline-block;
+  margin-left: 15px;
+  overflow: hidden; }
 
 .repairFields {
   margin: 0 !important; }
@@ -401,13 +417,14 @@ a.topBtn {
       .repairFields form div label {
         font-size: 1em;
         color: #424242;
-        font-weight: bold;
-        font-style: italic; }
+        /*font-weight:bold;*/
+        /*font-style:italic;*/
+        font-weight: normal; }
       .repairFields form div .checkboxList label {
         font-weight: normal !important;
         font-style: normal !important;
         font-size: 0.9em; }
-      .repairFields form div input:not(.newClient), .repairFields form div select {
+      .repairFields form div input:not(.newClient), .repairFields form div select, .repairFields form div textarea {
         background-color: #fcfcfc; }
     .repairFields form .field-accessories-id_accessories > .help-block {
       display: none; }

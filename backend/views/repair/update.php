@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = 'Editar';
     		        'modelClient' => $modelClient,
                     'stores' => $allStores,
                     'types' => $allTypes,
+                    'statusAll' => $allStatus,
                     'accessories' => $allAccess,
                     'modelStores' => $modelStores,
                     'modelBrands' => $modelBrands,
@@ -37,6 +38,8 @@ $this->params['breadcrumbs'][] = 'Editar';
                     'modelInv' => $modelInv,
                     'modelAccess' => $modelAccess,
                     'modelRepairAccess' => $modelRepairAccess,
+                    'modelStatus' => $modelStatus,
+                    'modelParts' => $modelParts,
                     'isOk' => $isOk
     		    ]) ?>
 

@@ -91,58 +91,58 @@ use yii\widgets\ActiveForm;
             </div>
             
 
-         <div class="row">
-  
-            <!-- REPAIR TYPE -->
-            <?= $form->field($modelTypes, 'id_type', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->dropDownList($types,['id'=>'typeID','prompt'=>'--'])->label('Tipo de reparação')?>
-            <?= $form->field($modelRepair, 'priority', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList([''=>'--','1' => 'Alta', '2' => 'Média', '3' => 'Baixa'],['id'=>'priorityID']) ?>
-        </div>
-
-
-        <div class="row">
-             <?php
-            if (isset($modelTypes->id_type)){
-                $newModel = $modelTypes->findOne($modelTypes->id_type);
-            }
-
-            if (isset($newModel) && $newModel->extraData == 1){
-                $showBar = true;
-            }else{
-                $showBar = false;
-            }
-          
-            ?>
-            <!--BUDGET SELECTION-->
-            <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 normalType" <?= (!$showBar) ? 'style="display:none;"' : null ?>>
-                <div class="row">
-                    <?= $form->field($modelRepair, 'maxBudget', ['options' => ['class' => 'col-lg-12 maxBudget']])->textInput(['maxlength' => 10]) ?>                    
-                    
-                    <input type="hidden" name="maxBudgetHidden" id="maxBudgetHidden" value="hidden"/>
-                </div>               
-                
+            <div class="row">
+      
+                <!-- REPAIR TYPE -->
+                <?= $form->field($modelTypes, 'id_type', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->dropDownList($types,['id'=>'typeID','prompt'=>'--'])->label('Tipo de reparação')?>
+                <?= $form->field($modelRepair, 'priority', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList([''=>'--','1' => 'Alta', '2' => 'Média', '3' => 'Baixa'],['id'=>'priorityID']) ?>
             </div>
-        </div>
 
-        <div class="row">
-             <!--DESCRIPTIONS-->
-            <?= $form->field($modelRepair, 'repair_desc', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Descrição da Avaria") ?>
-            <?= $form->field($modelRepair, 'obs', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Outras observações") ?>
 
-        </div>
+            <div class="row">
+                 <?php
+                if (isset($modelTypes->id_type)){
+                    $newModel = $modelTypes->findOne($modelTypes->id_type);
+                }
 
-        <div class="row">
-             <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 accessoriesListing">
-                <!--ACCESSORIES-->
-                <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
-                    <label>
-                        <?= $form->field($modelAccess, 'id_accessories', ['options' => ['class' => 'clearPad']])->checkboxList($accessories,['unselect'=> 0,'separator'=>'<br/>','class'=>'checkboxList'])->label("Acessórios") ?>
-                    </label>
-                </div>
-                <?= $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-4 col-xs-4 col-sm-4 col-md-4']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("") ?>
-            </div>            
-        </div>
+                if (isset($newModel) && $newModel->extraData == 1){
+                    $showBar = true;
+                }else{
+                    $showBar = false;
+                }
+              
+                ?>
+                <!--BUDGET SELECTION-->
+                <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 normalType" <?= (!$showBar) ? 'style="display:none;"' : null ?>>
+                    <div class="row">
+                        <?= $form->field($modelRepair, 'maxBudget', ['options' => ['class' => 'col-lg-6 maxBudget']])->textInput(['maxlength' => 10]) ?>                    
+                        
+                        <input type="hidden" name="maxBudgetHidden" id="maxBudgetHidden" value="hidden"/>
+                    </div>               
                     
-        
+                </div>
+            </div>
+
+            <div class="row">
+                 <!--DESCRIPTIONS-->
+                <?= $form->field($modelRepair, 'repair_desc', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Descrição da Avaria") ?>
+                <?= $form->field($modelRepair, 'obs', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Outras observações") ?>
+
+            </div>
+
+            <div class="row">
+                 <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 accessoriesListing">
+                    <!--ACCESSORIES-->
+                    <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
+                        <label>
+                            <?= $form->field($modelAccess, 'id_accessories', ['options' => ['class' => 'clearPad']])->checkboxList($accessories,['unselect'=> 0,'separator'=>'<br/>','class'=>'checkboxList'])->label("Acessórios") ?>
+                        </label>
+                    </div>
+                    <?= $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-4 col-xs-4 col-sm-4 col-md-4']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("") ?>
+                </div>            
+            </div>
+        </div>                
+         
         <div class="row">
             <div class="form-group col-lg-12 col-xs-12 col-sm-12 col-md-12 pageButtons">
                 <?= Html::submitButton($modelRepair->isNewRecord ? 'Criar' : 'Atualizar', ['class' => $modelRepair->isNewRecord ? 'btn btn-success col-lg-1' : 'btn btn-primary col-lg-1','name'=>'submit']) ?>
@@ -150,6 +150,7 @@ use yii\widgets\ActiveForm;
             </div>
 
         </div>
+
         
 
         <?php ActiveForm::end(); ?>

@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="clearAll"></div>
         <?php $form = ActiveForm::begin(['enableClientValidation' => false]); ?>
-            <?php echo $form->errorSummary([$modelClient,$modelRepair,$modelStores, $modelBrands, $modelEquip, $modelModels, $modelTypes, $modelInv, $modelAccess]); ?>
+            <?php echo $form->errorSummary([$modelClient,$modelRepair,$modelStores, $modelBrands, $modelEquip, $modelModels, $modelTypes, $modelInv, $modelAccess,$modelStatus,$modelParts]); ?>
             <div class="row">
                 <div class="col-lg-12">
                     <p class="note">Campos com <span class="required">*</span> são obrigatórios.</p>
@@ -67,7 +67,6 @@ use yii\widgets\ActiveForm;
 
         <div class="repairData">
 
-
             <!--EQUIPMENT-->
             <div class="row equipList">
             <?= $form->field($modelEquip, 'equipDesc', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->textInput()->label('Equipamentos') ?>
@@ -87,70 +86,122 @@ use yii\widgets\ActiveForm;
 
               -->
             </div>
-            
 
-         <div class="row">
-  
-            <!-- REPAIR TYPE -->
-            <?= $form->field($modelTypes, 'id_type', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->dropDownList($types,['id'=>'typeID','prompt'=>'--'])->label('Tipo de reparação')?>
-            <?= $form->field($modelRepair, 'priority', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList([''=>'--','1' => 'Alta', '2' => 'Média', '3' => 'Baixa'],['id'=>'priorityID']) ?>
-        </div>
+            <div class="row">
+                <!--DESCRIPTIONS-->
+                <?= $form->field($modelRepair, 'repair_desc', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Descrição da Avaria") ?>
+                <?= $form->field($modelRepair, 'obs', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Outras observações") ?>
+            </div>
+
+            <div class="row">
+                <!--BUDGET-->
+                <?= $form->field($modelRepair, 'budget',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->textInput() ?>
+                <?= $form->field($modelRepair, 'total',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->textInput() ?>
+            </div>
+
+            <div class="row">
+                <!--STATUS-->
+                <?= $form->field($modelStatus, 'id_status',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->dropDownList($statusAll,['id'=>'statusID','prompt'=>'--'])->label('Estado de reparação') ?>
+                <?= $form->field($modelRepair, 'priority', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList([''=>'--','1' => 'Alta', '2' => 'Média', '3' => 'Baixa'],['id'=>'priorityID']) ?>
+
+            </div>
 
             <?php
 
-            if ($modelTypes->extraData == 1){
-                $showBar = true;
-            }else{
-                $showBar = false;
-            }
-          
-            ?>
-        <div class="row">
-            <!--BUDGET SELECTION-->
-            <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 normalType" <?= (!$showBar) ? 'style="display:none;"' : null ?>>
-                <div class="row">
-                    <?= $form->field($modelRepair, 'maxBudget', ['options' => ['class' => 'col-lg-12 maxBudget']])->textInput(['maxlength' => 10]) ?>                    
-                    
-                    <input type="hidden" name="maxBudgetHidden" id="maxBudgetHidden" value="hidden"/>
-                </div>               
-                
-            </div>
-        </div>
-            
-        <div class="row">
-            <!--DESCRIPTIONS-->
-            <?= $form->field($modelRepair, 'repair_desc', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Descrição da Avaria") ?>
-            <?= $form->field($modelRepair, 'obs', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Outras observações") ?>
-        </div>
+                if ($modelTypes->extraData == 1){
+                    $showBar = true;
+                }else{
+                    $showBar = false;
+                }
+              
+                ?>
 
-        <div class="row">
-             <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 accessoriesListing">
-                <!--ACCESSORIES-->
-                <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
-                    <label>
-                        <?= $form->field($modelAccess, 'id_accessories', ['options' => ['class' => 'clearPad']])->checkboxList($accessories,['unselect'=> 0,'separator'=>'<br/>','class'=>'checkboxList'])->label("Acessórios") ?>
-                    </label>
+            <div class="row">
+                <!-- REPAIR TYPE -->
+                <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
+                    <div class="row">
+                        <?= $form->field($modelTypes, 'id_type', ['options' => ['class' => 'col-lg-12 col-xs-12 col-sm-12 col-md-12 required']])->dropDownList($types,['id'=>'typeID','prompt'=>'--'])->label('Tipo de reparação')?>
+                        <!--BUDGET SELECTION-->
+                        <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 normalType" <?= (!$showBar) ? 'style="display:none;"' : null ?>>
+                            <div class="row">
+                                <?= $form->field($modelRepair, 'maxBudget', ['options' => ['class' => 'col-lg-12 maxBudget']])->textInput(['maxlength' => 10]) ?>                    
+                                
+                                <input type="hidden" name="maxBudgetHidden" id="maxBudgetHidden" value="hidden"/>
+                            </div>               
+                            
+                        </div>
+                    </div>
                 </div>
-
-                <?php 
-                    if (isset($modelAccess->id_accessories) && in_array(3,$modelAccess->id_accessories)){
-                       echo $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-4 col-xs-4 col-sm-4 col-md-4','style'=>'display:block']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("");
-                    }else{
-                       echo $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-4 col-xs-4 col-sm-4 col-md-4']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("");
-                    }
-                ?> 
-
                 
+                <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6 accessoriesListing">
+                    <!--ACCESSORIES-->
+                    <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
+                        <label>
+                            <?= $form->field($modelAccess, 'id_accessories', ['options' => ['class' => 'clearPad']])->checkboxList($accessories,['unselect'=> 0,'separator'=>'<br/>','class'=>'checkboxList'])->label("Acessórios") ?>
+                        </label>
+                    </div>
+
+                    <?php 
+                        if (isset($modelAccess->id_accessories) && in_array(3,$modelAccess->id_accessories)){
+                           echo $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-4 col-xs-4 col-sm-4 col-md-4','style'=>'display:block']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("");
+                        }else{
+                           echo $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-4 col-xs-4 col-sm-4 col-md-4']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("");
+                        }
+                    ?> 
+
+                    
+                </div>
+            
+            </div>            
+            
+        </div>
+
+        <div class="partsContainer row">
+            <div class="partsAction smallSectionTitle col-lg-12">
+                Peças
             </div>
         </div>
+
+            <table class="partsInsert table table-striped table-bordered">
+                <thead>
+                    <tr class="listHeader">
+                        <th>Código</th>
+                        <th>Quantidade</th>
+                        <th>Designação</th>
+                        <th>Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="line_0">
+                        <th><?= $form->field($modelParts,'[0]partCode')->textInput()->label(false) ?></th>
+                        <th><?= $form->field($modelParts,'[0]partQuant')->textInput()->label(false) ?></th>
+                        <th><?= $form->field($modelParts,'[0]partDesc')->textInput()->label(false) ?></th>
+                        <th><?= $form->field($modelParts,'[0]partPrice')->textInput()->label(false) ?></th>
+                    </tr>
+                    <tr id="line_1">
+                        <th><?= $form->field($modelParts,'[1]partCode')->textInput()->label(false) ?></th>
+                        <th><?= $form->field($modelParts,'[1]partQuant')->textInput()->label(false) ?></th>
+                        <th><?= $form->field($modelParts,'[1]partDesc')->textInput()->label(false) ?></th>
+                        <th><?= $form->field($modelParts,'[1]partPrice')->textInput()->label(false) ?></th>
+                    </tr>
+                </tbody>
+            </table>
+
+        <div class="row addButtonContainer">
+            <div class="addButton btn btn-info">
+               <span class=" glyphicon glyphicon-plus"></span>
+                <span>Adicionar peça</span> 
+            </div>
             
-           
+        </div>
+
         <div class="row">
             <div class="form-group col-lg-12 col-xs-12 col-sm-12 col-md-12 pageButtons">
                 <?= Html::submitButton($modelRepair->isNewRecord ? 'Criar' : 'Atualizar', ['class' => $modelRepair->isNewRecord ? 'btn btn-success col-lg-1' : 'btn btn-primary col-lg-1','name'=>'submit']) ?>
                 <?= Html::submitButton('Cancelar',array('class'=>'btn btn-danger col-lg-1','name'=>'cancelar','id'=>'cancelar')); ?>
             </div>
-        </div>      
+        </div>  
+            
         
 
         <?php ActiveForm::end(); ?>

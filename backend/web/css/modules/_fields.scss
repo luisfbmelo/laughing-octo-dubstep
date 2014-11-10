@@ -24,8 +24,9 @@
 			label{
 				font-size:1em;
 				color:$text-color;
-				font-weight:bold;
-				font-style:italic;
+				/*font-weight:bold;*/
+				/*font-style:italic;*/
+				font-weight:normal;
 			}
 
 			.checkboxList{
@@ -36,7 +37,7 @@
 				}
 			}
 
-			input:not(.newClient), select{
+			input:not(.newClient), select, textarea{
 				background-color:$topBtn-bg-active-color;
 			}
 

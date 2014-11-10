@@ -1,6 +1,7 @@
-.repairsGrid{
+.repairsGrid, .partsInsert{
 	.listHeader{
 		background-color:$dark-blue-bg;
+		color:white;
 
 		a{
 			color:white;
@@ -73,4 +74,25 @@
 	    	}    		
     	}
     }		
+}
+
+
+	
+.partsInsert{
+	.form-group{
+		margin-bottom:0!important;
+
+		.help-block{
+			/*display:none;*/
+		}
+	}
+
+}
+
+
+.addButton{
+	display:inline-block;
+
+	margin-left:15px;
+	overflow:hidden;
 }

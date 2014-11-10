@@ -9,8 +9,10 @@ use Yii;
  *
  * @property integer $id_part
  * @property string $partDesc
- * @property string $partDoce
+ * @property string $partCode
  * @property string $partPrice
+ * @property integer $status
+ * @property integer $partQuant
  *
  * @property RepairParts[] $repairParts
  * @property Repair[] $repairs
@@ -31,11 +33,10 @@ class Parts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_part', 'partDesc', 'partDoce', 'partPrice'], 'required'],
-            [['id_part'], 'integer'],
+            [['id_part', 'partDesc', 'partCode', 'partPrice', 'partQuant'], 'required'],
+            [['id_part', 'status', 'partQuant'], 'integer'],
             [['partPrice'], 'number'],
-            [['partDesc'], 'string', 'max' => 45],
-            [['partDoce'], 'string', 'max' => 250]
+            [['partDesc', 'partCode'], 'string', 'max' => 250]
         ];
     }
 
@@ -47,8 +48,10 @@ class Parts extends \yii\db\ActiveRecord
         return [
             'id_part' => 'Id Part',
             'partDesc' => 'Part Desc',
-            'partDoce' => 'Part Doce',
+            'partCode' => 'Part Code',
             'partPrice' => 'Part Price',
+            'status' => 'Status',
+            'partQuant' => 'Part Quant',
         ];
     }
 

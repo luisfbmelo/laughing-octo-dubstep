@@ -51,4 +51,8 @@ class Status extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Repair::className(), ['status_id' => 'id_status']);
     }
+
+    public function getAllStatus(){
+        return $this->find()->asArray()->orderBy('statusDesc ASC')->all();  
+    }
 }

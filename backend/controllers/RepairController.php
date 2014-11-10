@@ -16,6 +16,7 @@ use common\models\Accessories;
 use common\models\RepairAccessory;
 use common\models\User;
 use common\models\Status;
+use common\models\Parts;
 
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -24,6 +25,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\base\Exception;
+use yii\base\Model;
 
 date_default_timezone_set("Atlantic/Azores");
 
@@ -162,9 +164,7 @@ class RepairController extends Controller
             $connection = \Yii::$app->db;
             $transaction = $connection->beginTransaction();
             try {
-                $errorStatus = false;
                 $valid = false;
-                $validDropdowns = false;
                 $isOk = [];
 
                 //validate client
@@ -435,45 +435,267 @@ class RepairController extends Controller
         $modelAccess = new accessories();
         $modelRepairAccess = new repairaccessory();
         $modelEquipBrand = new equipbrand();
+        $modelStatus = new status();
+        $modelParts = new parts();
         
 
         /*GET EXISTING DATA*/
         $allStores=ArrayHelper::map($modelStores->getAllStores(), 'id_store', 'storeDesc');
-        //$allStores = stores::find()->asArray()->orderBy('storeDesc ASC')->all();
-
-        /*$allBrands = ArrayHelper::map($modelBrands->getAllBrands(), 'id_brand', 'brandName');        
-
-        $allEquip = ArrayHelper::map($modelEquip->getAllEquip(), 'id_equip', 'equipDesc');      
-
-        $allModels = ArrayHelper::map($modelModels->getAllModels(), 'id_model', 'modelName'); */
 
         $allTypes = ArrayHelper::map($modelTypes->getAllTypes(), 'id_type', 'typeDesc');
 
         $allAccess = ArrayHelper::map($modelAccess->getAllAccess(), 'id_accessories', 'accessDesc');
 
-        /*SET DEFAULT DATA*/
-        //stores
-        $modelStores->id_store = $modelRepair->store_id;
-        //client
-        $modelClient = $modelClient->findOne($modelRepair->client_id);
+        $allStatus = ArrayHelper::map($modelStatus->getAllStatus(),'id_status','statusDesc');
 
-        //accessories
-        $modelAccess->id_accessories = $modelRepair->getThisAccess($modelRepair->id_repair);
-        $modelRepairAccess->otherDesc = $modelRepair->getThisOtherDesc($modelRepair->id_repair);
-
-        //repair type
-        $modelTypes = $modelTypes->findOne($modelRepair->type_id);
-
-        //inventory
-        $modelInv = $modelInv->findOne($modelRepair->inve_id);
-        $modelEquip = $modelEquip->findOne($modelInv->equip_id);
-        $modelBrands = $modelBrands->findOne($modelInv->brand_id);
-        $modelModels = $modelModels->findOne($modelInv->model_id);
+        
 
         if (isset($_POST['cancelar'])){
             return $this->goBack();
         }else if (isset($_POST['submit'])){
-            return $this->goBack();
+
+            try {
+                $valid = false;
+                $isOk = [];
+
+                //validate client
+                $valid = $modelClient->load(Yii::$app->request->post()) && $modelClient->validate(['cliName','cliAdress','cliDoorNum','cliPostalCode','cliPostalSuffix','cliConFix','cliConMov1','cliConMov2']);
+
+                //equipments validation
+                $valid = $modelEquip->load(Yii::$app->request->post()) && $modelEquip->validate(['equipDesc']) && $valid;
+                $valid = $modelBrands->load(Yii::$app->request->post()) && $modelBrands->validate(['brandName']) && $valid;
+                $valid = $modelModels->load(Yii::$app->request->post()) && $modelModels->validate(['modelName']) && $valid;
+
+                if (Yii::$app->request->post('equipId')!="new"){
+                    $modelEquip->id_equip = Yii::$app->request->post('equipId'); 
+                }
+
+                if (Yii::$app->request->post('brandId')!="new"){
+                    $modelBrands->id_brand = Yii::$app->request->post('brandId');
+                }
+
+                if (Yii::$app->request->post('modelId')!='new'){
+                    $modelModels->id_model = Yii::$app->request->post('modelId');
+                }
+
+                if (Yii::$app->request->post('clientDataHidden')!="new"){
+                    $modelClient->id_client = Yii::$app->request->post('clientDataHidden');
+                }
+
+                $valid = $modelInv->load(Yii::$app->request->post()) && $modelInv->validate(['inveSN']) && $valid;
+
+                $valid = $modelTypes->load(Yii::$app->request->post()) && $modelTypes->validate(['id_type']) && $valid;
+
+                $valid = $modelStores->load(Yii::$app->request->post()) && $modelStores->validate(['id_store']) && $valid;
+
+                $valid = $modelStatus->load(Yii::$app->request->post()) && $modelStatus->validate(['id_status']) && $valid;
+
+                $valid = $modelRepair->load(Yii::$app->request->post()) && $modelRepair->validate(['repair_desc','priority','budget','total']) && $valid;
+
+
+
+                //$parts = Yii::$app->request->post('Parts');
+                /*for($c=0;$c<sizeof($parts);$c++){
+                    $partsFinal[$c]['partCode'] = $parts[$c]['partCode'];
+                    $partsFinal[$c]['partQuant'] = $parts[$c]['partQuant'];
+                    $partsFinal[$c]['partDesc'] = $parts[$c]['partDesc'];
+                    $partsFinal[$c]['partPrice'] = $parts[$c]['partPrice'];
+
+
+                    
+                }*/
+                
+
+                $valid = $modelParts->load(Yii::$app->request->post()) && $modelParts->validate(['partDesc']);
+                //print_r(json_encode($partsFinal,true));
+
+//$valid = Model::loadMultiple($modelParts,Yii::$app->request->post()) && Model::validateMultiple($modelParts);
+                
+               
+
+                $valid= false;
+                if ($valid){
+
+                    //RESOLVE INV ID's
+                    if (Yii::$app->request->post('modelId')!='new' && Yii::$app->request->post('equipId')!="new" && Yii::$app->request->post('brandId')!="new"){
+                        $modelEquip->id_equip = Yii::$app->request->post('equipId');
+                        $modelBrands->id_brand = Yii::$app->request->post('brandId');
+                        $modelModels->id_model = Yii::$app->request->post('modelId');
+                    }else{
+                        //add equip
+                        if (Yii::$app->request->post('equipId')!="new"){
+                           $modelEquip->id_equip = Yii::$app->request->post('equipId'); 
+                       }else{
+                            $equipArray = [
+                                'id_equip' => NULL,
+                                'isNewRecord' => TRUE,
+                                'equipDesc' => Yii::$app->request->post('Equipaments')['equipDesc'],
+                                'status' => 1
+                            ];
+                            $modelEquip->id_equip = $modelRepair->addModelData($modelEquip,$equipArray);
+                       }
+
+                       if (Yii::$app->request->post('brandId')!="new"){
+                           $modelBrands->id_brand = Yii::$app->request->post('brandId'); 
+                       }else{
+                            $brandArray = [
+                                'id_brand' => NULL,
+                                'isNewRecord' => TRUE,
+                                'brandName' => Yii::$app->request->post('Brands')['brandName'],
+                                'status' => 1
+                            ];
+                            $modelBrands->id_brand = $modelRepair->addModelData($modelBrands,$brandArray);
+                       }
+
+                        $modelArray = [
+                            'id_model' => NULL,
+                            'isNewRecord' => TRUE,
+                            'modelName' => Yii::$app->request->post('Models')['modelName'],
+                            'equip_id' => $modelEquip->id_equip,
+                            'brand_id' => $modelBrands->id_brand,
+                            'status' => 1
+                        ];
+                        $modelModels->id_model = $modelRepair->addModelData($modelModels,$modelArray);
+                    }
+
+                    
+                    //ADD INVENTORY
+                    $invArray = [
+                        'id_inve' => NULL,
+                        'isNewRecord' => TRUE,
+                        'equip_id' => $modelEquip->id_equip,
+                        'brand_id' => $modelBrands->id_brand,
+                        'model_id' => $modelModels->id_model,
+                        'inveSN' =>$modelInv->inveSN
+
+                    ];
+                    //add to model
+                    $invId = $modelRepair->addModelData($modelInv,$invArray);
+
+                    //ADD CLIENT
+                    if (Yii::$app->request->post('clientDataHidden')=="new"){
+                        $clientArray = [
+                            'id_client' => NULL,
+                            'isNewRecord' => TRUE
+                        ];
+                        //add to model
+                        $clientId = $modelRepair->addModelData($modelClient,$clientArray);
+                    }else{
+                        $newModel = $modelClient->findOne(Yii::$app->request->post('clientDataHidden'));
+                        $newModel->load(Yii::$app->request->post());
+                        $newModel->save();
+
+                        $clientId = Yii::$app->request->post('clientDataHidden');
+                    }                 
+                    
+
+                    //set max budget
+                    if ($modelRepair->maxBudget==""){
+                        $modelRepair->maxBudget = NULL;
+                    }
+
+                    //set final vars
+                    $modelRepair->attributeToRepair([
+                        'status_id' => 1,
+                        'store_id' => $modelStores->id_store,
+                        'user_id' => \Yii::$app->user->getId(),
+                        'date_entry' => date('Y-m-d H:i:s'),
+                        'type_id' => $modelTypes->id_type,
+                        'client_id' => $clientId,
+                        'inve_id' => $invId
+                    ]);
+                    
+                    /*VALIDATE REPAIR MODEl*/
+                    if ($modelRepair->save()){
+                        $repairId = Yii::$app->db->getLastInsertID();
+
+
+                        //save accessories
+                        if (empty(Yii::$app->request->post('Accessories')['id_accessories'])!=1){
+
+                            for ($accInc=0;$accInc<sizeof(Yii::$app->request->post('Accessories')['id_accessories']);$accInc++){
+                                $accessArray = [];
+
+                                if (Yii::$app->request->post('Accessories')['id_accessories'][$accInc]==3){
+                                    $otherDesc = Yii::$app->request->post('RepairAccessory')['otherDesc'];
+                                }else{
+                                    $otherDesc = NULL;
+                                }
+
+                                $accessArray = [
+                                    'isNewRecord' => TRUE,
+                                    'repair_id' => $repairId,
+                                    'accessory_id' => Yii::$app->request->post('Accessories')['id_accessories'][$accInc],
+                                    'otherDesc' => $otherDesc
+                                ];
+
+                                $modelRepair->addModelData($modelRepairAccess,$accessArray);
+                            }
+                            
+                        }
+
+                        //commit all saves
+                        $transaction->commit();
+                        return $this->redirect(['index']);
+                        //throw new Exception('STOP.');
+                    }else{
+                        //throw new Exception('Unable to save record1.');
+                    }
+                                       
+                }else{
+                    //throw new Exception('Unable to save record2.');
+                }                     
+
+                //return $this->redirect(['view', 'id' => $model->name]);
+
+            } catch(Exception $e) {
+                $transaction->rollback();
+                echo $e->getMessage(); exit;
+            }
+
+            return $this->render('update', [
+                'modelRepair' => $modelRepair,
+                'modelClient' => $modelClient,
+                'allStores' => $allStores,
+                'allTypes' => $allTypes,
+                'allAccess' => $allAccess,
+                'allStatus' =>$allStatus,
+                'modelStores' => $modelStores,
+                'modelBrands' => $modelBrands,
+                'modelEquip' => $modelEquip,
+                'modelModels' => $modelModels,
+                'modelTypes' => $modelTypes,
+                'modelInv' => $modelInv,
+                'modelAccess' => $modelAccess,
+                'modelRepairAccess' => $modelRepairAccess,
+                'modelStatus' => $modelStatus,
+                'modelParts' => $modelParts,
+                'isOk' => false
+            ]);
+        }else{
+
+            /*SET DEFAULT DATA*/
+            //stores
+            $modelStores->id_store = $modelRepair->store_id;
+            //client
+            $modelClient = $modelClient->findOne($modelRepair->client_id);
+
+            //accessories
+            $modelAccess->id_accessories = $modelRepair->getThisAccess($modelRepair->id_repair);
+            $modelRepairAccess->otherDesc = $modelRepair->getThisOtherDesc($modelRepair->id_repair);
+
+            //repair type
+            $modelTypes = $modelTypes->findOne($modelRepair->type_id);
+
+            //inventory
+            $modelInv = $modelInv->findOne($modelRepair->inve_id);
+            $modelEquip = $modelEquip->findOne($modelInv->equip_id);
+            $modelBrands = $modelBrands->findOne($modelInv->brand_id);
+            $modelModels = $modelModels->findOne($modelInv->model_id);
+
+            //status
+            $modelStatus = $modelStatus->findOne($modelRepair->status_id);
+
         }
 
 
@@ -483,6 +705,7 @@ class RepairController extends Controller
             'allStores' => $allStores,
             'allTypes' => $allTypes,
             'allAccess' => $allAccess,
+            'allStatus' =>$allStatus,
             'modelStores' => $modelStores,
             'modelBrands' => $modelBrands,
             'modelEquip' => $modelEquip,
@@ -491,6 +714,8 @@ class RepairController extends Controller
             'modelInv' => $modelInv,
             'modelAccess' => $modelAccess,
             'modelRepairAccess' => $modelRepairAccess,
+            'modelStatus' => $modelStatus,
+            'modelParts' => $modelParts,
             'isOk' => false
         ]);
     }
