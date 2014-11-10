@@ -504,9 +504,12 @@ class RepairController extends Controller
 
                     
                 }*/
-                
 
-                $valid = $modelParts->load(Yii::$app->request->post()) && $modelParts->validate(['partDesc']);
+                //print_r($_POST['Parts'][0]);
+                $modelParts->attributes=$_POST['Parts'][0];
+                $modelParts->validate(['partQuant']);
+
+                //$valid = $modelParts->load(Yii::$app->request->post()) && $modelParts->validate(['partDesc']);
                 //print_r(json_encode($partsFinal,true));
 
 //$valid = Model::loadMultiple($modelParts,Yii::$app->request->post()) && Model::validateMultiple($modelParts);
