@@ -19,6 +19,8 @@ use common\models\Status;
 use common\models\Parts;
 use common\models\RepairParts;
 
+use common\models\SearchRepair;
+
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -77,7 +79,7 @@ class RepairController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
+        /*$dataProvider = new ActiveDataProvider([
             'query' => repair::find()->where(["status"=>1]),
             'sort'=> ['defaultOrder' => ['date_entry'=>SORT_DESC]],
             'pagination' => [
@@ -86,6 +88,14 @@ class RepairController extends Controller
         ]);
 
         return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);*/
+
+        $searchModel = new SearchRepair();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -684,10 +694,10 @@ class RepairController extends Controller
 
                         //commit all saves
                         $transaction->commit();
-                        //return $this->redirect(['index']);
+                        return $this->redirect(['index']);
                         //throw new Exception('STOP.');
                         
-                        return $this->render('update', [
+                        /*return $this->render('update', [
                             'modelRepair' => $modelRepair,
                             'modelClient' => $modelClient,
                             'allStores' => $allStores,
@@ -707,7 +717,7 @@ class RepairController extends Controller
                             'isOk' => false,
                             'items' => $items
                         ]);
-
+*/
                     }else{
                         //throw new Exception('Unable to save record1.');
                     }

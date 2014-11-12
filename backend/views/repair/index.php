@@ -5,6 +5,11 @@ use yii\grid\GridView;
 use yii\grid\CheckboxColumn;
 use yii\helpers\Url;
 use common\models;
+use yii\helpers\ArrayHelper;
+
+use common\models\Stores;
+use common\models\Status;
+
 
 
 setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
@@ -60,6 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'columns' => [
                         //['class' => 'yii\grid\SerialColumn'],
                         ['class' => CheckboxColumn::className()],
+                        
                         'id_repair',
                         //'type_id',
                         //'client_id',
@@ -68,6 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'attribute' => 'store_id',
                             'label' => 'Local',
+                            'filter' => ArrayHelper::map(stores::find()->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc'),
                             'content' => function($model, $index, $dataColumn) {
                                 return $model->getStoreDesc()["storeDesc"];
                             },
@@ -83,17 +90,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
 
                         [
-                            'attribute' => 'date_entry',
+                            'attribute' => 'date_entry'/*,
                             'label' => 'Entrada',
                             'content' => function($model, $index, $dataColumn){
                                 return $model->getArrangedDate();
-                            }
+                            }*/
                         ],
                         
                         //'date_entry',
                         [
                             'attribute' => 'status_id',
                             'label' => 'Estado',
+                            'filter' => ArrayHelper::map(status::find()->asArray()->orderBy('id_status ASC')->all(), 'id_status','statusDesc'),
                             'content' => function($model, $index, $dataColumn) {
                                 return $status = "<div class='status_".$model->status_id."'><span class='circle'></span><span>".$model->getStatusDesc()["statusDesc"]."</span><span class='clearAll'></span></div>";
                             },                           
@@ -112,7 +120,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     /*'rowOptions' => function ($model, $index, $widget, $grid){
                         return ['class' => 'status_'.$model->status_id];
                     },*/
-                    'filterModel' => $dataProvider,
+                    'filterModel' => $searchModel,
                     'headerRowOptions' =>['class'=>'listHeader'],
                     'options' => [
                         'class' => 'repairsGrid',

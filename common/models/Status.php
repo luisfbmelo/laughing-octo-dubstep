@@ -53,6 +53,6 @@ class Status extends \yii\db\ActiveRecord
     }
 
     public function getAllStatus(){
-        return $this->find()->asArray()->orderBy('statusDesc ASC')->all();  
+        return $this->find()->asArray()->orderBy('id_status ASC')->all();  
     }
 }

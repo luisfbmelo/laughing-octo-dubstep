@@ -115,7 +115,7 @@ use yii\widgets\ActiveForm;
                 <!--BUDGET SELECTION-->
                 <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 normalType" <?= (!$showBar) ? 'style="display:none;"' : null ?>>
                     <div class="row">
-                        <?= $form->field($modelRepair, 'maxBudget', ['options' => ['class' => 'col-lg-6 maxBudget']])->textInput(['maxlength' => 10]) ?>                    
+                        <?= $form->field($modelRepair, 'maxBudget', ['options' => ['class' => 'col-lg-12 maxBudget']])->textInput(['maxlength' => 10]) ?>                    
                         
                         <input type="hidden" name="maxBudgetHidden" id="maxBudgetHidden" value="hidden"/>
                     </div>               
