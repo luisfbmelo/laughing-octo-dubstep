@@ -603,6 +603,9 @@ class RepairController extends Controller
                     
                     /*VALIDATE REPAIR MODEl*/
                     if ($modelRepair->save()){
+
+                        //set repair type data
+                        $modelTypes = $modelTypes->findOne($modelRepair->type_id);
   
                         //save accessories
                         if (empty(Yii::$app->request->post('Accessories')['id_accessories'])!=1){
@@ -627,6 +630,9 @@ class RepairController extends Controller
 
                                 $modelRepair->addModelData($modelRepairAccess,$accessArray);
                             }
+
+                            //reset accessories
+                            $modelAccess->id_accessories = $modelRepair->getThisAccess($modelRepair->id_repair);
                             
                         }
 
@@ -682,25 +688,25 @@ class RepairController extends Controller
                         //throw new Exception('STOP.');
                         
                         return $this->render('update', [
-                'modelRepair' => $modelRepair,
-                'modelClient' => $modelClient,
-                'allStores' => $allStores,
-                'allTypes' => $allTypes,
-                'allAccess' => $allAccess,
-                'allStatus' =>$allStatus,
-                'modelStores' => $modelStores,
-                'modelBrands' => $modelBrands,
-                'modelEquip' => $modelEquip,
-                'modelModels' => $modelModels,
-                'modelTypes' => $modelTypes,
-                'modelInv' => $modelInv,
-                'modelAccess' => $modelAccess,
-                'modelRepairAccess' => $modelRepairAccess,
-                'modelStatus' => $modelStatus,
-                'modelParts' => $modelParts,
-                'isOk' => false,
-                'items' => $items
-            ]);
+                            'modelRepair' => $modelRepair,
+                            'modelClient' => $modelClient,
+                            'allStores' => $allStores,
+                            'allTypes' => $allTypes,
+                            'allAccess' => $allAccess,
+                            'allStatus' =>$allStatus,
+                            'modelStores' => $modelStores,
+                            'modelBrands' => $modelBrands,
+                            'modelEquip' => $modelEquip,
+                            'modelModels' => $modelModels,
+                            'modelTypes' => $modelTypes,
+                            'modelInv' => $modelInv,
+                            'modelAccess' => $modelAccess,
+                            'modelRepairAccess' => $modelRepairAccess,
+                            'modelStatus' => $modelStatus,
+                            'modelParts' => $modelParts,
+                            'isOk' => false,
+                            'items' => $items
+                        ]);
 
                     }else{
                         //throw new Exception('Unable to save record1.');

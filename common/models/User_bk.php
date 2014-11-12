@@ -1,5 +1,4 @@
 <?php
-
 namespace common\models;
 
 use Yii;
@@ -48,14 +47,24 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
             [['username', 'email', 'password_hash', 'group_id', 'auth_key', 'role'], 'required'],
             [['group_id', 'status', 'role'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['username', 'email'], 'string', 'max' => 45]
-            //[['password_hash', 'password_reset_token', 'auth_key'], 'string', 'max' => 250]
+            [['username', 'email'], 'string', 'max' => 45],
+            [['password_hash', 'password_reset_token', 'auth_key'], 'string', 'max' => 250]
         ];
     }
 
@@ -262,22 +271,13 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function beforeSave($insert){
 
-        /*if (parent::beforeSave($insert)) {
+        if (parent::beforeSave($insert)) {
             $this->role = 50;
             $this->group_id = 1;
             $this->status = 1;
-            $this->created_at = date('Y-m-d H:i:s');
-            $this->updated_at = date('Y-m-d H:i:s');
             return true;
         } else {
             return false;
-        }*/
-
-        if ($this->isNewRecord)
-        {
-           
         }
-     
-        return parent::beforeSave($insert);
     }
 }
