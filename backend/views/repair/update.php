@@ -23,7 +23,9 @@ $this->params['breadcrumbs'][] = 'Editar';
 
     			<h1 class="sectionTitle col-lg-12"><?= Html::encode($this->title) ?></h1>
 
-    		    <?= $this->render('_formEdit', [
+    		    <?=
+                $renderVars = 
+                 $this->render('_formEdit', [
     		        'modelRepair' => $modelRepair,
     		        'modelClient' => $modelClient,
                     'stores' => $allStores,
@@ -40,7 +42,8 @@ $this->params['breadcrumbs'][] = 'Editar';
                     'modelRepairAccess' => $modelRepairAccess,
                     'modelStatus' => $modelStatus,
                     'modelParts' => $modelParts,
-                    'isOk' => $isOk
+                    'isOk' => $isOk,
+                    'items' => $items
     		    ]) ?>
 
     		</div>

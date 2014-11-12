@@ -17,6 +17,7 @@ use common\models\RepairAccessory;
 use common\models\User;
 use common\models\Status;
 use common\models\Parts;
+use common\models\RepairParts;
 
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -77,7 +78,7 @@ class RepairController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => repair::find(),
+            'query' => repair::find()->where(["status"=>1]),
             'sort'=> ['defaultOrder' => ['date_entry'=>SORT_DESC]],
             'pagination' => [
                 'pageSize' => 10,
@@ -423,6 +424,10 @@ class RepairController extends Controller
      */
     public function actionUpdate($id)
     {
+
+        $isOk = [];
+        $items = array();
+
         /*START MODELS*/
         $modelRepair = $this->findModel($id);
         $modelClient = new client();
@@ -431,12 +436,13 @@ class RepairController extends Controller
         $modelEquip = new equipaments();
         $modelModels = new models();
         $modelTypes = new repairtype();
-        $modelInv = new inventory();
+        $modelInv = inventory::findOne($modelRepair->inve_id);
         $modelAccess = new accessories();
         $modelRepairAccess = new repairaccessory();
         $modelEquipBrand = new equipbrand();
         $modelStatus = new status();
-        $modelParts = new parts();
+        $modelParts = new parts();     
+        $modelPartsRepair = new repairparts();     
         
 
         /*GET EXISTING DATA*/
@@ -448,15 +454,18 @@ class RepairController extends Controller
 
         $allStatus = ArrayHelper::map($modelStatus->getAllStatus(),'id_status','statusDesc');
 
+
         
 
         if (isset($_POST['cancelar'])){
             return $this->goBack();
         }else if (isset($_POST['submit'])){
 
+            $connection = \Yii::$app->db;
+            $transaction = $connection->beginTransaction();
             try {
                 $valid = false;
-                $isOk = [];
+                
 
                 //validate client
                 $valid = $modelClient->load(Yii::$app->request->post()) && $modelClient->validate(['cliName','cliAdress','cliDoorNum','cliPostalCode','cliPostalSuffix','cliConFix','cliConMov1','cliConMov2']);
@@ -493,30 +502,16 @@ class RepairController extends Controller
                 $valid = $modelRepair->load(Yii::$app->request->post()) && $modelRepair->validate(['repair_desc','priority','budget','total']) && $valid;
 
 
+                //validate parts
+                if (isset($_POST['Parts'])){
+                    $items=$this->getItemsToUpdate();
 
-                //$parts = Yii::$app->request->post('Parts');
-                /*for($c=0;$c<sizeof($parts);$c++){
-                    $partsFinal[$c]['partCode'] = $parts[$c]['partCode'];
-                    $partsFinal[$c]['partQuant'] = $parts[$c]['partQuant'];
-                    $partsFinal[$c]['partDesc'] = $parts[$c]['partDesc'];
-                    $partsFinal[$c]['partPrice'] = $parts[$c]['partPrice'];
+                    foreach($items as $i=>$item){
+                        $item->attributes = $_POST['Parts'][$i];
+                        $valid = $item->validate(['partDesc','partCode','partPrice','partQuant']);
+                    }
+                }
 
-
-                    
-                }*/
-
-                //print_r($_POST['Parts'][0]);
-                $modelParts->attributes=$_POST['Parts'][0];
-                $modelParts->validate(['partQuant']);
-
-                //$valid = $modelParts->load(Yii::$app->request->post()) && $modelParts->validate(['partDesc']);
-                //print_r(json_encode($partsFinal,true));
-
-//$valid = Model::loadMultiple($modelParts,Yii::$app->request->post()) && Model::validateMultiple($modelParts);
-                
-               
-
-                $valid= false;
                 if ($valid){
 
                     //RESOLVE INV ID's
@@ -564,8 +559,7 @@ class RepairController extends Controller
                     
                     //ADD INVENTORY
                     $invArray = [
-                        'id_inve' => NULL,
-                        'isNewRecord' => TRUE,
+                        'id_inve' => $modelRepair->inve_id,
                         'equip_id' => $modelEquip->id_equip,
                         'brand_id' => $modelBrands->id_brand,
                         'model_id' => $modelModels->id_model,
@@ -599,23 +593,20 @@ class RepairController extends Controller
 
                     //set final vars
                     $modelRepair->attributeToRepair([
-                        'status_id' => 1,
+                        'id_repair' => $modelRepair->id_repair,
+                        'status_id' => $modelStatus->id_status,
                         'store_id' => $modelStores->id_store,
                         'user_id' => \Yii::$app->user->getId(),
-                        'date_entry' => date('Y-m-d H:i:s'),
                         'type_id' => $modelTypes->id_type,
-                        'client_id' => $clientId,
-                        'inve_id' => $invId
+                        'client_id' => $clientId
                     ]);
                     
                     /*VALIDATE REPAIR MODEl*/
                     if ($modelRepair->save()){
-                        $repairId = Yii::$app->db->getLastInsertID();
-
-
+  
                         //save accessories
                         if (empty(Yii::$app->request->post('Accessories')['id_accessories'])!=1){
-
+                            repairaccessory::deleteAll(["repair_id"=>$modelRepair->id_repair]);
                             for ($accInc=0;$accInc<sizeof(Yii::$app->request->post('Accessories')['id_accessories']);$accInc++){
                                 $accessArray = [];
 
@@ -625,9 +616,11 @@ class RepairController extends Controller
                                     $otherDesc = NULL;
                                 }
 
+                                
+
                                 $accessArray = [
                                     'isNewRecord' => TRUE,
-                                    'repair_id' => $repairId,
+                                    'repair_id' => $modelRepair->id_repair,
                                     'accessory_id' => Yii::$app->request->post('Accessories')['id_accessories'][$accInc],
                                     'otherDesc' => $otherDesc
                                 ];
@@ -637,10 +630,78 @@ class RepairController extends Controller
                             
                         }
 
+                        if (isset($items) && sizeof($items)>0){ 
+
+                            repairparts::deleteAll(["repair_id"=>$modelRepair->id_repair]);
+
+                            foreach($items as $i=>$item){
+                                
+                                $partArray = [];
+
+                                if (isset($item->id_part) && $item->id_part!=""){
+                                    $idPart = $item->id_part;
+                                    $isNew = FALSE;
+                                }else{
+                                    $idPart = NULL;
+                                    $isNew = TRUE;
+                                }
+
+                                $partArray = [
+                                    'id_part' => $idPart,
+                                    'isNewRecord' => $isNew,
+                                    'partDesc'=>$item->partDesc,
+                                    'partCode'=>$item->partCode,
+                                    'partPrice'=>$item->partPrice,
+                                    'status' => 1,
+                                ];
+
+                                if ($isNew){
+                                    $partAdded = $modelRepair->addModelData($modelParts,$partArray);
+                                }else{
+                                    $modelRepair->addModelData($modelParts,$partArray);
+                                    $partAdded = $idPart;
+                                }                                
+
+                                $totalPartsArray = [
+                                    'isNewRecord' => TRUE,
+                                    'repair_id' => $modelRepair->id_repair,
+                                    'part_id' => $partAdded,
+                                    'partQuant' => $item->partQuant
+                                ];
+
+
+                                $modelRepair->addModelData($modelPartsRepair,$totalPartsArray);
+                            }
+
+
+                        }
+
                         //commit all saves
                         $transaction->commit();
-                        return $this->redirect(['index']);
+                        //return $this->redirect(['index']);
                         //throw new Exception('STOP.');
+                        
+                        return $this->render('update', [
+                'modelRepair' => $modelRepair,
+                'modelClient' => $modelClient,
+                'allStores' => $allStores,
+                'allTypes' => $allTypes,
+                'allAccess' => $allAccess,
+                'allStatus' =>$allStatus,
+                'modelStores' => $modelStores,
+                'modelBrands' => $modelBrands,
+                'modelEquip' => $modelEquip,
+                'modelModels' => $modelModels,
+                'modelTypes' => $modelTypes,
+                'modelInv' => $modelInv,
+                'modelAccess' => $modelAccess,
+                'modelRepairAccess' => $modelRepairAccess,
+                'modelStatus' => $modelStatus,
+                'modelParts' => $modelParts,
+                'isOk' => false,
+                'items' => $items
+            ]);
+
                     }else{
                         //throw new Exception('Unable to save record1.');
                     }
@@ -655,6 +716,7 @@ class RepairController extends Controller
                 $transaction->rollback();
                 echo $e->getMessage(); exit;
             }
+
 
             return $this->render('update', [
                 'modelRepair' => $modelRepair,
@@ -673,7 +735,8 @@ class RepairController extends Controller
                 'modelRepairAccess' => $modelRepairAccess,
                 'modelStatus' => $modelStatus,
                 'modelParts' => $modelParts,
-                'isOk' => false
+                'isOk' => false,
+                'items' => $items
             ]);
         }else{
 
@@ -699,6 +762,9 @@ class RepairController extends Controller
             //status
             $modelStatus = $modelStatus->findOne($modelRepair->status_id);
 
+            //parts
+            $items = $modelRepair->getThisParts($modelRepair->id_repair);
+
         }
 
 
@@ -719,7 +785,8 @@ class RepairController extends Controller
             'modelRepairAccess' => $modelRepairAccess,
             'modelStatus' => $modelStatus,
             'modelParts' => $modelParts,
-            'isOk' => false
+            'isOk' => false,
+            'items' => $items
         ]);
     }
 
@@ -732,7 +799,9 @@ class RepairController extends Controller
     public function actionDelete($id)
     {
 
-        $this->findModel($id)->delete();
+        $obj = $this->findModel($id);
+        $obj->status = 0;
+        $obj->save();
         return $this->redirect(['index']);
         
         
@@ -741,11 +810,12 @@ class RepairController extends Controller
     public function actionDelajax(){
         if (isset($_POST['list']) && $_POST['list']!=""){
             $listarray = $_POST['list'];
-            $error = false;
 
             //removes all projects
             foreach($listarray as $repair){
-                repair::find()->where(['id_repair'=>$repair])->one()->delete();
+                $obj = repair::find()->where(['id_repair'=>$repair])->one();
+                $obj->status = 0;
+                $obj->save();
             }
 
             echo json_encode("done");
@@ -790,5 +860,25 @@ class RepairController extends Controller
     public function isActive($routes = array())
     {
         return "activeTop";
+    }
+
+    private function getItemsToUpdate(){
+        $itemsArray = array();
+ 
+        // Iterate over each item from the submitted form
+        if (isset($_POST['Parts']) && is_array($_POST['Parts'])) {
+            foreach ($_POST['Parts'] as $item) {
+                // If item id is available, read the record from database 
+                /*if (array_key_exists('id', $item) ){
+                    $items[] = MyModel::model()->findByPk($item['id']);
+                }
+                // Otherwise create a new record
+                else {
+                    
+                }*/
+                $itemsArray[] = new parts();
+            }
+        }
+        return $itemsArray;
     }
 }

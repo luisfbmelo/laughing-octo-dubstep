@@ -206,8 +206,22 @@ class Repair extends \yii\db\ActiveRecord
             $model->$arrayKeys[$a] = $elements[$arrayKeys[$a]];
         }
 
-        if ($model->save(false)){
+        if ($model->save()){
             return Yii::$app->db->getLastInsertID();
+        }else{
+            return false;
+        }
+    }
+
+    public function updateModelData($model,$elements){
+        $arrayKeys = array_keys($elements);
+
+        for ($a=0;$a<sizeof($elements);$a++){
+            $model->$arrayKeys[$a] = $elements[$arrayKeys[$a]];
+        }
+
+        if ($model->update(false)){
+            return true;
         }else{
             return false;
         }
@@ -302,6 +316,27 @@ class Repair extends \yii\db\ActiveRecord
 
         return $returnValue;
 
+    }
+
+    public function getThisParts($id){
+        $parts = RepairParts::find()->joinWith('part')->where(['repair_id' => $id])->all();
+
+        $returnArray = array();
+        $values = array();
+        
+        foreach ($parts as $i=>$row){
+
+            $values['id_part'] = $row['part']['id_part'];
+            $values['partCode'] = $row['part']['partCode'];
+            $values['partDesc'] = $row['part']['partDesc'];
+            $values['partQuant'] = $row['partQuant'];
+            $values['partPrice'] = $row['part']['partPrice'];
+
+            $returnArray[$i] = new parts();
+            $returnArray[$i]->attributes = $values;
+        }
+
+        return $returnArray;
     }
 
     public function beforeDelete()

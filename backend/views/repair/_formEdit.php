@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="clearAll"></div>
         <?php $form = ActiveForm::begin(['enableClientValidation' => false]); ?>
-            <?php echo $form->errorSummary([$modelClient,$modelRepair,$modelStores, $modelBrands, $modelEquip, $modelModels, $modelTypes, $modelInv, $modelAccess,$modelStatus,$modelParts]); ?>
+            <?php echo $form->errorSummary([$modelClient,$modelRepair,$modelStores, $modelBrands, $modelEquip, $modelModels, $modelTypes, $modelInv, $modelAccess,$modelStatus]); ?>
             <div class="row">
                 <div class="col-lg-12">
                     <p class="note">Campos com <span class="required">*</span> são obrigatórios.</p>
@@ -95,8 +95,8 @@ use yii\widgets\ActiveForm;
 
             <div class="row">
                 <!--BUDGET-->
-                <?= $form->field($modelRepair, 'budget',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->textInput() ?>
-                <?= $form->field($modelRepair, 'total',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->textInput() ?>
+                <?= $form->field($modelRepair, 'budget',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textInput() ?>
+                <?= $form->field($modelRepair, 'total',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textInput() ?>
             </div>
 
             <div class="row">
@@ -172,18 +172,27 @@ use yii\widgets\ActiveForm;
                     </tr>
                 </thead>
                 <tbody>
-                    <tr id="line_0">
-                        <th><?= $form->field($modelParts,'[0]partCode')->textInput()->label(false) ?></th>
-                        <th><?= $form->field($modelParts,'[0]partQuant')->textInput()->label(false) ?></th>
-                        <th><?= $form->field($modelParts,'[0]partDesc')->textInput()->label(false) ?></th>
-                        <th><?= $form->field($modelParts,'[0]partPrice')->textInput()->label(false) ?></th>
-                    </tr>
-                    <tr id="line_1">
-                        <th><?= $form->field($modelParts,'[1]partCode')->textInput()->label(false) ?></th>
-                        <th><?= $form->field($modelParts,'[1]partQuant')->textInput()->label(false) ?></th>
-                        <th><?= $form->field($modelParts,'[1]partDesc')->textInput()->label(false) ?></th>
-                        <th><?= $form->field($modelParts,'[1]partPrice')->textInput()->label(false) ?></th>
-                    </tr>
+                    <?php 
+                    if (isset($items) && sizeof($items)>0){ 
+                        foreach($items as $i=>$item){
+                        ?>
+                            <tr id="line_<?php echo $i;?>">
+                                <th><?= $form->field($item,"[$i]partCode")->textInput()->label(false) ?></th>
+                                <th><?= $form->field($item,"[$i]partQuant")->textInput()->label(false) ?></th>
+                                <th><?= $form->field($item,"[$i]partDesc")->textInput()->label(false) ?></th>
+                                <th><?= $form->field($item,"[$i]partPrice")->textInput()->label(false) ?><input type="hidden" id="parts-<?php echo $i; ?>-id_part" class="form-control" name="Parts[<?php echo $i; ?>][id_part]" value="<?php echo $item->id_part;?>"></th>
+
+                                
+                            </tr>
+                    <?php }}else{ ?>
+                        <tr id="line_0">
+                            <th><?= $form->field($modelParts,'[0]partCode')->textInput()->label(false) ?></th>
+                            <th><?= $form->field($modelParts,'[0]partQuant')->textInput()->label(false) ?></th>
+                            <th><?= $form->field($modelParts,'[0]partDesc')->textInput()->label(false) ?></th>
+                            <th><?= $form->field($modelParts,'[0]partPrice')->textInput()->label(false) ?></th>
+                            
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
 
