@@ -58,7 +58,7 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`user` (
   `password_hash` VARCHAR(250) NOT NULL ,
   `group_id` INT NOT NULL ,
   `password_reset_token` VARCHAR(250) NULL ,
-  `status` INT NOT NULL DEFAULT 1 ,
+  `status` INT NULL DEFAULT 1 ,
   `auth_key` VARCHAR(250) NOT NULL ,
   `role` INT NOT NULL ,
   `created_at` DATETIME NULL ,
@@ -291,11 +291,12 @@ ENGINE = InnoDB;
 -- Table `toque_sta`.`parts`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`parts` (
-  `id_part` INT NOT NULL ,
-  `partDesc` VARCHAR(45) NOT NULL ,
-  `partDoce` VARCHAR(250) NOT NULL ,
+  `id_part` INT NOT NULL AUTO_INCREMENT ,
+  `partDesc` VARCHAR(250) NOT NULL ,
+  `partCode` VARCHAR(250) NOT NULL ,
   `partPrice` DECIMAL NOT NULL ,
-  `status` INT NOT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
+  `partQuant` INT NULL ,
   PRIMARY KEY (`id_part`) )
 ENGINE = InnoDB;
 
