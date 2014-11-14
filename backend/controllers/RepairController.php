@@ -373,7 +373,7 @@ class RepairController extends Controller
 
                         //commit all saves
                         $transaction->commit();
-                        return $this->redirect(['index']);
+                        return $this->redirect(['index','sd'=>$repairId,'a'=>'n']);
                         //throw new Exception('STOP.');
                     }else{
                         //throw new Exception('Unable to save record1.');
@@ -409,7 +409,7 @@ class RepairController extends Controller
             ]);
         }
 
-        return $this->render('create', [
+        /*return $this->render('create', [
             'modelRepair' => $modelRepair,
             'modelClient' => $modelClient,
             'allStores' => $allStores,
@@ -424,7 +424,8 @@ class RepairController extends Controller
             'modelAccess' => $modelAccess,
             'modelRepairAccess' => $modelRepairAccess,
             'isOk' => false
-        ]);        
+        ]); */
+        return $this->redirect(['index','sd'=>13,'a'=>'n']);       
     }
 
     /**

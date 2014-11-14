@@ -27,7 +27,7 @@ AppAsset::register($this);
         ?>
             <div class="container-fluid fHeight">
                 
-                <nav class="row brandHeader">
+                <nav class="row brandHeader hidden-print">
                     <div class="col-lg-5 col-xs-10 col-sm-5 col-md-5">
                         <a href="<?php echo Yii::$app->getUrlManager()->createUrl('repair/index'); ?>"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt="" class="src"></a>
                     </div>
@@ -62,7 +62,7 @@ AppAsset::register($this);
                 </nav>
             
                 <aside class="row menuBox">
-                    <div class="col-lg-2 col-xs-12 col-sm-3 col-md-3 clearPad menuContainer">
+                    <div class="col-lg-2 col-xs-12 col-sm-3 col-md-3 clearPad menuContainer hidden-print">
                         
 
                         <!-- Side Menu -->
