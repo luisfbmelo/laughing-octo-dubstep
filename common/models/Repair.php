@@ -21,6 +21,9 @@ use Yii;
  * @property string $budget
  * @property string $maxBudget
  * @property string $total
+ * @property string $obs
+ * @property string $status
+ * @property string $warranty_date
  *
  * @property Client $client
  * @property Inventory $inve
@@ -51,7 +54,7 @@ class Repair extends \yii\db\ActiveRecord
             [['type_id', 'client_id', 'inve_id', 'status_id', 'user_id', 'repair_desc', 'date_entry', 'store_id', 'priority'], 'required'],
             [['type_id', 'client_id', 'inve_id', 'user_id', 'store_id', 'priority','status_id'], 'integer'],
             [['repair_desc','obs'], 'string'],
-            [['date_entry', 'date_close'], 'safe'],
+            [['date_entry', 'date_close','warranty_date'], 'safe'],
             [['budget', 'maxBudget', 'total'], 'number']
         ];
     }
@@ -76,7 +79,9 @@ class Repair extends \yii\db\ActiveRecord
             'budget' => 'Orçamento',
             'maxBudget' => 'Orçamento máximo',
             'total' => 'Total',
-            'obs' => 'Observações'
+            'obs' => 'Observações',
+            'status' => 'Estado',
+            'warranty_date' => 'Data de garantia'
         ];
     }
 
@@ -178,6 +183,22 @@ class Repair extends \yii\db\ActiveRecord
 
     public function getStoreDesc(){
         return Stores::find()->joinWith("repairs")->where(['stores.id_store'=>$this->store_id])->asArray()->one();
+    }
+
+    /**
+     * @param string the name of the attribute to be validated
+     * @param array options specified in the validation rule
+     */
+    public function checkWarranty($attribute,$date,$hidden)
+    {
+        if($date=="" && $hidden=="shown"){
+             $this->addError($attribute, 'Data foi inserida incorretamente');
+             return false;
+        }else if($hidden=="shown"){
+            return true;
+        }else{
+            return true;
+        }
     }
 
     /**
@@ -318,8 +339,13 @@ class Repair extends \yii\db\ActiveRecord
 
     }
 
+    /**
+     * Get all parts from a given repair
+     * @param  [int] $id [repair id]
+     * @return [array]     [array with all the parts of a repair]
+     */
     public function getThisParts($id){
-        $parts = RepairParts::find()->joinWith('part')->where(['repair_id' => $id])->all();
+        $parts = RepairParts::find()->joinWith('part')->where(['repair_id' => $id,'parts.status'=> 1])->all();
 
         $returnArray = array();
         $values = array();
@@ -368,4 +394,5 @@ class Repair extends \yii\db\ActiveRecord
             return false;
         }
     }
+
 }

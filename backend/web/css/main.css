@@ -337,6 +337,21 @@ a.topBtn {
 .deleteBtn {
   margin-bottom: 15px; }
 
+.partRemove {
+  position: relative; }
+  .partRemove div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: #d9534f; }
+    .partRemove div:hover {
+      color: #c9302c;
+      cursor: pointer; }
+
 .repairsGrid .listHeader, .partsInsert .listHeader {
   background-color: #414957;
   color: white; }
@@ -404,7 +419,8 @@ a.topBtn {
     padding-left: 0 !important; }
   .repairFields form {
     /*ACCESSORIES ERROR BOX*/
-    /*OTHER ACCESSORIES DESC*/ }
+    /*OTHER ACCESSORIES DESC*/
+    /*REPAIR TYPES*/ }
     .repairFields form .required label:after {
       content: "*";
       width: 10px;
@@ -434,17 +450,17 @@ a.topBtn {
       padding-top: 15px; }
       .repairFields form .pageButtons button {
         margin-right: 30px; }
-    .repairFields form .normalType {
+    .repairFields form .normalType, .repairFields form .warrantyType {
       margin-bottom: 15px; }
-      .repairFields form .normalType .row {
+      .repairFields form .normalType .row, .repairFields form .warrantyType .row {
         box-sizing: border-box;
         margin: 0 !important;
         background-color: #eaeaea; }
-        .repairFields form .normalType .row .maxBudget {
+        .repairFields form .normalType .row .maxBudget, .repairFields form .normalType .row .warranty_date, .repairFields form .warrantyType .row .maxBudget, .repairFields form .warrantyType .row .warranty_date {
           padding: 15px 15px 0 !important; }
-        .repairFields form .normalType .row .wantMaxBox input {
+        .repairFields form .normalType .row .wantMaxBox input, .repairFields form .warrantyType .row .wantMaxBox input {
           margin-right: 10px; }
-      .repairFields form .normalType:before {
+      .repairFields form .normalType:before, .repairFields form .warrantyType:before {
         content: "";
         position: absolute;
         top: -15px;

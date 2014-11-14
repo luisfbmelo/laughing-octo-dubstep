@@ -194,6 +194,7 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`repair` (
   `total` DECIMAL NULL ,
   `obs` TEXT NULL ,
   `status` INT NOT NULL DEFAULT 1 ,
+  `warranty_date` DATE NULL ,
   PRIMARY KEY (`id_repair`) ,
   INDEX `fk_repair_client` (`client_id` ASC) ,
   INDEX `fk_repair_repair_type1` (`type_id` ASC) ,
@@ -334,12 +335,19 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`modLog` (
   `logMessage` TEXT NOT NULL ,
   `logType` INT NOT NULL ,
   `user_id` INT NOT NULL ,
-  `status` INT NOT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
+  `repair_id` INT NOT NULL ,
   PRIMARY KEY (`id_log`) ,
   INDEX `fk_modLog_users1` (`user_id` ASC) ,
+  INDEX `fk_modLog_repair1` (`repair_id` ASC) ,
   CONSTRAINT `fk_modLog_users1`
     FOREIGN KEY (`user_id` )
     REFERENCES `toque_sta`.`user` (`id_users` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_modLog_repair1`
+    FOREIGN KEY (`repair_id` )
+    REFERENCES `toque_sta`.`repair` (`id_repair` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

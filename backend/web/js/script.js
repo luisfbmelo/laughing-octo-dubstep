@@ -39,10 +39,10 @@ $(document).ready(function(){
 	$(".addButton").on("click",function(){
 		var lastLineId = $(".partsInsert tr:last").attr("id");
 		lastLineId = lastLineId.split("_").pop();
-		console.log(lastLineId);
 		lastLineId++;
 
 		var content = '<tr id="line_'+lastLineId+'">'+
+		'<th class="partRemove"><div class="glyphicon glyphicon-remove"></div></th>'+
 		'<th>'+
 			'<div class="form-group field-parts-'+lastLineId+'-partcode"><input type="text" id="parts-'+lastLineId+'-partcode" class="form-control" name="Parts['+lastLineId+'][partCode]"><div class="help-block"></div></div>'+
 		'</th>'+

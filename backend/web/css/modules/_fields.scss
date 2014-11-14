@@ -61,14 +61,15 @@
 			}
 		}
 
-		.normalType{
+		/*REPAIR TYPES*/
+		.normalType, .warrantyType{
 			margin-bottom:15px;
 			.row{
 				box-sizing: border-box;
 				margin:0!important;
 				background-color:$topBtn-bg-color;
 
-				.maxBudget{
+				.maxBudget, .warranty_date{
 					padding: 15px 15px 0!important;
 				}
 

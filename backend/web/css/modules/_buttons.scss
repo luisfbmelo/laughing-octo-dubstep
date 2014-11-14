@@ -36,3 +36,20 @@ a.topBtn{
 .deleteBtn{
 	margin-bottom:15px;
 }
+
+.partRemove{
+	position:relative;
+	
+	div{
+		position:absolute;
+		top:50%;
+		left:50%;
+		@include translate(-50%,-50%);
+		color:$danger-btn;
+
+		&:hover{
+			color:$danger-btn-hover;
+			cursor:pointer;
+		}
+	}
+}

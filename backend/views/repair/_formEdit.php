@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\datecontrol\DateControl;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\repair */
@@ -108,10 +109,19 @@ use yii\widgets\ActiveForm;
 
             <?php
 
+                //budget bar
                 if ($modelTypes->extraData == 1){
                     $showBar = true;
+                    $showDate = false;
+
+                //warranty bar
+                }else if($modelTypes->extraData == 2){
+                    $showBar = false;
+                    $showDate = true;
+
                 }else{
                     $showBar = false;
+                    $showDate = false;
                 }
               
                 ?>
@@ -121,15 +131,37 @@ use yii\widgets\ActiveForm;
                 <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
                     <div class="row">
                         <?= $form->field($modelTypes, 'id_type', ['options' => ['class' => 'col-lg-12 col-xs-12 col-sm-12 col-md-12 required']])->dropDownList($types,['id'=>'typeID','prompt'=>'--'])->label('Tipo de reparação')?>
-                        <!--BUDGET SELECTION-->
+                        
+
+                        <!--BUDGET/DATE SELECTION-->
                         <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 normalType" <?= (!$showBar) ? 'style="display:none;"' : null ?>>
                             <div class="row">
                                 <?= $form->field($modelRepair, 'maxBudget', ['options' => ['class' => 'col-lg-12 maxBudget']])->textInput(['maxlength' => 10]) ?>                    
                                 
-                                <input type="hidden" name="maxBudgetHidden" id="maxBudgetHidden" value="hidden"/>
+                                <input type="hidden" name="maxBudgetHidden" id="maxBudgetHidden" <?= (!$showBar) ? 'value="hidden"' : 'value="shown"'?>/>
                             </div>               
                             
                         </div>
+
+                        <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 warrantyType" <?= (!$showDate) ? 'style="display:none;"' : null ?>>
+                            <div class="row">
+
+                                <?php 
+                                    echo $form->field($modelRepair, 'warranty_date', ['options' => ['class' => 'col-lg-12 warranty_date']])->widget(DateControl::classname(), [
+                                        'displayFormat' => 'dd/MM/yyyy',
+                                        'autoWidget' => false,
+                                        'widgetClass' => 'yii\widgets\MaskedInput',
+                                        'options' => [
+                                            'mask' => '99/99/9999'
+                                        ],
+                                    ]);
+                                ?>                    
+                                
+                                <input type="hidden" name="warrantyHidden" id="warrantyHidden" <?= (!$showDate) ? 'value="hidden"' : 'value="shown"'?>/>
+                            </div>               
+                            
+                        </div>
+
                     </div>
                 </div>
                 
@@ -165,6 +197,7 @@ use yii\widgets\ActiveForm;
             <table class="partsInsert table table-striped table-bordered">
                 <thead>
                     <tr class="listHeader">
+                        <th></th>
                         <th>Código</th>
                         <th>Quantidade</th>
                         <th>Designação</th>
@@ -177,19 +210,20 @@ use yii\widgets\ActiveForm;
                         foreach($items as $i=>$item){
                         ?>
                             <tr id="line_<?php echo $i;?>">
+                                <th class="partRemove"><div class="glyphicon glyphicon-remove" id="part_<?= $item->id_part ?>"></div></th>
                                 <th><?= $form->field($item,"[$i]partCode")->textInput()->label(false) ?></th>
                                 <th><?= $form->field($item,"[$i]partQuant")->textInput()->label(false) ?></th>
                                 <th><?= $form->field($item,"[$i]partDesc")->textInput()->label(false) ?></th>
                                 <th><?= $form->field($item,"[$i]partPrice")->textInput()->label(false) ?><input type="hidden" id="parts-<?php echo $i; ?>-id_part" class="form-control" name="Parts[<?php echo $i; ?>][id_part]" value="<?php echo $item->id_part;?>"></th>
-
-                                
+                                                                
                             </tr>
                     <?php }}else{ ?>
                         <tr id="line_0">
+                            <th></th>
                             <th><?= $form->field($modelParts,'[0]partCode')->textInput()->label(false) ?></th>
                             <th><?= $form->field($modelParts,'[0]partQuant')->textInput()->label(false) ?></th>
                             <th><?= $form->field($modelParts,'[0]partDesc')->textInput()->label(false) ?></th>
-                            <th><?= $form->field($modelParts,'[0]partPrice')->textInput()->label(false) ?></th>
+                            <th><?= $form->field($modelParts,'[0]partPrice')->textInput()->label(false) ?></th>                            
                             
                         </tr>
                     <?php } ?>
@@ -218,31 +252,102 @@ use yii\widgets\ActiveForm;
 <script>
     $(document).ready(function(){
 
+        //DELETE PART
+        $("tbody").on("click",'.partRemove div', function(){
+      
+            var urlBase = '<?php echo Yii::$app->request->baseUrl;?>';
+            var urlDest = urlBase+'/parts/delajax';
+            var el = $(this), partId;
 
+            //if has ID
+            if (el.attr("id")){
+                partId = el.attr("id").split("_").pop();
+            }
+
+            //if id is ok
+            if (partId!=undefined){
+                $.ajax({
+                    url: urlDest,
+                    type:"POST",
+                    dataType: 'json',
+                    data:{ id: partId},
+                    success: function(data){
+                        var tbodyChild = el.parent().parent().parent().children().length;
+                        
+                        if (data=="done"){
+                            
+                            if (tbodyChild==1){
+                                el.parent().parent().find("input").removeAttr('value');   
+                            }else{
+                                el.parent().parent().remove();
+                            }
+                            
+                        }else if(data=="empty"){
+
+                            if (tbodyChild==1){
+                                el.parent().parent().find("input").removeAttr('value');   
+                            }else{
+                                el.parent().parent().remove();
+                            }
+                        }
+                    },
+                    error: function(){
+
+                    }
+                });
+
+            //if is a new element
+            }else{
+                console.log("1");
+                el.parent().parent().find("input").val(''); 
+            }
+            
+        });
+
+
+        //CHANGE EXTRA DATA REPAIR TYPE BOX
         $("#typeID").on('change',function(){
             var state = $(this).val();
-            var desc = $('option:selected', $(this)).text();
+            var desc = $('option:selected', $(this)).val();
             console.log(desc);
 
-            if (desc=="Normal"){
+            if (desc==1){
                 $(".normalType").toggle(0,function(){
                     console.log($(".normalType").css("display"));
                     if ($(".normalType").css("display")=="none"){
                         state="hidden";
                     }else{
                         state="shown";
+                        $(".warrantyType").css('display','none');
+                        $("#warrantyHidden").val('hidden');
                     }
 
                     $("#maxBudgetHidden").val(state);
 
                 });
+            
+            }else if(desc==2){
+                $(".warrantyType").toggle(0,function(){
+                    console.log($(".warrantyType").css("display"));
+                    if ($(".warrantyType").css("display")=="none"){
+                        state="hidden";
+                    }else{
+                        state="shown";
+                        $(".normalType").css('display','none');
+                        $("#maxBudgetHidden").val('hidden');
+                    }
+
+                    $("#warrantyHidden").val(state);
+
+                });
             }else{
-                $(".normalType").css('display','none');
+                $(".warrantyType").css('display','none');
                 state = 'hidden';
-                $("#maxBudgetHidden").val(state);
+                $("#warrantyHidden").val(state);
             }
             
         });
+
 
         //LOAD BRANDS
         $("#equipID").on('change',function(){

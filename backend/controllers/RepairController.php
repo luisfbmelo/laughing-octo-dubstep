@@ -175,6 +175,7 @@ class RepairController extends Controller
             $connection = \Yii::$app->db;
             $transaction = $connection->beginTransaction();
             try {
+
                 $valid = false;
                 $isOk = [];
 
@@ -235,6 +236,9 @@ class RepairController extends Controller
                 $valid = $modelStores->load(Yii::$app->request->post()) && $modelStores->validate(['id_store']) && $valid;
 
                 $valid = $modelRepair->load(Yii::$app->request->post()) && $modelRepair->validate(['repair_desc','priority']) && $valid;
+
+                $valid = $modelRepair->checkWarranty('warranty_date',Yii::$app->request->post('Repair')['warranty_date'],Yii::$app->request->post('warrantyHidden')) && $valid;
+
 
                 if ($valid){
 
@@ -314,7 +318,18 @@ class RepairController extends Controller
                     //set max budget
                     if ($modelRepair->maxBudget==""){
                         $modelRepair->maxBudget = NULL;
+                    }else{
+                        $modelRepair->warranty_date = NULL;
                     }
+
+                    //set warranty date
+                    if (Yii::$app->request->post('Repair')['warranty_date']==""){
+                        $modelRepair->warranty_date = NULL;
+                    }else{
+                        $modelRepair->warranty_date = date('Y-m-d', Yii::$app->request->post('Repair')['warranty_date']);
+                        $modelRepair->maxBudget = NULL;
+                    }
+
 
                     //set final vars
                     $modelRepair->attributeToRepair([
@@ -599,6 +614,16 @@ class RepairController extends Controller
                     //set max budget
                     if ($modelRepair->maxBudget==""){
                         $modelRepair->maxBudget = NULL;
+                    }else{
+                        $modelRepair->warranty_date = NULL;
+                    }
+
+                    //set warranty date
+                    if (Yii::$app->request->post('Repair')['warranty_date']==""){
+                        $modelRepair->warranty_date = NULL;
+                    }else{
+                        $modelRepair->warranty_date = date('Y-m-d', Yii::$app->request->post('Repair')['warranty_date']);
+                        $modelRepair->maxBudget = NULL;
                     }
 
                     //set final vars
@@ -646,11 +671,24 @@ class RepairController extends Controller
                             
                         }
 
+                        //save repair parts
                         if (isset($items) && sizeof($items)>0){ 
 
                             repairparts::deleteAll(["repair_id"=>$modelRepair->id_repair]);
+                            $opAttr = array("id_part", "status");
 
                             foreach($items as $i=>$item){
+
+                                foreach($item as $itemKey=>$itemList){
+                                    
+                                    if ($item[$itemKey]=="" && !in_array($itemKey, $opAttr)){
+                                        $isEmpty = true;
+                                    }
+                                }
+
+                                if (isset($isEmpty) && $isEmpty){
+                                    continue;
+                                }
                                 
                                 $partArray = [];
 
@@ -716,8 +754,8 @@ class RepairController extends Controller
                             'modelParts' => $modelParts,
                             'isOk' => false,
                             'items' => $items
-                        ]);
-*/
+                        ]);*/
+
                     }else{
                         //throw new Exception('Unable to save record1.');
                     }
@@ -781,6 +819,8 @@ class RepairController extends Controller
             //parts
             $items = $modelRepair->getThisParts($modelRepair->id_repair);
 
+            $modelRepair->warranty_date = strtotime($modelRepair->warranty_date);
+
         }
 
 
@@ -819,8 +859,7 @@ class RepairController extends Controller
         $obj->status = 0;
         $obj->save();
         return $this->redirect(['index']);
-        
-        
+    
     }
 
     public function actionDelajax(){
@@ -892,6 +931,7 @@ class RepairController extends Controller
                 else {
                     
                 }*/
+                
                 $itemsArray[] = new parts();
             }
         }

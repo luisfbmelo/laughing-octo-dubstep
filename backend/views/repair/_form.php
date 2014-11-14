@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\datecontrol\DateControl;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\repair */
@@ -101,23 +102,51 @@ use yii\widgets\ActiveForm;
 
             <div class="row">
                  <?php
+                 
                 if (isset($modelTypes->id_type)){
                     $newModel = $modelTypes->findOne($modelTypes->id_type);
                 }
-
+                //budget bar
                 if (isset($newModel) && $newModel->extraData == 1){
                     $showBar = true;
+                    $showDate = false;
+
+                //warranty bar
+                }else if(isset($newModel) && $newModel->extraData == 2){
+                    $showBar = false;
+                    $showDate = true;
+
                 }else{
                     $showBar = false;
-                }
+                    $showDate = false;
+                }                
               
                 ?>
-                <!--BUDGET SELECTION-->
-                <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 normalType" <?= (!$showBar) ? 'style="display:none;"' : null ?>>
+                <!--BUDGET/DATE SELECTION-->
+                <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 normalType" <?= (!$showBar) ? 'style="display:none;"' : "" ?>>
                     <div class="row">
                         <?= $form->field($modelRepair, 'maxBudget', ['options' => ['class' => 'col-lg-12 maxBudget']])->textInput(['maxlength' => 10]) ?>                    
                         
-                        <input type="hidden" name="maxBudgetHidden" id="maxBudgetHidden" value="hidden"/>
+                        <input type="hidden" name="maxBudgetHidden" id="maxBudgetHidden" <?= (!$showBar) ? 'value="hidden"' : 'value="shown"'?>/>
+                    </div>               
+                    
+                </div>
+
+                <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 warrantyType" <?= (!$showDate) ? 'style="display:none;"' : "" ?>>
+                    <div class="row">
+
+                        <?php 
+                            echo $form->field($modelRepair, 'warranty_date', ['options' => ['class' => 'col-lg-12 warranty_date']])->widget(DateControl::classname(), [
+                                'displayFormat' => 'dd/MM/yyyy',
+                                'autoWidget' => false,
+                                'widgetClass' => 'yii\widgets\MaskedInput',
+                                'options' => [
+                                    'mask' => '99/99/9999'
+                                ],
+                            ]);
+                        ?>                    
+                        
+                        <input type="hidden" name="warrantyHidden" id="warrantyHidden" <?= (!$showDate) ? 'value="hidden"' : 'value="shown"'?>/>
                     </div>               
                     
                 </div>
@@ -158,28 +187,45 @@ use yii\widgets\ActiveForm;
 <script>
     $(document).ready(function(){
 
-
+        //CHANGE EXTRA DATA REPAIR TYPE BOX
         $("#typeID").on('change',function(){
             var state = $(this).val();
-            var desc = $('option:selected', $(this)).text();
+            var desc = $('option:selected', $(this)).val();
             console.log(desc);
 
-            if (desc=="Normal"){
+            if (desc==1){
                 $(".normalType").toggle(0,function(){
                     console.log($(".normalType").css("display"));
                     if ($(".normalType").css("display")=="none"){
                         state="hidden";
                     }else{
                         state="shown";
+                        $(".warrantyType").css('display','none');
+                        $("#warrantyHidden").val('hidden');
                     }
 
                     $("#maxBudgetHidden").val(state);
 
                 });
+            
+            }else if(desc==2){
+                $(".warrantyType").toggle(0,function(){
+                    console.log($(".warrantyType").css("display"));
+                    if ($(".warrantyType").css("display")=="none"){
+                        state="hidden";
+                    }else{
+                        state="shown";
+                        $(".normalType").css('display','none');
+                        $("#maxBudgetHidden").val('hidden');
+                    }
+
+                    $("#warrantyHidden").val(state);
+
+                });
             }else{
-                $(".normalType").css('display','none');
+                $(".warrantyType").css('display','none');
                 state = 'hidden';
-                $("#maxBudgetHidden").val(state);
+                $("#warrantyHidden").val(state);
             }
             
         });

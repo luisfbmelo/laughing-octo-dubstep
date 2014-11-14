@@ -10,4 +10,9 @@ return [
             'showScriptName' => false,
         ]
     ],
+    'modules' => [
+       'datecontrol' =>  [
+            'class' => '\kartik\datecontrol\Module'
+        ],
+    ],
 ];
