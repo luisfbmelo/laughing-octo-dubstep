@@ -131,9 +131,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
    <?php 
-    if (isset($_GET['sd']) && !empty($_GET['sd']) && is_numeric($_GET['sd']) && isset($_GET['a']) && !empty($_GET['a'])){
-        switch($_GET['a']){
-            case 'n':
+    if (isset($modelRepair) && !empty($modelRepair) && $modelRepair!=null){
         ?>
         <!-- visible-print-block -->
         <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 visible-print-block" id="printEntry">
@@ -144,15 +142,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         <tbody>
                             <tr>
                                 <th>Entrada</th>
-                                <th>Nº 9999</th>
+                                <th>Nº <?php echo $modelRepair[0]['id_repair'];?></th>
                             </tr>
                             <tr>
                                 <th>Data</th>
-                                <th>31-12-2014</th>
+                                <th><?php echo $modelRepair[0]['date_entry'];?></th>
                             </tr>
                             <tr>
                                 <th>Local</th>
-                                <th>Angra</th>
+                                <th><?php echo $modelRepair[0]['storeDesc'];?></th>
                             </tr>
                         </tbody>
                     </table>
@@ -165,24 +163,24 @@ $this->params['breadcrumbs'][] = $this->title;
                         <tbody>
                             <tr>
                                 <th>Nome</th>
-                                <th colspan="2">Paulo Belem</th>
+                                <th colspan="2"><?php echo $modelRepair[0]['cliName'];?></th>
                             </tr>
                             <tr>
                                 <th>Morada</th>
-                                <th colspan="2">Rua da Cruz Dourada</th>
+                                <th colspan="2"><?php echo $modelRepair[0]['cliAdress'];?></th>
                             </tr>
                             <tr>
                                 <th rowspan="3">Contacto</th>
                                 <th>Fixo</th>
-                                <th>295 000 000</th>
+                                <th><?php echo $modelRepair[0]['cliConFix'];?></th>
                             </tr>
                             <tr>
                                 <th>Móvel1</th>
-                                <th>000000000</th>
+                                <th><?php echo $modelRepair[0]['cliConMov1'];?></th>
                             </tr>
                             <tr>
                                 <th>Móvel 2</th>
-                                <th>00000000</th>
+                                <th><?php echo $modelRepair[0]['cliConMov2'];?></th>
                             </tr>
                         </tbody>
                     </table>
@@ -194,24 +192,36 @@ $this->params['breadcrumbs'][] = $this->title;
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th>Telemovel</th>
-                                <th>Nokia</th>
-                                <th>Lumia 654</th>
-                                <th>00000000</th>
+                                <th><?php echo $modelRepair[0]['equipDesc'];?></th>
+                                <th><?php echo $modelRepair[0]['brandName'];?></th>
+                                <th><?php echo $modelRepair[0]['modelName'];?></th>
+                                <th><?php echo $modelRepair[0]['inveSN'];?></th>
                             </tr>
+
                             <tr>
                                 <th>Bateria</th>
+                                <?php if (isset($modelAccess[0]) && $modelAccess[0]['accessory']['accessType']==1){?>
                                 <th><span class="glyphicon glyphicon-ok-sign"></span></th>
-                                <th colspan="2" rowspan="3">Observações</th>
+                                <?php } ?>
+                                <th colspan="2" rowspan="3">asd<?php echo $modelRepair[0]['obs'];?></th>
                             </tr>
+                            
                             <tr>
                                 <th>Carregador</th>
-                                <th><span class="glyphicon glyphicon-ok-sign"></span></th>
+                                <th>
+                                    <?php if (isset($modelAccess[1]) && $modelAccess[1]['accessory']['accessType']==3){?>
+                                    <span class="glyphicon glyphicon-ok-sign"></span>
+                                    <?php } ?>
+                                </th>
                             </tr>
+
                             <tr>
                                 <th>Outro</th>
-                                <th>Cabos, capa</th>
+                                <?php if (isset($modelAccess[2]) && $modelAccess[2]['accessory']['accessType']==2){?>
+                                <th><?php echo $modelAccess[2]['otherDesc'];?></th>
+                                <?php } ?>
                             </tr>
+                            
                         </tbody>
                     </table>
 
@@ -224,7 +234,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <tbody>
                             <tr>
-                                <th>Descrição da avaria</th>
+                                <th><?php echo $modelRepair[0]['repair_desc'];?></th>
                             </tr>
                         </tbody>
                     </table>
@@ -236,17 +246,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"> 
                     <table class="table table-bordered">
                         <tbody>
-                            <tr>
+                             <tr>
                                 <th>Entrada</th>
-                                <th>Nº 9999</th>
+                                <th>Nº <?php echo $modelRepair[0]['id_repair'];?></th>
                             </tr>
                             <tr>
                                 <th>Data</th>
-                                <th>31-12-2014</th>
+                                <th><?php echo $modelRepair[0]['date_entry'];?></th>
                             </tr>
                             <tr>
                                 <th>Local</th>
-                                <th>Angra</th>
+                                <th><?php echo $modelRepair[0]['storeDesc'];?></th>
                             </tr>
                         </tbody>
                     </table>
@@ -257,7 +267,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <script>
            
                 //print showing div
-                //printDiv("printEntry");
+                printDiv("printEntry");
                 
                 function printDiv(divName) {
                      var printContents = document.getElementById(divName).innerHTML;
@@ -271,9 +281,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
           
         </script>
-
-        <?php break; 
-}}?>
+        <?php
+    }?>
 </section>
 
 <script>

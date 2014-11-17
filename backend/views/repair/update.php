@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = 'Editar';
     			<h1 class="sectionTitle col-lg-12"><?= Html::encode($this->title) ?></h1>
 
     		    <?=
-                $renderVars = 
+                
                  $this->render('_formEdit', [
     		        'modelRepair' => $modelRepair,
     		        'modelClient' => $modelClient,

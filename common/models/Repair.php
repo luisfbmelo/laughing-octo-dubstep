@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\db\Query;
+
 
 /**
  * This is the model class for table "repair".
@@ -321,6 +323,18 @@ class Repair extends \yii\db\ActiveRecord
 
     }
 
+    public function getThisAccessAll($id){
+        $accessories = RepairAccessory::find()->joinWith('accessory')->where(['repair_id' => $id])->asArray()->all();
+
+        $returnArray = array();
+        foreach ($accessories as $row){
+            $returnArray[] = $row;
+        }
+
+        return $returnArray;
+
+    }
+
     /**
      * Returns the description of other accessories
      * @param  [int] $id [repair identification]
@@ -363,6 +377,54 @@ class Repair extends \yii\db\ActiveRecord
         }
 
         return $returnArray;
+    }
+
+    public function getAllData($id){
+        $connection = \Yii::$app->db;
+
+        $repair = $connection
+        ->createCommand('
+            Select
+  repair.*,
+  models.modelName,
+  equipaments.equipDesc,
+  brands.brandName,
+  client.*,
+  stores.storeDesc,
+  inventory.inveSN,
+  repair_accessory.otherDesc,
+  accessories.accessType
+From
+  repair Inner Join
+  client On client.id_client = repair.client_id Inner Join
+  stores On stores.id_store = repair.store_id Inner Join
+  inventory On repair.inve_id = inventory.id_inve Inner Join
+  equipaments On inventory.equip_id = equipaments.id_equip Inner Join
+  brands On inventory.brand_id = brands.id_brand Inner Join
+  models On models.equip_id = equipaments.id_equip And models.brand_id =
+    brands.id_brand And inventory.model_id = models.id_model Inner Join
+  repair_accessory On repair_accessory.repair_id = repair.id_repair Inner Join
+  accessories On repair_accessory.accessory_id = accessories.id_accessories
+            WHERE repair.id_repair=:repairId');
+
+        $repair->bindValue(':repairId', $id);
+
+        $model = $repair->queryAll();
+
+
+        /*$repair = $this->find()
+        ->innerJoin('client','client.id_client = repair.client_id')
+        ->innerJoin('stores','stores.id_store = repair.store_id')
+        ->innerJoin('inventory','repair.inve_id = inventory.id_inve')        
+        ->innerJoin('equipaments','inventory.equip_id = equipaments.id_equip')
+        ->innerJoin('brands','inventory.brand_id = brands.id_brand')
+        ->innerJoin('models','models.equip_id = equipaments.id_equip And models.brand_id = brands.id_brand And inventory.model_id = models.id_model')
+        ->innerJoin('repair_accessory','repair_accessory.repair_id = repair.id_repair')
+        ->innerJoin('accessories','repair_accessory.accessory_id = accessories.id_accessories')
+        ->where(['repair.id_repair'=> $id])->asArray()
+        ->all();*/
+
+        return $model;
     }
 
     public function beforeDelete()
