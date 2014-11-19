@@ -1,0 +1,56 @@
+#printEntry *{
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.header,
+.client_data_table,
+.repair_details_table,
+.foote
+{
+	table:first-of-type{
+		tbody{
+			tr > th{
+				font-size:0.8em;
+				font-weight:normal;
+
+				&:first-child, &.setTableTitle{
+					background:$dark-blue-bg!important;
+					color:white!important;
+					width: 25%;
+					vertical-align: middle;
+					font-weight:bold;
+				}
+			}
+		}
+	}
+
+	img{
+		text-align:center;
+		vertical-align:middle;
+	}	
+}
+
+.repairDesc{
+	thead{
+		tr > th{
+			font-size:0.8em;
+			background:$dark-blue-bg!important;
+			color:white!important;
+			//font-weight:normal;
+		}
+	}
+
+	tbody{
+		tr > th{
+			font-size:0.8em;
+			font-weight:normal;		
+		}
+	}
+
+	img{
+		text-align:center;
+		vertical-align:middle;
+	}
+}
+

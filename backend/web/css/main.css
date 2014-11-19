@@ -352,6 +352,10 @@ a.topBtn {
       color: #c9302c;
       cursor: pointer; }
 
+.repair-index .glyphicon {
+  font-size: 1.5em;
+  padding: 5px; }
+
 .repairsGrid .listHeader, .partsInsert .listHeader {
   background-color: #414957;
   color: white; }
@@ -506,3 +510,43 @@ a.topBtn {
 */
 * html .ui-autocomplete {
   height: 250px; }
+
+#printEntry * {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact; }
+
+.header table:first-of-type tbody tr > th,
+.client_data_table table:first-of-type tbody tr > th,
+.repair_details_table table:first-of-type tbody tr > th,
+.foote table:first-of-type tbody tr > th {
+  font-size: 0.8em;
+  font-weight: normal; }
+  .header table:first-of-type tbody tr > th:first-child, .header table:first-of-type tbody tr > th.setTableTitle,
+  .client_data_table table:first-of-type tbody tr > th:first-child,
+  .client_data_table table:first-of-type tbody tr > th.setTableTitle,
+  .repair_details_table table:first-of-type tbody tr > th:first-child,
+  .repair_details_table table:first-of-type tbody tr > th.setTableTitle,
+  .foote table:first-of-type tbody tr > th:first-child,
+  .foote table:first-of-type tbody tr > th.setTableTitle {
+    background: #414957 !important;
+    color: white !important;
+    width: 25%;
+    vertical-align: middle;
+    font-weight: bold; }
+.header img,
+.client_data_table img,
+.repair_details_table img,
+.foote img {
+  text-align: center;
+  vertical-align: middle; }
+
+.repairDesc thead tr > th {
+  font-size: 0.8em;
+  background: #414957 !important;
+  color: white !important; }
+.repairDesc tbody tr > th {
+  font-size: 0.8em;
+  font-weight: normal; }
+.repairDesc img {
+  text-align: center;
+  vertical-align: middle; }

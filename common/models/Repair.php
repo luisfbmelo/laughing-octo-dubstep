@@ -323,7 +323,7 @@ class Repair extends \yii\db\ActiveRecord
 
     }
 
-    public function getThisAccessAll($id){
+    static function getThisAccessAll($id){
         $accessories = RepairAccessory::find()->joinWith('accessory')->where(['repair_id' => $id])->asArray()->all();
 
         $returnArray = array();
@@ -425,6 +425,21 @@ From
         ->all();*/
 
         return $model;
+    }
+
+    static function accessType($array, $key, $val){
+
+      //go for all accessories
+      foreach ($array as $i=>$item){
+
+        //keys on a certain accessory
+        foreach($item as $nested){
+          if (isset($nested[$key]) && $nested[$key] == $val){
+              return $id['index'] = $i;
+          }
+        }
+      }
+      return "not";
     }
 
     public function beforeDelete()

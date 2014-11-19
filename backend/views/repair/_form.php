@@ -68,17 +68,17 @@ use kartik\datecontrol\DateControl;
         
 
         <div class="repairData">
-
+        <?php echo is_numeric($modelBrands->id_brand);?>
 
             <!--EQUIPMENT-->
             <div class="row equipList">
 
                 <?= $form->field($modelEquip, 'equipDesc', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->textInput()->label('Equipamentos') ?>
-                <input type="hidden" name="equipId" id="equipId" value="<?= (isset($modelEquip->id_equip)) ? $modelEquip->id_equip : 'new' ?>"/>
+                <input type="hidden" name="equipId" id="equipId" value="<?= (isset($modelEquip->id_equip) && is_numeric($modelEquip->id_equip)) ? $modelEquip->id_equip : 'new' ?>"/>
                 <?= $form->field($modelBrands, 'brandName', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->textInput()->label('Marcas') ?>
-                <input type="hidden" name="brandId" id="brandId" value="<?= (isset($modelBrands->id_brand)) ? $modelBrands->id_brand : 'new' ?>"/>
+                <input type="hidden" name="brandId" id="brandId" value="<?= (isset($modelBrands->id_brand) && is_numeric($modelBrands->id_brand)) ? $modelBrands->id_brand : 'new' ?>"/>
                 <?= $form->field($modelModels, 'modelName', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->textInput()->label('Modelos') ?>
-                <input type="hidden" name="modelId" id="modelId" value="<?= (isset($modelModels->id_model)) ? $modelModels->id_model : 'new' ?>"/>
+                <input type="hidden" name="modelId" id="modelId" value="<?= (isset($modelModels->id_model) && is_numeric($modelModels->id_model)) ? $modelModels->id_model : 'new' ?>"/>
 
                 <?= $form->field($modelInv, 'inveSN', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3']])->textInput(['maxlength' => 10]) ?>
              <!-- $form->field($modelEquip, 'id_equip', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->dropDownList($equip,['id'=>'equipID','prompt'=>'\-\-'])->label('Equipamentos') 

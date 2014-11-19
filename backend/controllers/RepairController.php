@@ -73,6 +73,16 @@ class RepairController extends Controller
         ];
     }
 
+    public function actionSearch(){
+        $searchModel = new SearchRepair();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('search', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider
+        ]);
+    }
+
     /**
      * Lists all repair models.
      * @return mixed
@@ -97,9 +107,6 @@ class RepairController extends Controller
 
             $modelAccess = new accessories();
             $modelAccess = repair::getThisAccessAll($_GET['sd']);
-              /*print_r($modelAccess);
-            die();*/
-            
         }else{
             $modelRepair = null;
             $modelAccess = null;
@@ -300,6 +307,7 @@ class RepairController extends Controller
                             $modelBrands->id_brand = $modelRepair->addModelData($modelBrands,$brandArray);
                        }
 
+
                         $modelArray = [
                             'id_model' => NULL,
                             'isNewRecord' => TRUE,
@@ -309,6 +317,7 @@ class RepairController extends Controller
                             'status' => 1
                         ];
                         $modelModels->id_model = $modelRepair->addModelData($modelModels,$modelArray);
+                        
                     }
 
                     
@@ -436,7 +445,7 @@ class RepairController extends Controller
             ]);
         }
 
-        /*return $this->render('create', [
+        return $this->render('create', [
             'modelRepair' => $modelRepair,
             'modelClient' => $modelClient,
             'allStores' => $allStores,
@@ -451,8 +460,7 @@ class RepairController extends Controller
             'modelAccess' => $modelAccess,
             'modelRepairAccess' => $modelRepairAccess,
             'isOk' => false
-        ]); */
-        return $this->redirect(['index','sd'=>13,'a'=>'n']);       
+        ]);     
     }
 
     /**
@@ -561,7 +569,7 @@ class RepairController extends Controller
 
                     foreach($items as $i=>$item){
                         $item->attributes = $_POST['Parts'][$i];
-                        $valid = $item->validate(['partDesc','partCode','partPrice','partQuant']);
+                        $valid = $item->validate(['partDesc','partCode','partPrice','partQuant']) && $valid;
                     }
                 }
 
@@ -759,7 +767,7 @@ class RepairController extends Controller
                         }
 
                         //commit all saves
-                        $transaction->commit();
+                        echo $transaction->commit();
                         return $this->redirect(['index']);
                         //throw new Exception('STOP.');
                         

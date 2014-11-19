@@ -11,6 +11,7 @@ use Yii;
  * @property string $modelName
  * @property integer $brand_id
  * @property integer $equip_id
+ * @property integer $status
  *
  * @property Inventory[] $inventories
  * @property Brands $brand
@@ -32,9 +33,9 @@ class Models extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_model','modelName', 'brand_id', 'equip_id'], 'required'],
+            [['modelName', 'brand_id', 'equip_id'], 'required'],
             [['modelName'], 'string'],
-            [['brand_id', 'equip_id'], 'integer']
+            [['brand_id', 'equip_id', 'status'], 'integer']
         ];
     }
 
@@ -44,10 +45,11 @@ class Models extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_model' => 'Modelo',
+            'id_model' => 'Id Model',
             'modelName' => 'Model Name',
             'brand_id' => 'Brand ID',
             'equip_id' => 'Equip ID',
+            'status' => 'Status',
         ];
     }
 

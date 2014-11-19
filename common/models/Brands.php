@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $id_brand
  * @property string $brandName
+ * @property integer $status
  *
  * @property EquipBrand[] $equipBrands
  * @property Equipaments[] $equips
@@ -31,8 +32,9 @@ class Brands extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_brand' ,'brandName'], 'required'],
-            [['brandName'], 'string']
+            [['brandName'], 'required'],
+            [['brandName'], 'string'],
+            [['status'], 'integer']
         ];
     }
 
@@ -42,8 +44,9 @@ class Brands extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_brand' => 'Marca',
+            'id_brand' => 'Id Brand',
             'brandName' => 'Brand Name',
+            'status' => 'Status',
         ];
     }
 

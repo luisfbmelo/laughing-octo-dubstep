@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
 
 use common\models\Stores;
 use common\models\Status;
-
+use common\models\Repair;
 
 
 setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </a>
         </div>
         <div class="col-lg-2 col-xs-4 col-sm-4 col-md-4">
-            <a href="<?php echo Url::to(['repair/create']); ?>" class="topBtn">
+            <a href="<?php echo Url::to(['repair/search']); ?>" class="topBtn">
                 <div class="btnEl">
 
                     <?php //Html::a('Nova reparação', ['create'], ['class' => 'btn btn-success']) ?>
@@ -171,7 +171,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             </tr>
                             <tr>
                                 <th rowspan="3">Contacto</th>
-                                <th>Fixo</th>
+                                <th class="setTableTitle">Fixo</th>
                                 <th><?php echo $modelRepair[0]['cliConFix'];?></th>
                             </tr>
                             <tr>
@@ -192,6 +192,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
+                                <th>Equipamento</th>
                                 <th><?php echo $modelRepair[0]['equipDesc'];?></th>
                                 <th><?php echo $modelRepair[0]['brandName'];?></th>
                                 <th><?php echo $modelRepair[0]['modelName'];?></th>
@@ -200,16 +201,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
                             <tr>
                                 <th>Bateria</th>
-                                <?php if (isset($modelAccess[0]) && $modelAccess[0]['accessory']['accessType']==1){?>
+                                <?php //print_r($modelAccess[1]['accessory']['accessType']);
+                                $key = repair::accessType($modelAccess,'accessType',1);
+                                $key1 = repair::accessType($modelAccess,'accessType',2);
+                                $key2 = repair::accessType($modelAccess,'accessType',3);
+                                
+                                if (isset($modelAccess) && is_numeric($key)){?>
                                 <th><span class="glyphicon glyphicon-ok-sign"></span></th>
+                                <?php }else{ ?>
+                                <th></th>
                                 <?php } ?>
-                                <th colspan="2" rowspan="3">asd<?php echo $modelRepair[0]['obs'];?></th>
+                                <th colspan="3" rowspan="3">asd<?php echo $modelRepair[0]['obs'];?></th>
                             </tr>
                             
                             <tr>
                                 <th>Carregador</th>
                                 <th>
-                                    <?php if (isset($modelAccess[1]) && $modelAccess[1]['accessory']['accessType']==3){?>
+                                    <?php if (isset($modelAccess) && is_numeric($key2)){?>
                                     <span class="glyphicon glyphicon-ok-sign"></span>
                                     <?php } ?>
                                 </th>
@@ -217,15 +225,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
                             <tr>
                                 <th>Outro</th>
-                                <?php if (isset($modelAccess[2]) && $modelAccess[2]['accessory']['accessType']==2){?>
-                                <th><?php echo $modelAccess[2]['otherDesc'];?></th>
+                                <?php if (isset($modelAccess) && is_numeric($key1)){?>
+                                <th><?php echo $modelAccess[$key1]['otherDesc'];?></th>
+                                <?php }else{ ?>
+                                <th></th>
                                 <?php } ?>
                             </tr>
                             
                         </tbody>
                     </table>
 
-                    <table class="table table-bordered">
+                    <table class="table table-bordered repairDesc">
                         <thead>                    
                             <tr>
                                 <th>Avaria</th>
@@ -267,17 +277,18 @@ $this->params['breadcrumbs'][] = $this->title;
         <script>
            
                 //print showing div
-                printDiv("printEntry");
-                
+                printDiv("printEntry");      
+
                 function printDiv(divName) {
-                     var printContents = document.getElementById(divName).innerHTML;
-                     var originalContents = document.body.innerHTML;
+                    var printContents = document.getElementById(divName).innerHTML;
+                    var originalContents = document.body.innerHTML;
 
-                     document.body.innerHTML = printContents;
+                    document.body.innerHTML = printContents;
 
-                     window.print();
+                    window.print();
+                    setTimeout(function () { window.location.href = window.location.href.split('?')[0]; }, 100);
 
-                     document.body.innerHTML = originalContents;
+                    document.body.innerHTML = originalContents;
                 }
           
         </script>
