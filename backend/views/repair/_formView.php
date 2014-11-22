@@ -223,10 +223,10 @@ use kartik\datecontrol\DateControl;
                         <thead>
                             <tr class="listHeader">
                       
-                                <th>Código</th>
-                                <th>Quantidade</th>
-                                <th>Designação</th>
-                                <th>Preço</th>
+                                <td>Código</td>
+                                <td>Quantidade</td>
+                                <td>Designação</td>
+                                <td>Preço</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -234,10 +234,10 @@ use kartik\datecontrol\DateControl;
                                 foreach($items as $i=>$item){
                                 ?>
                                     <tr id="line_<?php echo $i;?>">
-                                        <th><?= $form->field($item,"[$i]partCode")->textInput(['readonly'=>'readonly'])->label(false) ?></th>
-                                        <th><?= $form->field($item,"[$i]partQuant")->textInput(['readonly'=>'readonly'])->label(false) ?></th>
-                                        <th><?= $form->field($item,"[$i]partDesc")->textInput(['readonly'=>'readonly'])->label(false) ?></th>
-                                        <th><?= $form->field($item,"[$i]partPrice")->textInput(['readonly'=>'readonly'])->label(false) ?><input type="hidden" id="parts-<?php echo $i; ?>-id_part" class="form-control" name="Parts[<?php echo $i; ?>][id_part]" value="<?php echo $item->id_part;?>"></th>
+                                        <td><?= $form->field($item,"[$i]partCode")->textInput(['readonly'=>'readonly'])->label(false) ?></td>
+                                        <td><?= $form->field($item,"[$i]partQuant")->textInput(['readonly'=>'readonly'])->label(false) ?></td>
+                                        <td><?= $form->field($item,"[$i]partDesc")->textInput(['readonly'=>'readonly'])->label(false) ?></td>
+                                        <td><?= $form->field($item,"[$i]partPrice")->textInput(['readonly'=>'readonly'])->label(false) ?><input type="hidden" id="parts-<?php echo $i; ?>-id_part" class="form-control" name="Parts[<?php echo $i; ?>][id_part]" value="<?php echo $item->id_part;?>"></td>
                                                                         
                                     </tr>
                             <?php } ?>

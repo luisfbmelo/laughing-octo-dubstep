@@ -197,11 +197,11 @@ use kartik\datecontrol\DateControl;
         <table class="partsInsert table table-striped table-bordered">
             <thead>
                 <tr class="listHeader">
-                    <th></th>
-                    <th>Código</th>
-                    <th>Quantidade</th>
-                    <th>Designação</th>
-                    <th>Preço</th>
+                    <td></td>
+                    <td>Código</td>
+                    <td>Quantidade</td>
+                    <td>Designação</td>
+                    <td>Preço</td>
                 </tr>
             </thead>
             <tbody>
@@ -210,20 +210,20 @@ use kartik\datecontrol\DateControl;
                     foreach($items as $i=>$item){
                     ?>
                         <tr id="line_<?php echo $i;?>">
-                            <th class="partRemove"><div class="glyphicon glyphicon-remove" id="part_<?= $item->id_part ?>"></div></th>
-                            <th><?= $form->field($item,"[$i]partCode")->textInput()->label(false) ?></th>
-                            <th><?= $form->field($item,"[$i]partQuant")->textInput()->label(false) ?></th>
-                            <th><?= $form->field($item,"[$i]partDesc")->textInput()->label(false) ?></th>
-                            <th><?= $form->field($item,"[$i]partPrice")->textInput()->label(false) ?><input type="hidden" id="parts-<?php echo $i; ?>-id_part" class="form-control" name="Parts[<?php echo $i; ?>][id_part]" value="<?php echo $item->id_part;?>"></th>
+                            <td class="partRemove"><div class="glyphicon glyphicon-remove" id="part_<?= $item->id_part ?>"></div></td>
+                            <td><?= $form->field($item,"[$i]partCode")->textInput()->label(false) ?></td>
+                            <td><?= $form->field($item,"[$i]partQuant")->textInput()->label(false) ?></td>
+                            <td><?= $form->field($item,"[$i]partDesc")->textInput()->label(false) ?></td>
+                            <td><?= $form->field($item,"[$i]partPrice")->textInput()->label(false) ?><input type="hidden" id="parts-<?php echo $i; ?>-id_part" class="form-control" name="Parts[<?php echo $i; ?>][id_part]" value="<?php echo $item->id_part;?>"></td>
                                                             
                         </tr>
                 <?php }}else{ ?>
                     <tr id="line_0">
-                        <th></th>
-                        <th><?= $form->field($modelParts,'[0]partCode')->textInput()->label(false) ?></th>
-                        <th><?= $form->field($modelParts,'[0]partQuant')->textInput()->label(false) ?></th>
-                        <th><?= $form->field($modelParts,'[0]partDesc')->textInput()->label(false) ?></th>
-                        <th><?= $form->field($modelParts,'[0]partPrice')->textInput()->label(false) ?></th>                            
+                        <td></td>
+                        <td><?= $form->field($modelParts,'[0]partCode')->textInput()->label(false) ?></td>
+                        <td><?= $form->field($modelParts,'[0]partQuant')->textInput()->label(false) ?></td>
+                        <td><?= $form->field($modelParts,'[0]partDesc')->textInput()->label(false) ?></td>
+                        <td><?= $form->field($modelParts,'[0]partPrice')->textInput()->label(false) ?></td>                            
                         
                     </tr>
                 <?php } ?>

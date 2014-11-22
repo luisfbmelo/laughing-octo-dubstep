@@ -525,19 +525,19 @@ a.topBtn {
       content: "€";
       padding-left: 5px; }
 
-.header table:first-of-type tbody tr > th,
-.client_data_table table:first-of-type tbody tr > th,
-.repair_details_table table:first-of-type tbody tr > th,
-.foote table:first-of-type tbody tr > th {
+.header table:first-of-type tbody tr > td,
+.client_data_table table:first-of-type tbody tr > td,
+.repair_details_table table:first-of-type tbody tr > td,
+.foote table:first-of-type tbody tr > td {
   font-size: 0.8em;
   font-weight: normal; }
-  .header table:first-of-type tbody tr > th:first-child, .header table:first-of-type tbody tr > th.setTableTitle,
-  .client_data_table table:first-of-type tbody tr > th:first-child,
-  .client_data_table table:first-of-type tbody tr > th.setTableTitle,
-  .repair_details_table table:first-of-type tbody tr > th:first-child,
-  .repair_details_table table:first-of-type tbody tr > th.setTableTitle,
-  .foote table:first-of-type tbody tr > th:first-child,
-  .foote table:first-of-type tbody tr > th.setTableTitle {
+  .header table:first-of-type tbody tr > td:first-child, .header table:first-of-type tbody tr > td.setTableTitle,
+  .client_data_table table:first-of-type tbody tr > td:first-child,
+  .client_data_table table:first-of-type tbody tr > td.setTableTitle,
+  .repair_details_table table:first-of-type tbody tr > td:first-child,
+  .repair_details_table table:first-of-type tbody tr > td.setTableTitle,
+  .foote table:first-of-type tbody tr > td:first-child,
+  .foote table:first-of-type tbody tr > td.setTableTitle {
     background: #414957 !important;
     color: white !important;
     width: 25%;
@@ -550,11 +550,11 @@ a.topBtn {
   text-align: center;
   vertical-align: middle; }
 
-.repairDesc thead tr > th {
+.repairDesc thead tr > td {
   font-size: 0.8em;
   background: #414957 !important;
   color: white !important; }
-.repairDesc tbody tr > th {
+.repairDesc tbody tr > td {
   font-size: 0.8em;
   font-weight: normal; }
 .repairDesc img {
@@ -568,16 +568,20 @@ a.topBtn {
     color: white !important;
     font-weight: normal;
     font-size: 0.87em; }
-  .partsInsert .listHeader th {
+  .partsInsert .listHeader td {
     font-size: 0.8em;
     border: none !important;
     text-align: center;
     background-color: #414957 !important;
     color: white !important; }
-.partsInsert tbody tr th {
+.partsInsert tbody tr td {
   font-size: 0.8em;
   font-weight: normal; }
-  .partsInsert tbody tr th.showTotal {
+
+.repairTotal table tbody tr > td {
+  font-size: 0.8em; }
+  .repairTotal table tbody tr > td.showTotal {
+    width: 70%;
     text-align: right;
     background-color: #414957 !important;
     color: white !important;
