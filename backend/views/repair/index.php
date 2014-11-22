@@ -308,7 +308,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //IF IS A CLOSING ELEMENT
             case "closeEl":?>
-            alksjdlkajsldkjaskld
                 <!-- visible-print-block -->
                 <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 visible-print-block" id="printEntry">
                     <div class="row header">

@@ -49,7 +49,8 @@ class SearchRepair extends Repair
         $query = Repair::find();
 
         //join other models tables
-        $query->joinWith('client');
+        $query->innerJoin('client','client.id_client = repair.client_id');
+        $query->with("client");
 
         $query->andFilterWhere([
             'repair.status' => 1
@@ -63,10 +64,19 @@ class SearchRepair extends Repair
             ],
         ]);
 
+        //add cliName attributes to sort
+        $dataProvider->sort->attributes['client'] = [
+            'asc' => ['client.cliName' => SORT_ASC],
+            'desc' => ['client.cliName' => SORT_DESC],
+        ];
+
+
         //for standard gridview with no search
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
+
+
 
         /*IF A SEARCH IS DONE*/
         $query->andFilterWhere([
