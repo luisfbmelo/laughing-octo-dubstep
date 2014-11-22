@@ -12,6 +12,9 @@ use common\models\Repair;
  */
 class SearchRepair extends Repair
 {
+    //set other modules tables
+    public $client;
+
     /**
      * @inheritdoc
      */
@@ -19,7 +22,8 @@ class SearchRepair extends Repair
     {
         return [
             [['id_repair', 'type_id', 'client_id', 'inve_id', 'status_id', 'user_id', 'date_close', 'store_id', 'priority', 'status'], 'integer'],
-            [['repair_desc', 'date_entry', 'obs'], 'safe'],
+            //add other modules tables to safe
+            [['repair_desc', 'date_entry', 'obs', 'client'], 'safe'],
             [['budget', 'maxBudget', 'total'], 'number'],
         ];
     }
@@ -44,40 +48,50 @@ class SearchRepair extends Repair
     {
         $query = Repair::find();
 
-        
+        //join other models tables
+        $query->joinWith('client');
 
         $query->andFilterWhere([
-            'id_repair' => $this->id_repair,
-            'type_id' => $this->type_id,
-            'client_id' => $this->client_id,
-            'inve_id' => $this->inve_id,
-            'status_id' => $this->status_id,
-            'user_id' => $this->user_id,
-            'date_entry' => $this->date_entry,
-            'date_close' => $this->date_close,
-            'store_id' => $this->store_id,
-            'priority' => $this->priority,
-            'budget' => $this->budget,
-            'maxBudget' => $this->maxBudget,
-            'total' => $this->total,
-            'status' => 1,
+            'repair.status' => 1
         ]);
-
-        $query->andFilterWhere(['like', 'repair_desc', $this->repair_desc])
-            ->andFilterWhere(['like', 'obs', $this->obs]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-           
             'sort'=> ['defaultOrder' => ['date_entry'=>SORT_DESC]],
             'pagination' => [
                 'pageSize' => 10,
             ],
         ]);
 
+        //for standard gridview with no search
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
+
+        /*IF A SEARCH IS DONE*/
+        $query->andFilterWhere([
+            'repair.id_repair' => $this->id_repair,
+            'repair.type_id' => $this->type_id,
+            'repair.client_id' => $this->client_id,
+            'repair.inve_id' => $this->inve_id,
+            'repair.status_id' => $this->status_id,
+            'repair.user_id' => $this->user_id,
+            //'repair.date_entry' => $this->date_entry,
+            'repair.date_close' => $this->date_close,
+            'repair.store_id' => $this->store_id,
+            'repair.priority' => $this->priority,
+            'repair.budget' => $this->budget,
+            'repair.maxBudget' => $this->maxBudget,
+            'repair.total' => $this->total,
+            'repair.status' => 1
+        ]);
+
+        $query->andFilterWhere(['like', 'repair_desc', $this->repair_desc])
+            ->andFilterWhere(['like', 'obs', $this->obs])
+            ->andFilterWhere(['like', 'date_entry', $this->date_entry]);
+
+        //search on other modules tables
+        $query->andFilterWhere(['like', 'client.cliName', $this->client]);
 
         return $dataProvider;
     }

@@ -10,6 +10,7 @@ use yii\helpers\ArrayHelper;
 use common\models\Stores;
 use common\models\Status;
 use common\models\Repair;
+use common\models\Client;
 
 
 setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
@@ -84,11 +85,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         ],
                         [
-                            'attribute' => 'client_id',
+                            //data from other modules tables
+                            'attribute' => 'client',
                             'label' => 'Cliente',
-                            'content' => function($model, $index, $dataColumn) {
+                            /*'content' => function($model, $index, $dataColumn) {
                                 return $model->getClientName()["cliName"];
-                            }
+                            }*/
+                            'value' => 'client.cliName'
 
                         ],
 
