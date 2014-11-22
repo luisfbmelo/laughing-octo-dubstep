@@ -137,7 +137,9 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
    <?php 
+
     if (isset($modelRepair) && !empty($modelRepair) && $modelRepair!=null){
+
         switch($requestType){
             //IF IS A NEW REPAIR
             case "elNew":
@@ -405,6 +407,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <th></th>
                                         <?php } ?>
                                     </tr>
+
+                                    <tr>
+                                        <th>Orçamento</th>
+                                        <th colspan="4" class="priceTag"><?php echo $modelRepair[0]['budget'];?></th>
+                                    </tr>
                                     
                                 </tbody>
                             </table>
@@ -425,27 +432,36 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                     </div>
 
-                    <div class="row foote">
-                        <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
-                        <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"> 
-                            <table class="table table-bordered">
-                                <tbody>
-                                     <tr>
-                                        <th>Entrada</th>
-                                        <th>Nº <?php echo $modelRepair[0]['id_repair'];?></th>
+                    <?php if (isset($items) && sizeof($items)>0){?>
+                    <table class="partsInsert table table-striped table-bordered">
+                        <thead>
+                            <tr class="listHeader">
+                                <th>Código</th>
+                                <th>Quantidade</th>
+                                <th>Designação</th>
+                                <th>Preço</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                             
+                                foreach($items as $i=>$item){
+                                ?>
+                                    <tr id="line_<?php echo $i;?>">
+                                        <th><?php echo $item['partCode'];?></th>
+                                        <th><?php echo $item['partQuant'];?></th>
+                                        <th><?php echo $item['partDesc'];?></th>
+                                        <th class="priceTag"><?php echo $item['partPrice'];?></th>
+                                                                        
                                     </tr>
-                                    <tr>
-                                        <th>Data</th>
-                                        <th><?php echo $modelRepair[0]['date_entry'];?></th>
-                                    </tr>
-                                    <tr>
-                                        <th>Local</th>
-                                        <th><?php echo $modelRepair[0]['storeDesc'];?></th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                            <?php }?>
+                                <tr>
+                                    <th colspan="3" class="showTotal">Total</th>
+                                    <th class="priceTag"><?php echo $modelRepair[0]['total'];?></th>
+                                </tr>                            
+                        </tbody>
+                    </table>
+                    <?php } ?>
                 </div>
 
                 <script>

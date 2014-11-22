@@ -405,8 +405,7 @@ From
   inventory On repair.inve_id = inventory.id_inve Inner Join
   equipaments On inventory.equip_id = equipaments.id_equip Inner Join
   brands On inventory.brand_id = brands.id_brand Inner Join
-  models On models.equip_id = equipaments.id_equip And models.brand_id =
-    brands.id_brand And inventory.model_id = models.id_model Inner Join
+  models On inventory.model_id = models.id_model Inner Join
   repair_accessory On repair_accessory.repair_id = repair.id_repair Inner Join
   accessories On repair_accessory.accessory_id = accessories.id_accessories
             WHERE repair.id_repair=:repairId');

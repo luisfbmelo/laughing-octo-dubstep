@@ -194,41 +194,41 @@ use kartik\datecontrol\DateControl;
             </div>
         </div>
 
-            <table class="partsInsert table table-striped table-bordered">
-                <thead>
-                    <tr class="listHeader">
-                        <th></th>
-                        <th>Código</th>
-                        <th>Quantidade</th>
-                        <th>Designação</th>
-                        <th>Preço</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php 
-                    if (isset($items) && sizeof($items)>0){ 
-                        foreach($items as $i=>$item){
-                        ?>
-                            <tr id="line_<?php echo $i;?>">
-                                <th class="partRemove"><div class="glyphicon glyphicon-remove" id="part_<?= $item->id_part ?>"></div></th>
-                                <th><?= $form->field($item,"[$i]partCode")->textInput()->label(false) ?></th>
-                                <th><?= $form->field($item,"[$i]partQuant")->textInput()->label(false) ?></th>
-                                <th><?= $form->field($item,"[$i]partDesc")->textInput()->label(false) ?></th>
-                                <th><?= $form->field($item,"[$i]partPrice")->textInput()->label(false) ?><input type="hidden" id="parts-<?php echo $i; ?>-id_part" class="form-control" name="Parts[<?php echo $i; ?>][id_part]" value="<?php echo $item->id_part;?>"></th>
-                                                                
-                            </tr>
-                    <?php }}else{ ?>
-                        <tr id="line_0">
-                            <th></th>
-                            <th><?= $form->field($modelParts,'[0]partCode')->textInput()->label(false) ?></th>
-                            <th><?= $form->field($modelParts,'[0]partQuant')->textInput()->label(false) ?></th>
-                            <th><?= $form->field($modelParts,'[0]partDesc')->textInput()->label(false) ?></th>
-                            <th><?= $form->field($modelParts,'[0]partPrice')->textInput()->label(false) ?></th>                            
-                            
+        <table class="partsInsert table table-striped table-bordered">
+            <thead>
+                <tr class="listHeader">
+                    <th></th>
+                    <th>Código</th>
+                    <th>Quantidade</th>
+                    <th>Designação</th>
+                    <th>Preço</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                if (isset($items) && sizeof($items)>0){ 
+                    foreach($items as $i=>$item){
+                    ?>
+                        <tr id="line_<?php echo $i;?>">
+                            <th class="partRemove"><div class="glyphicon glyphicon-remove" id="part_<?= $item->id_part ?>"></div></th>
+                            <th><?= $form->field($item,"[$i]partCode")->textInput()->label(false) ?></th>
+                            <th><?= $form->field($item,"[$i]partQuant")->textInput()->label(false) ?></th>
+                            <th><?= $form->field($item,"[$i]partDesc")->textInput()->label(false) ?></th>
+                            <th><?= $form->field($item,"[$i]partPrice")->textInput()->label(false) ?><input type="hidden" id="parts-<?php echo $i; ?>-id_part" class="form-control" name="Parts[<?php echo $i; ?>][id_part]" value="<?php echo $item->id_part;?>"></th>
+                                                            
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+                <?php }}else{ ?>
+                    <tr id="line_0">
+                        <th></th>
+                        <th><?= $form->field($modelParts,'[0]partCode')->textInput()->label(false) ?></th>
+                        <th><?= $form->field($modelParts,'[0]partQuant')->textInput()->label(false) ?></th>
+                        <th><?= $form->field($modelParts,'[0]partDesc')->textInput()->label(false) ?></th>
+                        <th><?= $form->field($modelParts,'[0]partPrice')->textInput()->label(false) ?></th>                            
+                        
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
 
         <div class="row addButtonContainer">
             <div class="addButton btn btn-info">

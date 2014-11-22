@@ -1,3 +1,4 @@
+@charset "CP850";
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
 @import url(http://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic);
 /*Fonts*/
@@ -517,6 +518,12 @@ a.topBtn {
 #printEntry * {
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact; }
+  #printEntry * .priceTag {
+    text-align: center;
+    font-weight: bold !important; }
+    #printEntry * .priceTag:after {
+      content: "€";
+      padding-left: 5px; }
 
 .header table:first-of-type tbody tr > th,
 .client_data_table table:first-of-type tbody tr > th,
@@ -553,6 +560,28 @@ a.topBtn {
 .repairDesc img {
   text-align: center;
   vertical-align: middle; }
+
+.partsInsert .listHeader {
+  background-color: #414957 !important;
+  color: white !important; }
+  .partsInsert .listHeader a {
+    color: white !important;
+    font-weight: normal;
+    font-size: 0.87em; }
+  .partsInsert .listHeader th {
+    font-size: 0.8em;
+    border: none !important;
+    text-align: center;
+    background-color: #414957 !important;
+    color: white !important; }
+.partsInsert tbody tr th {
+  font-size: 0.8em;
+  font-weight: normal; }
+  .partsInsert tbody tr th.showTotal {
+    text-align: right;
+    background-color: #414957 !important;
+    color: white !important;
+    font-weight: bold !important; }
 
 /*BUTTONS*/
 .btn {

@@ -90,13 +90,16 @@ class RepairController extends Controller
     public function actionIndex()
     {
         if (isset($_GET['sd']) && !empty($_GET['sd']) && is_numeric($_GET['sd']) && isset($_GET['a']) && !empty($_GET['a'])){
+            $modelRepair = new repair();
             switch($_GET['a']){
                 case 'n':
                     $requestType = 'newEl';
+                    $items = null;
                 break;
 
                 case 'c':
                     $requestType = 'closeEl';
+                    $items = $modelRepair->getThisParts($_GET['sd']);
                 break;
 
                 default:
@@ -104,7 +107,7 @@ class RepairController extends Controller
                 break;
             }
 
-            $modelRepair = new repair();
+            
             $modelRepair = $modelRepair->getAllData($_GET['sd']);
           /*  print_r($modelRepair[0]);
             die();*/
@@ -115,6 +118,7 @@ class RepairController extends Controller
             $modelRepair = null;
             $modelAccess = null;
             $requestType = null;
+            $items = null;
         }
         /*$dataProvider = new ActiveDataProvider([
             'query' => repair::find()->where(["status"=>1]),
@@ -136,7 +140,8 @@ class RepairController extends Controller
             'dataProvider' => $dataProvider,
             'modelRepair' => $modelRepair,
             'modelAccess' => $modelAccess,
-            'requestType' => $requestType
+            'requestType' => $requestType,
+            'items' => $items
         ]);
     }
 

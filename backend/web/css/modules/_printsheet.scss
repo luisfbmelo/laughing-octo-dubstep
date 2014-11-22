@@ -7,6 +7,16 @@
 #printEntry *{
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+
+    .priceTag{
+    	text-align:center;
+    	font-weight:bold!important;
+
+	    &:after{
+	    	content: "€";
+	    	padding-left:5px;
+	    }
+    }
 }
 
 .header,
@@ -60,3 +70,39 @@
 	}
 }
 
+.partsInsert{
+	.listHeader{
+		background-color:$dark-blue-bg!important;
+		color:white!important;
+
+		a{
+			color:white!important;
+			font-weight:normal;
+			font-size:0.87em;
+		}	
+
+		th{
+			font-size:0.8em;
+			border:none!important;
+			text-align:center;
+			background-color:$dark-blue-bg!important;
+			color:white!important;
+		}	
+	}
+
+	tbody{
+		tr{
+			th{
+				font-size:0.8em;
+				font-weight:normal;
+
+				&.showTotal{
+					text-align:right;
+					background-color:$dark-blue-bg!important;
+					color:white!important;
+					font-weight:bold!important;
+				}
+			}
+		}
+	}
+}
