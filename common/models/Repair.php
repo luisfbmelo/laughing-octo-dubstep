@@ -187,6 +187,10 @@ class Repair extends \yii\db\ActiveRecord
         return Stores::find()->joinWith("repairs")->where(['stores.id_store'=>$this->store_id])->asArray()->one();
     }
 
+    public function getClientName(){
+        return Client::find()->joinWith("repairs")->where(['client.id_client'=>$this->client_id])->asArray()->one();
+    }
+
     /**
      * @param string the name of the attribute to be validated
      * @param array options specified in the validation rule

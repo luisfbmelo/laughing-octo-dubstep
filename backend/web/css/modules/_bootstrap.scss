@@ -1,0 +1,37 @@
+/*BUTTONS*/
+.btn{
+	@include border-radius(0);
+}
+
+/*VIEW FORM*/
+.viewField{
+	textarea:hover, 
+	input:hover, 
+	textarea:active, 
+	input:active, 
+	textarea:focus, 
+	input:focus,
+	button:focus,
+	button:active,
+	button:hover,
+	select:focus,
+	select:active,
+	select:hover,
+	{
+	    outline:0px !important;
+	    -webkit-appearance:none!important;
+	    box-shadow:none!important;
+	    border-color: #cccccc!important;
+	}
+
+	.form-control[disabled],
+	.form-control[readonly], 
+	fieldset[disabled] .form-control{
+		color:#888;
+		background-color:#eee!important;
+		cursor:default!important;
+	}
+
+
+}
+

@@ -511,6 +511,9 @@ a.topBtn {
 * html .ui-autocomplete {
   height: 250px; }
 
+.printBtn a {
+  display: block; }
+
 #printEntry * {
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact; }
@@ -550,3 +553,35 @@ a.topBtn {
 .repairDesc img {
   text-align: center;
   vertical-align: middle; }
+
+/*BUTTONS*/
+.btn {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0; }
+
+/*VIEW FORM*/
+.viewField textarea:hover,
+.viewField input:hover,
+.viewField textarea:active,
+.viewField input:active,
+.viewField textarea:focus,
+.viewField input:focus,
+.viewField button:focus,
+.viewField button:active,
+.viewField button:hover,
+.viewField select:focus,
+.viewField select:active,
+.viewField select:hover {
+  outline: 0px !important;
+  -webkit-appearance: none !important;
+  box-shadow: none !important;
+  border-color: #cccccc !important; }
+.viewField .form-control[disabled],
+.viewField .form-control[readonly],
+.viewField fieldset[disabled] .form-control {
+  color: #888;
+  background-color: #eeeeee !important;
+  cursor: default !important; }

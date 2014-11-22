@@ -44,18 +44,7 @@ class SearchRepair extends Repair
     {
         $query = Repair::find();
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-           
-            'sort'=> ['defaultOrder' => ['date_entry'=>SORT_DESC]],
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-        ]);
-
-        if (!($this->load($params) && $this->validate())) {
-            return $dataProvider;
-        }
+        
 
         $query->andFilterWhere([
             'id_repair' => $this->id_repair,
@@ -76,6 +65,19 @@ class SearchRepair extends Repair
 
         $query->andFilterWhere(['like', 'repair_desc', $this->repair_desc])
             ->andFilterWhere(['like', 'obs', $this->obs]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+           
+            'sort'=> ['defaultOrder' => ['date_entry'=>SORT_DESC]],
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+
+        if (!($this->load($params) && $this->validate())) {
+            return $dataProvider;
+        }
 
         return $dataProvider;
     }

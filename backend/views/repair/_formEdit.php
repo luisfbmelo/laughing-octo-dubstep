@@ -240,8 +240,8 @@ use kartik\datecontrol\DateControl;
 
         <div class="row">
             <div class="form-group col-lg-12 col-xs-12 col-sm-12 col-md-12 pageButtons">
-                <?= Html::submitButton($modelRepair->isNewRecord ? 'Criar' : 'Atualizar', ['class' => $modelRepair->isNewRecord ? 'btn btn-success col-lg-1' : 'btn btn-primary col-lg-1','name'=>'submit']) ?>
-                <?= Html::submitButton('Cancelar',array('class'=>'btn btn-danger col-lg-1','name'=>'cancelar','id'=>'cancelar')); ?>
+                <?= Html::submitButton($modelRepair->isNewRecord ? 'Criar' : '<span class="glyphicon glyphicon-ok"></span>', ['class' => $modelRepair->isNewRecord ? 'btn btn-success col-lg-1' : 'btn btn-success col-lg-1','name'=>'submit']) ?>
+                <?= Html::submitButton('<span class="glyphicon glyphicon-remove"></span>',array('class'=>'btn btn-danger col-lg-1','name'=>'cancelar','id'=>'cancelar')); ?>
             </div>
         </div>  
             

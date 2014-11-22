@@ -95,6 +95,10 @@ class RepairController extends Controller
                     $requestType = 'newEl';
                 break;
 
+                case 'c':
+                    $requestType = 'closeEl';
+                break;
+
                 default:
                     $requestType = null;
                 break;
@@ -110,6 +114,7 @@ class RepairController extends Controller
         }else{
             $modelRepair = null;
             $modelAccess = null;
+            $requestType = null;
         }
         /*$dataProvider = new ActiveDataProvider([
             'query' => repair::find()->where(["status"=>1]),
@@ -130,7 +135,8 @@ class RepairController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'modelRepair' => $modelRepair,
-            'modelAccess' => $modelAccess
+            'modelAccess' => $modelAccess,
+            'requestType' => $requestType
         ]);
     }
 
@@ -141,9 +147,99 @@ class RepairController extends Controller
      */
     public function actionView($id)
     {
+        $isOk = [];
+        $items = array();
+
+        /*START MODELS*/
+        $modelRepair = $this->findModel($id);
+        $modelClient = new client();
+        $modelStores = new stores();
+        $modelBrands = new brands();
+        $modelEquip = new equipaments();
+        $modelModels = new models();
+        $modelTypes = new repairtype();
+        $modelInv = inventory::findOne($modelRepair->inve_id);
+        $modelAccess = new accessories();
+        $modelRepairAccess = new repairaccessory();
+        $modelEquipBrand = new equipbrand();
+        $modelStatus = new status();
+        $modelParts = new parts();     
+        $modelPartsRepair = new repairparts();     
+        
+
+        /*GET EXISTING DATA*/
+        $allStores=ArrayHelper::map($modelStores->getAllStores(), 'id_store', 'storeDesc');
+
+        $allTypes = ArrayHelper::map($modelTypes->getAllTypes(), 'id_type', 'typeDesc');
+
+        $allAccess = ArrayHelper::map($modelAccess->getAllAccess(), 'id_accessories', 'accessDesc');
+
+        $allStatus = ArrayHelper::map($modelStatus->getAllStatus(),'id_status','statusDesc');
+
+        /*SET DEFAULT DATA*/
+        //stores
+        $modelStores = $modelStores->findOne($modelRepair->store_id);
+        //client
+        $modelClient = $modelClient->findOne($modelRepair->client_id);
+
+        //accessories
+        $modelAccess = $modelRepair->getThisAccessAll($modelRepair->id_repair);
+        $modelRepairAccess->otherDesc = $modelRepair->getThisOtherDesc($modelRepair->id_repair);
+
+        //repair type
+        $modelTypes = $modelTypes->findOne($modelRepair->type_id);
+
+        //inventory
+        $modelInv = $modelInv->findOne($modelRepair->inve_id);
+        $modelEquip = $modelEquip->findOne($modelInv->equip_id);
+        $modelBrands = $modelBrands->findOne($modelInv->brand_id);
+        $modelModels = $modelModels->findOne($modelInv->model_id);
+
+        //status
+        $modelStatus = $modelStatus->findOne($modelRepair->status_id);
+
+        //parts
+        $items = $modelRepair->getThisParts($modelRepair->id_repair);
+
+        $modelRepair->warranty_date = strtotime($modelRepair->warranty_date);
+
+
+        switch($modelRepair->priority){
+            case 1:
+                $modelRepair->priority = "Alta";
+            break;
+            case 2:
+                $modelRepair->priority = "Média";
+            break;
+            case 3:
+                $modelRepair->priority = "Baixa";
+            break;
+        }
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'modelRepair' => $modelRepair,
+            'modelClient' => $modelClient,
+            'allStores' => $allStores,
+            'allTypes' => $allTypes,
+            'allAccess' => $allAccess,
+            'allStatus' =>$allStatus,
+            'modelStores' => $modelStores,
+            'modelBrands' => $modelBrands,
+            'modelEquip' => $modelEquip,
+            'modelModels' => $modelModels,
+            'modelTypes' => $modelTypes,
+            'modelInv' => $modelInv,
+            'modelAccess' => $modelAccess,
+            'modelRepairAccess' => $modelRepairAccess,
+            'modelStatus' => $modelStatus,
+            'modelParts' => $modelParts,
+            'isOk' => false,
+            'items' => $items
         ]);
+
+        /*return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);*/
     }
 
     /**
@@ -914,6 +1010,16 @@ class RepairController extends Controller
         }else{
             echo json_encode("error");
         }
+    }
+
+    public function actionSetdeliver($id)
+    {
+
+        $obj = $this->findModel($id);
+        $obj->status_id = 5;
+        $obj->save();
+        return $this->redirect(['index','sd'=>$id,'a'=>'c']);
+    
     }
 
     /**

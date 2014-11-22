@@ -184,7 +184,7 @@ AppAsset::register($this);
         <div class="overlay"></div>
         <div class="statusBox ajaxMes">
             <div class="statusMessage flash-success">
-                Projeto eliminado com sucesso.
+                Elemento eliminado com sucesso.
             </div>
         </div> 
         <!--END ACTION MESSAGES-->        
