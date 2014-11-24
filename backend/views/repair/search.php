@@ -26,7 +26,18 @@ $this->params['breadcrumbs'][] = 'Pesquisar';
                 
                  $this->render('_search', [
                     'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider
+                    'dataProvider' => $dataProvider,
+                    'modelRepair' => $modelRepair,
+                    'modelClient' => $modelClient,
+                    'stores' => $allStores,
+                    'types' => $allTypes,
+                    'statusAll' => $allStatus,
+                    'modelStores' => $modelStores,
+                    'modelBrands' => $modelBrands,
+                    'modelEquip' => $modelEquip,
+                    'modelModels' => $modelModels,
+                    'modelTypes' => $modelTypes,
+                    'modelInv' => $modelInv
                 ]) ?>
 
             </div>

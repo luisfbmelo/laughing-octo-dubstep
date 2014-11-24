@@ -56,7 +56,7 @@ class Repair extends \yii\db\ActiveRecord
             [['type_id', 'client_id', 'inve_id', 'status_id', 'user_id', 'repair_desc', 'date_entry', 'store_id', 'priority'], 'required'],
             [['type_id', 'client_id', 'inve_id', 'user_id', 'store_id', 'priority','status_id'], 'integer'],
             [['repair_desc','obs'], 'string'],
-            [['date_entry', 'date_close','warranty_date'], 'safe'],
+            [['date_entry', 'date_close', 'warranty_date'], 'safe'],
             [['budget', 'maxBudget', 'total'], 'number']
         ];
     }

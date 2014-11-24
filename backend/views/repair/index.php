@@ -62,6 +62,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     <span class="glyphicon glyphicon-trash"></span>
                 </div>
 
+                <?php if (isset($_GET['SearchRepair'])){?>
+                    <a href="<?php echo Yii::$app->request->baseUrl;?>/repair/index" class="btn btn-default clearBtn">
+                        <span>Limpar</span>
+                    </a>
+                <?php } ?>
+
                 <?= 
 
                 GridView::widget([

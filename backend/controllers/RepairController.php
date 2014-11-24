@@ -74,12 +74,45 @@ class RepairController extends Controller
     }
 
     public function actionSearch(){
+        /*START MODELS*/
+        $modelRepair = new repair();
+        $modelClient = new client();
+        $modelStores = new stores();
+        $modelBrands = new brands();
+        $modelEquip = new equipaments();
+        $modelModels = new models();
+        $modelTypes = new repairtype();
+        $modelInv = new inventory();
+        $modelAccess = new accessories();
+        $modelRepairAccess = new repairaccessory();
+        $modelEquipBrand = new equipbrand();
+        $modelStatus = new status();        
+
+        /*GET EXISTING DATA*/
+        $allStores=ArrayHelper::map($modelStores->getAllStores(), 'id_store', 'storeDesc');
+        $allTypes = ArrayHelper::map($modelTypes->getAllTypes(), 'id_type', 'typeDesc');
+        $allStatus = ArrayHelper::map($modelStatus->getAllStatus(),'id_status','statusDesc');
+
+
+        /*print_r(Yii::$app->request->queryParams);
+        die();*/
         $searchModel = new SearchRepair();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('search', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider
+            'dataProvider' => $dataProvider,
+            'modelRepair' => $modelRepair,
+            'modelClient' => $modelClient,
+            'allStores' => $allStores,
+            'allTypes' => $allTypes,
+            'allStatus' => $allStatus,
+            'modelStores' => $modelStores,
+            'modelBrands' => $modelBrands,
+            'modelEquip' => $modelEquip,
+            'modelModels' => $modelModels,
+            'modelTypes' => $modelTypes,
+            'modelInv' => $modelInv
         ]);
     }
 
@@ -89,6 +122,19 @@ class RepairController extends Controller
      */
     public function actionIndex()
     {
+        /*$dataProvider = new ActiveDataProvider([
+            'query' => repair::find()->where(["status"=>1]),
+            'sort'=> ['defaultOrder' => ['date_entry'=>SORT_DESC]],
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);*/
+
+        //RESOLVE FOR PRINTING
         if (isset($_GET['sd']) && !empty($_GET['sd']) && is_numeric($_GET['sd']) && isset($_GET['a']) && !empty($_GET['a'])){
             $modelRepair = new repair();
             switch($_GET['a']){
@@ -109,9 +155,6 @@ class RepairController extends Controller
 
             
             $modelRepair = $modelRepair->getAllData($_GET['sd']);
-          /*  print_r($modelRepair[0]);
-            die();*/
-
             $modelAccess = new accessories();
             $modelAccess = repair::getThisAccessAll($_GET['sd']);
         }else{
@@ -120,18 +163,7 @@ class RepairController extends Controller
             $requestType = null;
             $items = null;
         }
-        /*$dataProvider = new ActiveDataProvider([
-            'query' => repair::find()->where(["status"=>1]),
-            'sort'=> ['defaultOrder' => ['date_entry'=>SORT_DESC]],
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-        ]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);*/
-
+        
         $searchModel = new SearchRepair();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -705,8 +737,9 @@ class RepairController extends Controller
                                 'status' => 1
                             ];
                             $modelBrands->id_brand = $modelRepair->addModelData($modelBrands,$brandArray);
-                       }
-
+                        }
+                        
+                        
                         $modelArray = [
                             'id_model' => NULL,
                             'isNewRecord' => TRUE,
@@ -1022,6 +1055,7 @@ class RepairController extends Controller
 
         $obj = $this->findModel($id);
         $obj->status_id = 5;
+        $obj->date_close = date('Y-m-d H:i:s');
         $obj->save();
         return $this->redirect(['index','sd'=>$id,'a'=>'c']);
     

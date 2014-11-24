@@ -54,6 +54,7 @@ $this->params['breadcrumbs'][] = 'Detalhes';
     <?php
     if (isset($_GET['sd']) && !empty($_GET['sd']) && is_numeric($_GET['sd']) && isset($_GET['a']) && !empty($_GET['a']) && $_GET['a']=="c"){?>
         <!-- visible-print-block -->
+        <div class="row">
         <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12" id="printEntry">
             <div class="row header">
                 <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
@@ -61,16 +62,16 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th>Entrada</th>
-                                <th>Nº <?php echo $modelRepair->id_repair;?></th>
+                                <td>Entrada</td>
+                                <td>Nº <?php echo $modelRepair->id_repair;?></td>
                             </tr>
                             <tr>
-                                <th>Data</th>
-                                <th><?php echo $modelRepair->date_entry;?></th>
+                                <td>Data</td>
+                                <td><?php echo $modelRepair->date_entry;?></td>
                             </tr>
                             <tr>
-                                <th>Local</th>
-                                <th><?php echo $modelStores->storeDesc;?></th>
+                                <td>Local</td>
+                                <td><?php echo $modelStores->storeDesc;?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -82,25 +83,25 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th>Nome</th>
-                                <th colspan="2"><?php echo $modelClient->cliName;?></th>
+                                <td>Nome</td>
+                                <td colspan="2"><?php echo $modelClient->cliName;?></td>
                             </tr>
                             <tr>
-                                <th>Morada</th>
-                                <th colspan="2"><?php echo $modelClient->cliAdress;?></th>
+                                <td>Morada</td>
+                                <td colspan="2"><?php echo $modelClient->cliAdress;?></td>
                             </tr>
                             <tr>
-                                <th rowspan="3">Contacto</th>
-                                <th class="setTableTitle">Fixo</th>
-                                <th><?php echo $modelClient->cliConFix;?></th>
+                                <td rowspan="3">Contacto</td>
+                                <td class="setTableTitle">Fixo</td>
+                                <td><?php echo $modelClient->cliConFix;?></td>
                             </tr>
                             <tr>
-                                <th>Móvel1</th>
-                                <th><?php echo $modelClient->cliConMov1;?></th>
+                                <td>Móvel1</td>
+                                <td><?php echo $modelClient->cliConMov1;?></td>
                             </tr>
                             <tr>
-                                <th>Móvel 2</th>
-                                <th><?php echo $modelClient->cliConMov2;?></th>
+                                <td>Móvel 2</td>
+                                <td><?php echo $modelClient->cliConMov2;?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -112,43 +113,43 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <th>Equipamento</th>
-                                <th><?php echo $modelEquip->equipDesc;?></th>
-                                <th><?php echo $modelBrands->brandName;?></th>
-                                <th><?php echo $modelModels->modelName;?></th>
-                                <th><?php echo $modelInv->inveSN;?></th>
+                                <td>Equipamento</td>
+                                <td><?php echo $modelEquip->equipDesc;?></td>
+                                <td><?php echo $modelBrands->brandName;?></td>
+                                <td><?php echo $modelModels->modelName;?></td>
+                                <td><?php echo $modelInv->inveSN;?></td>
                             </tr>
 
                             <tr>
-                                <th>Bateria</th>
+                                <td>Bateria</td>
                                 <?php //print_r($modelAccess[1]['accessory']['accessType']);
                                 $key = repair::accessType($modelAccess,'accessType',1);
                                 $key1 = repair::accessType($modelAccess,'accessType',2);
                                 $key2 = repair::accessType($modelAccess,'accessType',3);
                                 
                                 if (isset($modelAccess) && is_numeric($key)){?>
-                                <th><span class="glyphicon glyphicon-ok-sign"></span></th>
+                                <td><span class="glyphicon glyphicon-ok-sign"></span></td>
                                 <?php }else{ ?>
-                                <th></th>
+                                <td></td>
                                 <?php } ?>
-                                <th colspan="3" rowspan="3">asd<?php echo $modelRepair->obs;?></th>
+                                <td colspan="3" rowspan="3">asd<?php echo $modelRepair->obs;?></td>
                             </tr>
                             
                             <tr>
-                                <th>Carregador</th>
-                                <th>
+                                <td>Carregador</td>
+                                <td>
                                     <?php if (isset($modelAccess) && is_numeric($key2)){?>
                                     <span class="glyphicon glyphicon-ok-sign"></span>
                                     <?php } ?>
-                                </th>
+                                </td>
                             </tr>
 
                             <tr>
-                                <th>Outro</th>
+                                <td>Outro</td>
                                 <?php if (isset($modelAccess) && is_numeric($key1)){?>
-                                <th><?php echo $modelAccess[$key1]['otherDesc'];?></th>
+                                <td><?php echo $modelAccess[$key1]['otherDesc'];?></td>
                                 <?php }else{ ?>
-                                <th></th>
+                                <td></td>
                                 <?php } ?>
                             </tr>
                             
@@ -158,13 +159,13 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                     <table class="table table-bordered repairDesc">
                         <thead>                    
                             <tr>
-                                <th>Avaria</th>
+                                <td>Avaria</td>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr>
-                                <th><?php echo $modelRepair->repair_desc;?></th>
+                                <td><?php echo $modelRepair->repair_desc;?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -177,16 +178,16 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                     <table class="table table-bordered">
                         <tbody>
                              <tr>
-                                <th>Entrada</th>
-                                <th>Nº <?php echo $modelRepair->id_repair;?></th>
+                                <td>Entrada</td>
+                                <td>Nº <?php echo $modelRepair->id_repair;?></td>
                             </tr>
                             <tr>
-                                <th>Data</th>
-                                <th><?php echo $modelRepair->date_entry;?></th>
+                                <td>Data</td>
+                                <td><?php echo $modelRepair->date_entry;?></td>
                             </tr>
                             <tr>
-                                <th>Local</th>
-                                <th><?php echo $modelStores->storeDesc;?></th>
+                                <td>Local</td>
+                                <td><?php echo $modelStores->storeDesc;?></td>
                             </tr>
                         </tbody>
                     </table>
@@ -212,5 +213,6 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                 }
           
         </script>
+        </div>
     <?php } ?>
 </div>

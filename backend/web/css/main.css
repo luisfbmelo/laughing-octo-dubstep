@@ -338,6 +338,11 @@ a.topBtn {
 .deleteBtn {
   margin-bottom: 15px; }
 
+.clearBtn {
+  display: inline-block;
+  margin-bottom: 15px;
+  float: right; }
+
 .partRemove {
   position: relative; }
   .partRemove div {
