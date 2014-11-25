@@ -47,11 +47,11 @@ class Parts extends \yii\db\ActiveRecord
     {
         return [
             'id_part' => 'Id Part',
-            'partDesc' => 'Part Desc',
-            'partCode' => 'Part Code',
-            'partPrice' => 'Part Price',
+            'partDesc' => 'Descrição',
+            'partCode' => 'Código',
+            'partPrice' => 'Preço',
             'status' => 'Status',
-            'partQuant' => 'Part Quant',
+            'partQuant' => 'Quantidade',
         ];
     }
 

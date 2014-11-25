@@ -45,7 +45,7 @@ class Brands extends \yii\db\ActiveRecord
     {
         return [
             'id_brand' => 'Id Brand',
-            'brandName' => 'Brand Name',
+            'brandName' => 'Marcas',
             'status' => 'Status',
         ];
     }

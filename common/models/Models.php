@@ -46,7 +46,7 @@ class Models extends \yii\db\ActiveRecord
     {
         return [
             'id_model' => 'Id Model',
-            'modelName' => 'Model Name',
+            'modelName' => 'Modelos',
             'brand_id' => 'Brand ID',
             'equip_id' => 'Equip ID',
             'status' => 'Status',

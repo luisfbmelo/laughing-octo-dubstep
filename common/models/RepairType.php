@@ -41,7 +41,7 @@ class RepairType extends \yii\db\ActiveRecord
     {
         return [
             'id_type' => 'Tipo de reparação',
-            'typeDesc' => 'Type Desc',
+            'typeDesc' => 'Tipo de reparação',
             'extraData' => 'Type extra data',
         ];
     }

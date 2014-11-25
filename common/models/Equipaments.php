@@ -43,7 +43,7 @@ class Equipaments extends \yii\db\ActiveRecord
     {
         return [
             'id_equip' => 'Equipamento',
-            'equipDesc' => 'Equip Desc',
+            'equipDesc' => 'Equipamentos',
         ];
     }
 

@@ -15,4 +15,5 @@ return [
             'class' => '\kartik\datecontrol\Module'
         ],
     ],
+    'language' => 'pt',
 ];
