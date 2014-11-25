@@ -238,7 +238,7 @@ class RepairController extends Controller
         //parts
         $items = $modelRepair->getThisParts($modelRepair->id_repair);
 
-        $modelRepair->warranty_date = strtotime($modelRepair->warranty_date);
+        //$modelRepair->warranty_date = strtotime($modelRepair->warranty_date);
 
 
         switch($modelRepair->priority){
@@ -495,7 +495,7 @@ class RepairController extends Controller
                     if (Yii::$app->request->post('Repair')['warranty_date']==""){
                         $modelRepair->warranty_date = NULL;
                     }else{
-                        $modelRepair->warranty_date = date('Y-m-d', Yii::$app->request->post('Repair')['warranty_date']);
+                        //$modelRepair->warranty_date = date('Y-m-d', Yii::$app->request->post('Repair')['warranty_date']);
                         $modelRepair->maxBudget = NULL;
                     }
 
@@ -738,8 +738,8 @@ class RepairController extends Controller
                             ];
                             $modelBrands->id_brand = $modelRepair->addModelData($modelBrands,$brandArray);
                         }
-                        
-                        
+
+
                         $modelArray = [
                             'id_model' => NULL,
                             'isNewRecord' => TRUE,
@@ -792,7 +792,7 @@ class RepairController extends Controller
                     if (Yii::$app->request->post('Repair')['warranty_date']==""){
                         $modelRepair->warranty_date = NULL;
                     }else{
-                        $modelRepair->warranty_date = date('Y-m-d', Yii::$app->request->post('Repair')['warranty_date']);
+                        //$modelRepair->warranty_date = date('Y-m-d', Yii::$app->request->post('Repair')['warranty_date']);
                         $modelRepair->maxBudget = NULL;
                     }
 
@@ -989,7 +989,7 @@ class RepairController extends Controller
             //parts
             $items = $modelRepair->getThisParts($modelRepair->id_repair);
 
-            $modelRepair->warranty_date = strtotime($modelRepair->warranty_date);
+            //$modelRepair->warranty_date = strtotime($modelRepair->warranty_date);
 
         }
 

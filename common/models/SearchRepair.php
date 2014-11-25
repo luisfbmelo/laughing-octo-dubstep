@@ -29,7 +29,7 @@ class SearchRepair extends Repair
     public function rules()
     {
         return [
-            [['id_repair', 'type_id', 'client_id', 'inve_id', 'status_id', 'user_id', 'date_close', 'store_id', 'priority', 'status'], 'integer'],
+            [['id_repair', 'type_id', 'client_id', 'inve_id', 'status_id', 'user_id', 'store_id', 'priority', 'status'], 'integer'],
             //add other modules tables to safe
             [['repair_desc', 'date_entry', 'date_close', 'obs', 'client', 'cliContact', 'equip', 'brand', 'model', 'sn'], 'safe'],
             [['budget', 'maxBudget', 'total'], 'number'],
@@ -54,12 +54,7 @@ class SearchRepair extends Repair
      */
     public function search($params)
     {
-        //transform date if is submited
-        if (isset($params['SearchRepair']['date_entry']) && !empty($params['SearchRepair']['date_entry'])){
-            $params['SearchRepair']['date_entry'] = date('Y-m-d', $params['SearchRepair']['date_entry']);
-        }
-
-
+    
         $query = Repair::find();
 
         //join other models tables
@@ -99,9 +94,10 @@ class SearchRepair extends Repair
             return $dataProvider;
         }
 
-        if (isset($this->date_close) && !empty($this->date_close)){
+        
+        /*if (isset($this->date_close) && !empty($this->date_close)){
             $this->date_close = date('Y-m-d', $this->date_close);
-        }
+        }*/
 
 
         /*IF A SEARCH IS DONE*/
