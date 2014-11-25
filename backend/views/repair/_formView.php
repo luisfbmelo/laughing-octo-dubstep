@@ -22,7 +22,7 @@ use kartik\datecontrol\DateControl;
                         ],
                     ]) ?>
                     <a href="<?php echo Yii::$app->request->baseUrl;?>/repair/view?id=<?php echo $modelRepair->id_repair;?>&sd=<?php echo $modelRepair->id_repair;?>&a=c" class="btn btn-primary printBtn">
-                        <span class="glyphicon glyphicon-print"></span>
+                        <span class="glyphicon glyphicon-print" style="padding-right:10px;"></span>Emissão
                     </a>
 
                     <?php if($modelRepair->status_id==4){
@@ -33,7 +33,11 @@ use kartik\datecontrol\DateControl;
                                 'method' => 'post',
                             ],
                         ]);
-                    }?>
+                    }else if ($modelRepair->status_id==5){ ?>
+                        <a href="<?php echo Yii::$app->request->baseUrl;?>/repair/view?id=<?php echo $modelRepair->id_repair;?>&sd=<?php echo $modelRepair->id_repair;?>&a=c" class="btn btn-primary printBtn">
+                            <span class="glyphicon glyphicon-print" style="padding-right:10px;"></span>Entrega
+                        </a>
+                    <?php } ?>
                 </div>
             </div>
 
@@ -243,13 +247,5 @@ use kartik\datecontrol\DateControl;
                             <?php } ?>
                         </tbody>
                     </table>
-
-                <div class="row addButtonContainer">
-                    <div class="addButton btn btn-info">
-                       <span class=" glyphicon glyphicon-plus"></span>
-                        <span>Adicionar peça</span> 
-                    </div>
-                    
-                </div>
         <?php }
         ActiveForm::end();?>

@@ -392,7 +392,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?php }else{ ?>
                                         <td></td>
                                         <?php } ?>
-                                        <td colspan="3" rowspan="3">asd<?php echo $modelRepair[0]['obs'];?></td>
+                                        <td colspan="3" rowspan="3"><?php echo $modelRepair[0]['obs'];?></td>
                                     </tr>
                                     
                                     <tr>
