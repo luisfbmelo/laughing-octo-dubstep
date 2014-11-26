@@ -28,7 +28,8 @@ class Groups extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['groupType'], 'required'],
+            [['groupType','type'], 'required'],
+            [['type'],'integer'],
             [['groupType'], 'string']
         ];
     }
@@ -41,6 +42,7 @@ class Groups extends \yii\db\ActiveRecord
         return [
             'id_group' => 'Id Group',
             'groupType' => 'Group Type',
+            'type' => 'Id Type'
         ];
     }
 

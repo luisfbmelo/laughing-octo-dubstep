@@ -68,7 +68,7 @@ AppAsset::register($this);
                         <!-- Side Menu -->
                         <div class="accordion collapse navbar-collapse clearPad" id="leftMenu">
                             <div class="accordion-group">
-                                <div class="accordion-heading <?php echo Yii::$app->controller->isActive(); ?>">
+                                <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['repair']); ?>">
                                     <a class="accordion-toggle" data-parent="#leftMenu" href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['repair/index']); ?>">
                                           <span class="glyphicon glyphicon-home"></span> 
                                           <span>Início</span>
@@ -97,8 +97,8 @@ AppAsset::register($this);
                             <!-- RESTRICTED -->
                             <?php if (\Yii::$app->session->get('user.group')==1){ ?>
                             <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#">
+                                <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['user']); ?>">
+                                    <a class="accordion-toggle" data-parent="#leftMenu" href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['user/index']); ?>">
                                         <span class="glyphicon glyphicon-user"></span> 
                                         <span>Utilizadores</span>
                                     </a>

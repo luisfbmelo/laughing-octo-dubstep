@@ -1095,6 +1095,7 @@ class RepairController extends Controller
      */
     public function isActive($routes = array())
     {
+        if (in_array('repair',$routes))
         return "activeTop";
     }
 

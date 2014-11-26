@@ -13,6 +13,7 @@ use kartik\datecontrol\DateControl;
         <?php $form = ActiveForm::begin(['enableClientValidation' => false]); ?>
             <div class="row">
                 <div class="col-lg-12">
+                    <?php if (Yii::$app->session->get('user.group')!=3){?>
                     <?= Html::a('<span class="glyphicon glyphicon-edit" style="padding-right:10px;"></span>Editar', ['update', 'id' => $modelRepair->id_repair], ['class' => 'btn btn-primary']) ?>
                     <?= Html::a('<span class="glyphicon glyphicon-trash" style="padding-right:10px;"></span>Eliminar', ['delete', 'id' => $modelRepair->id_repair], [
                         'class' => 'btn btn-danger',
@@ -21,11 +22,12 @@ use kartik\datecontrol\DateControl;
                             'method' => 'post',
                         ],
                     ]) ?>
+                    <?php } ?>
                     <a href="<?php echo Yii::$app->request->baseUrl;?>/repair/view?id=<?php echo $modelRepair->id_repair;?>&sd=<?php echo $modelRepair->id_repair;?>&a=c" class="btn btn-primary printBtn">
                         <span class="glyphicon glyphicon-print" style="padding-right:10px;"></span>Emissão
                     </a>
 
-                    <?php if($modelRepair->status_id==4){
+                    <?php if($modelStatus->type==2){
                         echo Html::a('<span class="glyphicon glyphicon-ok" style="padding-right:10px;"></span>Entregar', ['setdeliver', 'id' => $modelRepair->id_repair], [
                             'class' => 'btn btn-success',
                             'data' => [
@@ -33,7 +35,7 @@ use kartik\datecontrol\DateControl;
                                 'method' => 'post',
                             ],
                         ]);
-                    }else if ($modelRepair->status_id==5){ ?>
+                    }else if ($modelStatus->type==3){ ?>
                         <a href="<?php echo Yii::$app->request->baseUrl;?>/repair/view?id=<?php echo $modelRepair->id_repair;?>&sd=<?php echo $modelRepair->id_repair;?>&a=c" class="btn btn-primary printBtn">
                             <span class="glyphicon glyphicon-print" style="padding-right:10px;"></span>Entrega
                         </a>

@@ -28,6 +28,7 @@ class Status extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['type'], 'integer'],
             [['id_status','statusDesc'], 'required'],
             [['statusDesc'], 'string', 'max' => 250]
         ];
@@ -41,6 +42,7 @@ class Status extends \yii\db\ActiveRecord
         return [
             'id_status' => 'Id Status',
             'statusDesc' => 'Status Desc',
+            'type' => 'Tipo de estado'
         ];
     }
 

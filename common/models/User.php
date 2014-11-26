@@ -66,7 +66,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id_users' => 'Id Users',
-            'username' => 'Username',
+            'username' => 'Nome de utilizador',
             'email' => 'Email',
             'password_hash' => 'Password Hash',
             'group_id' => 'Group ID',
@@ -74,7 +74,7 @@ class User extends ActiveRecord implements IdentityInterface
             'status' => 'Status',
             'auth_key' => 'Auth Key',
             'role' => 'Role',
-            'created_at' => 'Created At',
+            'created_at' => 'Data de criação',
             'updated_at' => 'Updated At',
         ];
     }
@@ -258,6 +258,11 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    /*CUSTOM*/
+    public function getThisGroup(){
+        return Groups::find()->joinWith("users")->where(['groups.id_group'=>$this->group_id])->asArray()->one();
     }
 
     public function beforeSave($insert){

@@ -6,6 +6,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use common\models\LoginForm;
 use common\models\User;
+use common\models\Groups;
 use yii\filters\VerbFilter;
 
 
@@ -62,13 +63,16 @@ class SiteController extends Controller
 
     public function actionLogin()
     {
+
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            \Yii::$app->session->set('user.group',User::findOne(Yii::$app->user->getId())->group_id);
+            $userInfo = Groups::find()->select('groups.type')->innerJoin('user','user.group_id = groups.id_group')->where(['user.id_users'=>Yii::$app->user->getId()])->one();
+            
+            \Yii::$app->session->set('user.group',$userInfo->type);
             //return $this->goBack();
             return $this->redirect(Yii::$app->urlManager->createUrl(['repair/index']));
         } else {

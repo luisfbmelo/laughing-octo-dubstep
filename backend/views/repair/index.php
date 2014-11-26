@@ -16,6 +16,12 @@ use common\models\Client;
 setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
 date_default_timezone_set('Atlantic/Azores');
 
+//get user group and define buttons
+if (\Yii::$app->session->get('user.group')!=3){ 
+    $template = '{view}{update}{delete}';
+}else{
+    $template = '{view}';
+}
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -69,6 +75,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php } ?>
 
                 <?= 
+
+
 
                 GridView::widget([
                     'dataProvider' => $dataProvider,
@@ -126,7 +134,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         // 'maxBudget',
                         // 'total',
 
-                        ['class' => 'yii\grid\ActionColumn'],
+                        ['class' => 'yii\grid\ActionColumn',
+                            'template' => $template
+                        ],
                     ],
 
                     /*'rowOptions' => function ($model, $index, $widget, $grid){
@@ -135,7 +145,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'filterModel' => $searchModel,
                     'headerRowOptions' =>['class'=>'listHeader'],
                     'options' => [
-                        'class' => 'repairsGrid',
+                        'class' => 'grid_listing',
                     ]
                 ]); ?>
 
