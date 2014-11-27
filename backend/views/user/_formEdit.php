@@ -21,18 +21,18 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="row">
-        <?= $form->field($model, 'password',['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->passwordInput()->label('Password') ?>
+        <?= $form->field($modelSignup, 'password',['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->passwordInput()->label('Password') ?>
     </div>
     <div class="row">
-        <?= $form->field($model, 'password_repeat',['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->passwordInput()->label('Confirme a password') ?>
+        <?= $form->field($modelSignup, 'password_repeat',['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->passwordInput()->label('Confirme a password') ?>
     </div>
 
     <div class="row">
-        <?= $form->field($modelGroups, 'id_group', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->dropDownList($allGroups,['id'=>'groupId','prompt'=>'--'])->label('Privilégios')?>
+        <?= $form->field($modelGroups, 'id_group', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->dropDownList($allGroups,['id'=>'groupId','prompt'=>'--'])->label('Previlégios')?>
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton('<span class="glyphicon glyphicon-ok"></span>', ['class' => 'btn btn-success', 'name' => 'signup']) ?>
+        <?= Html::submitButton('<span class="glyphicon glyphicon-ok"></span>', ['class' => 'btn btn-success', 'name' => 'update']) ?>
         <?= Html::submitButton('<span class="glyphicon glyphicon-remove"></span>',array('class'=>'btn btn-danger','name'=>'cancelar','id'=>'cancelar')); ?>
     </div>
 

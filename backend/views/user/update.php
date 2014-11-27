@@ -1,21 +1,36 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
 
-$this->title = 'Update User: ' . ' ' . $model->id_users;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->title = 'Atualizar utilizador: ' . ' ' . $model->username;
+$this->params['breadcrumbs'][] = ['label' => 'Utilizadores', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id_users, 'url' => ['view', 'id' => $model->id_users]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Atualizar';
 ?>
-<div class="user-update">
+<section class="col-lg-10 col-xs-12 col-sm-9 col-md-9">
+    <div class="row">
+    	<div class="col-lg-12">
+    		<?= Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
+    	</div>
+    	<div class="col-lg-12">
+    		<div class="row repairFields">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    			<h1 class="sectionTitle col-lg-12"><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    		    <?= $this->render('_formEdit', [
+			        'model' => $model,
+			        'modelGroups' => $modelGroups,
+            		'allGroups' => $allGroups,
+            		'modelSignup' => $modelSignup
+			    ]) ?>
 
+    		</div>
+    	</div>
+    </div>
 </div>

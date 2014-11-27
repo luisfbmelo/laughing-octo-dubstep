@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         //'password_hash',
                         [
                             'attribute' => 'group_id',
-                            'label' => 'Grupo',
+                            'label' => 'Privilégios',
                             'filter' => ArrayHelper::map(groups::find()->asArray()->orderBy('id_group ASC')->all(), 'id_group','groupType'),
                             'content' => function($model, $index, $dataColumn) {
                                 return $model->getThisGroup()['groupType'];
@@ -68,7 +68,9 @@ $this->params['breadcrumbs'][] = $this->title;
                          'created_at',
                         // 'updated_at',
 
-                        ['class' => 'yii\grid\ActionColumn'],
+                        ['class' => 'yii\grid\ActionColumn',
+                            'template' => '{update}{delete}'
+                        ],
                     ],
                 ]); ?>
 
@@ -77,3 +79,45 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $(".deleteBtn").click(function(){
+            var urlBase = '<?php echo Yii::$app->request->baseUrl;?>';
+            var urlDest = urlBase+'/user/delajax';
+
+            //get all selected elements
+            var idList = $('input[type=checkbox][name="selection\\[\\]"]:checked').map(function () {
+                return $(this).val();
+            }).get();
+            //var idList = $("input[type=checkbox]:checked").val();
+            console.log(idList);
+            //if exists
+            if(idList!="")
+            {
+                if(confirm("Deseja realmente excluir este item?"))
+                {
+                    $.ajax({
+                        url: urlDest,
+                        type:"POST",
+                        dataType: 'json',
+                        data:{ list: idList},
+                        success: function(data){
+                            console.log(data);
+                            if (data=="done"){
+                                $(".overlay").css("display","block");
+                                $(".ajaxMes").css("display","block");
+                                $(".ajaxMes").delay(2000).fadeOut(500,function(){
+                                    window.location = window.location.href;
+                                });
+                            }
+                        },
+                        error: function(){
+
+                        }
+                    });
+                }
+            }
+        });
+    });
+</script>

@@ -89,7 +89,7 @@ class RepairController extends Controller
         $modelStatus = new status();        
 
         /*GET EXISTING DATA*/
-        $allStores=ArrayHelper::map($modelStores->getAllStores(), 'id_store', 'storeDesc');
+        $allStores = ArrayHelper::map($modelStores->getAllStores(), 'id_store', 'storeDesc');
         $allTypes = ArrayHelper::map($modelTypes->getAllTypes(), 'id_type', 'typeDesc');
         $allStatus = ArrayHelper::map($modelStatus->getAllStatus(),'id_status','statusDesc');
 

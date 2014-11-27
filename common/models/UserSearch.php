@@ -43,8 +43,16 @@ class UserSearch extends User
     {
         $query = User::find();
 
+        $query->andFilterWhere([
+            'user.status' => 1
+        ]);
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> ['defaultOrder' => ['created_at'=>SORT_DESC]],
+            'pagination' => [
+                'pageSize' => 10,
+            ],
         ]);
 
         if (!($this->load($params) && $this->validate())) {

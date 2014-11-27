@@ -28,7 +28,7 @@ class Groups extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['groupType','type'], 'required'],
+            [['id_group', 'groupType','type'], 'required'],
             [['type'],'integer'],
             [['groupType'], 'string']
         ];
@@ -40,7 +40,7 @@ class Groups extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_group' => 'Id Group',
+            'id_group' => 'Permissão',
             'groupType' => 'Group Type',
             'type' => 'Id Type'
         ];
@@ -52,5 +52,13 @@ class Groups extends \yii\db\ActiveRecord
     public function getUsers()
     {
         return $this->hasMany(User::className(), ['group_id' => 'id_group']);
+    }
+
+    /**
+     * Returns all groups
+     * @return [array] [groups data]
+     */
+    public function getAllGroups(){
+        return $this->find()->asArray()->orderBy('type ASC')->all();  
     }
 }

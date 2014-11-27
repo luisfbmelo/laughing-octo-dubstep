@@ -140,6 +140,12 @@ Status Message
   border: 2px solid #adffa2;
   color: #2b6423; }
 
+/*BOOTSTRAP EQUIVALENT*/
+/*field error*/
+/*.help-block{
+    background-color: $error-message;
+    padding:10px;
+}*/
 .brandHeader {
   background-color: #414957;
   padding: 20px;
@@ -380,7 +386,7 @@ a.topBtn {
   .grid_listing tbody tr td, .partsInsert tbody tr td {
     vertical-align: middle !important;
     font-size: 0.87em; }
-  .grid_listing tbody tr td:nth-child(7) div, .partsInsert tbody tr td:nth-child(7) div {
+  .grid_listing tbody tr td:nth-child(8) div, .partsInsert tbody tr td:nth-child(8) div {
     min-width: 130px;
     display: inline-block;
     background-color: #414957;
@@ -391,10 +397,10 @@ a.topBtn {
     border-radius: 15px;
     padding: 5px 10px;
     color: white; }
-    .grid_listing tbody tr td:nth-child(7) div span, .partsInsert tbody tr td:nth-child(7) div span {
+    .grid_listing tbody tr td:nth-child(8) div span, .partsInsert tbody tr td:nth-child(8) div span {
       display: block;
       float: left; }
-    .grid_listing tbody tr td:nth-child(7) div .circle, .partsInsert tbody tr td:nth-child(7) div .circle {
+    .grid_listing tbody tr td:nth-child(8) div .circle, .partsInsert tbody tr td:nth-child(8) div .circle {
       margin-top: 2px;
       background: #f00;
       width: 15px;
@@ -405,15 +411,15 @@ a.topBtn {
       -o-border-radius: 50%;
       border-radius: 50%;
       margin-right: 10px; }
-    .grid_listing tbody tr td:nth-child(7) div.status_1 .circle, .partsInsert tbody tr td:nth-child(7) div.status_1 .circle {
+    .grid_listing tbody tr td:nth-child(8) div.status_1 .circle, .partsInsert tbody tr td:nth-child(8) div.status_1 .circle {
       background-color: #8db4e3; }
-    .grid_listing tbody tr td:nth-child(7) div.status_2 .circle, .partsInsert tbody tr td:nth-child(7) div.status_2 .circle {
+    .grid_listing tbody tr td:nth-child(8) div.status_2 .circle, .partsInsert tbody tr td:nth-child(8) div.status_2 .circle {
       background-color: #fac090; }
-    .grid_listing tbody tr td:nth-child(7) div.status_3 .circle, .partsInsert tbody tr td:nth-child(7) div.status_3 .circle {
+    .grid_listing tbody tr td:nth-child(8) div.status_3 .circle, .partsInsert tbody tr td:nth-child(8) div.status_3 .circle {
       background-color: yellow; }
-    .grid_listing tbody tr td:nth-child(7) div.status_4 .circle, .partsInsert tbody tr td:nth-child(7) div.status_4 .circle {
+    .grid_listing tbody tr td:nth-child(8) div.status_4 .circle, .partsInsert tbody tr td:nth-child(8) div.status_4 .circle {
       background-color: #92d050; }
-    .grid_listing tbody tr td:nth-child(7) div.status_5 .circle, .partsInsert tbody tr td:nth-child(7) div.status_5 .circle {
+    .grid_listing tbody tr td:nth-child(8) div.status_5 .circle, .partsInsert tbody tr td:nth-child(8) div.status_5 .circle {
       background-color: #7f7f7f; }
 
 .partsInsert .form-group {

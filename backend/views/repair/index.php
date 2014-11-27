@@ -116,6 +116,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $model->getArrangedDate();
                             }*/
                         ],
+
+                        [
+                            'attribute' => 'username',
+                            'label' => 'Utilizador',
+                            'value' => 'user.username'
+                        ],
                         
                         //'date_entry',
                         [

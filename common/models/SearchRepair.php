@@ -23,6 +23,9 @@ class SearchRepair extends Repair
     public $model;
     public $sn;
 
+    //USER
+    public $username;
+
     /**
      * @inheritdoc
      */
@@ -31,7 +34,7 @@ class SearchRepair extends Repair
         return [
             [['id_repair', 'type_id', 'client_id', 'inve_id', 'status_id', 'user_id', 'store_id', 'priority', 'status'], 'integer'],
             //add other modules tables to safe
-            [['repair_desc', 'date_entry', 'date_close', 'obs', 'client', 'cliContact', 'equip', 'brand', 'model', 'sn'], 'safe'],
+            [['repair_desc', 'date_entry', 'date_close', 'obs', 'client', 'cliContact', 'equip', 'brand', 'model', 'sn', 'username'], 'safe'],
             [['budget', 'maxBudget', 'total'], 'number'],
         ];
     }
@@ -62,6 +65,8 @@ class SearchRepair extends Repair
         $query->with("client");
         $query->innerJoin('inventory','repair.inve_id = inventory.id_inve');
         $query->with("inve");
+        $query->innerJoin('user','user.id_users = repair.user_id');
+        $query->with("user");
 
         $query->innerJoin('equipaments','inventory.equip_id = equipaments.id_equip');
 
@@ -86,6 +91,11 @@ class SearchRepair extends Repair
         $dataProvider->sort->attributes['client'] = [
             'asc' => ['client.cliName' => SORT_ASC],
             'desc' => ['client.cliName' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['username'] = [
+            'asc' => ['user.username' => SORT_ASC],
+            'desc' => ['user.username' => SORT_DESC],
         ];
 
 
@@ -132,6 +142,9 @@ class SearchRepair extends Repair
         $query->andFilterWhere(['like', 'equipaments.equipDesc', $this->equip])
         ->andFilterWhere(['like', 'brands.brandName', $this->brand])
         ->andFilterWhere(['like', 'models.modelName', $this->model]);
+
+        //search on user data
+        $query->andFilterWhere(['like', 'user.username', $this->username]);
 
         return $dataProvider;
     }

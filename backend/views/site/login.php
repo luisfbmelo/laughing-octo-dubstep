@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'username',['labelOptions'=>['label'=>'Nome de Utilizador']])->textInput(array('placeholder' => 'Nome de utilizador')); ?>
         <?= $form->field($model, 'password',['labelOptions'=>['label'=>'Password']])->passwordInput(array('placeholder' => 'Password')) ?>
 
-        <a href="#">Recuperar password</a>
+        <a href="#"><?= Html::a('Recuperar password', ['user/request-password-reset']) ?></a>
 
         <?= $form->field($model, 'rememberMe',['labelOptions'=>['label'=>'Lembrar-me']])->checkbox() ?>
         <div class="form-group">
