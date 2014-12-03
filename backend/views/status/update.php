@@ -3,15 +3,14 @@
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
-
 /* @var $this yii\web\View */
-/* @var $model common\models\User */
+/* @var $model common\models\Status */
 
-$this->title = 'Criar novo utilizador';
-$this->params['breadcrumbs'][] = ['label' => 'Utilizadores', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Estado: ' . ' ' . $model->statusDesc;
+$this->params['breadcrumbs'][] = ['label' => 'Estados', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->id_status, 'url' => ['view', 'id' => $model->id_status]];
+$this->params['breadcrumbs'][] = 'Atualizar';
 ?>
-
 <section class="col-lg-10 col-xs-12 col-sm-9 col-md-9">
     <div class="row">
     	<div class="col-lg-12">
@@ -20,14 +19,12 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
     	</div>
     	<div class="col-lg-12">
-    		<div class="repairFields">
+    		<div class="row repairFields">
 
     			<h1 class="sectionTitle col-lg-12"><?= Html::encode($this->title) ?></h1>
 
-    		    <?= $this->render('_form', [
+    		    <?= $this->render('_formEdit', [
 			        'model' => $model,
-			        'modelGroups' => $modelGroups,
-            		'allGroups' => $allGroups
 			    ]) ?>
 
     		</div>

@@ -46,7 +46,7 @@ class Inventory extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_inve' => 'Id Inve',
+            'id_inve' => 'Id',
             'equip_id' => 'Equip ID',
             'brand_id' => 'Brand ID',
             'model_id' => 'Model ID',
@@ -86,5 +86,15 @@ class Inventory extends \yii\db\ActiveRecord
         return $this->hasMany(Repair::className(), ['inve_id' => 'id_inve']);
     }
 
-    
+    public function getEquipName(){
+        return Equipaments::find()->joinWith("inventories")->where(['equipaments.id_equip'=>$this->equip_id])->asArray()->one();
+    }
+
+    public function getBrandName(){
+        return Brands::find()->joinWith("inventories")->where(['brands.id_brand'=>$this->brand_id])->asArray()->one();
+    }
+
+    public function getModelName(){
+        return Models::find()->joinWith("inventories")->where(['models.id_model'=>$this->model_id])->asArray()->one();
+    }
 }

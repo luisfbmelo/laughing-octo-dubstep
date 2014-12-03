@@ -86,8 +86,8 @@ AppAsset::register($this);
                             </div>
 
                             <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#">
+                                <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['inventory']); ?>">
+                                    <a class="accordion-toggle" data-parent="#leftMenu" href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['inventory/index']); ?>">
                                         <span class="glyphicon glyphicon-th"></span> 
                                         <span>Inventário</span>
                                     </a>
@@ -107,7 +107,7 @@ AppAsset::register($this);
                             
 
                             <div class="accordion-group">
-                                <div class="accordion-heading">
+                                <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['status']); ?>">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseFive">
                                         <span class="glyphicon glyphicon-cog"></span> 
                                         <span class="glyphicon glyphicon-plus secondGliph"></span>
@@ -118,7 +118,7 @@ AppAsset::register($this);
                                     <div class="accordion-inner">
                                         <ul>
                                             <li><a href="">Lojas</a></li>
-                                            <li><a href="">Estados</a></li>
+                                            <li class="<?php echo Yii::$app->controller->isActive(['status']); ?>"><a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['status/index']); ?>">Estados</a></li>
                                             <li><a href="">Equipamentos</a></li>
                                         </ul>                 
                                     </div>

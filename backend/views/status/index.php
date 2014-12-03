@@ -5,13 +5,11 @@ use yii\grid\GridView;
 use yii\grid\CheckboxColumn;
 use yii\helpers\ArrayHelper;
 
-use common\models\Groups;
-
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\UserSearch */
+/* @var $searchModel common\models\StatusSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Utilizadores';
+$this->title = 'Estados';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <section class="col-lg-10 col-xs-12 col-sm-9 col-md-9">
@@ -27,13 +25,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     <span class="glyphicon glyphicon-trash"></span>
                 </div>
 
-                <?php if (isset($_GET['UserSearch'])){?>
-                    <a href="<?php echo Yii::$app->request->baseUrl;?>/user/index" class="btn btn-default clearBtn">
+                <?php if (isset($_GET['StatusSearch'])){?>
+                    <a href="<?php echo Yii::$app->request->baseUrl;?>/status/index" class="btn btn-default clearBtn">
                         <span>Limpar</span>
                     </a>
                 <?php } ?>
 
-                <?= GridView::widget([
+                <?php
+                    $types = array(
+                    0=>array('id'=>"1",'desc'=>'Normal'),
+                    1=>array('id'=>"2",'desc'=>'Terminado'),
+                    2=>array('id'=>"3",'desc'=>'Fecho'));
+                ?>
+                <?=                
+
+                GridView::widget([
                     'dataProvider' => $dataProvider,
                     'filterModel' => $searchModel,
                     'headerRowOptions' =>['class'=>'listHeader'],
@@ -41,32 +47,31 @@ $this->params['breadcrumbs'][] = $this->title;
                         'class' => 'grid_listing',
                     ],
                     'columns' => [
-                        //['class' => 'yii\grid\SerialColumn'],
                         ['class' => CheckboxColumn::className()],
-
-                        //'id_users',
-                        'username',
-                        'email:email',
-                        //'password_hash',
+                        'id_status',
                         [
-                            'attribute' => 'group_id',
-                            'label' => 'Privilégios',
-                            'filter' => ArrayHelper::map(groups::find()->asArray()->orderBy('id_group ASC')->all(), 'id_group','groupType'),
+                            'attribute' => 'statusDesc',
+                            'label' => 'Estado',
                             'content' => function($model, $index, $dataColumn) {
-                                return $model->getThisGroup()['groupType'];
+                                return $status = "<div class='status-color'><span class='circle' style='background-color:#".$model->color.";'></span><span>".$model->statusDesc."</span><span class='clearAll'></span></div>";
                             },                           
                             
                         ],
-                        // 'password_reset_token',
-                        // 'status',
-                        // 'auth_key',
-                        // 'role',
-                         'created_at',
-                        // 'updated_at',
+
+                        [
+                            'attribute' => 'type',
+                            'label' => 'Tipo de estado',
+                            'filter' => ArrayHelper::map($types, 'id', 'desc'),
+                            'content' => function($model, $index, $dataColumn) {
+                                return $model->convertType();
+                            },                           
+                            
+                        ],
 
                         ['class' => 'yii\grid\ActionColumn',
                             'template' => '{update}{delete}'
-                        ],
+                        ],                      
+
                     ],
                 ]); ?>
 
@@ -79,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
     $(document).ready(function(){
         $(".deleteBtn").click(function(){
             var urlBase = '<?php echo Yii::$app->request->baseUrl;?>';
-            var urlDest = urlBase+'/user/delajax';
+            var urlDest = urlBase+'/status/delajax';
 
             //get all selected elements
             var idList = $('input[type=checkbox][name="selection\\[\\]"]:checked').map(function () {

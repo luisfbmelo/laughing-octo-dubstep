@@ -129,7 +129,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'label' => 'Estado',
                             'filter' => ArrayHelper::map(status::find()->asArray()->orderBy('id_status ASC')->all(), 'id_status','statusDesc'),
                             'content' => function($model, $index, $dataColumn) {
-                                return $status = "<div class='status_".$model->status_id."'><span class='circle'></span><span>".$model->getStatusDesc()["statusDesc"]."</span><span class='clearAll'></span></div>";
+                                return $status = "<div class='status-color'><span class='circle' style='background-color:#".$model->getStatusDesc()['color'].";'></span><span>".$model->getStatusDesc()["statusDesc"]."</span><span class='clearAll'></span></div>";
                             },                           
                             
                         ],

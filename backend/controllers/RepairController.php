@@ -693,6 +693,11 @@ class RepairController extends Controller
 
                 $valid = $modelStatus->load(Yii::$app->request->post()) && $modelStatus->validate(['id_status']) && $valid;
 
+                //workarround
+                if ($valid){
+                    $modelStatus=$modelStatus->findOne(Yii::$app->request->post('Status')['id_status']);
+                }
+
                 $valid = $modelRepair->load(Yii::$app->request->post()) && $modelRepair->validate(['repair_desc','priority','budget','total']) && $valid;
 
 
@@ -1052,9 +1057,9 @@ class RepairController extends Controller
 
     public function actionSetdeliver($id)
     {
-
+        $statusSet = Status::find()->where(['type'=>3])->orderBy("id_status DESC")->one();
         $obj = $this->findModel($id);
-        $obj->status_id = 5;
+        $obj->status_id = $statusSet->id_status;
         $obj->date_close = date('Y-m-d H:i:s');
         $obj->save();
         return $this->redirect(['index','sd'=>$id,'a'=>'c']);

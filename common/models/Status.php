@@ -9,6 +9,9 @@ use Yii;
  *
  * @property integer $id_status
  * @property string $statusDesc
+ * @property integer $status
+ * @property integer $type
+ * @property string $color
  *
  * @property Repair[] $repairs
  */
@@ -28,9 +31,10 @@ class Status extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type'], 'integer'],
-            [['id_status','statusDesc'], 'required'],
-            [['statusDesc'], 'string', 'max' => 250]
+            [['statusDesc'], 'required'],
+            [['status', 'type'], 'integer'],
+            [['statusDesc'], 'string', 'max' => 250],
+            [['color'], 'string', 'max' => 25]
         ];
     }
 
@@ -40,9 +44,11 @@ class Status extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_status' => 'Id Status',
-            'statusDesc' => 'Status Desc',
-            'type' => 'Tipo de estado'
+            'id_status' => 'Número de estado',
+            'statusDesc' => 'Estado',
+            'status' => 'Status',
+            'type' => 'Tipo de estado',
+            'color' => 'Cor',
         ];
     }
 
@@ -56,5 +62,19 @@ class Status extends \yii\db\ActiveRecord
 
     public function getAllStatus(){
         return $this->find()->asArray()->orderBy('id_status ASC')->all();  
+    }
+
+    public function convertType(){
+        switch($this->type){
+            case 1:
+                return 'Normal';
+                break;
+            case 2:
+                return 'Por entregar';
+                break;
+            case 3:
+                return 'Entregue';
+                break;
+        }
     }
 }

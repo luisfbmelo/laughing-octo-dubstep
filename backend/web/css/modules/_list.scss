@@ -34,9 +34,9 @@
 				font-size:0.87em;
 			}
 
-			td:nth-child(8){
+			td{
 
-				div{
+				.status-color{
 					min-width:130px;
 					display:inline-block;
 					background-color:$dark-blue-bg;

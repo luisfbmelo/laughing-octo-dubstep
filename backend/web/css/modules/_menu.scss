@@ -78,10 +78,7 @@
                     background-color:#414957!important;
                 }
 
-                &.activeTop {
-                    background-color:#414957!important;
-                    border-top:1px solid $menuB-second-line;
-                }
+                
         }
 
         .accordion-heading:hover{  
@@ -116,4 +113,9 @@
          
     }
 
+}
+
+.activeTop {
+    background-color:#414957!important;
+    border-top:1px solid $menuB-second-line;
 }

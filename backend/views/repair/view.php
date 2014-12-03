@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = 'Detalhes';
             ]) ?>
         </div>
         <div class="col-lg-12">
-            <div class="row repairFields viewField">
+            <div class="repairFields viewField">
 
                 <h1 class="sectionTitle col-lg-12"><?= Html::encode($this->title) ?></h1>
 
@@ -413,4 +413,4 @@ $this->params['breadcrumbs'][] = 'Detalhes';
             </div>
 
     <?php break;}} ?>
-</div>
+</section>

@@ -292,9 +292,6 @@ Status Message
           padding: 0; }
       #leftMenu .accordion-group .accordion-heading.active {
         background-color: #414957 !important; }
-      #leftMenu .accordion-group .accordion-heading.activeTop {
-        background-color: #414957 !important;
-        border-top: 1px solid #899cbc; }
     #leftMenu .accordion-group .accordion-heading:hover {
       background-color: #414957; }
     #leftMenu .accordion-group .accordion-inner ul li {
@@ -314,6 +311,10 @@ Status Message
         padding-left: 10px; }
     #leftMenu .accordion-group .accordion-inner ul li:hover {
       background-color: #414957; }
+
+.activeTop {
+  background-color: #414957 !important;
+  border-top: 1px solid #899cbc; }
 
 /*TOP BUTTONS*/
 a.topBtn {
@@ -341,9 +342,9 @@ a.topBtn {
   a.topBtn:hover {
     background-color: #fcfcfc !important; }
 
-.deleteBtn, .createUserBtn {
+.deleteBtn, .addBtn {
   margin-bottom: 15px; }
-  .deleteBtn *, .createUserBtn * {
+  .deleteBtn *, .addBtn * {
     padding: 0 !important;
     font-size: 1em !important; }
 
@@ -386,7 +387,7 @@ a.topBtn {
   .grid_listing tbody tr td, .partsInsert tbody tr td {
     vertical-align: middle !important;
     font-size: 0.87em; }
-  .grid_listing tbody tr td:nth-child(8) div, .partsInsert tbody tr td:nth-child(8) div {
+  .grid_listing tbody tr td .status-color, .partsInsert tbody tr td .status-color {
     min-width: 130px;
     display: inline-block;
     background-color: #414957;
@@ -397,10 +398,10 @@ a.topBtn {
     border-radius: 15px;
     padding: 5px 10px;
     color: white; }
-    .grid_listing tbody tr td:nth-child(8) div span, .partsInsert tbody tr td:nth-child(8) div span {
+    .grid_listing tbody tr td .status-color span, .partsInsert tbody tr td .status-color span {
       display: block;
       float: left; }
-    .grid_listing tbody tr td:nth-child(8) div .circle, .partsInsert tbody tr td:nth-child(8) div .circle {
+    .grid_listing tbody tr td .status-color .circle, .partsInsert tbody tr td .status-color .circle {
       margin-top: 2px;
       background: #f00;
       width: 15px;
@@ -411,15 +412,15 @@ a.topBtn {
       -o-border-radius: 50%;
       border-radius: 50%;
       margin-right: 10px; }
-    .grid_listing tbody tr td:nth-child(8) div.status_1 .circle, .partsInsert tbody tr td:nth-child(8) div.status_1 .circle {
+    .grid_listing tbody tr td .status-color.status_1 .circle, .partsInsert tbody tr td .status-color.status_1 .circle {
       background-color: #8db4e3; }
-    .grid_listing tbody tr td:nth-child(8) div.status_2 .circle, .partsInsert tbody tr td:nth-child(8) div.status_2 .circle {
+    .grid_listing tbody tr td .status-color.status_2 .circle, .partsInsert tbody tr td .status-color.status_2 .circle {
       background-color: #fac090; }
-    .grid_listing tbody tr td:nth-child(8) div.status_3 .circle, .partsInsert tbody tr td:nth-child(8) div.status_3 .circle {
+    .grid_listing tbody tr td .status-color.status_3 .circle, .partsInsert tbody tr td .status-color.status_3 .circle {
       background-color: yellow; }
-    .grid_listing tbody tr td:nth-child(8) div.status_4 .circle, .partsInsert tbody tr td:nth-child(8) div.status_4 .circle {
+    .grid_listing tbody tr td .status-color.status_4 .circle, .partsInsert tbody tr td .status-color.status_4 .circle {
       background-color: #92d050; }
-    .grid_listing tbody tr td:nth-child(8) div.status_5 .circle, .partsInsert tbody tr td:nth-child(8) div.status_5 .circle {
+    .grid_listing tbody tr td .status-color.status_5 .circle, .partsInsert tbody tr td .status-color.status_5 .circle {
       background-color: #7f7f7f; }
 
 .partsInsert .form-group {
