@@ -693,11 +693,6 @@ class RepairController extends Controller
 
                 $valid = $modelStatus->load(Yii::$app->request->post()) && $modelStatus->validate(['id_status']) && $valid;
 
-                //workarround
-                if ($valid){
-                    $modelStatus=$modelStatus->findOne(Yii::$app->request->post('Status')['id_status']);
-                }
-
                 $valid = $modelRepair->load(Yii::$app->request->post()) && $modelRepair->validate(['repair_desc','priority','budget','total']) && $valid;
 
 

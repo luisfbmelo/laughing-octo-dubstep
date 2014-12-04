@@ -28,7 +28,7 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="row">
-        <?= $form->field($modelGroups, 'id_group', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->dropDownList($allGroups,['id'=>'groupId','prompt'=>'--'])->label('Previlégios')?>
+        <?= $form->field($modelGroups, 'id_group', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->dropDownList($allGroups,['id'=>'groupId','prompt'=>'--'])->label('Privilégios')?>
     </div>
 
     <div class="row form-group">

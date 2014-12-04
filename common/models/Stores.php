@@ -57,6 +57,6 @@ class Stores extends \yii\db\ActiveRecord
      * @return [array] [stores data]
      */
     public function getAllStores(){
-        return $this->find()->asArray()->orderBy('storeDesc ASC')->all();  
+        return $this->find()->where(['status'=>1])->asArray()->orderBy('storeDesc ASC')->all();  
     }
 }

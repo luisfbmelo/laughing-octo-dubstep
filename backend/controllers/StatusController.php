@@ -62,8 +62,17 @@ class StatusController extends Controller
     {
         $model = new Status();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post()) && $model->validate(['statusDesc','type'])) {
+            $model->isNewRecord = TRUE;
+            $model->id_status = NULL;
+            if ($model->save(false)){
+                return $this->redirect(['index']);
+            }else{
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
+            
         } else {
             return $this->render('create', [
                 'model' => $model,

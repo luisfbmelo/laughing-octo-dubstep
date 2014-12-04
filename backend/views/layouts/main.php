@@ -47,7 +47,7 @@ AppAsset::register($this);
 
                     <div class="col-lg-5 col-xs-12 col-sm-5 col-md-5 profileBox">
                         <div class="userInfo">
-                            <div class="userLoged">Bem vindo <strong>Paulo Belém</strong>.</div>
+                            <div class="userLoged">Bem vindo <strong><?php echo \Yii::$app->session->get('user.name');?></strong>.</div>
                             <div class="notifications">
                                 <span>4</span>
                             </div>
@@ -117,9 +117,9 @@ AppAsset::register($this);
                                 <div id="collapseFive" class="accordion-body collapse" style="height: 0px; ">
                                     <div class="accordion-inner">
                                         <ul>
-                                            <li><a href="">Lojas</a></li>
+                                            <li><a href="">Clientes</a></li>
                                             <li class="<?php echo Yii::$app->controller->isActive(['status']); ?>"><a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['status/index']); ?>">Estados</a></li>
-                                            <li><a href="">Equipamentos</a></li>
+                                            <li><a href="">Lojas</a></li>
                                         </ul>                 
                                     </div>
                                  </div>
