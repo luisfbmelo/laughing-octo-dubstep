@@ -11,7 +11,17 @@ use kartik\datecontrol\DateControl;
 
 <div class="clearAll"></div>
         <?php $form = ActiveForm::begin(['enableClientValidation' => false]); ?>
-            <?php echo $form->errorSummary([$modelClient,$modelRepair,$modelStores, $modelBrands, $modelEquip, $modelModels, $modelTypes, $modelInv, $modelAccess,$modelStatus]); ?>
+            <?php 
+            //summary models array
+            $arrayModels = array($modelClient,$modelRepair,$modelStores, $modelBrands, $modelEquip, $modelModels, $modelTypes, $modelInv, $modelAccess,$modelStatus);
+            if (isset($items) && sizeof($items)>0){ 
+                foreach($items as $i=>$item){
+                    array_push($arrayModels,$item);
+                }
+            }
+            echo $form->errorSummary($arrayModels); 
+
+            ?>
             <div class="row">
                 <div class="col-lg-12">
                     <p class="note">Campos com <span class="required">*</span> são obrigatórios.</p>
@@ -209,7 +219,7 @@ use kartik\datecontrol\DateControl;
                 if (isset($items) && sizeof($items)>0){ 
                     foreach($items as $i=>$item){
                     ?>
-                        <tr id="line_<?php echo $i;?>">
+                        <tr id="line_<?php echo $i;?>" class="realPart">
                             <td class="partRemove"><div class="glyphicon glyphicon-remove" id="part_<?= $item->id_part ?>"></div></td>
                             <td><?= $form->field($item,"[$i]partCode")->textInput()->label(false) ?></td>
                             <td><?= $form->field($item,"[$i]partQuant")->textInput()->label(false) ?></td>
@@ -266,40 +276,43 @@ use kartik\datecontrol\DateControl;
 
             //if id is ok
             if (partId!=undefined){
-                $.ajax({
-                    url: urlDest,
-                    type:"POST",
-                    dataType: 'json',
-                    data:{ id: partId},
-                    success: function(data){
-                        var tbodyChild = el.parent().parent().parent().children().length;
-                        
-                        if (data=="done"){
+                if(confirm("Deseja realmente excluir este item? A operação é irreversível!"))
+                {
+                    $.ajax({
+                        url: urlDest,
+                        type:"POST",
+                        dataType: 'json',
+                        data:{ id: partId},
+                        success: function(data){
+                            var tbodyChild = el.parent().parent().parent().children().length;
                             
-                            if (tbodyChild==1){
-                                el.parent().parent().find("input").removeAttr('value');   
-                            }else{
-                                el.parent().parent().remove();
-                            }
-                            
-                        }else if(data=="empty"){
+                            if (data=="done"){
+                                
+                                if (tbodyChild==1){
+                                    el.parent().parent().find("input").removeAttr('value');   
+                                }else{
+                                    el.parent().parent().remove();
+                                }
+                                
+                            }else if(data=="empty"){
 
-                            if (tbodyChild==1){
-                                el.parent().parent().find("input").removeAttr('value');   
-                            }else{
-                                el.parent().parent().remove();
+                                if (tbodyChild==1){
+                                    el.parent().parent().find("input").removeAttr('value');   
+                                }else{
+                                    el.parent().parent().remove();
+                                }
                             }
+                        },
+                        error: function(){
+
                         }
-                    },
-                    error: function(){
-
-                    }
-                });
+                    });
+                }
 
             //if is a new element
             }else{
                 console.log("1");
-                el.parent().parent().find("input").val(''); 
+                el.parent().parent().remove(); 
             }
             
         });

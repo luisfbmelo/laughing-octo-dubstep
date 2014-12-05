@@ -3,13 +3,12 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\grid\CheckboxColumn;
-use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\StatusSearch */
+/* @var $searchModel common\models\StoresSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Estados';
+$this->title = 'Lojas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <section class="col-lg-10 col-xs-12 col-sm-9 col-md-9">
@@ -31,15 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     </a>
                 <?php } ?>
 
-                <?php
-                    $types = array(
-                    0=>array('id'=>"1",'desc'=>'Normal'),
-                    1=>array('id'=>"2",'desc'=>'Terminado'),
-                    2=>array('id'=>"3",'desc'=>'Fecho'));
-                ?>
-                <?=                
-
-                GridView::widget([
+            
+                <?= GridView::widget([
                     'dataProvider' => $dataProvider,
                     'filterModel' => $searchModel,
                     'headerRowOptions' =>['class'=>'listHeader'],
@@ -48,30 +40,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'columns' => [
                         ['class' => CheckboxColumn::className()],
-                        'id_status',
                         [
-                            'attribute' => 'statusDesc',
-                            'label' => 'Estado',
-                            'content' => function($model, $index, $dataColumn) {
-                                return $status = "<div class='status-color'><span class='circle' style='background-color:#".$model->color.";'></span><span>".$model->statusDesc."</span><span class='clearAll'></span></div>";
-                            },                           
+                            'attribute' => 'id_store',
+                            'label' => 'Identificador da loja',                        
                             
                         ],
-
+                        
                         [
-                            'attribute' => 'type',
-                            'label' => 'Tipo de estado',
-                            'filter' => ArrayHelper::map($types, 'id', 'desc'),
-                            'content' => function($model, $index, $dataColumn) {
-                                return $model->convertType();
-                            },                           
+                            'attribute' => 'storeDesc',
+                            'label' => 'Loja',                        
                             
                         ],
 
                         ['class' => 'yii\grid\ActionColumn',
                             'template' => '{update}{delete}'
-                        ],                      
-
+                        ], 
                     ],
                 ]); ?>
 
@@ -84,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
     $(document).ready(function(){
         $(".deleteBtn").click(function(){
             var urlBase = '<?php echo Yii::$app->request->baseUrl;?>';
-            var urlDest = urlBase+'/status/delajax';
+            var urlDest = urlBase+'/stores/delajax';
 
             //get all selected elements
             var idList = $('input[type=checkbox][name="selection\\[\\]"]:checked').map(function () {

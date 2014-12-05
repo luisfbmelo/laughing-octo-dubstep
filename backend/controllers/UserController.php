@@ -7,6 +7,7 @@ use common\models\User;
 use common\models\UserSearch;
 use common\models\SignupForm;
 use common\models\Groups;
+use common\models\Repair;
 
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -199,24 +200,45 @@ class UserController extends Controller
     {
         /*$this->findModel($id)->delete();*/
         $obj = $this->findModel($id);
-        $obj->status = 0;
-        $obj->save();
 
-        return $this->redirect(['index']);
+        $exists = Repair::find()->where([ 'user_id' => $obj->id_users])->exists();
+        if (!$exists){
+            $obj->status = 0;
+            $obj->save();
+            return $this->redirect(['index']); 
+        }else{
+            Yii::$app->session->setFlash('errorHasRepair','<strong>Erro ao remover!</strong><br/>Este utilizador está associado a uma ou mais reparações.');
+            return $this->redirect(['index']); 
+        }
     }
 
     public function actionDelajax(){
         if (isset($_POST['list']) && $_POST['list']!=""){
             $listarray = $_POST['list'];
 
-            //removes all projects
-            foreach($listarray as $user){
-                $obj = user::find()->where(['id_users'=>$user])->one();
-                $obj->status = 0;
-                $obj->save();
-            }
+            $connection = \Yii::$app->db;
+            $transaction = $connection->beginTransaction();
+            try {
+                //removes all projects
+                foreach($listarray as $user){
+                    $exists = Repair::find()->where([ 'user_id' => $user])->exists();
+                    if ($exists){
+                        throw new Exception('It has repair.');
+                    }else{
+                        $obj = user::find()->where(['id_users'=>$user])->one();
+                        $obj->status = 0;
+                        $obj->save();
+                    }
+                }
 
-            echo json_encode("done");
+                echo $transaction->commit();
+                echo json_encode("done");
+
+            }catch(Exception $e) {
+                $transaction->rollback();
+                //echo $e->getMessage(); exit;
+                echo json_encode("error");
+            }
             
         }else{
             echo json_encode("error");

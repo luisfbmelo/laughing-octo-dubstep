@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Status */
+/* @var $model common\models\Stores */
 
-$this->title = 'Estado: ' . ' ' . $model->statusDesc;
-$this->params['breadcrumbs'][] = ['label' => 'Estados', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->statusDesc]; //, 'url' => ['view', 'id' => $model->id_status]
+$this->title = 'Atualizar loja: ' . ' ' . $model->storeDesc;
+$this->params['breadcrumbs'][] = ['label' => 'Lojas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->storeDesc];
 $this->params['breadcrumbs'][] = 'Atualizar';
 ?>
 <section class="col-lg-10 col-xs-12 col-sm-9 col-md-9">

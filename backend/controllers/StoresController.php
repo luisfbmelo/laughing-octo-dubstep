@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Status;
-use common\models\StatusSearch;
+use common\models\Stores;
+use common\models\StoresSearch;
 use common\models\Repair;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -12,9 +12,9 @@ use yii\filters\VerbFilter;
 use yii\base\Exception;
 
 /**
- * StatusController implements the CRUD actions for Status model.
+ * StoresController implements the CRUD actions for Stores model.
  */
-class StatusController extends Controller
+class StoresController extends Controller
 {
     public function behaviors()
     {
@@ -29,12 +29,12 @@ class StatusController extends Controller
     }
 
     /**
-     * Lists all Status models.
+     * Lists all Stores models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new StatusSearch();
+        $searchModel = new StoresSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -44,7 +44,7 @@ class StatusController extends Controller
     }
 
     /**
-     * Displays a single Status model.
+     * Displays a single Stores model.
      * @param integer $id
      * @return mixed
      */
@@ -56,20 +56,20 @@ class StatusController extends Controller
     }
 
     /**
-     * Creates a new Status model.
+     * Creates a new Stores model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Status();
+        $model = new Stores();
 
         if (isset($_POST['cancelar'])){
              return $this->redirect(['index']);
         }else if (isset($_POST['add'])){
-            if ($model->load(Yii::$app->request->post()) && $model->validate(['statusDesc','type'])) {
+            if ($model->load(Yii::$app->request->post()) && $model->validate(['storeDesc'])) {
                 $model->isNewRecord = TRUE;
-                $model->id_status = NULL;
+                $model->id_store = NULL;
                 if ($model->save(false)){
                     return $this->redirect(['index']);
                 }else{
@@ -88,10 +88,11 @@ class StatusController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);
+
     }
 
     /**
-     * Updates an existing Status model.
+     * Updates an existing Stores model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -118,25 +119,42 @@ class StatusController extends Controller
     }
 
     /**
-     * Deletes an existing Status model.
+     * Deletes an existing Stores model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
     {
-        /*$this->findModel($id)->delete();*/
+
         $obj = $this->findModel($id);
 
-        $exists = Repair::find()->where([ 'status_id' => $obj->id_status])->exists();
+        $exists = Repair::find()->where([ 'store_id' => $obj->id_store])->exists();
         if (!$exists){
             $obj->status = 0;
             $obj->save();
+            /*Yii::$app->session->setFlash('actionSuccess','Elemento eliminado com sucesso.');*/
             return $this->redirect(['index']); 
         }else{
-            Yii::$app->session->setFlash('errorHasRepair','<strong>Impossível remover!</strong><br/>Este estado está associado a uma ou mais reparações.');
+            Yii::$app->session->setFlash('errorHasRepair','<strong>Impossível remover!</strong><br/>Esta loja está associada a uma ou mais reparações.');
             return $this->redirect(['index']); 
         }  
+    }
+
+    /**
+     * Finds the Stores model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Stores the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Stores::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 
     public function actionDelajax(){
@@ -147,12 +165,12 @@ class StatusController extends Controller
             $transaction = $connection->beginTransaction();
             try {
                 //removes all projects
-                foreach($listarray as $status){
-                    $exists = Repair::find()->where([ 'status_id' => $status])->exists();
+                foreach($listarray as $store){
+                    $exists = Repair::find()->where([ 'store_id' => $store])->exists();
                     if ($exists){
                         throw new Exception('It has repair.');
                     }else{
-                        $obj = status::find()->where(['id_status'=>$status])->one();
+                        $obj = stores::find()->where(['id_store'=>$store])->one();
                         $obj->status = 0;
                         $obj->save(); 
                     }
@@ -173,29 +191,13 @@ class StatusController extends Controller
     }
 
     /**
-     * Finds the Status model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Status the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Status::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-    }
-
-    /**
      * Checks if the current route matches with given routes
      * @param array $routes
      * @return bool
      */
     public function isActive($routes = array())
     {
-        if (in_array('status',$routes))
+        if (in_array('stores',$routes))
         return "activeTop";
     }
 }

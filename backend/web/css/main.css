@@ -100,7 +100,8 @@ body {
     margin: 0; }
 
 .overlay,
-.ajaxMes {
+.ajaxSucc,
+.ajaxError {
   display: none; }
 
 /*
@@ -124,21 +125,58 @@ Status Message
   top: 50% !important;
   z-index: 9999;
   text-align: center;
-  font-size: 0.87em;
   transform: translateY(-50%); }
 
 .statusMessage {
   display: inline-block;
   width: auto;
   margin: 0 auto;
-  font-size: 1.4em;
+  font-size: 1em;
   text-align: center;
-  padding: 5px; }
+  padding: 1.2em 5.12em;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  position: relative; }
 
 .flash-success {
-  background: #e7ffe4;
-  border: 2px solid #adffa2;
-  color: #2b6423; }
+  background: #D4FECC;
+  border: 2px solid #A4DA9C;
+  color: #4D7944; }
+
+.flash-error {
+  background: #FED2D3;
+  border: 2px solid #DB8F9C;
+  color: #8B2530; }
+
+.closeBtn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 1px;
+  font-size: 0.7em; }
+
+.flash-success .closeBtn {
+  border: 2px solid #4D7944;
+  color: #4D7944; }
+
+.flash-success .closeBtn:hover {
+  border: 2px solid #4D7944;
+  color: #D4FECC;
+  background-color: #4D7944;
+  cursor: pointer; }
+
+.flash-error .closeBtn {
+  border: 2px solid #8B2530;
+  color: #8B2530; }
+
+.flash-error .closeBtn:hover {
+  border: 2px solid #8B2530;
+  color: #FED2D3;
+  background-color: #8B2530;
+  cursor: pointer; }
 
 /*BOOTSTRAP EQUIVALENT*/
 /*field error*/
@@ -149,7 +187,8 @@ Status Message
 .brandHeader {
   background-color: #414957;
   padding: 20px;
-  color: white; }
+  color: white;
+  border-bottom: 1px solid #899cbc; }
 
 .brandHeader .profileBox {
   text-align: right;
@@ -314,7 +353,7 @@ Status Message
 
 .activeTop {
   background-color: #414957 !important;
-  border-top: 1px solid #899cbc; }
+  /*border-top:1px solid $menuB-second-line;*/ }
 
 /*TOP BUTTONS*/
 a.topBtn {

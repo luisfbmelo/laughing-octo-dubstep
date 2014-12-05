@@ -40,7 +40,7 @@ class Stores extends \yii\db\ActiveRecord
     {
         return [
             'id_store' => 'Loja',
-            'storeDesc' => 'Store Desc',
+            'storeDesc' => 'Nome da loja',
         ];
     }
 

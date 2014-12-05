@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\Status */
 
-$this->title = 'Estado: ' . ' ' . $model->statusDesc;
-$this->params['breadcrumbs'][] = ['label' => 'Estados', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->statusDesc]; //, 'url' => ['view', 'id' => $model->id_status]
-$this->params['breadcrumbs'][] = 'Atualizar';
+/* @var $this yii\web\View */
+/* @var $model common\models\Stores */
+
+$this->title = 'Nova Loja';
+$this->params['breadcrumbs'][] = ['label' => 'Lojas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <section class="col-lg-10 col-xs-12 col-sm-9 col-md-9">
     <div class="row">
@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = 'Atualizar';
 
     			<h1 class="sectionTitle col-lg-12"><?= Html::encode($this->title) ?></h1>
 
-    		    <?= $this->render('_formEdit', [
+    		    <?= $this->render('_form', [
 			        'model' => $model,
 			    ]) ?>
 

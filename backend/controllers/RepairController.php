@@ -700,9 +700,18 @@ class RepairController extends Controller
                 if (isset($_POST['Parts'])){
                     $items=$this->getItemsToUpdate();
 
-                    foreach($items as $i=>$item){
-                        $item->attributes = $_POST['Parts'][$i];
-                        $valid = $item->validate(['partDesc','partCode','partPrice','partQuant']) && $valid;
+                    $c=0;
+                    foreach($_POST['Parts'] as $i=>$part){
+                        
+
+                        if (empty($part['partDesc']) && empty($part['partCode']) && empty($part['partPrice']) && empty($part['partQuant'])){
+
+                            continue;
+                        }else{
+                            $items[$c]->attributes = $part;
+                            $valid = $items[$c]->validate(['partDesc','partCode','partPrice','partQuant']) && $valid;
+                            $c++;
+                        }
                     }
                 }
 
@@ -843,25 +852,27 @@ class RepairController extends Controller
 
                         //save repair parts
                         if (isset($items) && sizeof($items)>0){ 
-
+                            //delete all existing
                             repairparts::deleteAll(["repair_id"=>$modelRepair->id_repair]);
-                            $opAttr = array("id_part", "status");
+
+                            //attributes to check if it is empty
+                            //$opAttr = array("id_part", "status");
 
                             foreach($items as $i=>$item){
 
-                                foreach($item as $itemKey=>$itemList){
-                                    
+                                /*foreach($item as $itemKey=>$itemList){
+                                    //check if it is an empty row
                                     if ($item[$itemKey]=="" && !in_array($itemKey, $opAttr)){
                                         $isEmpty = true;
                                     }
                                 }
-
+                                // if empty row, go to next element
                                 if (isset($isEmpty) && $isEmpty){
                                     continue;
-                                }
+                                }*/
                                 
                                 $partArray = [];
-
+                                //check if part is new
                                 if (isset($item->id_part) && $item->id_part!=""){
                                     $idPart = $item->id_part;
                                     $isNew = FALSE;
@@ -869,6 +880,7 @@ class RepairController extends Controller
                                     $idPart = NULL;
                                     $isNew = TRUE;
                                 }
+
 
                                 $partArray = [
                                     'id_part' => $idPart,
@@ -878,14 +890,18 @@ class RepairController extends Controller
                                     'partPrice'=>$item->partPrice,
                                     'status' => 1,
                                 ];
-
+                               
+                                //save if new
+                                //update if existing
                                 if ($isNew){
                                     $partAdded = $modelRepair->addModelData($modelParts,$partArray);
                                 }else{
                                     $modelRepair->addModelData($modelParts,$partArray);
                                     $partAdded = $idPart;
                                 }                                
+                                
 
+                                //save all parts to the repair_parts table
                                 $totalPartsArray = [
                                     'isNewRecord' => TRUE,
                                     'repair_id' => $modelRepair->id_repair,
@@ -1104,7 +1120,7 @@ class RepairController extends Controller
  
         // Iterate over each item from the submitted form
         if (isset($_POST['Parts']) && is_array($_POST['Parts'])) {
-            foreach ($_POST['Parts'] as $item) {
+            foreach ($_POST['Parts'] as $a=>$item) {
                 // If item id is available, read the record from database 
                 /*if (array_key_exists('id', $item) ){
                     $items[] = MyModel::model()->findByPk($item['id']);
@@ -1113,8 +1129,11 @@ class RepairController extends Controller
                 else {
                     
                 }*/
-                
-                $itemsArray[] = new parts();
+                if (empty($item['partDesc']) && empty($item['partCode']) && empty($item['partPrice']) && empty($item['partQuant'])){
+                    continue;
+                }else{
+                    $itemsArray[] = new parts();
+                }
             }
         }
         return $itemsArray;

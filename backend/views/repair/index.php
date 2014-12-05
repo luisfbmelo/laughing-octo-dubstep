@@ -548,8 +548,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             console.log(data);
                             if (data=="done"){
                                 $(".overlay").css("display","block");
-                                $(".ajaxMes").css("display","block");
-                                $(".ajaxMes").delay(2000).fadeOut(500,function(){
+                                $(".dinFlash").css("display","block");
+                                $(".dinFlash").delay(2000).fadeOut(500,function(){
                                     window.location = window.location.href;
                                 });
                             }

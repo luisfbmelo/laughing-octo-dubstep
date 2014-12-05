@@ -98,12 +98,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         dataType: 'json',
                         data:{ list: idList},
                         success: function(data){
-                            console.log(data);
                             if (data=="done"){
                                 $(".overlay").css("display","block");
-                                $(".ajaxMes").css("display","block");
-                                $(".ajaxMes").delay(2000).fadeOut(500,function(){
+                                $(".ajaxSucc").css("display","block");
+                                $(".ajaxSucc").delay(5000).fadeOut(500,function(){
                                     window.location = window.location.href;
+                                });
+                            }else{
+                                $(".overlay").css("display","block");
+                                $(".ajaxError").css("display","block");
+                                $(".ajaxError").delay(5000).fadeOut(500,function(){
+                                   $(this).css("display","none");
+                                   $(".overlay").css("display","none");
                                 });
                             }
                         },

@@ -107,19 +107,19 @@ AppAsset::register($this);
                             
 
                             <div class="accordion-group">
-                                <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['status']); ?>">
+                                <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['status','stores']); ?>">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseFive">
                                         <span class="glyphicon glyphicon-cog"></span> 
-                                        <span class="glyphicon glyphicon-plus secondGliph"></span>
+                                        <span class="glyphicon glyphicon-<?= (Yii::$app->controller->isActive(['status','stores']) != "activeTop") ? 'plus' : 'minus' ?> secondGliph"></span>
                                         <span>Configurações</span>
                                     </a>
                                 </div>
-                                <div id="collapseFive" class="accordion-body collapse" style="height: 0px; ">
+                                <div id="collapseFive" class="accordion-body collapse <?= (Yii::$app->controller->isActive(['status','stores']) == "activeTop") ? 'in"' : ' ' ?>" <?= (Yii::$app->controller->isActive(['status','stores']) != "activeTop") ? 'style="height:0px;"' : ' ' ?>>
                                     <div class="accordion-inner">
                                         <ul>
                                             <li><a href="">Clientes</a></li>
                                             <li class="<?php echo Yii::$app->controller->isActive(['status']); ?>"><a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['status/index']); ?>">Estados</a></li>
-                                            <li><a href="">Lojas</a></li>
+                                            <li class="<?php echo Yii::$app->controller->isActive(['stores']); ?>"><a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['stores/index']); ?>">Lojas</a></li>
                                         </ul>                 
                                     </div>
                                  </div>
@@ -156,38 +156,77 @@ AppAsset::register($this);
             </div>
         <?php } ?>
 
-<!--ACTION MESSAGES-->
-        <?php if(Yii::$app->session->hasFlash('addedProj')): ?>
-
-        <div class="statusBox">
+    <!--ACTION MESSAGES-->
+    <div class="overlay"></div>
+    <?php if(Yii::$app->session->hasFlash('actionSuccess')): ?>
+        <div class="statusBox dinFlash">
             <div class="statusMessage flash-success">
-                <?php echo Yii::app()->session->getFlash('addedProj'); ?>
+                <div class="glyphicon glyphicon-ok" style="font-size:3em;margin-bottom:0.5em;"></div>
+                <div><?php echo Yii::$app->session->getFlash('actionSuccess'); ?></div>
+                <div class="closeBtn">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </div>
             </div>
         </div>
-        <?php endif; ?>
+    <?php endif; ?>
 
-        <?php if(Yii::$app->session->hasFlash('updatedProj')): ?>
-        <div class="statusBox">
-            <div class="statusMessage flash-success">
-                <?php echo Yii::$app->session->getFlash('updatedProj'); ?>
+    <?php if(Yii::$app->session->hasFlash('errorHasRepair')): ?>
+        <div class="statusBox dinFlash">
+            <div class="statusMessage flash-error">
+                <div class="glyphicon glyphicon-warning-sign" style="font-size:3em;margin-bottom:0.5em;"></div>
+                <div><?php echo Yii::$app->session->getFlash('errorHasRepair'); ?></div>
+                <div class="closeBtn">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </div>
             </div>
         </div>
-        <?php endif; ?>
+    <?php endif; ?>
+    <!--CONSTANT SUCCESS-->
+    
+    <div class="statusBox ajaxSucc const">
+        <div class="statusMessage flash-success">
+            <div class="glyphicon glyphicon-ok" style="font-size:3em;margin-bottom:0.5em;"></div>
+            <div>Elemento eliminado com sucesso.</div>
+            <div class="closeBtn">
+                <span class="glyphicon glyphicon-remove"></span>
+            </div>
+        </div>
+    </div> 
 
-        <?php if(Yii::$app->session->hasFlash('deleteProj')): ?>
-            <div class="statusBox">
-            <div class="statusMessage flash-success">
-                <?php echo Yii::$app->session->getFlash('deleteProj'); ?>
+    <!--CONSTANT ERROR-->
+    <div class="statusBox ajaxError const">
+        <div class="statusMessage flash-error">
+            <div class="glyphicon glyphicon-ok" style="font-size:3em;margin-bottom:0.5em;"></div>
+            <div><strong>Não foi possível eliminar.</strong><br/>Verifique se existe alguma reparação associada.</div>
+            <div class="closeBtn">
+                <span class="glyphicon glyphicon-remove"></span>
             </div>
-            </div>
-        <?php endif; ?>
-        <div class="overlay"></div>
-        <div class="statusBox ajaxMes">
-            <div class="statusMessage flash-success">
-                Elemento eliminado com sucesso.
-            </div>
-        </div> 
-        <!--END ACTION MESSAGES-->        
+        </div>
+    </div> 
+    <!--END ACTION MESSAGES-->     
+
+    <script>
+    $(document).ready(function(){
+        if ($(".dinFlash").length){
+            $(".overlay").css("display","block");
+            $(".dinFlash").delay(5000).fadeOut(500,function(){
+                $(".overlay").css("display","none");
+                $(this).remove();
+            });
+        }
+
+        $(".closeBtn").on("click",function(){
+            if ($(this).parent().parent().hasClass("const")){
+                window.location = window.location.href;
+            }else{
+                $(this).parent().parent().remove();
+                $(".overlay").css("display","none");
+            }
+            
+        });
+        
+    });
+    </script>
 
     <?php $this->endBody() ?>
 </body>
