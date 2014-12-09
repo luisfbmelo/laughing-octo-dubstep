@@ -8,6 +8,7 @@ use common\models\UserSearch;
 use common\models\SignupForm;
 use common\models\Groups;
 use common\models\Repair;
+use common\models\Stores;
 
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -80,7 +81,9 @@ class UserController extends Controller
 
         $model = new SignupForm();
         $modelGroups = new Groups();
+        $modelStores = new Stores();
 
+        $allStores = ArrayHelper::map($modelStores->getAllStores(), 'id_store', 'storeDesc');
         $allGroups = ArrayHelper::map($modelGroups->getAllGroups(), 'id_group', 'groupType');
 
         if (isset($_POST['cancelar'])){
@@ -94,10 +97,12 @@ class UserController extends Controller
 
                 $valid = false;
                 $valid = $modelGroups->load(Yii::$app->request->post()) && $modelGroups->validate(['id_group']);
+                $valid = $modelStores->load(Yii::$app->request->post()) && $modelStores->validate(['id_store']);
 
                 if ($model->load(Yii::$app->request->post()) && $model->validate() && $valid) {
 
                     $model->id_group = $modelGroups->id_group;
+                    $model->id_store = $modelStores->id_store;
 
                     if ($user = $model->signup()) {
 
@@ -117,7 +122,9 @@ class UserController extends Controller
         return $this->render('create', [
             'model' => $model,
             'modelGroups' => $modelGroups,
-            'allGroups' => $allGroups
+            'allGroups' => $allGroups,
+            'allStores' => $allStores,
+            'modelStores' => $modelStores
         ]);
     }
 
@@ -133,12 +140,15 @@ class UserController extends Controller
         $model = $this->findModel($id);
         $modelSignup = new SignupForm();
         $modelGroups = new Groups();
+        $modelStores = new Stores();
 
         /*GET ESSENCIAL CONTENT*/
+        $allStores = ArrayHelper::map($modelStores->getAllStores(), 'id_store', 'storeDesc');
         $allGroups = ArrayHelper::map($modelGroups->getAllGroups(), 'id_group', 'groupType');
 
         /*SET FROM OTHER MODELS*/
         $modelGroups->id_group = $model->group_id;
+        $modelStores->id_store = $model->store_id;
 
         if (isset($_POST['cancelar'])){
             $this->redirect(['index']);
@@ -150,6 +160,8 @@ class UserController extends Controller
 
                 $currentPass = $model->password_hash;
                 $valid = $modelGroups->load(Yii::$app->request->post()) && $modelGroups->validate(['id_group']);
+
+                $valid = $modelStores->load(Yii::$app->request->post()) && $modelStores->validate(['id_store']);
                 
 
                 if ($model->load(Yii::$app->request->post()) && $model->validate(['username','email']) && $valid) {
@@ -167,6 +179,7 @@ class UserController extends Controller
 
                     //set values
                     $model->group_id = $modelGroups->id_group;
+                    $model->store_id = $modelStores->id_store;
                     $model->updated_at = date('Y-m-d H:i:s');
                     
                     $model->save();
@@ -186,7 +199,9 @@ class UserController extends Controller
             'model' => $model,
             'modelGroups' => $modelGroups,
             'allGroups' => $allGroups,
-            'modelSignup' => $modelSignup
+            'allStores' => $allStores,
+            'modelSignup' => $modelSignup,
+            'modelStores' => $modelStores
         ]);  
     }
 

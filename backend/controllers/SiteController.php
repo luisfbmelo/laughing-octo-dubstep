@@ -71,10 +71,11 @@ class SiteController extends Controller
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             $userInfo = Groups::find()->select('groups.type')->innerJoin('user','user.group_id = groups.id_group')->where(['user.id_users'=>Yii::$app->user->getId()])->one();
-            $user = User::find()->select('username')->where(['id_users'=>Yii::$app->user->getId()])->one();
+            $user = User::find()->where(['id_users'=>Yii::$app->user->getId()])->one();
             
             \Yii::$app->session->set('user.group',$userInfo->type);
             \Yii::$app->session->set('user.name',$user->username);
+            \Yii::$app->session->set('user.store',$user->store_id);
             //return $this->goBack();
             return $this->redirect(Yii::$app->urlManager->createUrl(['repair/index']));
         } else {

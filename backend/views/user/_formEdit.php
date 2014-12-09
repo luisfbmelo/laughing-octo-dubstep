@@ -31,6 +31,10 @@ use yii\widgets\ActiveForm;
         <?= $form->field($modelGroups, 'id_group', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->dropDownList($allGroups,['id'=>'groupId','prompt'=>'--'])->label('Privilégios')?>
     </div>
 
+    <div class="row">
+        <?= $form->field($modelStores, 'id_store', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->dropDownList($allStores,['id'=>'storeID','prompt'=>'--'])->label('Loja')?>
+    </div>
+
     <div class="row form-group">
         <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 pageButtons">
             <?= Html::submitButton('<span class="glyphicon glyphicon-ok"></span>', ['class' => 'btn btn-success col-lg-1', 'name' => 'update']) ?>

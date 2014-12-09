@@ -92,7 +92,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         [
                             'attribute' => 'store_id',
                             'label' => 'Local',
-                            'filter' => ArrayHelper::map(stores::find()->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc'),
+                            'filter' => ArrayHelper::map(stores::find()->where(['status'=>1])->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc'),
                             'content' => function($model, $index, $dataColumn) {
                                 return $model->getStoreDesc()["storeDesc"];
                             },

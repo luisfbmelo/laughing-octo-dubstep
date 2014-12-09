@@ -44,7 +44,19 @@ ENGINE = InnoDB;
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`groups` (
   `id_group` INT NOT NULL AUTO_INCREMENT ,
   `groupType` TEXT NOT NULL ,
+  `type` INT NOT NULL ,
   PRIMARY KEY (`id_group`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `toque_sta`.`stores`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `toque_sta`.`stores` (
+  `id_store` INT NOT NULL AUTO_INCREMENT ,
+  `storeDesc` TEXT NOT NULL ,
+  `status` INT NOT NULL DEFAULT 1 ,
+  PRIMARY KEY (`id_store`) )
 ENGINE = InnoDB;
 
 
@@ -63,11 +75,18 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`user` (
   `role` INT NOT NULL ,
   `created_at` DATETIME NULL ,
   `updated_at` DATETIME NULL ,
+  `store_id` INT NOT NULL ,
   INDEX `fk_users_groups1` (`group_id` ASC) ,
   PRIMARY KEY (`id_users`) ,
+  INDEX `fk_user_stores1` (`store_id` ASC) ,
   CONSTRAINT `fk_users_groups1`
     FOREIGN KEY (`group_id` )
     REFERENCES `toque_sta`.`groups` (`id_group` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_stores1`
+    FOREIGN KEY (`store_id` )
+    REFERENCES `toque_sta`.`stores` (`id_store` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -153,23 +172,14 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `toque_sta`.`stores`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `toque_sta`.`stores` (
-  `id_store` INT NOT NULL AUTO_INCREMENT ,
-  `storeDesc` TEXT NOT NULL ,
-  `status` INT NOT NULL DEFAULT 1 ,
-  PRIMARY KEY (`id_store`) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `toque_sta`.`status`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `toque_sta`.`status` (
   `id_status` INT NOT NULL AUTO_INCREMENT ,
   `statusDesc` VARCHAR(250) NOT NULL ,
   `status` INT NOT NULL DEFAULT 1 ,
+  `type` INT NULL DEFAULT 1 ,
+  `color` VARCHAR(25) NULL ,
   PRIMARY KEY (`id_status`) )
 ENGINE = InnoDB;
 
@@ -186,7 +196,7 @@ CREATE  TABLE IF NOT EXISTS `toque_sta`.`repair` (
   `user_id` INT NOT NULL ,
   `repair_desc` TEXT NOT NULL ,
   `date_entry` DATETIME NOT NULL ,
-  `date_close` INT NULL ,
+  `date_close` DATETIME NULL ,
   `store_id` INT NOT NULL ,
   `priority` INT NOT NULL ,
   `budget` DECIMAL NULL ,

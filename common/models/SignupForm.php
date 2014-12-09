@@ -17,6 +17,7 @@ class SignupForm extends Model
     public $password;
     public $password_repeat;
     public $id_group;
+    public $id_store;
 
     /**
      * @inheritdoc
@@ -68,6 +69,7 @@ class SignupForm extends Model
 
             $user->role = 50;
             $user->group_id = $this->id_group;
+            $user->store_id = $this->id_store;
             $user->status = 1;
             $user->created_at = date('Y-m-d H:i:s');
             $user->updated_at = date('Y-m-d H:i:s');

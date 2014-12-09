@@ -6,6 +6,8 @@ use yii\grid\CheckboxColumn;
 use yii\helpers\ArrayHelper;
 
 use common\models\Groups;
+use common\models\Stores;
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\UserSearch */
@@ -56,6 +58,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return $model->getThisGroup()['groupType'];
                             },                           
                             
+                        ],
+                        [
+                            'attribute' => 'store_id',
+                            'label' => 'Local',
+                            'filter' => ArrayHelper::map(stores::find()->where(['status'=>1])->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc'),
+                            'content' => function($model, $index, $dataColumn) {
+                                return $model->getThisStore()["storeDesc"];
+                            },
+
                         ],
                         // 'password_reset_token',
                         // 'status',

@@ -87,7 +87,7 @@ use kartik\datecontrol\DateControl;
                 <?= $form->field($modelModels, 'modelName', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->textInput()->label('Modelos') ?>
                 <input type="hidden" name="modelId" id="modelId" value="<?= $modelModels->id_model ?>"/>
 
-                <?= $form->field($modelInv, 'inveSN', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3']])->textInput(['maxlength' => 10]) ?>
+                <?= $form->field($modelInv, 'inveSN', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3']])->textInput() ?>
              <!-- $form->field($modelEquip, 'id_equip', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->dropDownList($equip,['id'=>'equipID','prompt'=>'\-\-'])->label('Equipamentos') 
 
             
@@ -558,10 +558,10 @@ use kartik\datecontrol\DateControl;
                 $("#modelId").val(ui.item.id);
 
                 //CHANGE ALL
-                $("#brands-brandname").val(ui.item.brandName);
-                $("#brandId").val(ui.item.brandId);
-                $("#equipaments-equipdesc").val(ui.item.equipName);
-                $("#equipId").val(ui.item.equipId);
+                //$("#brands-brandname").val(ui.item.brandName);
+                //$("#brandId").val(ui.item.brandId);
+                //$("#equipaments-equipdesc").val(ui.item.equipName);
+               // $("#equipId").val(ui.item.equipId);
             },
             response: function( event, ui ) {
                 //console.log(ui);

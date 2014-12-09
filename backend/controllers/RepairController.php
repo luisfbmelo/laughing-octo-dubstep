@@ -316,6 +316,10 @@ class RepairController extends Controller
         //$allAccess = ArrayHelper::map(accessories::find()->where('accessType != :id', [':id' => '2'])->asArray()->orderBy('accessDesc ASC')->all(), 'id_accessories', 'accessDesc');
         $allAccess = ArrayHelper::map($modelAccess->getAllAccess(), 'id_accessories', 'accessDesc');
 
+        //set defaults
+        $modelStores->id_store = Yii::$app->session->get('user.store');
+        $modelTypes->id_type = 1;
+
 
         /*LOGIC PROCESS*/
         //if it is canceled

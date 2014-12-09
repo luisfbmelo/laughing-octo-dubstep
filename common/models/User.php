@@ -51,8 +51,8 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'email', 'password_hash', 'group_id', 'auth_key', 'role'], 'required'],
-            [['group_id', 'status', 'role'], 'integer'],
+            [['username', 'email', 'password_hash', 'group_id', 'auth_key', 'role', 'store_id'], 'required'],
+            [['group_id', 'status', 'role', 'store_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['username', 'email'], 'string', 'max' => 45]
             //[['password_hash', 'password_reset_token', 'auth_key'], 'string', 'max' => 250]
@@ -76,6 +76,7 @@ class User extends ActiveRecord implements IdentityInterface
             'role' => 'Role',
             'created_at' => 'Data de criação',
             'updated_at' => 'Updated At',
+            'store_id' => 'Loja'
         ];
     }
 
@@ -93,6 +94,14 @@ class User extends ActiveRecord implements IdentityInterface
     public function getRepairs()
     {
         return $this->hasMany(Repair::className(), ['user_id' => 'id_users']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStore()
+    {
+        return $this->hasOne(Stores::className(), ['id_store' => 'store_id']);
     }
 
     /**
@@ -263,6 +272,10 @@ class User extends ActiveRecord implements IdentityInterface
     /*CUSTOM*/
     public function getThisGroup(){
         return Groups::find()->joinWith("users")->where(['groups.id_group'=>$this->group_id])->asArray()->one();
+    }
+
+    public function getThisStore(){
+        return Stores::find()->joinWith("users")->where(['stores.id_store'=>$this->store_id])->asArray()->one();
     }
 
     public function beforeSave($insert){

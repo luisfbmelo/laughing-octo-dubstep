@@ -27,7 +27,9 @@ $this->params['breadcrumbs'][] = 'Atualizar';
 			        'model' => $model,
 			        'modelGroups' => $modelGroups,
             		'allGroups' => $allGroups,
-            		'modelSignup' => $modelSignup
+            		'modelSignup' => $modelSignup,
+                    'allStores' => $allStores,
+                    'modelStores' => $modelStores
 			    ]) ?>
 
     		</div>

@@ -53,6 +53,14 @@ class Stores extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(User::className(), ['store_id' => 'id_store']);
+    }
+
+    /**
      * Returns all stores
      * @return [array] [stores data]
      */
