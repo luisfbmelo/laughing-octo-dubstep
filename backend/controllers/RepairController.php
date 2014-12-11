@@ -122,17 +122,7 @@ class RepairController extends Controller
      */
     public function actionIndex()
     {
-        /*$dataProvider = new ActiveDataProvider([
-            'query' => repair::find()->where(["status"=>1]),
-            'sort'=> ['defaultOrder' => ['date_entry'=>SORT_DESC]],
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-        ]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);*/
+        $viewType = 0;
 
         //RESOLVE FOR PRINTING
         if (isset($_GET['sd']) && !empty($_GET['sd']) && is_numeric($_GET['sd']) && isset($_GET['a']) && !empty($_GET['a'])){
@@ -163,9 +153,13 @@ class RepairController extends Controller
             $requestType = null;
             $items = null;
         }
+
+        if (isset($_GET['list']) && is_numeric($_GET['list']) && $_GET['list']>0){
+            $viewType = $_GET['list'];
+        }
         
         $searchModel = new SearchRepair();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $viewType);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -239,19 +233,6 @@ class RepairController extends Controller
         $items = $modelRepair->getThisParts($modelRepair->id_repair);
 
         //$modelRepair->warranty_date = strtotime($modelRepair->warranty_date);
-
-
-        switch($modelRepair->priority){
-            case 1:
-                $modelRepair->priority = "Alta";
-            break;
-            case 2:
-                $modelRepair->priority = "Média";
-            break;
-            case 3:
-                $modelRepair->priority = "Baixa";
-            break;
-        }
 
         return $this->render('view', [
             'modelRepair' => $modelRepair,
@@ -406,10 +387,7 @@ class RepairController extends Controller
 
                 $valid = $modelStores->load(Yii::$app->request->post()) && $modelStores->validate(['id_store']) && $valid;
 
-                $valid = $modelRepair->load(Yii::$app->request->post()) && $modelRepair->validate(['repair_desc','priority']) && $valid;
-
-                $valid = $modelRepair->checkWarranty('warranty_date',Yii::$app->request->post('Repair')['warranty_date'],Yii::$app->request->post('warrantyHidden')) && $valid;
-
+                $valid = $modelRepair->load(Yii::$app->request->post()) && $modelRepair->validate(['repair_desc']) && $valid;
 
                 if ($valid){
 
@@ -490,16 +468,6 @@ class RepairController extends Controller
 
                     //set max budget
                     if ($modelRepair->maxBudget==""){
-                        $modelRepair->maxBudget = NULL;
-                    }else{
-                        $modelRepair->warranty_date = NULL;
-                    }
-
-                    //set warranty date
-                    if (Yii::$app->request->post('Repair')['warranty_date']==""){
-                        $modelRepair->warranty_date = NULL;
-                    }else{
-                        //$modelRepair->warranty_date = date('Y-m-d', Yii::$app->request->post('Repair')['warranty_date']);
                         $modelRepair->maxBudget = NULL;
                     }
 
@@ -697,7 +665,7 @@ class RepairController extends Controller
 
                 $valid = $modelStatus->load(Yii::$app->request->post()) && $modelStatus->validate(['id_status']) && $valid;
 
-                $valid = $modelRepair->load(Yii::$app->request->post()) && $modelRepair->validate(['repair_desc','priority','budget','total']) && $valid;
+                $valid = $modelRepair->load(Yii::$app->request->post()) && $modelRepair->validate(['repair_desc','budget','total']) && $valid;
 
 
                 //validate parts
@@ -797,17 +765,9 @@ class RepairController extends Controller
                     //set max budget
                     if ($modelRepair->maxBudget==""){
                         $modelRepair->maxBudget = NULL;
-                    }else{
-                        $modelRepair->warranty_date = NULL;
                     }
 
-                    //set warranty date
-                    if (Yii::$app->request->post('Repair')['warranty_date']==""){
-                        $modelRepair->warranty_date = NULL;
-                    }else{
-                        //$modelRepair->warranty_date = date('Y-m-d', Yii::$app->request->post('Repair')['warranty_date']);
-                        $modelRepair->maxBudget = NULL;
-                    }
+
 
                     //set final vars
                     $modelRepair->attributeToRepair([
@@ -892,6 +852,7 @@ class RepairController extends Controller
                                     'partDesc'=>$item->partDesc,
                                     'partCode'=>$item->partCode,
                                     'partPrice'=>$item->partPrice,
+                                    'partQuant' => $item->partQuant,
                                     'status' => 1,
                                 ];
                                
@@ -1115,8 +1076,12 @@ class RepairController extends Controller
      */
     public function isActive($routes = array())
     {
-        if (in_array('repair',$routes))
-        return "activeTop";
+        if (in_array('repair2',$routes) && isset($_GET['list'])){
+            return "activeTop";
+        }else if (in_array('repair',$routes) && !isset($_GET['list'])){
+            return "activeTop";
+        }
+        
     }
 
     private function getItemsToUpdate(){

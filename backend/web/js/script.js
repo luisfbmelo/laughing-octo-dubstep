@@ -47,13 +47,13 @@ $(document).ready(function(){
 			'<div class="form-group field-parts-'+lastLineId+'-partcode"><input type="text" id="parts-'+lastLineId+'-partcode" class="form-control" name="Parts['+lastLineId+'][partCode]"><div class="help-block"></div></div>'+
 		'</td>'+
 		'<td>'+
-			'<div class="form-group field-parts-'+lastLineId+'-partquant"><input type="text" id="parts-'+lastLineId+'-partquant" class="form-control" name="Parts['+lastLineId+'][partQuant]"><div class="help-block"></div></div>'+
+			'<div class="form-group field-parts-'+lastLineId+'-partquant"><input type="text" id="parts-'+lastLineId+'-partquant" class="form-control partInput" name="Parts['+lastLineId+'][partQuant]"><div class="help-block"></div></div>'+
 		'</td>'+
 		'<td>'+
 			'<div class="form-group field-parts-'+lastLineId+'-partdesc required"><input type="text" id="parts-'+lastLineId+'-partdesc" class="form-control" name="Parts['+lastLineId+'][partDesc]"><div class="help-block"></div></div>'+
 		'</td>'+
 		'<td>'+
-			'<div class="form-group field-parts-'+lastLineId+'-partprice required"><input type="text" id="parts-'+lastLineId+'-partprice" class="form-control" name="Parts['+lastLineId+'][partPrice]"><div class="help-block"></div></div>'+
+			'<div class="form-group field-parts-'+lastLineId+'-partprice required"><input type="text" id="parts-'+lastLineId+'-partprice" class="form-control partInput" name="Parts['+lastLineId+'][partPrice]"><div class="help-block"></div></div>'+
 		'</td>'+
 		'</tr>';
 		$(".partsInsert tbody tr:last").after(content);

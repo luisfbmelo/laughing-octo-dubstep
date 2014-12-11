@@ -23,7 +23,7 @@ use kartik\datecontrol\DateControl;
                         ],
                     ]) ?>
                     <?php } ?>
-                    <a href="<?php echo Yii::$app->request->baseUrl;?>/repair/view?id=<?php echo $modelRepair->id_repair;?>&sd=<?php echo $modelRepair->id_repair;?>&a=c" class="btn btn-primary printBtn">
+                    <a href="<?php echo Yii::$app->request->baseUrl;?>/repair/view?id=<?php echo $modelRepair->id_repair;?>&sd=<?php echo $modelRepair->id_repair;?>&a=n" class="btn btn-primary printBtn">
                         <span class="glyphicon glyphicon-print" style="padding-right:10px;"></span>Emissão
                     </a>
 
@@ -113,15 +113,13 @@ use kartik\datecontrol\DateControl;
 
             <div class="row">
                 <!--BUDGET-->
-                <?= $form->field($modelRepair, 'budget',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textInput(['readonly'=>'readonly']) ?>
+                <?= $form->field($modelRepair, 'workPrice',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textInput(['readonly'=>'readonly']) ?>
                 <?= $form->field($modelRepair, 'total',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textInput(['readonly'=>'readonly']) ?>
             </div>
 
             <div class="row">
                 <!--STATUS-->
                 <?= $form->field($modelStatus, 'statusDesc',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->textInput(['readonly'=>'readonly'])->label('Estado de reparação') ?>
-                <?= $form->field($modelRepair, 'priority', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textInput(['readonly'=>'readonly']) ?>
-
             </div>
 
             <?php

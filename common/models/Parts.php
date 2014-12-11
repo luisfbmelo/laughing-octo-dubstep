@@ -33,7 +33,7 @@ class Parts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['partDesc', 'partCode', 'partPrice'], 'required'],
+            [['partDesc', 'partCode', 'partPrice','partQuant'], 'required'],
             [['id_part', 'status', 'partQuant'], 'integer'],
             [['partPrice'], 'number'],
             [['partDesc', 'partCode'], 'string', 'max' => 250]

@@ -98,8 +98,8 @@ class ActionColumn extends Column
     {
         if (!isset($this->buttons['view'])) {
             $this->buttons['view'] = function ($url, $model) {
-                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
-                    'title' => Yii::t('yii', 'View'),
+                return Html::a('<span class="glyphicon glyphicon-search"></span>', $url, [
+                    'title' => Yii::t('yii', 'Detalhes'),
                     'data-pjax' => '0',
                 ]);
             };

@@ -34,8 +34,8 @@ class SearchRepair extends Repair
         return [
             [['id_repair', 'type_id', 'client_id', 'inve_id', 'status_id', 'user_id', 'store_id', 'priority', 'status'], 'integer'],
             //add other modules tables to safe
-            [['repair_desc', 'date_entry', 'date_close', 'obs', 'client', 'cliContact', 'equip', 'brand', 'model', 'sn', 'username'], 'safe'],
-            [['budget', 'maxBudget', 'total'], 'number'],
+            [['repair_desc', 'date_entry', 'date_close', 'obs', 'client', 'cliContact', 'equip', 'brand', 'model', 'sn', 'username','status_id'], 'safe'],
+            [['workPrice', 'maxBudget', 'total'], 'number'],
         ];
     }
 
@@ -55,7 +55,7 @@ class SearchRepair extends Repair
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$viewType)
     {
     
         $query = Repair::find();
@@ -79,6 +79,14 @@ class SearchRepair extends Repair
             'repair.status' => 1
         ]);
 
+        //FILTER ACCORDING TO VIEW TYPE
+        switch($viewType){
+            case 1:
+                $query->andFilterWhere(['not',['repair.status_id'=>5]]);
+                $query->andFilterWhere(['not',['repair.status_id'=>4]]);
+                break;
+        }
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort'=> ['defaultOrder' => ['date_entry'=>SORT_DESC]],
@@ -96,6 +104,16 @@ class SearchRepair extends Repair
         $dataProvider->sort->attributes['username'] = [
             'asc' => ['user.username' => SORT_ASC],
             'desc' => ['user.username' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['equip'] = [
+            'asc' => ['equipaments.equipDesc' => SORT_ASC],
+            'desc' => ['equipaments.equipDesc' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['model'] = [
+            'asc' => ['models.modelName' => SORT_ASC],
+            'desc' => ['models.modelName' => SORT_DESC],
         ];
 
 

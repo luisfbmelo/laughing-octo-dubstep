@@ -92,13 +92,19 @@ use kartik\datecontrol\DateControl;
             </div>
             
 
+            
+            <div class="row">
+                 <!--DESCRIPTIONS-->
+                <?= $form->field($modelRepair, 'repair_desc', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Descrição da Avaria") ?>
+                <?= $form->field($modelRepair, 'obs', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Outras observações") ?>
+
+            </div>
+
             <div class="row">
       
                 <!-- REPAIR TYPE -->
-                <?= $form->field($modelTypes, 'id_type', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->dropDownList($types,['id'=>'typeID','prompt'=>'--'])->label('Tipo de reparação')?>
-                <?= $form->field($modelRepair, 'priority', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList([''=>'--','1' => 'Alta', '2' => 'Média', '3' => 'Baixa'],['id'=>'priorityID']) ?>
+                <?= $form->field($modelTypes, 'id_type', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->dropDownList($types,['id'=>'typeID','prompt'=>'--'])->label('Tipo de reparação')?> 
             </div>
-
 
             <div class="row">
                  <?php
@@ -131,33 +137,8 @@ use kartik\datecontrol\DateControl;
                     </div>               
                     
                 </div>
-
-                <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 warrantyType" <?= (!$showDate) ? 'style="display:none;"' : "" ?>>
-                    <div class="row">
-
-                        <?php 
-                            echo $form->field($modelRepair, 'warranty_date', ['options' => ['class' => 'col-lg-12 warranty_date']])->widget(DateControl::classname(), [
-                                'displayFormat' => 'dd/MM/yyyy',
-                                'autoWidget' => false,
-                                'widgetClass' => 'yii\widgets\MaskedInput',
-                                'options' => [
-                                    'mask' => '99/99/9999'
-                                ],
-                            ]);
-                        ?>                    
-                        
-                        <input type="hidden" name="warrantyHidden" id="warrantyHidden" <?= (!$showDate) ? 'value="hidden"' : 'value="shown"'?>/>
-                    </div>               
-                    
-                </div>
             </div>
 
-            <div class="row">
-                 <!--DESCRIPTIONS-->
-                <?= $form->field($modelRepair, 'repair_desc', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Descrição da Avaria") ?>
-                <?= $form->field($modelRepair, 'obs', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Outras observações") ?>
-
-            </div>
 
             <div class="row">
                  <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 accessoriesListing">
@@ -200,32 +181,16 @@ use kartik\datecontrol\DateControl;
                         state="hidden";
                     }else{
                         state="shown";
-                        $(".warrantyType").css('display','none');
-                        $("#warrantyHidden").val('hidden');
                     }
 
                     $("#maxBudgetHidden").val(state);
 
                 });
-            
-            }else if(desc==2){
-                $(".warrantyType").toggle(0,function(){
-                    console.log($(".warrantyType").css("display"));
-                    if ($(".warrantyType").css("display")=="none"){
-                        state="hidden";
-                    }else{
-                        state="shown";
-                        $(".normalType").css('display','none');
-                        $("#maxBudgetHidden").val('hidden');
-                    }
 
-                    $("#warrantyHidden").val(state);
-
-                });
             }else{
-                $(".warrantyType").css('display','none');
+                $(".normalType").css('display','none');
                 state = 'hidden';
-                $("#warrantyHidden").val(state);
+                $("#maxBudgetHidden").val(state);
             }
             
         });

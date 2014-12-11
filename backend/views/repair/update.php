@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = 'Editar';
             ]) ?>
     	</div>
     	<div class="col-lg-12">
-    		<div class="repairFields">
+    		<div class="repairFields repairUpdate">
 
     			<h1 class="sectionTitle col-lg-12"><?= Html::encode($this->title) ?></h1>
 

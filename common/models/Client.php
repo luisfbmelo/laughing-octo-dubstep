@@ -38,7 +38,7 @@ class Client extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cliName', 'cliAdress', 'cliPostalCode', 'cliPostalSuffix', 'cliDoorNum', 'cliConFix', 'cliConMov1'], 'required'],
+            [['cliName', 'cliConMov1'], 'required'],
             [['cliPostalCode', 'cliPostalSuffix', 'cliDoorNum', 'cliCC', 'cliNIF', 'cliConFix', 'cliConMov1', 'cliConMov2'], 'integer'],
             [['cliBirthday'], 'safe'],
             [['cliName', 'cliAdress'], 'string', 'max' => 250]

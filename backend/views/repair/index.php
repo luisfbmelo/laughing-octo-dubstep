@@ -23,6 +23,14 @@ if (\Yii::$app->session->get('user.group')!=3){
     $template = '{view}';
 }
 
+if (isset($_GET['list']) && $_GET['list']==1){
+    $queryString = "?list=1";
+    $isFilter = true;
+}else{
+    $queryString ="";
+    $isFilter = false;
+}
+
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -31,9 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <section class="col-lg-10 col-xs-12 col-sm-9 col-md-9">
+    <?php if (!$isFilter){?>
     <div class="row hidden-print">
-
-
         <div class="col-lg-2 col-xs-4 col-sm-4 col-md-4">
             <a href="<?php echo Url::to(['repair/create']); ?>" class="topBtn">
                 <div class="btnEl">
@@ -58,6 +65,8 @@ $this->params['breadcrumbs'][] = $this->title;
             </a>
         </div>
     </div>
+    <?php } ?>
+
     <div class="row hidden-print">
         <div class="col-lg-12">
              <div class="repair-index">
@@ -69,91 +78,176 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
                 <?php if (isset($_GET['SearchRepair'])){?>
-                    <a href="<?php echo Yii::$app->request->baseUrl;?>/repair/index" class="btn btn-default clearBtn">
+                    <a href="<?php echo Yii::$app->request->baseUrl;?>/repair/index<?php echo $queryString;?>" class="btn btn-default clearBtn">
                         <span>Limpar</span>
                     </a>
                 <?php } ?>
 
-                <?= 
+                <?php 
 
-
-
-                GridView::widget([
-                    'dataProvider' => $dataProvider,
-                    'columns' => [
-                        //['class' => 'yii\grid\SerialColumn'],
-                        ['class' => CheckboxColumn::className()],
-                        
-                        'id_repair',
-                        //'type_id',
-                        //'client_id',
-                        //'inve_id',
-                        'repair_desc:ntext',
-                        [
-                            'attribute' => 'store_id',
-                            'label' => 'Local',
-                            'filter' => ArrayHelper::map(stores::find()->where(['status'=>1])->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc'),
-                            'content' => function($model, $index, $dataColumn) {
-                                return $model->getStoreDesc()["storeDesc"];
-                            },
-
-                        ],
-                        [
-                            //data from other modules tables
-                            'attribute' => 'client',
-                            'label' => 'Cliente',
-                            /*'content' => function($model, $index, $dataColumn) {
-                                return $model->getClientName()["cliName"];
-                            }*/
-                            'value' => 'client.cliName'
-
-                        ],
-
-                        [
-                            'attribute' => 'date_entry'/*,
-                            'label' => 'Entrada',
-                            'content' => function($model, $index, $dataColumn){
-                                return $model->getArrangedDate();
-                            }*/
-                        ],
-
-                        [
-                            'attribute' => 'username',
-                            'label' => 'Utilizador',
-                            'value' => 'user.username'
-                        ],
-                        
-                        //'date_entry',
-                        [
-                            'attribute' => 'status_id',
-                            'label' => 'Estado',
-                            'filter' => ArrayHelper::map(status::find()->where(['status'=>1])->asArray()->orderBy('id_status ASC')->all(), 'id_status','statusDesc'),
-                            'content' => function($model, $index, $dataColumn) {
-                                return $status = "<div class='status-color'><span class='circle' style='background-color:#".$model->getStatusDesc()['color'].";'></span><span>".$model->getStatusDesc()["statusDesc"]."</span><span class='clearAll'></span></div>";
-                            },                           
+                if ($isFilter){
+                   echo GridView::widget([
+                        'dataProvider' => $dataProvider,
+                        'columns' => [
+                            //['class' => 'yii\grid\SerialColumn'],
+                            ['class' => CheckboxColumn::className()],
                             
-                        ],
-                        // 'date_close',
-                        // 'store_id',
-                        // 'priority',
-                        // 'budget',
-                        // 'maxBudget',
-                        // 'total',
+                            'id_repair',
+                            //'type_id',
+                            //'client_id',
+                            //'inve_id',
+                            
+                            [
+                                'attribute' => 'store_id',
+                                'label' => 'Local',
+                                'filter' => ArrayHelper::map(stores::find()->where(['status'=>1])->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc'),
+                                'content' => function($model, $index, $dataColumn) {
+                                    return $model->getStoreDesc()["storeDesc"];
+                                },
 
-                        ['class' => 'yii\grid\ActionColumn',
-                            'template' => $template
-                        ],
-                    ],
+                            ],
+                            [
+                                'attribute' => 'equip',
+                                'label' => 'Equipamento',
+                                'content' => function($model, $index, $dataColumn) {
+                                    return $model->getEquipName()["equipDesc"];
+                                },                           
+                                
+                            ],
+                            [
+                                'attribute' => 'model',
+                                'label' => 'Modelo',
+                                'content' => function($model, $index, $dataColumn) {
+                                    return $model->getModelName()["modelName"];
+                                },                           
+                                
+                            ],
+                            'repair_desc:ntext',
+                            [
+                                //data from other modules tables
+                                'attribute' => 'client',
+                                'label' => 'Cliente',
+                                'value' => 'client.cliName'
 
-                    /*'rowOptions' => function ($model, $index, $widget, $grid){
-                        return ['class' => 'status_'.$model->status_id];
-                    },*/
-                    'filterModel' => $searchModel,
-                    'headerRowOptions' =>['class'=>'listHeader'],
-                    'options' => [
-                        'class' => 'grid_listing',
-                    ]
-                ]); ?>
+                            ],
+
+                            [
+                                'attribute' => 'date_entry'/*,
+                                'label' => 'Entrada',
+                                'content' => function($model, $index, $dataColumn){
+                                    return $model->getArrangedDate();
+                                }*/
+                            ],
+                            
+                            
+                            [
+                                'attribute' => 'status_id',
+                                'label' => 'Estado',
+                                'filter' => ArrayHelper::map(status::find()->where(['status'=>1])->andWhere(['not',['id_status'=>4]])->andWhere(['not',['id_status'=>5]])->asArray()->orderBy('id_status ASC')->all(), 'id_status','statusDesc'),
+                                'content' => function($model, $index, $dataColumn) {
+                                    return $status = "<div class='status-color'><span class='circle' style='background-color:#".$model->getStatusDesc()['color'].";'></span><span>".$model->getStatusDesc()["statusDesc"]."</span><span class='clearAll'></span></div>";
+                                },                           
+                                
+                            ],
+
+
+                            ['class' => 'yii\grid\ActionColumn',
+                                'template' => $template
+                            ],
+                        ],
+
+                        /*'rowOptions' => function ($model, $index, $widget, $grid){
+                            return ['class' => 'status_'.$model->status_id];
+                        },*/
+                        'filterModel' => $searchModel,
+                        'headerRowOptions' =>['class'=>'listHeader'],
+                        'options' => [
+                            'class' => 'grid_listing',
+                        ]
+                    ]);
+                }else{
+                  echo  GridView::widget([
+                        'dataProvider' => $dataProvider,
+                        'columns' => [
+                            //['class' => 'yii\grid\SerialColumn'],
+                            ['class' => CheckboxColumn::className()],
+                            
+                            'id_repair',
+                            //'type_id',
+                            //'client_id',
+                            //'inve_id',
+                            
+                            [
+                                'attribute' => 'store_id',
+                                'label' => 'Local',
+                                'filter' => ArrayHelper::map(stores::find()->where(['status'=>1])->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc'),
+                                'content' => function($model, $index, $dataColumn) {
+                                    return $model->getStoreDesc()["storeDesc"];
+                                },
+
+                            ],
+                            [
+                                'attribute' => 'equip',
+                                'label' => 'Equipamento',
+                                'content' => function($model, $index, $dataColumn) {
+                                    return $model->getEquipName()["equipDesc"];
+                                },                           
+                                
+                            ],
+                            [
+                                'attribute' => 'model',
+                                'label' => 'Modelo',
+                                'content' => function($model, $index, $dataColumn) {
+                                    return $model->getModelName()["modelName"];
+                                },                           
+                                
+                            ],
+                            'repair_desc:ntext',
+                            [
+                                //data from other modules tables
+                                'attribute' => 'client',
+                                'label' => 'Cliente',
+                                'value' => 'client.cliName'
+
+                            ],
+
+                            [
+                                'attribute' => 'date_entry'/*,
+                                'label' => 'Entrada',
+                                'content' => function($model, $index, $dataColumn){
+                                    return $model->getArrangedDate();
+                                }*/
+                            ],
+                            
+                            
+                            /*[
+                                'attribute' => 'status_id',
+                                'label' => 'Estado',
+                                'filter' => ArrayHelper::map(status::find()->where(['status'=>1])->asArray()->orderBy('id_status ASC')->all(), 'id_status','statusDesc'),
+                                'content' => function($model, $index, $dataColumn) {
+                                    return $status = "<div class='status-color'><span class='circle' style='background-color:#".$model->getStatusDesc()['color'].";'></span><span>".$model->getStatusDesc()["statusDesc"]."</span><span class='clearAll'></span></div>";
+                                },                           
+                                
+                            ],*/
+
+
+                            ['class' => 'yii\grid\ActionColumn',
+                                'template' => $template
+                            ],
+                        ],
+
+                        /*'rowOptions' => function ($model, $index, $widget, $grid){
+                            return ['class' => 'status_'.$model->status_id];
+                        },*/
+                        'filterModel' => $searchModel,
+                        'headerRowOptions' =>['class'=>'listHeader'],
+                        'options' => [
+                            'class' => 'grid_listing',
+                        ]
+                    ]);
+                }
+
+                 ?>
 
             </div>
         </div>

@@ -105,33 +105,18 @@ use kartik\datecontrol\DateControl;
             </div>
 
             <div class="row">
-                <!--BUDGET-->
-                <?= $form->field($modelRepair, 'budget',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textInput() ?>
-                <?= $form->field($modelRepair, 'total',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textInput() ?>
-            </div>
-
-            <div class="row">
                 <!--STATUS-->
-                <?= $form->field($modelStatus, 'id_status',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->dropDownList($statusAll,['id'=>'statusID','prompt'=>'--'])->label('Estado de reparação') ?>
-                <?= $form->field($modelRepair, 'priority', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList([''=>'--','1' => 'Alta', '2' => 'Média', '3' => 'Baixa'],['id'=>'priorityID']) ?>
+                <?= $form->field($modelStatus, 'id_status',['options' => ['class' => 'col-lg-12 col-xs-12 col-sm-12 col-md-12 required']])->dropDownList($statusAll,['id'=>'statusID','prompt'=>'--'])->label('Estado de reparação') ?>
 
             </div>
 
             <?php
 
                 //budget bar
-                if ($modelTypes->extraData == 1){
+                if ($modelTypes->id_type == 1){
                     $showBar = true;
-                    $showDate = false;
-
-                //warranty bar
-                }else if($modelTypes->extraData == 2){
-                    $showBar = false;
-                    $showDate = true;
-
                 }else{
                     $showBar = false;
-                    $showDate = false;
                 }
               
                 ?>
@@ -152,26 +137,6 @@ use kartik\datecontrol\DateControl;
                             </div>               
                             
                         </div>
-
-                        <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 warrantyType" <?= (!$showDate) ? 'style="display:none;"' : null ?>>
-                            <div class="row">
-
-                                <?php 
-                                    echo $form->field($modelRepair, 'warranty_date', ['options' => ['class' => 'col-lg-12 warranty_date']])->widget(DateControl::classname(), [
-                                        'displayFormat' => 'dd/MM/yyyy',
-                                        'autoWidget' => false,
-                                        'widgetClass' => 'yii\widgets\MaskedInput',
-                                        'options' => [
-                                            'mask' => '99/99/9999'
-                                        ],
-                                    ]);
-                                ?>                    
-                                
-                                <input type="hidden" name="warrantyHidden" id="warrantyHidden" <?= (!$showDate) ? 'value="hidden"' : 'value="shown"'?>/>
-                            </div>               
-                            
-                        </div>
-
                     </div>
                 </div>
                 
@@ -248,6 +213,29 @@ use kartik\datecontrol\DateControl;
             
         </div>
 
+        <!--TOTAL-->
+        <div class="row" style="margin-top:30px">
+            <!--WORKPRICE-->
+            <?= $form->field($modelRepair, 'workPrice',['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-6 col-md-4']])->textInput() ?>  
+
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pull-right" >
+                <table class="formTable table table-striped table-bordered">
+                    <thead>
+                        <tr class="listHeader">
+                            <td>TOTAL</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><?= $form->field($modelRepair, 'total',['options' => ['class' => 'col-lg-12 col-xs-12 col-sm-12 col-md-12']])->textInput()->label(false) ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+
+        <!--END BUTTONS-->
         <div class="row">
             <div class="form-group col-lg-12 col-xs-12 col-sm-12 col-md-12 pageButtons">
                 <?= Html::submitButton($modelRepair->isNewRecord ? 'Criar' : '<span class="glyphicon glyphicon-ok"></span>', ['class' => $modelRepair->isNewRecord ? 'btn btn-success col-lg-1' : 'btn btn-success col-lg-1','name'=>'submit']) ?>
@@ -261,10 +249,35 @@ use kartik\datecontrol\DateControl;
 
 <script>
     $(document).ready(function(){
+        //CHANGE TOTAL VALUE
+        changeTotal();
+
+        function changeTotal(){
+            var workPrice=parseInt($("#repair-workprice").val()),
+            partQuant=0,
+            partTotal=0,
+            totalParts = 0;
+
+            //in case of workPrice NaN
+            workPrice = workPrice || 0;
+
+            $.each($(".partsInsert tbody tr"), function() {
+                partQuant = parseInt($(this).find("input[id^=parts][id$=partquant]").val()) || 0;
+                partTotal = parseInt($(this).find("input[id^=parts][id$=partprice]").val()) || 0;
+                totalParts+=partQuant * partTotal;
+            });
+            
+            $("#repair-total").attr('value', totalParts+workPrice);
+            console.log($("#repair-total").attr('value'));
+        }        
+
+        $(".repairUpdate").on("keyup", "input.partInput, [id^=parts][id$=partprice], [id^=parts][id$=partquant] ,#repair-workprice", function(){
+            changeTotal();
+        });
 
         //DELETE PART
         $("tbody").on("click",'.partRemove div', function(){
-      
+            
             var urlBase = '<?php echo Yii::$app->request->baseUrl;?>';
             var urlDest = urlBase+'/parts/delajax';
             var el = $(this), partId;
@@ -273,9 +286,9 @@ use kartik\datecontrol\DateControl;
             if (el.attr("id")){
                 partId = el.attr("id").split("_").pop();
             }
-
+  
             //if id is ok
-            if (partId!=undefined){
+            if (partId!=undefined && partId!=""){
                 if(confirm("Deseja realmente excluir este item? A operação é irreversível!"))
                 {
                     $.ajax({
@@ -302,6 +315,7 @@ use kartik\datecontrol\DateControl;
                                     el.parent().parent().remove();
                                 }
                             }
+                            changeTotal();
                         },
                         error: function(){
 
@@ -313,6 +327,7 @@ use kartik\datecontrol\DateControl;
             }else{
                 console.log("1");
                 el.parent().parent().remove(); 
+                changeTotal();
             }
             
         });
@@ -331,32 +346,16 @@ use kartik\datecontrol\DateControl;
                         state="hidden";
                     }else{
                         state="shown";
-                        $(".warrantyType").css('display','none');
-                        $("#warrantyHidden").val('hidden');
                     }
 
                     $("#maxBudgetHidden").val(state);
 
                 });
             
-            }else if(desc==2){
-                $(".warrantyType").toggle(0,function(){
-                    console.log($(".warrantyType").css("display"));
-                    if ($(".warrantyType").css("display")=="none"){
-                        state="hidden";
-                    }else{
-                        state="shown";
-                        $(".normalType").css('display','none');
-                        $("#maxBudgetHidden").val('hidden');
-                    }
-
-                    $("#warrantyHidden").val(state);
-
-                });
             }else{
-                $(".warrantyType").css('display','none');
+                $(".normalType").css('display','none');
                 state = 'hidden';
-                $("#warrantyHidden").val(state);
+                $("#maxBudgetHidden").val(state);
             }
             
         });

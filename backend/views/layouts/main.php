@@ -48,9 +48,9 @@ AppAsset::register($this);
                     <div class="col-lg-5 col-xs-12 col-sm-5 col-md-5 profileBox">
                         <div class="userInfo">
                             <div class="userLoged">Bem vindo <strong><?php echo \Yii::$app->session->get('user.name');?></strong>.</div>
-                            <div class="notifications">
+                            <!-- <div class="notifications">
                                 <span>4</span>
-                            </div>
+                            </div> -->
                         </div>
                        <div class="clearAll"></div>
                         <div class="logoutButton">
@@ -77,19 +77,10 @@ AppAsset::register($this);
                             </div>
 
                             <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#">
-                                        <span class="glyphicon glyphicon-envelope"></span> 
-                                        <span>Mensagens</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="accordion-group">
-                                <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['inventory']); ?>">
-                                    <a class="accordion-toggle" data-parent="#leftMenu" href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['inventory/index']); ?>">
-                                        <span class="glyphicon glyphicon-th"></span> 
-                                        <span>Inventário</span>
+                                <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['repair2']); ?>">
+                                    <a class="accordion-toggle" data-parent="#leftMenu" href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['repair/index?list=1']); ?>">
+                                        <span class="glyphicon glyphicon-wrench"></span> 
+                                        <span>Reparações</span>
                                     </a>
                                 </div>
                             </div>
@@ -117,8 +108,6 @@ AppAsset::register($this);
                                 <div id="collapseFive" class="accordion-body collapse <?= (Yii::$app->controller->isActive(['status','stores']) == "activeTop") ? 'in"' : ' ' ?>" <?= (Yii::$app->controller->isActive(['status','stores']) != "activeTop") ? 'style="height:0px;"' : ' ' ?>>
                                     <div class="accordion-inner">
                                         <ul>
-                                            <li><a href="">Clientes</a></li>
-                                            <li class="<?php echo Yii::$app->controller->isActive(['status']); ?>"><a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['status/index']); ?>">Estados</a></li>
                                             <li class="<?php echo Yii::$app->controller->isActive(['stores']); ?>"><a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['stores/index']); ?>">Lojas</a></li>
                                         </ul>                 
                                     </div>

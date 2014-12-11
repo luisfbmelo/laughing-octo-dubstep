@@ -53,11 +53,11 @@ class Repair extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type_id', 'client_id', 'inve_id', 'status_id', 'user_id', 'repair_desc', 'date_entry', 'store_id', 'priority'], 'required'],
+            [['type_id', 'client_id', 'inve_id', 'status_id', 'user_id', 'repair_desc', 'date_entry', 'store_id'], 'required'],
             [['type_id', 'client_id', 'inve_id', 'user_id', 'store_id', 'priority','status_id'], 'integer'],
             [['repair_desc','obs'], 'string'],
             [['date_entry', 'date_close', 'warranty_date'], 'safe'],
-            [['budget', 'maxBudget', 'total'], 'number']
+            [['workPrice', 'maxBudget', 'total'], 'number']
         ];
     }
 
@@ -78,7 +78,7 @@ class Repair extends \yii\db\ActiveRecord
             'date_close' => 'Fecho',
             'store_id' => 'Loja',
             'priority' => 'Prioridade',
-            'budget' => 'Orçamento',
+            'workPrice' => 'Mão de Obra',
             'maxBudget' => 'Orçamento máximo',
             'total' => 'Total',
             'obs' => 'Observações',
@@ -373,7 +373,7 @@ class Repair extends \yii\db\ActiveRecord
             $values['id_part'] = $row['part']['id_part'];
             $values['partCode'] = $row['part']['partCode'];
             $values['partDesc'] = $row['part']['partDesc'];
-            $values['partQuant'] = $row['partQuant'];
+            $values['partQuant'] = $row['part']['partQuant'];
             $values['partPrice'] = $row['part']['partPrice'];
 
             $returnArray[$i] = new parts();
@@ -383,6 +383,23 @@ class Repair extends \yii\db\ActiveRecord
         return $returnArray;
     }
 
+    public function getEquipName(){
+        return Equipaments::find()->joinWith("inventories")->where(['inventory.id_inve'=>$this->inve_id])->asArray()->one();
+    }
+
+    /*public function getBrandName(){
+        return Brands::find()->joinWith("inventories")->where(['brands.id_brand'=>$this->brand_id])->asArray()->one();
+    }*/
+
+    public function getModelName(){
+        return Models::find()->joinWith("inventories")->where(['inventory.id_inve'=>$this->inve_id])->asArray()->one();
+    }
+
+    /**
+     * Get all info of a repair in order to print
+     * @param  int $id Repair ID
+     * @return array     Repair data
+     */
     public function getAllData($id){
         $connection = \Yii::$app->db;
 

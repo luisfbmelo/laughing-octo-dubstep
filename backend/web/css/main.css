@@ -411,22 +411,22 @@ a.topBtn {
   font-size: 1.5em;
   padding: 5px; }
 
-.grid_listing .listHeader, .partsInsert .listHeader {
+.grid_listing .listHeader, .partsInsert .listHeader, .formTable .listHeader {
   background-color: #414957;
   color: white; }
-  .grid_listing .listHeader a, .partsInsert .listHeader a {
+  .grid_listing .listHeader a, .partsInsert .listHeader a, .formTable .listHeader a {
     color: white;
     font-weight: normal;
     font-size: 0.87em; }
-  .grid_listing .listHeader th, .partsInsert .listHeader th {
+  .grid_listing .listHeader td, .grid_listing .listHeader th, .partsInsert .listHeader td, .partsInsert .listHeader th, .formTable .listHeader td, .formTable .listHeader th {
     border: none !important;
     text-align: center; }
-.grid_listing tbody tr, .partsInsert tbody tr {
+.grid_listing tbody tr, .partsInsert tbody tr, .formTable tbody tr {
   text-align: center; }
-  .grid_listing tbody tr td, .partsInsert tbody tr td {
+  .grid_listing tbody tr td, .partsInsert tbody tr td, .formTable tbody tr td {
     vertical-align: middle !important;
     font-size: 0.87em; }
-  .grid_listing tbody tr td .status-color, .partsInsert tbody tr td .status-color {
+  .grid_listing tbody tr td .status-color, .partsInsert tbody tr td .status-color, .formTable tbody tr td .status-color {
     min-width: 130px;
     display: inline-block;
     background-color: #414957;
@@ -437,10 +437,10 @@ a.topBtn {
     border-radius: 15px;
     padding: 5px 10px;
     color: white; }
-    .grid_listing tbody tr td .status-color span, .partsInsert tbody tr td .status-color span {
+    .grid_listing tbody tr td .status-color span, .partsInsert tbody tr td .status-color span, .formTable tbody tr td .status-color span {
       display: block;
       float: left; }
-    .grid_listing tbody tr td .status-color .circle, .partsInsert tbody tr td .status-color .circle {
+    .grid_listing tbody tr td .status-color .circle, .partsInsert tbody tr td .status-color .circle, .formTable tbody tr td .status-color .circle {
       margin-top: 2px;
       background: #f00;
       width: 15px;
@@ -451,20 +451,20 @@ a.topBtn {
       -o-border-radius: 50%;
       border-radius: 50%;
       margin-right: 10px; }
-    .grid_listing tbody tr td .status-color.status_1 .circle, .partsInsert tbody tr td .status-color.status_1 .circle {
+    .grid_listing tbody tr td .status-color.status_1 .circle, .partsInsert tbody tr td .status-color.status_1 .circle, .formTable tbody tr td .status-color.status_1 .circle {
       background-color: #8db4e3; }
-    .grid_listing tbody tr td .status-color.status_2 .circle, .partsInsert tbody tr td .status-color.status_2 .circle {
+    .grid_listing tbody tr td .status-color.status_2 .circle, .partsInsert tbody tr td .status-color.status_2 .circle, .formTable tbody tr td .status-color.status_2 .circle {
       background-color: #fac090; }
-    .grid_listing tbody tr td .status-color.status_3 .circle, .partsInsert tbody tr td .status-color.status_3 .circle {
+    .grid_listing tbody tr td .status-color.status_3 .circle, .partsInsert tbody tr td .status-color.status_3 .circle, .formTable tbody tr td .status-color.status_3 .circle {
       background-color: yellow; }
-    .grid_listing tbody tr td .status-color.status_4 .circle, .partsInsert tbody tr td .status-color.status_4 .circle {
+    .grid_listing tbody tr td .status-color.status_4 .circle, .partsInsert tbody tr td .status-color.status_4 .circle, .formTable tbody tr td .status-color.status_4 .circle {
       background-color: #92d050; }
-    .grid_listing tbody tr td .status-color.status_5 .circle, .partsInsert tbody tr td .status-color.status_5 .circle {
+    .grid_listing tbody tr td .status-color.status_5 .circle, .partsInsert tbody tr td .status-color.status_5 .circle, .formTable tbody tr td .status-color.status_5 .circle {
       background-color: #7f7f7f; }
 
-.partsInsert .form-group {
+.partsInsert .form-group, .formTable .form-group {
   margin-bottom: 0 !important; }
-  .partsInsert .form-group .help-block {
+  .partsInsert .form-group .help-block, .formTable .form-group .help-block {
     /*display:none;*/ }
 
 .addButton {
