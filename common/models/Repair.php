@@ -462,6 +462,33 @@ From
       return "not";
     }
 
+    /**
+     * Get all repairs that are out of warranty
+     * @return array     Repair data
+     */
+    public function getRepairOutWarranty(){
+        $connection = \Yii::$app->db;
+
+        $repair = $connection
+        ->createCommand('
+            Select
+              repair.id_repair,
+              repair.client_id,
+              client.cliName,
+              repair.date_entry
+            From
+              repair Inner Join
+              client On repair.client_id = client.id_client
+            Where
+              repair.date_entry < Date_Sub(Now(), Interval 25 Day)  AND repair.date_entry > Date_Sub(Now(), Interval 30 Day)
+            Order By
+              repair.date_entry');
+
+
+        $model = $repair->queryAll();
+        return $model;
+    }
+
     public function beforeDelete()
     {
         if (parent::beforeDelete()) {

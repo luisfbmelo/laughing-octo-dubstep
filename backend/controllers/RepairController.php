@@ -618,9 +618,9 @@ class RepairController extends Controller
 
         $allAccess = ArrayHelper::map($modelAccess->getAllAccess(), 'id_accessories', 'accessDesc');
 
-        $allStatus = ArrayHelper::map($modelStatus->getAllStatus(),'id_status','statusDesc');
+        //$allStatus = ArrayHelper::map($modelStatus->getAllStatus(),'id_status','statusDesc');
 
-
+        $allStatus = status::find()->where(['status'=>1])->andWhere(['not',['id_status'=>5]])->asArray()->all();
         
 
         if (isset($_POST['cancelar'])){
@@ -1106,5 +1106,49 @@ class RepairController extends Controller
             }
         }
         return $itemsArray;
+    }
+
+    /**
+     * Sends an email to the specified email address using the information collected by this model.
+     *
+     * @param  string  $email the target email address
+     * @return boolean whether the email was sent
+     */
+    public function actionCheckwarranty()
+    {
+        $repairs = repair::getRepairOutWarranty();
+
+        if (sizeof($repairs)>0){
+
+            $body = "Foi detetado que algumas reparações estão prestes a terminar a garantia de reparação nos próximos 5 dias. <br/>
+            Aceda ao portal em <a href=\"http://sat.toquereservado.pt/dev/backend/web\">http://sat.toquereservado.pt/dev/backend/web</a> e verifique as reparações com os seguintes ID's (números identificadores):
+                <ul>
+            ";
+
+            foreach($repairs as $row) {
+                $body.='
+                <li>
+                    '.$row["id_repair"].'
+                </li>
+                ';
+            }
+
+            $body.="</ul>";
+
+            //echo $body;       
+
+            $to = "luisfbmelo91@gmail.com";
+            $from = $to;
+            $subject = "Test";
+
+            $name='=?UTF-8?B?'.base64_encode("Teste").'?=';
+            $subject='=?UTF-8?B?'.base64_encode($subject).'?=';
+            $headers="From: $name <{$from}>\r\n".
+                "Reply-To: {$to}\r\n".
+                "MIME-Version: 1.0\r\n".
+                "Content-Type: text/plain; charset=UTF-8";
+
+            mail($to,$subject,$body,$headers);
+        }
     }
 }

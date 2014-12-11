@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\datecontrol\DateControl;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\repair */
@@ -104,12 +105,6 @@ use kartik\datecontrol\DateControl;
                 <?= $form->field($modelRepair, 'obs', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Outras observações") ?>
             </div>
 
-            <div class="row">
-                <!--STATUS-->
-                <?= $form->field($modelStatus, 'id_status',['options' => ['class' => 'col-lg-12 col-xs-12 col-sm-12 col-md-12 required']])->dropDownList($statusAll,['id'=>'statusID','prompt'=>'--'])->label('Estado de reparação') ?>
-
-            </div>
-
             <?php
 
                 //budget bar
@@ -161,6 +156,41 @@ use kartik\datecontrol\DateControl;
             
             </div>            
             
+        </div>
+
+        <div class="row">
+            <!--WORKPRICE-->
+            <?= $form->field($modelRepair, 'workPrice',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textInput() ?> 
+
+            <!--STATUS-->
+            <div class="col-lg-6 col-md-12 col-sm-6 col-xs-6 ">
+                <label class="control-label" for="status-id_status">Estado da reparação</label>
+                <div class="statusButtons">
+                    <?php 
+                    if (isset($statusAll) && sizeof($statusAll)>0){
+                        /*echo $form->field($modelStatus, 'id_status', ['options' => ['class' => 'clearPad']])->radioList(ArrayHelper::map($statusAll,'id_status','statusDesc'),['unselect'=> 0,'class'=>'checkboxList','itemOptions'=>['labelOptions'=>['style'=>'background-color:#']]])->label("Estado da reparação");*/
+
+
+                        $bodyHtml="";
+                        foreach($statusAll as $i=>$row){
+                            if ($modelStatus->id_status==$row['id_status']){
+                                $check = "checked";
+                            }else{
+                                $check = "";
+                            }
+                            $bodyHtml.='
+                            <span class="statusContainer">
+                                
+                                <input type="radio" name="Status[id_status]" id="status_'.$row["id_status"].'" value="'.$row["id_status"].'" '.$check.'/>
+                                <label for="status_'.$row["id_status"].'" class="status_'.$row["id_status"].'">'.$row["statusDesc"].'</label>
+                            </span>';
+                        }
+                        $bodyHtml.='<div class="clearAll"></div>';
+                        echo $bodyHtml;
+                    }
+                     ?>
+                </div>
+            </div>
         </div>
 
         <div class="partsContainer row">
@@ -215,8 +245,7 @@ use kartik\datecontrol\DateControl;
 
         <!--TOTAL-->
         <div class="row" style="margin-top:30px">
-            <!--WORKPRICE-->
-            <?= $form->field($modelRepair, 'workPrice',['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-6 col-md-4']])->textInput() ?>  
+             
 
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pull-right" >
                 <table class="formTable table table-striped table-bordered">

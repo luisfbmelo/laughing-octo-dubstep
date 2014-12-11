@@ -90,28 +90,5 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
-    }
-
-    /**
-     * Sends an email to the specified email address using the information collected by this model.
-     *
-     * @param  string  $email the target email address
-     * @return boolean whether the email was sent
-     */
-    public function actionEmail()
-    {
-        $to = "luisfbmelo91@gmail.com";
-        $from = $to;
-        $subject = "Test";
-        $body = "This was a test";
-
-            $name='=?UTF-8?B?'.base64_encode("Teste").'?=';
-                $subject='=?UTF-8?B?'.base64_encode($subject).'?=';
-                $headers="From: $name <{$from}>\r\n".
-                    "Reply-To: {$to}\r\n".
-                    "MIME-Version: 1.0\r\n".
-                    "Content-Type: text/plain; charset=UTF-8";
-
-                mail($to,$subject,$body,$headers);
-    }
+    }  
 }

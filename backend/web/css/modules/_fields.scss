@@ -44,6 +44,83 @@
 			
 		}
 
+		/*STATUS BUTTONS*/
+		.statusButtons{
+			margin-bottom:15px;
+			.statusContainer{
+				display:block;
+				/*float:left;*/
+				padding:5px;
+				margin-right:5px;
+
+				&:hover{
+					cursor:pointer;
+				}
+
+				label{
+					margin:0;
+					display: inline-block;  
+				    cursor: pointer;  
+				    position: relative;  
+				    padding-left: 25px;  
+				    margin-right: 15px;  
+				    font-size: 14px; 
+
+					&:hover{
+						cursor:pointer;
+					}
+				}
+
+				label:before {  
+				    content: "";  
+				    display: inline-block;  
+				  
+				    width: 16px;  
+				    height: 16px;  
+				  
+				    margin-right: 10px;  
+				    position: absolute;  
+				    left: 0;  
+				    bottom: 1px;   
+				    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);  
+				    border-radius: 8px;  
+				}
+
+				label.status_1:before{
+					background-color:$status1;			    		    			
+	    		}
+
+	    		label.status_2:before{
+					background-color:$status2;			    		    			
+	    		}
+
+	    		label.status_3:before{
+					background-color:$status3;			    		    			
+	    		}
+
+	    		label.status_4:before{
+					background-color:$status4;			    		    			
+	    		}
+
+	    		label.status_5:before{
+					background-color:$status5;			    		    			
+	    		}
+				
+
+				input[type=radio] {  
+				    display: none;  
+				} 
+
+				input[type=radio]:checked + label:before {  
+				    content: "\2022";  
+				    color: #000;  
+				    font-size: 30px;  
+				    text-align: center;  
+				    line-height: 18px;  
+				}  
+			}
+		}
+
 		/*ACCESSORIES ERROR BOX*/
 		.field-accessories-id_accessories > .help-block{
 			display:none;
