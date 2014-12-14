@@ -403,6 +403,7 @@ class RepairController extends Controller
                     }else{
                         //add equip
                         if (Yii::$app->request->post('equipId')!="new"){
+                            echo "1";
                            $modelEquip->id_equip = Yii::$app->request->post('equipId'); 
                        }else{
                             $equipArray = [
@@ -413,6 +414,7 @@ class RepairController extends Controller
                             ];
                             $modelEquip->id_equip = $modelRepair->addModelData($modelEquip,$equipArray);
                        }
+
 
                        if (Yii::$app->request->post('brandId')!="new"){
                            $modelBrands->id_brand = Yii::$app->request->post('brandId'); 
@@ -425,7 +427,7 @@ class RepairController extends Controller
                             ];
                             $modelBrands->id_brand = $modelRepair->addModelData($modelBrands,$brandArray);
                        }
-
+                       
 
                         $modelArray = [
                             'id_model' => NULL,
@@ -438,7 +440,6 @@ class RepairController extends Controller
                         $modelModels->id_model = $modelRepair->addModelData($modelModels,$modelArray);
                         
                     }
-
                     
                     //ADD INVENTORY
                     $invArray = [

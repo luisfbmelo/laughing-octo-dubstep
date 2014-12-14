@@ -68,7 +68,6 @@ use kartik\datecontrol\DateControl;
         
 
         <div class="repairData">
-        <?php echo is_numeric($modelBrands->id_brand);?>
 
             <!--EQUIPMENT-->
             <div class="row equipList">

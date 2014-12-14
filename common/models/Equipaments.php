@@ -31,7 +31,7 @@ class Equipaments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_equip','equipDesc'], 'required'],
+            [['equipDesc'], 'required'],
             [['equipDesc'], 'string']
         ];
     }
