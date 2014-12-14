@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
         </div>
-        <div class="col-lg-12">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <div class="repairFields viewField">
 
                 <h1 class="sectionTitle col-lg-12"><?= Html::encode($this->title) ?></h1>
@@ -137,7 +137,7 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                                     <?php }else{ ?>
                                     <td></td>
                                     <?php } ?>
-                                    <td colspan="3" rowspan="3">asd<?php echo $modelRepair->obs;?></td>
+                                    <td colspan="3" rowspan="3"><?php echo $modelRepair->obs;?></td>
                                 </tr>
                                 
                                 <tr>
@@ -326,8 +326,8 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                                     </tr>
 
                                     <tr>
-                                        <td>Orçamento</td>
-                                        <td colspan="4" class="priceTag"><?php echo $modelRepair->budget;?></td>
+                                        <td>Mão de obra</td>
+                                        <td colspan="4" class="priceTag"><?php echo $modelRepair->workPrice;?></td>
                                     </tr>
                                     
                                 </tbody>
@@ -350,13 +350,16 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                     </div>
 
                     <?php if (isset($items) && sizeof($items)>0){?>
+
                     <table class="partsInsert table table-striped table-bordered">
                         <thead>
+                            <tr class="listHeader">
+                                <td colspan="4" style="font-weight:bold;">Peças</td>
+                            </tr>
                             <tr class="listHeader">
                                 <td>Código</td>
                                 <td>Quantidade</td>
                                 <td>Designação</td>
-                                <td>Preço</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -368,7 +371,6 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                                         <td><?php echo $item['partCode'];?></td>
                                         <td><?php echo $item['partQuant'];?></td>
                                         <td><?php echo $item['partDesc'];?></td>
-                                        <td class="priceTag"><?php echo $item['partPrice'];?></td>
                                                                         
                                     </tr>
                             <?php }?>
@@ -376,6 +378,20 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                         </tbody>
                     </table>
                     <?php } ?>
+
+                    <table class="table table-bordered repairDesc">
+                        <thead>                    
+                            <tr>
+                                <td>Mão de obra</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="priceTag" style="text-align:left;"><?php echo $modelRepair->workPrice;?></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 
                     <div class="row repairTotal">
                         <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">

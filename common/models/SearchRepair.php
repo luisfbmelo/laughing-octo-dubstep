@@ -78,11 +78,11 @@ class SearchRepair extends Repair
         $query->andFilterWhere([
             'repair.status' => 1
         ]);
+        $query->andFilterWhere(['not',['repair.status_id'=>5]]);
 
         //FILTER ACCORDING TO VIEW TYPE
         switch($viewType){
             case 1:
-                $query->andFilterWhere(['not',['repair.status_id'=>5]]);
                 $query->andFilterWhere(['not',['repair.status_id'=>4]]);
                 break;
         }

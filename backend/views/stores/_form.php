@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 <?php echo $form->errorSummary([$model]); ?>
 
 <div class="row">
-	<?= $form->field($model, 'storeDesc', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput()->label('Nome da loja') ?>
+	<?= $form->field($model, 'storeDesc', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textInput()->label('Nome da loja') ?>
 </div>
 
 <div class="row form-group">

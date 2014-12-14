@@ -97,7 +97,7 @@ class RepairController extends Controller
         /*print_r(Yii::$app->request->queryParams);
         die();*/
         $searchModel = new SearchRepair();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, 0);
 
         return $this->render('search', [
             'searchModel' => $searchModel,
@@ -156,11 +156,13 @@ class RepairController extends Controller
 
         if (isset($_GET['list']) && is_numeric($_GET['list']) && $_GET['list']>0){
             $viewType = $_GET['list'];
+        }else{
+            $viewType = 0;
         }
         
         $searchModel = new SearchRepair();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $viewType);
-
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -205,7 +207,9 @@ class RepairController extends Controller
 
         $allAccess = ArrayHelper::map($modelAccess->getAllAccess(), 'id_accessories', 'accessDesc');
 
-        $allStatus = ArrayHelper::map($modelStatus->getAllStatus(),'id_status','statusDesc');
+        //$allStatus = ArrayHelper::map($modelStatus->getAllStatus(),'id_status','statusDesc');
+        
+        $allStatus = status::find()->where(['status'=>1])->asArray()->all();
 
         /*SET DEFAULT DATA*/
         //stores

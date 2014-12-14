@@ -19,26 +19,26 @@ use yii\widgets\ActiveForm;
 </div>
 
 <div class="row">
-    <?= $form->field($model, 'username',['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->label('Nome de utilizador') ?>
+    <?= $form->field($model, 'username',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->label('Nome de utilizador') ?>
 </div>
 
 <div class="row">
-    <?= $form->field($model, 'email',['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->label('E-mail') ?>
+    <?= $form->field($model, 'email',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->label('E-mail') ?>
 </div>
 
 <div class="row">
-    <?= $form->field($model, 'password',['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->passwordInput()->label('Password') ?>
+    <?= $form->field($model, 'password',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->passwordInput()->label('Password') ?>
 </div>
 <div class="row">
-    <?= $form->field($model, 'password_repeat',['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->passwordInput()->label('Confirme a password') ?>
-</div>
-
-<div class="row">
-    <?= $form->field($modelGroups, 'id_group', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->dropDownList($allGroups,['id'=>'groupId','prompt'=>'--'])->label('Privilégios')?>
+    <?= $form->field($model, 'password_repeat',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->passwordInput()->label('Confirme a password') ?>
 </div>
 
 <div class="row">
-    <?= $form->field($modelStores, 'id_store', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->dropDownList($allStores,['id'=>'storeID','prompt'=>'--'])->label('Loja')?>
+    <?= $form->field($modelGroups, 'id_group', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList($allGroups,['id'=>'groupId','prompt'=>'--'])->label('Privilégios')?>
+</div>
+
+<div class="row">
+    <?= $form->field($modelStores, 'id_store', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList($allStores,['id'=>'storeID','prompt'=>'--'])->label('Loja')?>
 </div>
 
 <div class="row form-group">

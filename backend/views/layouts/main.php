@@ -186,7 +186,7 @@ AppAsset::register($this);
     <div class="statusBox ajaxError const">
         <div class="statusMessage flash-error">
             <div class="glyphicon glyphicon-ok" style="font-size:3em;margin-bottom:0.5em;"></div>
-            <div><strong>Não foi possível eliminar.</strong><br/>Verifique se existe alguma reparação associada.</div>
+            <div><strong>Não foi possível eliminar.</strong><br/>Verifique se existe alguma reparação ou utilizador associados.</div>
             <div class="closeBtn">
                 <span class="glyphicon glyphicon-remove"></span>
             </div>

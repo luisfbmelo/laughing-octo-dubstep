@@ -46,7 +46,7 @@ use kartik\datecontrol\DateControl;
             <div class="row">
                 <?= $form->field($modelClient, 'cliDoorNum', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
                 <?= $form->field($modelClient, 'cliPostalCode', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
-                <?= $form->field($modelClient, 'cliPostalSuffix', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
+                <?= $form->field($modelClient, 'cliPostalSuffix', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput(['placeholder'=>'000']) ?>
             </div>  
           
             <div class="row">
@@ -101,9 +101,10 @@ use kartik\datecontrol\DateControl;
             </div>
 
             <div class="row">
-      
                 <!-- REPAIR TYPE -->
-                <?= $form->field($modelTypes, 'id_type', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->dropDownList($types,['id'=>'typeID','prompt'=>'--'])->label('Tipo de reparação')?> 
+                <?= $form->field($modelTypes, 'id_type', ['options' => ['class' => 'col-lg-12 col-xs-12 col-sm-12 col-md-12 required']])->dropDownList($types,['id'=>'typeID','prompt'=>'--'])->label('Tipo de reparação')?> 
+            
+
             </div>
 
             <div class="row">
@@ -129,7 +130,7 @@ use kartik\datecontrol\DateControl;
               
                 ?>
                 <!--BUDGET/DATE SELECTION-->
-                <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 normalType" <?= (!$showBar) ? 'style="display:none;"' : "" ?>>
+                <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 normalType" <?= (!$showBar) ? 'style="display:none;"' : "" ?>>
                     <div class="row">
                         <?= $form->field($modelRepair, 'maxBudget', ['options' => ['class' => 'col-lg-12 maxBudget']])->textInput(['maxlength' => 10]) ?>                    
                         
@@ -141,7 +142,7 @@ use kartik\datecontrol\DateControl;
 
 
             <div class="row">
-                 <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 accessoriesListing">
+                 <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6 accessoriesListing">
                     <!--ACCESSORIES-->
                     <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
                         <label>

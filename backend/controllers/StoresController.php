@@ -6,6 +6,8 @@ use Yii;
 use common\models\Stores;
 use common\models\StoresSearch;
 use common\models\Repair;
+use common\models\User;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -129,16 +131,20 @@ class StoresController extends Controller
 
         $obj = $this->findModel($id);
 
-        $exists = Repair::find()->where([ 'store_id' => $obj->id_store])->exists();
-        if (!$exists){
+        $existsRepair = Repair::find()->where([ 'store_id' => $obj->id_store])->exists();
+        $existsUser = User::find()->where([ 'store_id' => $obj->id_store])->exists();
+        if (!$existsRepair && !$existsUser){
             $obj->status = 0;
             $obj->save();
             /*Yii::$app->session->setFlash('actionSuccess','Elemento eliminado com sucesso.');*/
             return $this->redirect(['index']); 
-        }else{
+        }else if($existsRepair){
             Yii::$app->session->setFlash('errorHasRepair','<strong>Impossível remover!</strong><br/>Esta loja está associada a uma ou mais reparações.');
             return $this->redirect(['index']); 
-        }  
+        }else if($existsUser){
+            Yii::$app->session->setFlash('errorHasRepair','<strong>Impossível remover!</strong><br/>Esta loja está associada a um ou mais utilizadores.');
+            return $this->redirect(['index']); 
+        }
     }
 
     /**
@@ -166,9 +172,12 @@ class StoresController extends Controller
             try {
                 //removes all projects
                 foreach($listarray as $store){
-                    $exists = Repair::find()->where([ 'store_id' => $store])->exists();
-                    if ($exists){
+                    $existsRepair = Repair::find()->where([ 'store_id' => $store])->exists();
+                    $existsUser = User::find()->where([ 'store_id' => $store])->exists();
+                    if ($existsRepair){
                         throw new Exception('It has repair.');
+                    }else if($existsUser){
+                        throw new Exception('It has user.');
                     }else{
                         $obj = stores::find()->where(['id_store'=>$store])->one();
                         $obj->status = 0;

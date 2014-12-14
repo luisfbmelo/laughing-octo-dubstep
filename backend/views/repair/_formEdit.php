@@ -247,7 +247,7 @@ use yii\helpers\ArrayHelper;
         <div class="row" style="margin-top:30px">
              
 
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 pull-right" >
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" >
                 <table class="formTable table table-striped table-bordered">
                     <thead>
                         <tr class="listHeader">

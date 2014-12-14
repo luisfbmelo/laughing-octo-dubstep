@@ -111,32 +111,13 @@ use kartik\datecontrol\DateControl;
                 <?= $form->field($modelRepair, 'obs', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4,'readonly'=>'readonly'])->label("Outras observações") ?>
             </div>
 
-            <div class="row">
-                <!--BUDGET-->
-                <?= $form->field($modelRepair, 'workPrice',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textInput(['readonly'=>'readonly']) ?>
-                <?= $form->field($modelRepair, 'total',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textInput(['readonly'=>'readonly']) ?>
-            </div>
-
-            <div class="row">
-                <!--STATUS-->
-                <?= $form->field($modelStatus, 'statusDesc',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6 required']])->textInput(['readonly'=>'readonly'])->label('Estado de reparação') ?>
-            </div>
-
             <?php
 
                 //budget bar
-                if ($modelTypes->extraData == 1){
+                if ($modelTypes->id_type == 1){
                     $showBar = true;
-                    $showDate = false;
-
-                //warranty bar
-                }else if($modelTypes->extraData == 2){
-                    $showBar = false;
-                    $showDate = true;
-
                 }else{
                     $showBar = false;
-                    $showDate = false;
                 }
               
                 ?>
@@ -152,27 +133,6 @@ use kartik\datecontrol\DateControl;
                         <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 normalType" <?= (!$showBar) ? 'style="display:none;"' : null ?>>
                             <div class="row">
                                 <?= $form->field($modelRepair, 'maxBudget', ['options' => ['class' => 'col-lg-12 maxBudget']])->textInput(['readonly'=>'readonly']) ?>      
-                            </div>               
-                            
-                        </div>
-
-                        <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 warrantyType" <?= (!$showDate) ? 'style="display:none;"' : null ?>>
-                            <div class="row">
-
-                                <?php 
-                                    echo $form->field($modelRepair, 'warranty_date', ['options' => ['class' => 'col-lg-12 warranty_date','readonly'=>'readonly']])->widget(DateControl::classname(), [
-                                        'displayFormat' => 'dd/MM/yyyy',
-                                        'autoWidget' => false,
-                                        'widgetClass' => 'yii\widgets\MaskedInput',
-                                        'options' => [
-                                            'mask' => '99/99/9999',
-                                            'options' => [
-                                                'class' => 'form-control',
-                                                'readonly' => 'readonly'
-                                            ],
-                                        ],
-                                    ]);
-                                ?>                    
                             </div>               
                             
                         </div>
@@ -211,7 +171,42 @@ use kartik\datecontrol\DateControl;
                     
                 </div>
             
-            </div>            
+            </div>    
+
+             <div class="row">
+            <!--WORKPRICE-->
+            <?= $form->field($modelRepair, 'workPrice',['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textInput(['readonly'=>'readonly']) ?> 
+
+            <!--STATUS-->
+            <div class="col-lg-6 col-md-12 col-sm-6 col-xs-6 ">
+                <label class="control-label" for="status-id_status">Estado da reparação</label>
+                <div class="statusButtons">
+                    <?php 
+                    if (isset($statusAll) && sizeof($statusAll)>0){
+                        /*echo $form->field($modelStatus, 'id_status', ['options' => ['class' => 'clearPad']])->radioList(ArrayHelper::map($statusAll,'id_status','statusDesc'),['unselect'=> 0,'class'=>'checkboxList','itemOptions'=>['labelOptions'=>['style'=>'background-color:#']]])->label("Estado da reparação");*/
+
+
+                        $bodyHtml="";
+                        foreach($statusAll as $i=>$row){
+                            if ($modelStatus->id_status==$row['id_status']){
+                                $check = "checked";
+                            }else{
+                                $check = "";
+                            }
+                            $bodyHtml.='
+                            <span class="statusContainer">
+                                
+                                <input type="radio" name="Status[id_status]" id="status_'.$row["id_status"].'" value="'.$row["id_status"].'" '.$check.' disabled/>
+                                <label for="status_'.$row["id_status"].'" class="status_'.$row["id_status"].'">'.$row["statusDesc"].'</label>
+                            </span>';
+                        }
+                        $bodyHtml.='<div class="clearAll"></div>';
+                        echo $bodyHtml;
+                    }
+                     ?>
+                </div>
+            </div>
+        </div>       
             
         </div>
         <?php 
@@ -223,29 +218,49 @@ use kartik\datecontrol\DateControl;
                     </div>
                 </div>
 
-                    <table class="partsInsert table table-striped table-bordered">
-                        <thead>
-                            <tr class="listHeader">
-                      
-                                <td>Código</td>
-                                <td>Quantidade</td>
-                                <td>Designação</td>
-                                <td>Preço</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php 
-                                foreach($items as $i=>$item){
-                                ?>
-                                    <tr id="line_<?php echo $i;?>">
-                                        <td><?= $form->field($item,"[$i]partCode")->textInput(['readonly'=>'readonly'])->label(false) ?></td>
-                                        <td><?= $form->field($item,"[$i]partQuant")->textInput(['readonly'=>'readonly'])->label(false) ?></td>
-                                        <td><?= $form->field($item,"[$i]partDesc")->textInput(['readonly'=>'readonly'])->label(false) ?></td>
-                                        <td><?= $form->field($item,"[$i]partPrice")->textInput(['readonly'=>'readonly'])->label(false) ?><input type="hidden" id="parts-<?php echo $i; ?>-id_part" class="form-control" name="Parts[<?php echo $i; ?>][id_part]" value="<?php echo $item->id_part;?>"></td>
-                                                                        
-                                    </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
-        <?php }
-        ActiveForm::end();?>
+                <table class="partsInsert table table-striped table-bordered">
+                    <thead>
+                        <tr class="listHeader">
+                  
+                            <td>Código</td>
+                            <td>Quantidade</td>
+                            <td>Designação</td>
+                            <td>Preço</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                            foreach($items as $i=>$item){
+                            ?>
+                                <tr id="line_<?php echo $i;?>">
+                                    <td><?= $form->field($item,"[$i]partCode")->textInput(['readonly'=>'readonly'])->label(false) ?></td>
+                                    <td><?= $form->field($item,"[$i]partQuant")->textInput(['readonly'=>'readonly'])->label(false) ?></td>
+                                    <td><?= $form->field($item,"[$i]partDesc")->textInput(['readonly'=>'readonly'])->label(false) ?></td>
+                                    <td><?= $form->field($item,"[$i]partPrice")->textInput(['readonly'=>'readonly'])->label(false) ?><input type="hidden" id="parts-<?php echo $i; ?>-id_part" class="form-control" name="Parts[<?php echo $i; ?>][id_part]" value="<?php echo $item->id_part;?>"></td>
+                                                                    
+                                </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+
+                
+
+        <?php } ?>
+        <div class="row" style="margin-top:30px;">            
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" >
+                <table class="formTable table table-striped table-bordered">
+                    <thead>
+                        <tr class="listHeader">
+                            <td>TOTAL</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><?= $form->field($modelRepair, 'total',['options' => ['class' => 'col-lg-12 col-xs-12 col-sm-12 col-md-12']])->textInput(['readonly'=>'readonly'])->label(false) ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <?php ActiveForm::end(); ?>
