@@ -56,7 +56,7 @@ class Repair extends \yii\db\ActiveRecord
             [['type_id', 'client_id', 'inve_id', 'status_id', 'user_id', 'repair_desc', 'date_entry', 'store_id'], 'required'],
             [['type_id', 'client_id', 'inve_id', 'user_id', 'store_id', 'priority','status_id'], 'integer'],
             [['repair_desc','obs'], 'string'],
-            [['date_entry', 'date_close', 'warranty_date'], 'safe'],
+            [['date_entry', 'date_close', 'date_repaired', 'warranty_date'], 'safe'],
             [['workPrice', 'maxBudget', 'total'], 'number']
         ];
     }
@@ -76,6 +76,7 @@ class Repair extends \yii\db\ActiveRecord
             'repair_desc' => 'Problema',
             'date_entry' => 'Entrada',
             'date_close' => 'Fecho',
+            'date_repaired' => 'Reparado',
             'store_id' => 'Loja',
             'priority' => 'Prioridade',
             'workPrice' => 'Mão de Obra',
@@ -472,14 +473,57 @@ class Repair extends \yii\db\ActiveRecord
               repair.id_repair,
               repair.client_id,
               client.cliName,
-              repair.date_entry
+              repair.date_entry,
+              (30-DATEDIFF(NOW(),repair.date_entry)) as datediff
             From
               repair Inner Join
               client On repair.client_id = client.id_client
             Where
-              repair.date_entry < Date_Sub(Now(), Interval 25 Day)  AND repair.date_entry > Date_Sub(Now(), Interval 30 Day)
+              repair.date_entry <= Date_Sub(Now(), Interval 25 Day)  AND repair.date_entry > Date_Sub(Now(), Interval 30 Day)
             Order By
               repair.date_entry');
+
+
+        $model = $repair->queryAll();
+        return $model;
+    }
+
+    public function getRepairTime($id){
+        $connection = \Yii::$app->db;
+
+        $repair = $connection
+        ->createCommand('
+            Select
+              (30-DATEDIFF(NOW(),repair.date_entry)) as datediff
+            From
+              repair
+            Where
+              repair.id_repair = :id
+            Order By
+              repair.date_entry');
+
+        $repair->bindValue(':id', $id);
+
+
+        $model = $repair->queryAll();
+        return $model;
+    }
+
+    public function getTimeToDeliver($id){
+        $connection = \Yii::$app->db;
+
+        $repair = $connection
+        ->createCommand('
+            Select
+              (DATEDIFF(NOW(),repair.date_repaired)) as datediff
+            From
+              repair
+            Where
+              repair.id_repair = :id
+            Order By
+              repair.date_entry');
+
+        $repair->bindValue(':id', $id);
 
 
         $model = $repair->queryAll();

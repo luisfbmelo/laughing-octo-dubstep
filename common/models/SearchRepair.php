@@ -26,6 +26,10 @@ class SearchRepair extends Repair
     //USER
     public $username;
 
+    //repair custom
+    public $datediffRepair;
+    public $datediffDeliver;
+
     /**
      * @inheritdoc
      */
@@ -34,7 +38,7 @@ class SearchRepair extends Repair
         return [
             [['id_repair', 'type_id', 'client_id', 'inve_id', 'status_id', 'user_id', 'store_id', 'priority', 'status'], 'integer'],
             //add other modules tables to safe
-            [['repair_desc', 'date_entry', 'date_close', 'obs', 'client', 'cliContact', 'equip', 'brand', 'model', 'sn', 'username','status_id'], 'safe'],
+            [['repair_desc', 'date_entry', 'date_close', 'obs', 'client', 'cliContact', 'equip', 'brand', 'model', 'sn', 'username','status_id', 'datediffRepair', 'datediffDeliver'], 'safe'],
             [['workPrice', 'maxBudget', 'total'], 'number'],
         ];
     }
@@ -59,6 +63,7 @@ class SearchRepair extends Repair
     {
     
         $query = Repair::find();
+        $query->select(["*, (30-DATEDIFF(NOW(),repair.date_entry)) as 'datediffRepair', (DATEDIFF(NOW(),repair.date_repaired)) as 'datediffDeliver'"]);
 
         //join other models tables
         $query->innerJoin('client','client.id_client = repair.client_id');
@@ -85,6 +90,12 @@ class SearchRepair extends Repair
             case 1:
                 $query->andFilterWhere(['not',['repair.status_id'=>4]]);
                 break;
+            case 3:
+                $query->andWhere('repair.date_entry <= Date_Sub(Now(), Interval 25 Day)');;
+                break;
+            case 4:
+                $query->andWhere('repair.date_repaired < Date_Sub(Now(), Interval 30 Day)');;
+                break;
         }
 
         $dataProvider = new ActiveDataProvider([
@@ -94,6 +105,16 @@ class SearchRepair extends Repair
                 'pageSize' => 10,
             ],
         ]);
+
+        //add custom repair attributes to sort
+        $dataProvider->sort->attributes['datediffRepair'] = [
+            'asc' => ['datediffRepair' => SORT_ASC],
+            'desc' => ['datediffRepair' => SORT_DESC],
+        ];
+        $dataProvider->sort->attributes['datediffDeliver'] = [
+            'asc' => ['datediffDeliver' => SORT_ASC],
+            'desc' => ['datediffDeliver' => SORT_DESC],
+        ];
 
         //add cliName attributes to sort
         $dataProvider->sort->attributes['client'] = [
@@ -115,7 +136,6 @@ class SearchRepair extends Repair
             'asc' => ['models.modelName' => SORT_ASC],
             'desc' => ['models.modelName' => SORT_DESC],
         ];
-
 
         //for standard gridview with no search
         if (!($this->load($params) && $this->validate())) {
@@ -151,6 +171,10 @@ class SearchRepair extends Repair
         ->andFilterWhere(['like', 'obs', $this->obs])
         ->andFilterWhere(['like', 'date_entry', $this->date_entry])
         ->andFilterWhere(['like', 'date_close', $this->date_close]);
+
+        //repair custom
+        $query->andFilterWhere(['(30-DATEDIFF(NOW(),repair.date_entry))' => $this->datediffRepair]);
+        $query->andFilterWhere(['(DATEDIFF(NOW(),repair.date_repaired))' => $this->datediffDeliver]);
 
         //search on Client data
         $query->andFilterWhere(['like', 'client.cliName', $this->client])

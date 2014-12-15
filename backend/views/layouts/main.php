@@ -115,12 +115,23 @@ AppAsset::register($this);
                             </div>
 
                             <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#">
+                                <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['warranty','topickup']); ?>">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseSix">
                                         <span class="glyphicon glyphicon-warning-sign"></span> 
+                                        <span class="glyphicon glyphicon-<?= (Yii::$app->controller->isActive(['warranty','topickup']) != "activeTop") ? 'plus' : 'minus' ?> secondGliph"></span>
                                         <span>Avisos</span>
                                     </a>
                                 </div>
+                                <div id="collapseSix" class="accordion-body collapse <?= (Yii::$app->controller->isActive(['warranty','topickup']) == "activeTop") ? 'in"' : ' ' ?>" <?= (Yii::$app->controller->isActive(['warranty','topickup']) != "activeTop") ? 'style="height:0px;"' : ' ' ?>>
+                                    <div class="accordion-inner">
+                                        <ul>
+                                            <li class="<?php echo Yii::$app->controller->isActive(['warranty']); ?>"><a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['warning/warranty']); ?>">Garantia</a></li>
+                                        </ul>  
+                                        <ul>
+                                            <li class="<?php echo Yii::$app->controller->isActive(['topickup']); ?>"><a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['warning/pickup']); ?>">Por levantar</a></li>
+                                        </ul>                 
+                                    </div>
+                                 </div>
                             </div>
 
                             <div class="accordion-group">

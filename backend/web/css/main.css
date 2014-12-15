@@ -16,7 +16,9 @@ li{
 	margin:0;
 	padding:0;
 }*/
-#collapseFive ul, #collapseFive li {
+#collapseFive ul, #collapseFive li,
+#collapseSix ul,
+#collapseSix li {
   padding: 0;
   margin: 0; }
 

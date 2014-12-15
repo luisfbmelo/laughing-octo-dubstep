@@ -773,15 +773,22 @@ class RepairController extends Controller
                     }
 
 
-
                     //set final vars
+                    //set repaired date if it is repaired
+                    if ($modelStatus->id_status == 4){
+                        $repairedDate = date('Y-m-d H:i:s');
+                    }else{
+                        $repairedDate = NULL;
+                    }
+                    
                     $modelRepair->attributeToRepair([
                         'id_repair' => $modelRepair->id_repair,
                         'status_id' => $modelStatus->id_status,
                         'store_id' => $modelStores->id_store,
                         'user_id' => \Yii::$app->user->getId(),
                         'type_id' => $modelTypes->id_type,
-                        'client_id' => $clientId
+                        'client_id' => $clientId,
+                        'date_repaired' => $repairedDate
                     ]);
                     
                     /*VALIDATE REPAIR MODEl*/
@@ -1126,14 +1133,14 @@ class RepairController extends Controller
         if (sizeof($repairs)>0){
 
             $body = "Foi detetado que algumas reparações estão prestes a terminar a garantia de reparação nos próximos 5 dias. <br/>
-            Aceda ao portal em <a href=\"http://sat.toquereservado.pt/dev/backend/web\">http://sat.toquereservado.pt/dev/backend/web</a> e verifique as reparações com os seguintes ID's (números identificadores):
+            Aceda ao portal em <a href=\"http://localhost/toque/backend/web/warning/warranty\">http://localhost/toque/backend/web/warning/warranty</a> e verifique as reparações com os seguintes ID's (números identificadores):
                 <ul>
             ";
 
             foreach($repairs as $row) {
                 $body.='
                 <li>
-                    '.$row["id_repair"].'
+                    <a href="http://localhost/toque/backend/web/warning/warranty?SearchRepair%5Bid_repair%5D='.$row["id_repair"].'&SearchRepair%5Bstore_id%5D=&SearchRepair%5Bequip%5D=&SearchRepair%5Bmodel%5D=&SearchRepair%5Brepair_desc%5D=&SearchRepair%5Bclient%5D=&SearchRepair%5Bdate_entry%5D=&SearchRepair%5Bdatediff%5D=">'.$row["id_repair"].'</a>: faltam '.$row["datediff"].' dias para expirar.
                 </li>
                 ';
             }
@@ -1144,7 +1151,7 @@ class RepairController extends Controller
 
             $to = "luisfbmelo91@gmail.com";
             $from = $to;
-            $subject = "Test";
+            $subject = "Garantia a expirar";
 
             $name='=?UTF-8?B?'.base64_encode("Teste").'?=';
             $subject='=?UTF-8?B?'.base64_encode($subject).'?=';
