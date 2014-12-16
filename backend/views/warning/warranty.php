@@ -103,7 +103,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'label' => 'Dias para expirar',
                                 'content' => function($model, $index, $dataColumn) {
                                 	$time = $model->getRepairTime($index);                     
-                                    return  "<span style=\"color:red;font-weight:bold;\">".$time[0]['datediff']."</span>";
+                                    if ($time[0]['datediff']>0){
+                                        return  "<span style=\"color:red;font-weight:bold;\">".$time[0]['datediff']."</span>";
+                                    }else{
+                                        return  "<span style=\"color:red;font-weight:bold;\">Expirou há ".($time[0]['datediff']*-1)." dias</span>";
+                                    } 
                                 },                           
                                 
                             ],

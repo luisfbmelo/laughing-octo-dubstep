@@ -461,7 +461,7 @@ class Repair extends \yii\db\ActiveRecord
     }
 
     /**
-     * Get all repairs that are out of warranty
+     * Get all repairs that are 5 days away from getting out of warranty
      * @return array     Repair data
      */
     public function getRepairOutWarranty(){
@@ -479,7 +479,35 @@ class Repair extends \yii\db\ActiveRecord
               repair Inner Join
               client On repair.client_id = client.id_client
             Where
-              repair.date_entry <= Date_Sub(Now(), Interval 25 Day)  AND repair.date_entry > Date_Sub(Now(), Interval 30 Day)
+              (30-DATEDIFF(NOW(),repair.date_entry)) = 5
+            Order By
+              repair.date_entry');
+
+
+        $model = $repair->queryAll();
+        return $model;
+    }
+
+    /**
+     * Get all repairs that are more than 30 days to pickup
+     * @return array     Repair data
+     */
+    public function getRepairPickup(){
+        $connection = \Yii::$app->db;
+
+        $repair = $connection
+        ->createCommand('
+            Select
+              repair.id_repair,
+              repair.client_id,
+              client.cliName,
+              repair.date_entry,
+              (DATEDIFF(NOW(),repair.date_repaired)) as datediff
+            From
+              repair Inner Join
+              client On repair.client_id = client.id_client
+            Where
+              (DATEDIFF(NOW(),repair.date_repaired)) = 30
             Order By
               repair.date_entry');
 

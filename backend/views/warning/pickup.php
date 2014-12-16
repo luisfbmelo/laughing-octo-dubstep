@@ -26,7 +26,7 @@ if (\Yii::$app->session->get('user.group')!=3){
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Garantia a expirar...';
+$this->title = 'Equipamentos por levantar...';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -102,8 +102,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             	'attribute' => 'datediffDeliver',
                                 'label' => 'Dias após reparado',
                                 'content' => function($model, $index, $dataColumn) {
-                                	$time = $model->getTimeToDeliver($index);                     
-                                    return  "<span style=\"color:red;font-weight:bold;\">".$time[0]['datediff']."</span>";
+                                	$time = $model->getTimeToDeliver($index);
+                                    return  "<span style=\"color:red;font-weight:bold;\">".$time[0]['datediff']."</span>";          
+                                    
                                 },                           
                                 
                             ],

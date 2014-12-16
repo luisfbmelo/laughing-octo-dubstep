@@ -1,7 +1,7 @@
 <?php
 use kartik\datecontrol\Module;
 return [
-    'adminEmail' => 'admin@example.com',
+    'adminEmail' => 'geral@toquereservado.pt',
     'supportEmail' => 'support@example.com',
     'user.passwordResetTokenExpire' => 3600,
     'role' => '',

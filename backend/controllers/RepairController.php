@@ -1121,26 +1121,25 @@ class RepairController extends Controller
     }
 
     /**
-     * Sends an email to the specified email address using the information collected by this model.
-     *
-     * @param  string  $email the target email address
-     * @return boolean whether the email was sent
+     * Sends an email when there are repairs that will have their warranty finished in the next 5 days.
      */
     public function actionCheckwarranty()
     {
-        $repairs = repair::getRepairOutWarranty();
+        $repairs = new Repair();
+        $repairs = $repairs->getRepairOutWarranty();
 
         if (sizeof($repairs)>0){
 
-            $body = "Foi detetado que algumas reparações estão prestes a terminar a garantia de reparação nos próximos 5 dias. <br/>
-            Aceda ao portal em <a href=\"http://localhost/toque/backend/web/warning/warranty\">http://localhost/toque/backend/web/warning/warranty</a> e verifique as reparações com os seguintes ID's (números identificadores):
+            $body = "Foi detetado que algumas reparações estão prestes a terminar a garantia nos próximos <b>5 dias</b>. <br/><br/>
+            Aceda ao portal em <a href=\"http://sat.toquereservado.pt/dev/backend/web/warning/warranty\">www.sat.toquereservado.pt</a> para identificar e resolver o problema das seguintes reparações:
+                <br/>
                 <ul>
             ";
 
             foreach($repairs as $row) {
                 $body.='
                 <li>
-                    <a href="http://localhost/toque/backend/web/warning/warranty?SearchRepair%5Bid_repair%5D='.$row["id_repair"].'&SearchRepair%5Bstore_id%5D=&SearchRepair%5Bequip%5D=&SearchRepair%5Bmodel%5D=&SearchRepair%5Brepair_desc%5D=&SearchRepair%5Bclient%5D=&SearchRepair%5Bdate_entry%5D=&SearchRepair%5Bdatediff%5D=">'.$row["id_repair"].'</a>: faltam '.$row["datediff"].' dias para expirar.
+                    <a href="http://sat.toquereservado.pt/dev/backend/web/warning/warranty?SearchRepair%5Bid_repair%5D='.$row["id_repair"].'&SearchRepair%5Bstore_id%5D=&SearchRepair%5Bequip%5D=&SearchRepair%5Bmodel%5D=&SearchRepair%5Brepair_desc%5D=&SearchRepair%5Bclient%5D=&SearchRepair%5Bdate_entry%5D=&SearchRepair%5Bdatediff%5D=">'.$row["id_repair"].'</a>.
                 </li>
                 ';
             }
@@ -1150,15 +1149,58 @@ class RepairController extends Controller
             //echo $body;       
 
             $to = "luisfbmelo91@gmail.com";
-            $from = $to;
+            $from = \Yii::$app->params["adminEmail"];
             $subject = "Garantia a expirar";
 
-            $name='=?UTF-8?B?'.base64_encode("Teste").'?=';
+            $name='=?UTF-8?B?'.base64_encode("Sistema de Gestão de ToqueReservado").'?=';
             $subject='=?UTF-8?B?'.base64_encode($subject).'?=';
             $headers="From: $name <{$from}>\r\n".
                 "Reply-To: {$to}\r\n".
                 "MIME-Version: 1.0\r\n".
-                "Content-Type: text/plain; charset=UTF-8";
+                "Content-Type: text/html; charset=UTF-8";
+
+            mail($to,$subject,$body,$headers);
+        }
+    }
+
+    /**
+     * Sends and e-mail when a repair is taking more than 30 days to pickup
+     */
+    public function actionPickuptime()
+    {
+        $repairs = new Repair();
+        $repairs = $repairs->getRepairPickup();
+
+        if (sizeof($repairs)>0){
+
+            $body = "Existem equipamentos que não foram levantados pelo cliente após <b>30 dias</b>. <br/><br/>
+            Aceda ao portal em <a href=\"http://sat.toquereservado.pt/dev/backend/web/warning/pickup\">www.sat.toquereservado.pt</a> para identificar e resolver o problema das seguintes reparações:
+            <br/>
+                <ul>
+            ";
+
+            foreach($repairs as $row) {
+                $body.='
+                <li>
+                    <a href="http://sat.toquereservado.pt/dev/backend/web/warning/pickup?SearchRepair%5Bid_repair%5D='.$row["id_repair"].'&SearchRepair%5Bstore_id%5D=&SearchRepair%5Bequip%5D=&SearchRepair%5Bmodel%5D=&SearchRepair%5Brepair_desc%5D=&SearchRepair%5Bclient%5D=&SearchRepair%5Bdate_entry%5D=&SearchRepair%5Bdatediff%5D=">'.$row["id_repair"].'</a>
+                </li>
+                ';
+            }
+
+            $body.="</ul>";
+
+            //echo $body;       
+
+            $to = "luisfbmelo91@gmail.com";
+            $from = \Yii::$app->params["adminEmail"];
+            $subject = "Equipamentos por levantar";
+
+            $name='=?UTF-8?B?'.base64_encode("Sistema de Gestão de ToqueReservado").'?=';
+            $subject='=?UTF-8?B?'.base64_encode($subject).'?=';
+            $headers="From: $name <{$from}>\r\n".
+                "Reply-To: {$to}\r\n".
+                "MIME-Version: 1.0\r\n".
+                "Content-Type: text/html; charset=UTF-8";
 
             mail($to,$subject,$body,$headers);
         }
