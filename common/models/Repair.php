@@ -507,7 +507,7 @@ class Repair extends \yii\db\ActiveRecord
               repair Inner Join
               client On repair.client_id = client.id_client
             Where
-              (DATEDIFF(NOW(),repair.date_repaired)) = 30
+              (DATEDIFF(NOW(),repair.date_repaired)) = 90
             Order By
               repair.date_entry');
 
@@ -556,6 +556,17 @@ class Repair extends \yii\db\ActiveRecord
 
         $model = $repair->queryAll();
         return $model;
+    }
+
+    public function abbreviate($text){
+      $output = preg_split( "/( +|do|da)/", $text);
+      $finalOutput = "";
+
+      foreach ($output as $word){
+        $finalOutput.=substr($word,0,1);
+      }
+
+      return $finalOutput;
     }
 
     public function beforeDelete()

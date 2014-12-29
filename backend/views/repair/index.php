@@ -102,7 +102,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'label' => 'Local',
                                 'filter' => ArrayHelper::map(stores::find()->where(['status'=>1])->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc'),
                                 'content' => function($model, $index, $dataColumn) {
-                                    return $model->getStoreDesc()["storeDesc"];
+                                    $text = $model->getStoreDesc()["storeDesc"];
+                                    $output = $model->abbreviate($text);
+                                    return $output;
                                 },
 
                             ],
@@ -182,7 +184,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'label' => 'Local',
                                 'filter' => ArrayHelper::map(stores::find()->where(['status'=>1])->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc'),
                                 'content' => function($model, $index, $dataColumn) {
-                                    return $model->getStoreDesc()["storeDesc"];
+                                    $text = $model->getStoreDesc()["storeDesc"];
+                                    $output = $model->abbreviate($text);
+                                    return $output;
                                 },
 
                             ],

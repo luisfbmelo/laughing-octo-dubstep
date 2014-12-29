@@ -46,6 +46,7 @@ class UserSearch extends User
         $query->andFilterWhere([
             'user.status' => 1
         ]);
+        $query->andFilterWhere(['not',['user.userTypeAccess'=>2]]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

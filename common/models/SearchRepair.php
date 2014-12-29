@@ -83,18 +83,18 @@ class SearchRepair extends Repair
         $query->andFilterWhere([
             'repair.status' => 1
         ]);
-        $query->andFilterWhere(['not',['repair.status_id'=>5]]);
+        $query->andFilterWhere(['not',['repair.status_id'=>6]]);
 
         //FILTER ACCORDING TO VIEW TYPE
         switch($viewType){
             case 1:
-                $query->andFilterWhere(['not',['repair.status_id'=>4]]);
+                $query->andFilterWhere(['not',['repair.status_id'=>5]]);
                 break;
             case 3:
                 $query->andWhere('repair.date_entry <= Date_Sub(Now(), Interval 25 Day)');;
                 break;
             case 4:
-                $query->andWhere('repair.date_repaired < Date_Sub(Now(), Interval 30 Day)');;
+                $query->andWhere('repair.date_repaired < Date_Sub(Now(), Interval 90 Day)');;
                 break;
         }
 

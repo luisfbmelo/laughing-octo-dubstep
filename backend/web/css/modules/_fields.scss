@@ -87,22 +87,26 @@
 				}
 
 				label.status_1:before{
+					background-color:#fff;			    		    			
+	    		}
+
+				label.status_2:before{
 					background-color:$status1;			    		    			
 	    		}
 
-	    		label.status_2:before{
+	    		label.status_3:before{
 					background-color:$status2;			    		    			
 	    		}
 
-	    		label.status_3:before{
+	    		label.status_4:before{
 					background-color:$status3;			    		    			
 	    		}
 
-	    		label.status_4:before{
+	    		label.status_5:before{
 					background-color:$status4;			    		    			
 	    		}
 
-	    		label.status_5:before{
+	    		label.status_6:before{
 					background-color:$status5;			    		    			
 	    		}
 				

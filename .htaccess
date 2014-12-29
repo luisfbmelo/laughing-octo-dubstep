@@ -19,6 +19,8 @@
   RewriteCond %{SCRIPT_FILENAME} -d
   RewriteCond %{SCRIPT_FILENAME} -f
   RewriteRule "(^|/)\." - [F]
+
+RewriteRule ^(.*)$ backend/web/$1 [L,QSA]
 </IfModule>
 
 

@@ -625,7 +625,7 @@ class RepairController extends Controller
 
         //$allStatus = ArrayHelper::map($modelStatus->getAllStatus(),'id_status','statusDesc');
 
-        $allStatus = status::find()->where(['status'=>1])->andWhere(['not',['id_status'=>5]])->asArray()->all();
+        $allStatus = status::find()->where(['status'=>1])->andWhere(['not',['id_status'=>6]])->asArray()->all();
         
 
         if (isset($_POST['cancelar'])){
@@ -775,7 +775,7 @@ class RepairController extends Controller
 
                     //set final vars
                     //set repaired date if it is repaired
-                    if ($modelStatus->id_status == 4){
+                    if ($modelStatus->id_status == 5){
                         $repairedDate = date('Y-m-d H:i:s');
                     }else{
                         $repairedDate = NULL;
