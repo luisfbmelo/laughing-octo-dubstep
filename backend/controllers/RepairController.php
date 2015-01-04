@@ -1164,7 +1164,7 @@ class RepairController extends Controller
     }
 
     /**
-     * Sends and e-mail when a repair is taking more than 30 days to pickup
+     * Sends and e-mail when a repair is taking more than 90 days to pickup
      */
     public function actionPickuptime()
     {

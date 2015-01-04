@@ -265,7 +265,7 @@ $this->params['breadcrumbs'][] = $this->title;
             case "newEl":
         ?>
             <!-- visible-print-block -->
-            <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12" id="printEntry">
+            <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 visible-print-block" id="printEntry">
                 <div class="row header">
                     <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
                     <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"> 

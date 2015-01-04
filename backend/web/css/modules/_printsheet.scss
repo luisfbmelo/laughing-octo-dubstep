@@ -31,8 +31,8 @@
 				font-weight:normal;
 
 				&:first-child, &.setTableTitle{
-					background:$dark-blue-bg!important;
-					color:white!important;
+					/*background:$dark-blue-bg!important;
+					color:white!important;*/
 					width: 25%;
 					vertical-align: middle;
 					font-weight:bold;
@@ -51,9 +51,9 @@
 	thead{
 		tr > td{
 			font-size:0.8em;
-			background:$dark-blue-bg!important;
-			color:white!important;
-			//font-weight:normal;
+			/*background:$dark-blue-bg!important;
+			color:white!important;*/
+			font-weight:bold;
 		}
 	}
 
@@ -72,8 +72,8 @@
 
 .partsInsert{
 	.listHeader{
-		background-color:$dark-blue-bg!important;
-		color:white!important;
+		/*background-color:$dark-blue-bg!important;
+		color:white!important;*/
 
 		a{
 			color:white!important;
@@ -83,10 +83,11 @@
 
 		td{
 			font-size:0.8em;
-			border:none!important;
+			/*border:none!important;*/
 			text-align:center;
-			background-color:$dark-blue-bg!important;
-			color:white!important;
+			/*background-color:$dark-blue-bg!important;
+			color:white!important;*/
+			font-weight:bold;
 		}	
 	}
 
@@ -109,8 +110,8 @@
 				&.showTotal{
 					width:70%;
 					text-align:right;
-					background-color:$dark-blue-bg!important;
-					color:white!important;
+					/*background-color:$dark-blue-bg!important;
+					color:white!important;*/
 					font-weight:bold!important;
 				}
 			}

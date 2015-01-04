@@ -645,8 +645,8 @@ a.topBtn {
   .repair_details_table table:first-of-type tbody tr > td.setTableTitle,
   .foote table:first-of-type tbody tr > td:first-child,
   .foote table:first-of-type tbody tr > td.setTableTitle {
-    background: #414957 !important;
-    color: white !important;
+    /*background:$dark-blue-bg!important;
+    color:white!important;*/
     width: 25%;
     vertical-align: middle;
     font-weight: bold; }
@@ -659,8 +659,9 @@ a.topBtn {
 
 .repairDesc thead tr > td {
   font-size: 0.8em;
-  background: #414957 !important;
-  color: white !important; }
+  /*background:$dark-blue-bg!important;
+  color:white!important;*/
+  font-weight: bold; }
 .repairDesc tbody tr > td {
   font-size: 0.8em;
   font-weight: normal; }
@@ -669,18 +670,19 @@ a.topBtn {
   vertical-align: middle; }
 
 .partsInsert .listHeader {
-  background-color: #414957 !important;
-  color: white !important; }
+  /*background-color:$dark-blue-bg!important;
+  color:white!important;*/ }
   .partsInsert .listHeader a {
     color: white !important;
     font-weight: normal;
     font-size: 0.87em; }
   .partsInsert .listHeader td {
     font-size: 0.8em;
-    border: none !important;
+    /*border:none!important;*/
     text-align: center;
-    background-color: #414957 !important;
-    color: white !important; }
+    /*background-color:$dark-blue-bg!important;
+    color:white!important;*/
+    font-weight: bold; }
 .partsInsert tbody tr td {
   font-size: 0.8em;
   font-weight: normal; }
@@ -690,8 +692,8 @@ a.topBtn {
   .repairTotal table tbody tr > td.showTotal {
     width: 70%;
     text-align: right;
-    background-color: #414957 !important;
-    color: white !important;
+    /*background-color:$dark-blue-bg!important;
+    color:white!important;*/
     font-weight: bold !important; }
 
 /*BUTTONS*/
