@@ -102,7 +102,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'label' => 'Local',
                                 'filter' => ArrayHelper::map(stores::find()->where(['status'=>1])->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc'),
                                 'content' => function($model, $index, $dataColumn) {
-                                    $text = $model->getStoreDesc()["storeDesc"];
+
+                                    $text = $model->getStoreDesc($model->id_repair)["storeDesc"];
                                     $output = $model->abbreviate($text);
                                     return $output;
                                 },
@@ -145,7 +146,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'attribute' => 'status_id',
                                 'label' => 'Estado',
-                                'filter' => ArrayHelper::map(status::find()->where(['status'=>1])->andWhere(['not',['id_status'=>4]])->andWhere(['not',['id_status'=>5]])->asArray()->orderBy('id_status ASC')->all(), 'id_status','statusDesc'),
+                                'filter' => ArrayHelper::map(status::find()->where(['status'=>1])->andWhere(['not',['id_status'=>5]])->andWhere(['not',['id_status'=>6]])->asArray()->orderBy('id_status ASC')->all(), 'id_status','statusDesc'),
                                 'content' => function($model, $index, $dataColumn) {
                                     return $status = "<div class='status-color'><span class='circle' style='background-color:#".$model->getStatusDesc()['color'].";'></span><span>".$model->getStatusDesc()["statusDesc"]."</span><span class='clearAll'></span></div>";
                                 },                           
@@ -184,7 +185,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'label' => 'Local',
                                 'filter' => ArrayHelper::map(stores::find()->where(['status'=>1])->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc'),
                                 'content' => function($model, $index, $dataColumn) {
-                                    $text = $model->getStoreDesc()["storeDesc"];
+                                    $text = $model->getStoreDesc($model->id_repair)["storeDesc"];
                                     $output = $model->abbreviate($text);
                                     return $output;
                                 },
@@ -656,8 +657,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             console.log(data);
                             if (data=="done"){
                                 $(".overlay").css("display","block");
-                                $(".dinFlash").css("display","block");
-                                $(".dinFlash").delay(2000).fadeOut(500,function(){
+                                $(".ajaxSucc").css("display","block");
+                                $(".ajaxSucc").delay(2000).fadeOut(500,function(){
                                     window.location = window.location.href;
                                 });
                             }

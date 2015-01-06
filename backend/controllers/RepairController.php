@@ -57,6 +57,13 @@ class RepairController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
+                    // allow unauthenticated users
+                    [
+                        'allow' => true,
+                        'actions' => ['checkwarranty','pickuptime'],
+                        'roles' => ['?'],
+                    ],
+
                     // allow authenticated users
                     [
                         'allow' => true,
@@ -162,7 +169,7 @@ class RepairController extends Controller
         
         $searchModel = new SearchRepair();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $viewType);
-        
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -1173,7 +1180,7 @@ class RepairController extends Controller
 
         if (sizeof($repairs)>0){
 
-            $body = "Existem equipamentos que não foram levantados pelo cliente após <b>30 dias</b>. <br/><br/>
+            $body = "Existem equipamentos que não foram levantados pelo cliente após <b>90 dias</b>. <br/><br/>
             Aceda ao portal em <a href=\"http://sat.toquereservado.pt/dev/backend/web/warning/pickup\">www.sat.toquereservado.pt</a> para identificar e resolver o problema das seguintes reparações:
             <br/>
                 <ul>
@@ -1204,5 +1211,20 @@ class RepairController extends Controller
 
             mail($to,$subject,$body,$headers);
         }
+    }
+
+    /**
+     * Lists all repair models.
+     * @return mixed
+     */
+    public function actionTest()
+    {
+
+        
+        $model = repair::find()->where(['id_repair'=>2])->one();
+
+        return $this->render('test', [
+            'modelRepair' => $model
+        ]);
     }
 }

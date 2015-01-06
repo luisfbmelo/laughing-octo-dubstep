@@ -29,7 +29,7 @@ class Stores extends \yii\db\ActiveRecord
     {
         return [
             [['id_store','storeDesc'], 'required'],
-            [['storeDesc'], 'string']
+            [['storeDesc', 'status'], 'string']
         ];
     }
 
@@ -41,6 +41,7 @@ class Stores extends \yii\db\ActiveRecord
         return [
             'id_store' => 'Loja',
             'storeDesc' => 'Nome da loja',
+            'status' => 'Estado'
         ];
     }
 

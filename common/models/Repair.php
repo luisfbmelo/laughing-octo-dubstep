@@ -184,8 +184,9 @@ class Repair extends \yii\db\ActiveRecord
         return User::find()->joinWith("repairs")->where(['user.id_users'=>$this->user_id])->asArray()->one();
     }
 
-    public function getStoreDesc(){
-        return Stores::find()->joinWith("repairs")->where(['stores.id_store'=>$this->store_id])->asArray()->one();
+    public function getStoreDesc($id){
+      //return $this->store_id;
+      return Stores::find()->joinWith("repairs")->where(['repair.id_repair'=>$id])->asArray()->one();
     }
 
     public function getClientName(){
