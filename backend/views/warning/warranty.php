@@ -90,11 +90,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
 
                             [
-                                'attribute' => 'date_entry'/*,
-                                'label' => 'Entrada',
+                                'attribute' => 'date_entry',
                                 'content' => function($model, $index, $dataColumn){
-                                    return $model->getArrangedDate();
-                                }*/
+                                    return date("Y-m-d", strtotime($model->date_entry));
+                                }
                             ],
                             
                             

@@ -5,6 +5,38 @@
 	}
 }
 
+.grid_listing{
+	tbody{
+		tr{
+			td{
+				padding:2px!important;
+
+				a{
+					display:inline-block;
+					padding-right:5px;
+
+					/* one item */
+					&:first-child:nth-last-child(1) {
+						width: 100%;
+					}
+
+					/* two items */
+					&:first-child:nth-last-child(2),
+					&:first-child:nth-last-child(2) ~ a {
+						width: 50%;
+					}
+
+					/* three items */
+					&:first-child:nth-last-child(3),
+					&:first-child:nth-last-child(3) ~ a {
+						width: 33.3333%;
+					}
+				}
+			}
+		}
+	}
+}
+
 .grid_listing, .partsInsert, .formTable{
 	
 
@@ -17,6 +49,7 @@
 			font-weight:normal;
 			font-size:0.87em;
 		}	
+
 
 		td,th{
 			border:none!important;
@@ -34,6 +67,10 @@
 				font-size:0.87em;
 			}
 
+			td:last-of-type{
+				min-width:100px;
+			}
+
 			td{
 
 				.status-color{
@@ -42,7 +79,8 @@
 					background-color:$dark-blue-bg;
 
 					@include border-radius(15px);
-					padding:5px 10px;
+					padding:5px 15px;
+					margin-top:5px;
 
 					color:white;
 
@@ -57,7 +95,7 @@
 					    width: 15px;
 					    height: 15px;
 					    @include border-radius(50%); 
-					    margin-right:10px;
+					    margin-right:5px;
 					}
 
 					&.status_1 .circle{

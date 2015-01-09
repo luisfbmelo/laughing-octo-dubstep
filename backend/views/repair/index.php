@@ -17,14 +17,16 @@ setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
 date_default_timezone_set('Atlantic/Azores');
 
 //get user group and define buttons
-if (\Yii::$app->session->get('user.group')!=3){ 
+if (\Yii::$app->session->get('user.group')!=3 && !(isset($_GET['list']) && $_GET['list']==5)){ 
     $template = '{view}{update}{delete}';
+}else if (!(isset($_GET['list']) && $_GET['list']==5)){
+    $template = '{view}{update}';
 }else{
-    $template = '{view}';
+    $template = '{view}{recover}';
 }
 
-if (isset($_GET['list']) && $_GET['list']==1){
-    $queryString = "?list=1";
+if (isset($_GET['list'])){
+    $queryString = "?list=".$_GET['list'];
     $isFilter = true;
 }else{
     $queryString ="";
@@ -38,7 +40,7 @@ $this->title = 'Lista de reparações';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<section class="col-lg-10 col-xs-12 col-sm-9 col-md-9">
+<section class="col-lg-10 col-xs-12 col-sm-8 col-md-8">
     <?php if (!$isFilter){?>
     <div class="row hidden-print">
         <div class="col-lg-2 col-xs-4 col-sm-4 col-md-4">
@@ -73,9 +75,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h1 class="sectionTitle"><?= Html::encode($this->title) ?></h1>  
 
                 <!-- <input type="button" value="Eliminar" class="btn btn-danger deleteBtn"/> -->  
-                <div class="btn btn-danger deleteBtn">
-                    <span class="glyphicon glyphicon-trash"></span>
-                </div>
+                <?php if (isset($_GET['list']) && $_GET['list']!=5){?>
+                    <div class="btn btn-danger deleteBtn">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </div>
+                <?php } ?>
 
                 <?php if (isset($_GET['SearchRepair'])){?>
                     <a href="<?php echo Yii::$app->request->baseUrl;?>/repair/index<?php echo $queryString;?>" class="btn btn-default clearBtn">
@@ -85,7 +89,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?php 
 
-                if ($isFilter){
                    echo GridView::widget([
                         'dataProvider' => $dataProvider,
                         'columns' => [
@@ -135,11 +138,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
 
                             [
-                                'attribute' => 'date_entry'/*,
-                                'label' => 'Entrada',
+                                'attribute' => 'date_entry',
                                 'content' => function($model, $index, $dataColumn){
-                                    return $model->getArrangedDate();
-                                }*/
+                                    return date("Y-m-d", strtotime($model->date_entry));
+                                }
                             ],
                             
                             
@@ -155,7 +157,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
                             ['class' => 'yii\grid\ActionColumn',
-                                'template' => $template
+                                'template' => $template,
+                                'buttons'=>[
+                                    'recover' => function ($url, $model) {     
+                                        return Html::a('<span class="glyphicon glyphicon-repeat"></span>', ['recover', 'id' => $model->id_repair], [
+                                                'data' => [
+                                                    'confirm' => 'Tem a certeza que deseja recuperar esta reparação?',
+                                                    'method' => 'post',
+                                                ],
+                                            ]);                             
+                                    }
+                                ],
                             ],
                         ],
 
@@ -168,89 +180,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'class' => 'grid_listing',
                         ]
                     ]);
-                }else{
-                  echo  GridView::widget([
-                        'dataProvider' => $dataProvider,
-                        'columns' => [
-                            //['class' => 'yii\grid\SerialColumn'],
-                            ['class' => CheckboxColumn::className()],
-                            
-                            'id_repair',
-                            //'type_id',
-                            //'client_id',
-                            //'inve_id',
-                            
-                            [
-                                'attribute' => 'store_id',
-                                'label' => 'Local',
-                                'filter' => ArrayHelper::map(stores::find()->where(['status'=>1])->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc'),
-                                'content' => function($model, $index, $dataColumn) {
-                                    $text = $model->getStoreDesc($model->id_repair)["storeDesc"];
-                                    $output = $model->abbreviate($text);
-                                    return $output;
-                                },
-
-                            ],
-                            [
-                                'attribute' => 'equip',
-                                'label' => 'Equipamento',
-                                'content' => function($model, $index, $dataColumn) {
-                                    return $model->getEquipName()["equipDesc"];
-                                },                           
-                                
-                            ],
-                            [
-                                'attribute' => 'model',
-                                'label' => 'Modelo',
-                                'content' => function($model, $index, $dataColumn) {
-                                    return $model->getModelName()["modelName"];
-                                },                           
-                                
-                            ],
-                            'repair_desc:ntext',
-                            [
-                                //data from other modules tables
-                                'attribute' => 'client',
-                                'label' => 'Cliente',
-                                'value' => 'client.cliName'
-
-                            ],
-
-                            [
-                                'attribute' => 'date_entry'/*,
-                                'label' => 'Entrada',
-                                'content' => function($model, $index, $dataColumn){
-                                    return $model->getArrangedDate();
-                                }*/
-                            ],
-                            
-                            
-                            /*[
-                                'attribute' => 'status_id',
-                                'label' => 'Estado',
-                                'filter' => ArrayHelper::map(status::find()->where(['status'=>1])->asArray()->orderBy('id_status ASC')->all(), 'id_status','statusDesc'),
-                                'content' => function($model, $index, $dataColumn) {
-                                    return $status = "<div class='status-color'><span class='circle' style='background-color:#".$model->getStatusDesc()['color'].";'></span><span>".$model->getStatusDesc()["statusDesc"]."</span><span class='clearAll'></span></div>";
-                                },                           
-                                
-                            ],*/
-
-
-                            ['class' => 'yii\grid\ActionColumn',
-                                'template' => $template
-                            ],
-                        ],
-
-                        /*'rowOptions' => function ($model, $index, $widget, $grid){
-                            return ['class' => 'status_'.$model->status_id];
-                        },*/
-                        'filterModel' => $searchModel,
-                        'headerRowOptions' =>['class'=>'listHeader'],
-                        'options' => [
-                            'class' => 'grid_listing',
-                        ]
-                    ]);
-                }
+                
 
                  ?>
 
@@ -268,8 +198,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <!-- visible-print-block -->
             <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 visible-print-block" id="printEntry">
                 <div class="row header">
-                    <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
-                    <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"> 
+                    <div class="col-lg-6 col-xs-5 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
+                    <div class="col-lg-6 col-xs-7 col-sm-6 col-md-6"> 
                         <table class="table table-bordered">
                             <tbody>
                                 <tr>
@@ -278,7 +208,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </tr>
                                 <tr>
                                     <td>Data</td>
-                                    <td><?php echo $modelRepair[0]['date_entry'];?></td>
+                                    <td><?php echo date("Y-m-d", strtotime($modelRepair[0]['date_entry']));?></td>
                                 </tr>
                                 <tr>
                                     <td>Local</td>
@@ -343,7 +273,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <?php }else{ ?>
                                     <td></td>
                                     <?php } ?>
-                                    <td colspan="3" rowspan="3">asd<?php echo $modelRepair[0]['obs'];?></td>
+                                    <td colspan="3" rowspan="3">asd<?php echo $modelRepair[0]['repair_desc'];?></td>
                                 </tr>
                                 
                                 <tr>
@@ -367,25 +297,27 @@ $this->params['breadcrumbs'][] = $this->title;
                             </tbody>
                         </table>
 
-                        <table class="table table-bordered repairDesc">
-                            <thead>                    
-                                <tr>
-                                    <td>Avaria</td>
-                                </tr>
-                            </thead>
+                        <?php if (!empty($modelRepair[0]['obs'])){ ?>
+                            <table class="table table-bordered repairDesc">
+                                <thead>                    
+                                    <tr>
+                                        <td>Observações</td>
+                                    </tr>
+                                </thead>
 
-                            <tbody>
-                                <tr>
-                                    <td><?php echo $modelRepair[0]['repair_desc'];?></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                <tbody>
+                                    <tr>
+                                        <td><?php echo $modelRepair[0]['obs'];?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <?php } ?>
                     </div>
                 </div>
 
                 <div class="row foote">
-                    <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
-                    <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"> 
+                    <div class="col-lg-6 col-xs-5 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
+                    <div class="col-lg-6 col-xs-7 col-sm-6 col-md-6"> 
                         <table class="table table-bordered">
                             <tbody>
                                  <tr>
@@ -394,7 +326,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </tr>
                                 <tr>
                                     <td>Data</td>
-                                    <td><?php echo $modelRepair[0]['date_entry'];?></td>
+                                    <td><?php echo date("Y-m-d", strtotime($modelRepair[0]['date_entry']));?></td>
                                 </tr>
                                 <tr>
                                     <td>Local</td>
@@ -428,12 +360,13 @@ $this->params['breadcrumbs'][] = $this->title;
             break;
 
             //IF IS A CLOSING ELEMENT
-            case "closeEl":?>
+            case "closeEl":
+        ?>
                 <!-- visible-print-block -->
                 <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 visible-print-block" id="printEntry">
                     <div class="row header">
-                        <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
-                        <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"> 
+                        <div class="col-lg-6 col-xs-5 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
+                        <div class="col-lg-6 col-xs-7 col-sm-6 col-md-6"> 
                             <table class="table table-bordered">
                                 <tbody>
                                     <tr>
@@ -442,7 +375,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </tr>
                                     <tr>
                                         <td>Data</td>
-                                        <td><?php echo $modelRepair[0]['date_entry'];?></td>
+                                        <td><?php echo date("Y-m-d", strtotime($modelRepair[0]['date_entry']));?></td>
                                     </tr>
                                     <tr>
                                         <td>Local</td>
@@ -533,13 +466,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             <table class="table table-bordered repairDesc">
                                 <thead>                    
                                     <tr>
-                                        <td>Avaria</td>
+                                        <td>Reparação efetuada</td>
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     <tr>
-                                        <td><?php echo $modelRepair[0]['repair_desc'];?></td>
+                                        <td><?php echo $modelRepair[0]['repair_done_desc'];?></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -575,20 +508,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         </tbody>
                     </table>
                     <?php } ?>
-
-                    <table class="table table-bordered repairDesc">
-                        <thead>                    
-                            <tr>
-                                <td>Mão de obra</td>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td class="priceTag" style="text-align:left;"><?php echo $modelRepair[0]['workPrice'];?></td>
-                            </tr>
-                        </tbody>
-                    </table>
                 
                     <div class="row repairTotal">
                         <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">

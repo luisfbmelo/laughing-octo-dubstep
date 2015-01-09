@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Reparações', 'url' => ['index']]
 $this->params['breadcrumbs'][] = ['label' => $modelRepair->id_repair, 'url' => ['view', 'id' => $modelRepair->id_repair]];
 $this->params['breadcrumbs'][] = 'Detalhes';
 ?>
-<section class="col-lg-10 col-xs-12 col-sm-9 col-md-9">
+<section class="col-lg-10 col-xs-12 col-sm-8 col-md-8">
     <div class="row hidden-print">
         <div class="col-lg-12">
             <?= Breadcrumbs::widget([
@@ -62,8 +62,8 @@ $this->params['breadcrumbs'][] = 'Detalhes';
         <div class="row">
             <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 visible-print-block" id="printEntry">
                 <div class="row header">
-                    <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
-                    <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"> 
+                    <div class="col-lg-6 col-xs-5 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
+                    <div class="col-lg-6 col-xs-7 col-sm-6 col-md-6"> 
                         <table class="table table-bordered">
                             <tbody>
                                 <tr>
@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                                 </tr>
                                 <tr>
                                     <td>Data</td>
-                                    <td><?php echo $modelRepair->date_entry;?></td>
+                                    <td><?php echo date("Y-m-d", strtotime($modelRepair->date_entry));?></td>
                                 </tr>
                                 <tr>
                                     <td>Local</td>
@@ -137,7 +137,7 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                                     <?php }else{ ?>
                                     <td></td>
                                     <?php } ?>
-                                    <td colspan="3" rowspan="3"><?php echo $modelRepair->obs;?></td>
+                                    <td colspan="3" rowspan="3"><?php echo $modelRepair->repair_desc;?></td>
                                 </tr>
                                 
                                 <tr>
@@ -161,25 +161,29 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                             </tbody>
                         </table>
 
-                        <table class="table table-bordered repairDesc">
-                            <thead>                    
-                                <tr>
-                                    <td>Avaria</td>
-                                </tr>
-                            </thead>
+                        <?php if (!empty($modelRepair->obs)){ ?>
+                            <table class="table table-bordered repairDesc">
+                                <thead>                    
+                                    <tr>
+                                        <td>Outras observações</td>
+                                    </tr>
+                                </thead>
 
-                            <tbody>
-                                <tr>
-                                    <td><?php echo $modelRepair->repair_desc;?></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                <tbody>
+                                    <tr>
+                                        <td><?php echo $modelRepair->obs;?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <?php } ?>
+
+                        
                     </div>
                 </div>
 
                 <div class="row foote">
-                    <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
-                    <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"> 
+                    <div class="col-lg-6 col-xs-5 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
+                    <div class="col-lg-6 col-xs-7 col-sm-6 col-md-6"> 
                         <table class="table table-bordered">
                             <tbody>
                                  <tr>
@@ -188,7 +192,7 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                                 </tr>
                                 <tr>
                                     <td>Data</td>
-                                    <td><?php echo $modelRepair->date_entry;?></td>
+                                    <td><?php echo date("Y-m-d", strtotime($modelRepair->date_entry));?></td>
                                 </tr>
                                 <tr>
                                     <td>Local</td>
@@ -229,8 +233,8 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                 <!-- visible-print-block -->
                 <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 visible-print-block" id="printEntry">
                     <div class="row header">
-                        <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
-                        <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6"> 
+                        <div class="col-lg-6 col-xs-5 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
+                        <div class="col-lg-6 col-xs-7 col-sm-6 col-md-6"> 
                             <table class="table table-bordered">
                                 <tbody>
                                     <tr>
@@ -239,7 +243,7 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                                     </tr>
                                     <tr>
                                         <td>Data</td>
-                                        <td><?php echo $modelRepair->date_entry;?></td>
+                                        <td><?php echo date("Y-m-d", strtotime($modelRepair->date_entry));?></td>
                                     </tr>
                                     <tr>
                                         <td>Local</td>
@@ -323,26 +327,21 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                                         <?php }else{ ?>
                                         <td></td>
                                         <?php } ?>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Mão de obra</td>
-                                        <td colspan="4" class="priceTag"><?php echo $modelRepair->workPrice;?></td>
-                                    </tr>
-                                    
+                                    </tr>                                    
                                 </tbody>
                             </table>
 
                             <table class="table table-bordered repairDesc">
                                 <thead>                    
                                     <tr>
-                                        <td>Avaria</td>
+                                        <td>Reparação efetuada</td>
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     <tr>
-                                        <td><?php echo $modelRepair->repair_desc;?></td>
+                                        <td><?php echo $modelRepair->repair_done_desc;?></td>
+                                        <!-- <td><?php //echo $modelRepair->repair_desc;?></td> -->
                                     </tr>
                                 </tbody>
                             </table>
@@ -377,20 +376,6 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                         </tbody>
                     </table>
                     <?php } ?>
-
-                    <table class="table table-bordered repairDesc">
-                        <thead>                    
-                            <tr>
-                                <td>Mão de obra</td>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td class="priceTag" style="text-align:left;"><?php echo $modelRepair->workPrice;?></td>
-                            </tr>
-                        </tbody>
-                    </table>
                 
                     <div class="row repairTotal">
                         <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">

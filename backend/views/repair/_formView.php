@@ -13,33 +13,53 @@ use kartik\datecontrol\DateControl;
         <?php $form = ActiveForm::begin(['enableClientValidation' => false]); ?>
             <div class="row">
                 <div class="col-lg-12">
-                    <?php if (Yii::$app->session->get('user.group')!=3){?>
-                    <?= Html::a('<span class="glyphicon glyphicon-edit" style="padding-right:10px;"></span>Editar', ['update', 'id' => $modelRepair->id_repair], ['class' => 'btn btn-primary']) ?>
-                    <?= Html::a('<span class="glyphicon glyphicon-trash" style="padding-right:10px;"></span>Eliminar', ['delete', 'id' => $modelRepair->id_repair], [
-                        'class' => 'btn btn-danger',
-                        'data' => [
-                            'confirm' => 'Tem a certeza que deseja eliminar?',
-                            'method' => 'post',
-                        ],
-                    ]) ?>
-                    <?php } ?>
-                    <a href="<?php echo Yii::$app->request->baseUrl;?>/repair/view?id=<?php echo $modelRepair->id_repair;?>&sd=<?php echo $modelRepair->id_repair;?>&a=n" class="btn btn-primary printBtn">
-                        <span class="glyphicon glyphicon-print" style="padding-right:10px;"></span>Emissão
-                    </a>
+                    
+                    <?php if ($modelRepair->status!=0){ ?>
+                        <!--EDIT BTN-->
+                        <?= Html::a('<span class="glyphicon glyphicon-edit" style="padding-right:10px;"></span>Editar', ['update', 'id' => $modelRepair->id_repair], ['class' => 'btn btn-primary']) ?>
+                        
+                        <!--REMOVE BTN-->
+                        <?php if (Yii::$app->session->get('user.group')!=3){?>
+                            <?= Html::a('<span class="glyphicon glyphicon-trash" style="padding-right:10px;"></span>Eliminar', ['delete', 'id' => $modelRepair->id_repair], [
+                                'class' => 'btn btn-danger',
+                                'data' => [
+                                    'confirm' => 'Tem a certeza que deseja eliminar?',
+                                    'method' => 'post',
+                                ],
+                            ]) ?>
+                        <?php } ?>
 
-                    <?php if($modelStatus->type==2){
-                        echo Html::a('<span class="glyphicon glyphicon-ok" style="padding-right:10px;"></span>Entregar', ['setdeliver', 'id' => $modelRepair->id_repair], [
-                            'class' => 'btn btn-success',
-                            'data' => [
-                                'confirm' => 'Tem a certeza que deseja entregar esta reparação?',
-                                'method' => 'post',
-                            ],
-                        ]);
-                    }else if ($modelStatus->type==3){ ?>
-                        <a href="<?php echo Yii::$app->request->baseUrl;?>/repair/view?id=<?php echo $modelRepair->id_repair;?>&sd=<?php echo $modelRepair->id_repair;?>&a=c" class="btn btn-primary printBtn">
-                            <span class="glyphicon glyphicon-print" style="padding-right:10px;"></span>Entrega
+                        <!--PRINT ENTRY BTN-->
+                        <a href="<?php echo Yii::$app->request->baseUrl;?>/repair/view?id=<?php echo $modelRepair->id_repair;?>&sd=<?php echo $modelRepair->id_repair;?>&a=n" class="btn btn-primary printBtn">
+                            <span class="glyphicon glyphicon-print" style="padding-right:10px;"></span>Emissão
                         </a>
-                    <?php } ?>
+
+                        <!--DELIVER BTN-->
+                        <?php if($modelStatus->type==2){
+                            echo Html::a('<span class="glyphicon glyphicon-ok" style="padding-right:10px;"></span>Entregar', ['setdeliver', 'id' => $modelRepair->id_repair], [
+                                'class' => 'btn btn-success',
+                                'data' => [
+                                    'confirm' => 'Tem a certeza que deseja entregar esta reparação?',
+                                    'method' => 'post',
+                                ],
+                            ]);
+                        }else if ($modelStatus->type==3){ ?>
+                        <!--PRINT DELIVER BTN-->
+                            <a href="<?php echo Yii::$app->request->baseUrl;?>/repair/view?id=<?php echo $modelRepair->id_repair;?>&sd=<?php echo $modelRepair->id_repair;?>&a=c" class="btn btn-primary printBtn">
+                                <span class="glyphicon glyphicon-print" style="padding-right:10px;"></span>Entrega
+                            </a>
+                        <?php } ?>
+
+                    <!--RECOVER BTN-->
+                    <?php }else{ 
+                        echo Html::a('<span class="glyphicon glyphicon-repeat" style="padding-right:10px;"></span>Recuperar', ['recover', 'id' => $modelRepair->id_repair], [
+                                'class' => 'btn btn-success',
+                                'data' => [
+                                    'confirm' => 'Tem a certeza que deseja recuperar esta reparação?',
+                                    'method' => 'post',
+                                ],
+                            ]);
+                    } ?>
                 </div>
             </div>
 
@@ -109,6 +129,12 @@ use kartik\datecontrol\DateControl;
                 <!--DESCRIPTIONS-->
                 <?= $form->field($modelRepair, 'repair_desc', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4,'readonly'=>'readonly'])->label("Descrição da Avaria") ?>
                 <?= $form->field($modelRepair, 'obs', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4,'readonly'=>'readonly'])->label("Outras observações") ?>
+            </div>
+
+            <div class="row">
+                 <!--DESCRIPTIONS-->
+                <?= $form->field($modelRepair, 'repair_done_desc', ['options' => ['class' => 'col-lg-12 col-xs-12 col-sm-12 col-md-12']])->textarea(['rows' => 4,'readonly'=>'readonly'])->label("Reparação efetuada") ?>
+
             </div>
 
             <?php

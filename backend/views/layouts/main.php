@@ -85,6 +85,15 @@ AppAsset::register($this);
                                 </div>
                             </div>
 
+                            <div class="accordion-group">
+                                <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['repair3']); ?>">
+                                    <a class="accordion-toggle" data-parent="#leftMenu" href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['repair/index?list=5']); ?>">
+                                        <span class="glyphicon glyphicon-trash"></span> 
+                                        <span>Eliminadas</span>
+                                    </a>
+                                </div>
+                            </div>
+
                             <!-- RESTRICTED -->
                             <?php if (\Yii::$app->session->get('user.group')==1){ ?>
                             <div class="accordion-group">

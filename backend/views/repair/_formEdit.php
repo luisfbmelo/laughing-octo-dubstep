@@ -105,6 +105,12 @@ use yii\helpers\ArrayHelper;
                 <?= $form->field($modelRepair, 'obs', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->textarea(['rows' => 4])->label("Outras observações") ?>
             </div>
 
+            <div class="row">
+                 <!--DESCRIPTIONS-->
+                <?= $form->field($modelRepair, 'repair_done_desc', ['options' => ['class' => 'col-lg-12 col-xs-12 col-sm-12 col-md-12']])->textarea(['rows' => 4])->label("Reparação efetuada") ?>
+
+            </div>
+
             <?php
 
                 //budget bar

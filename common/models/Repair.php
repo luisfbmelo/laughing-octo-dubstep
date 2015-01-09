@@ -55,8 +55,8 @@ class Repair extends \yii\db\ActiveRecord
         return [
             [['type_id', 'client_id', 'inve_id', 'status_id', 'user_id', 'repair_desc', 'date_entry', 'store_id'], 'required'],
             [['type_id', 'client_id', 'inve_id', 'user_id', 'store_id', 'priority','status_id'], 'integer'],
-            [['repair_desc','obs'], 'string'],
-            [['date_entry', 'date_close', 'date_repaired', 'warranty_date'], 'safe'],
+            [['repair_desc','obs', 'repair_done_desc'], 'string'],
+            [['date_entry', 'date_close', 'date_repaired', 'warranty_date','repair_done_desc'], 'safe'],
             [['workPrice', 'maxBudget', 'total'], 'number']
         ];
     }
@@ -84,7 +84,8 @@ class Repair extends \yii\db\ActiveRecord
             'total' => 'Total',
             'obs' => 'Observações',
             'status' => 'Estado',
-            'warranty_date' => 'Data de garantia'
+            'warranty_date' => 'Data de garantia',
+            'repair_done_desc' => 'Reparação efetuada'
         ];
     }
 

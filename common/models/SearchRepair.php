@@ -80,10 +80,6 @@ class SearchRepair extends Repair
         $query->innerJoin('models','inventory.model_id = models.id_model');
 
 
-        $query->andFilterWhere([
-            'repair.status' => 1
-        ]);
-
         if (!isset($params['SearchRepair']['status_id']) || $params['SearchRepair']['status_id']!=6){
             $query->andFilterWhere(['not',['repair.status_id'=>6]]);
         }
@@ -92,12 +88,29 @@ class SearchRepair extends Repair
         switch($viewType){
             case 1:
                 $query->andFilterWhere(['not',['repair.status_id'=>5]]);
+                $query->andFilterWhere([
+                    'repair.status' => 1
+                ]);
                 break;
             case 3:
-                $query->andWhere('repair.date_entry <= Date_Sub(Now(), Interval 25 Day)');;
+                $query->andWhere('repair.date_entry <= Date_Sub(Now(), Interval 25 Day)');
+                $query->andFilterWhere([
+                    'repair.status' => 1
+                ]);
                 break;
             case 4:
-                $query->andWhere('repair.date_repaired < Date_Sub(Now(), Interval 90 Day)');;
+                $query->andWhere('repair.date_repaired < Date_Sub(Now(), Interval 90 Day)');
+                $query->andFilterWhere([
+                    'repair.status' => 1
+                ]);
+                break;
+            case 5:
+                $query->andFilterWhere(['repair.status'=>0]);
+                break;
+            default:
+                $query->andFilterWhere([
+                    'repair.status' => 1
+                ]);
                 break;
         }
 
@@ -105,7 +118,7 @@ class SearchRepair extends Repair
             'query' => $query,
             'sort'=> ['defaultOrder' => ['date_entry'=>SORT_DESC]],
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => 20,
             ],
         ]);
 
@@ -166,7 +179,6 @@ class SearchRepair extends Repair
             //'repair.budget' => $this->budget,
             //'repair.maxBudget' => $this->maxBudget,
            // 'repair.total' => $this->total,
-            'repair.status' => 1,
             'inventory.inveSN'=>$this->sn
         ]);
 

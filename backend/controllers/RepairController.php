@@ -589,6 +589,10 @@ class RepairController extends Controller
         return json_encode($brands);
     }
 
+    /**
+     * Get all models from given equipment and brand
+     * @return [json] [all models of that equipment and brand]
+     */
     public function actionGetmodels(){
         $models = ArrayHelper::map(models::find()->joinwith('brand')->where(['brand_id' => $_POST['brandId'],'equip_id' => $_POST['equipId'],'status'=>1])->all(), 'id_model', 'modelName');
         return json_encode($models);
@@ -895,6 +899,8 @@ class RepairController extends Controller
 
 
                                 $modelRepair->addModelData($modelPartsRepair,$totalPartsArray);
+
+                                
                             }
 
 
@@ -902,29 +908,11 @@ class RepairController extends Controller
 
                         //commit all saves
                         echo $transaction->commit();
-                        return $this->redirect(['index']);
+                        //return $this->redirect(['index']);
                         //throw new Exception('STOP.');
                         
-                        /*return $this->render('update', [
-                            'modelRepair' => $modelRepair,
-                            'modelClient' => $modelClient,
-                            'allStores' => $allStores,
-                            'allTypes' => $allTypes,
-                            'allAccess' => $allAccess,
-                            'allStatus' =>$allStatus,
-                            'modelStores' => $modelStores,
-                            'modelBrands' => $modelBrands,
-                            'modelEquip' => $modelEquip,
-                            'modelModels' => $modelModels,
-                            'modelTypes' => $modelTypes,
-                            'modelInv' => $modelInv,
-                            'modelAccess' => $modelAccess,
-                            'modelRepairAccess' => $modelRepairAccess,
-                            'modelStatus' => $modelStatus,
-                            'modelParts' => $modelParts,
-                            'isOk' => false,
-                            'items' => $items
-                        ]);*/
+                        
+                        return $this->redirect(['view', "id"=>$modelRepair->id_repair]);
 
                     }else{
                         //throw new Exception('Unable to save record1.');
@@ -1032,6 +1020,10 @@ class RepairController extends Controller
     
     }
 
+    /**
+     * Delete repair with ajax request
+     * @return json request result message
+     */
     public function actionDelajax(){
         if (isset($_POST['list']) && $_POST['list']!=""){
             $listarray = $_POST['list'];
@@ -1050,6 +1042,12 @@ class RepairController extends Controller
         }
     }
 
+
+    /**
+     * Sets the repair as delivered
+     * @param  int $id repair identifier
+     * @return null     redirects to the index and prints element deliver sheet
+     */
     public function actionSetdeliver($id)
     {
         $statusSet = Status::find()->where(['type'=>3])->orderBy("id_status DESC")->one();
@@ -1058,6 +1056,20 @@ class RepairController extends Controller
         $obj->date_close = date('Y-m-d H:i:s');
         $obj->save();
         return $this->redirect(['index','sd'=>$id,'a'=>'c']);
+    
+    }
+
+    /**
+     * Set a deleted repair as active again
+     * @param  int $id repair identifier
+     * @return null     returns to previous page
+     */
+    public function actionRecover($id)
+    {
+        $obj = $this->findModel($id);
+        $obj->status = 1;
+        $obj->save();
+        return $this->goBack();
     
     }
 
@@ -1095,7 +1107,9 @@ class RepairController extends Controller
      */
     public function isActive($routes = array())
     {
-        if (in_array('repair2',$routes) && isset($_GET['list'])){
+        if (in_array('repair3',$routes) && isset($_GET['list']) && $_GET['list']==5){
+            return "activeTop";
+        }else if (in_array('repair2',$routes) && isset($_GET['list']) && $_GET['list']==1){
             return "activeTop";
         }else if (in_array('repair',$routes) && !isset($_GET['list'])){
             return "activeTop";
@@ -1103,6 +1117,10 @@ class RepairController extends Controller
         
     }
 
+    /**
+     * Set a model for each part of a repair
+     * @return array all models to use
+     */
     private function getItemsToUpdate(){
         $itemsArray = array();
  

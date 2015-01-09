@@ -51,7 +51,7 @@ class StatusSearch extends Status
             'query' => $query,
             'sort'=> ['defaultOrder' => ['id_status'=>SORT_ASC]],
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => 20,
             ],
         ]);
 

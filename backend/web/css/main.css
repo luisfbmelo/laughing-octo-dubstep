@@ -413,6 +413,21 @@ a.topBtn {
   font-size: 1.5em;
   padding: 5px; }
 
+.grid_listing tbody tr td {
+  padding: 2px !important; }
+  .grid_listing tbody tr td a {
+    display: inline-block;
+    padding-right: 5px;
+    /* one item */
+    /* two items */
+    /* three items */ }
+    .grid_listing tbody tr td a:first-child:nth-last-child(1) {
+      width: 100%; }
+    .grid_listing tbody tr td a:first-child:nth-last-child(2), .grid_listing tbody tr td a:first-child:nth-last-child(2) ~ a {
+      width: 50%; }
+    .grid_listing tbody tr td a:first-child:nth-last-child(3), .grid_listing tbody tr td a:first-child:nth-last-child(3) ~ a {
+      width: 33.3333%; }
+
 .grid_listing .listHeader, .partsInsert .listHeader, .formTable .listHeader {
   background-color: #414957;
   color: white; }
@@ -428,6 +443,8 @@ a.topBtn {
   .grid_listing tbody tr td, .partsInsert tbody tr td, .formTable tbody tr td {
     vertical-align: middle !important;
     font-size: 0.87em; }
+  .grid_listing tbody tr td:last-of-type, .partsInsert tbody tr td:last-of-type, .formTable tbody tr td:last-of-type {
+    min-width: 100px; }
   .grid_listing tbody tr td .status-color, .partsInsert tbody tr td .status-color, .formTable tbody tr td .status-color {
     min-width: 130px;
     display: inline-block;
@@ -437,7 +454,8 @@ a.topBtn {
     -ms-border-radius: 15px;
     -o-border-radius: 15px;
     border-radius: 15px;
-    padding: 5px 10px;
+    padding: 5px 15px;
+    margin-top: 5px;
     color: white; }
     .grid_listing tbody tr td .status-color span, .partsInsert tbody tr td .status-color span, .formTable tbody tr td .status-color span {
       display: block;
@@ -452,7 +470,7 @@ a.topBtn {
       -ms-border-radius: 50%;
       -o-border-radius: 50%;
       border-radius: 50%;
-      margin-right: 10px; }
+      margin-right: 5px; }
     .grid_listing tbody tr td .status-color.status_1 .circle, .partsInsert tbody tr td .status-color.status_1 .circle, .formTable tbody tr td .status-color.status_1 .circle {
       background-color: #8db4e3; }
     .grid_listing tbody tr td .status-color.status_2 .circle, .partsInsert tbody tr td .status-color.status_2 .circle, .formTable tbody tr td .status-color.status_2 .circle {
@@ -631,6 +649,11 @@ a.topBtn {
     #printEntry * .priceTag:after {
       content: "€";
       padding-left: 5px; }
+#printEntry tr td {
+  padding: 2px !important;
+  font-size: 0.8rem !important; }
+#printEntry img {
+  max-with: 100px; }
 
 .header table:first-of-type tbody tr > td,
 .client_data_table table:first-of-type tbody tr > td,

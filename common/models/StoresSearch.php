@@ -51,7 +51,7 @@ class StoresSearch extends Stores
             'query' => $query,
             'sort'=> ['defaultOrder' => ['id_store'=>SORT_ASC]],
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => 20,
             ],
         ]);
 

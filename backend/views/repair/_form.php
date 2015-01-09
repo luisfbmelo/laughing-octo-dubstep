@@ -102,7 +102,6 @@ use kartik\datecontrol\DateControl;
             <div class="row">
                 <!-- REPAIR TYPE -->
                 <?= $form->field($modelTypes, 'id_type', ['options' => ['class' => 'col-lg-12 col-xs-12 col-sm-12 col-md-12 required']])->dropDownList($types,['id'=>'typeID','prompt'=>'--'])->label('Tipo de reparação')?> 
-            
 
             </div>
 
