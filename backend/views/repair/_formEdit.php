@@ -81,10 +81,31 @@ use yii\helpers\ArrayHelper;
 
             <!--EQUIPMENT-->
             <div class="row equipList">
-            <?= $form->field($modelEquip, 'equipDesc', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->textInput()->label('Equipamentos') ?>
-                <input type="hidden" name="equipId" id="equipId" value="<?= $modelEquip->id_equip ?>"/>
-                <?= $form->field($modelBrands, 'brandName', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->textInput()->label('Marcas') ?>
-                <input type="hidden" name="brandId" id="brandId" value="<?= $modelBrands->id_brand ?>"/>
+                <?php
+                 
+                $equipShow = (isset($invNewItem['equip']) && $invNewItem['equip']==1) ? "checked" : "";
+
+                $brandShow = (isset($invNewItem['brand']) && $invNewItem['brand']==1) ? "checked" : "";
+                            
+              
+                ?>
+
+                <div class="col-lg-3 col-xs-12 col-sm-6 col-md-3">
+                    <?= $form->field($modelEquip, 'equipDesc', ['options' => ['class' => 'required'],])->textInput()->label('Equipamentos') ?>
+                    <input type="hidden" name="equipId" id="equipId" value="<?= (isset($modelEquip->id_equip) && is_numeric($modelEquip->id_equip)) ? $modelEquip->id_equip : 'new' ?>"/>
+                    
+                    <input type="checkBox" name="equipNew" id="equipNew" class="invCheckbox" <?php echo $equipShow;?>/>
+                    <label for="equipNew">Novo equipamento</label>
+                </div>
+                
+                <div class="col-lg-3 col-xs-12 col-sm-6 col-md-3">
+                    <?= $form->field($modelBrands, 'brandName', ['options' => ['class' => 'required']])->textInput()->label('Marcas') ?>
+                    <input type="hidden" name="brandId" id="brandId" value="<?= (isset($modelBrands->id_brand) && is_numeric($modelBrands->id_brand)) ? $modelBrands->id_brand : 'new' ?>"/>
+                    
+                    <input type="checkBox" name="brandNew" id="brandNew" class="invCheckbox" <?php echo $brandShow;?> />
+                    <label for="brandNew">Nova marca</label>
+                </div>
+
                 <?= $form->field($modelModels, 'modelName', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->textInput()->label('Modelos') ?>
                 <input type="hidden" name="modelId" id="modelId" value="<?= $modelModels->id_model ?>"/>
 
@@ -397,7 +418,7 @@ use yii\helpers\ArrayHelper;
 
 
         //LOAD BRANDS
-        $("#equipID").on('change',function(){
+        /*$("#equipID").on('change',function(){
             $("#modelID").attr("disabled", "disabled");
 
             if ($('option:selected', $(this)).text()!="--"){
@@ -476,7 +497,7 @@ use yii\helpers\ArrayHelper;
                 $("#modelID").attr("disabled", "disabled");
             }
 
-        });
+        });*/
         
 
         //AUTOCOMPLETES
@@ -485,7 +506,7 @@ use yii\helpers\ArrayHelper;
 
         $('#client-cliname').autocomplete({
             source: urlDestCli,
-            minLength: 2,
+            minLength: 1,
             select: function(event, ui) {
                 $("#client-cliadress").val(ui.item.address);
                 $("#client-clidoornum").val(ui.item.door);
@@ -522,7 +543,7 @@ use yii\helpers\ArrayHelper;
 
         $('#equipaments-equipdesc').autocomplete({
             source: urlDestEquip,
-            minLength: 2,
+            minLength: 1,
             select: function(event, ui) {
                 $("#equipaments-equipdesc").val(ui.item.equipDesc);
 
@@ -552,7 +573,7 @@ use yii\helpers\ArrayHelper;
 
         $('#brands-brandname').autocomplete({
             source: urlDestBrand,
-            minLength: 2,
+            minLength: 1,
             select: function(event, ui) {
                 console.log(ui);
                 $("#brands-brandname").val(ui.item.brandName);
@@ -583,7 +604,7 @@ use yii\helpers\ArrayHelper;
 
         $('#models-modelname').autocomplete({
             source: urlDestModel,
-            minLength: 2,
+            minLength: 1,
             select: function(event, ui) {
                 console.log(ui);
                 $("#models-modelname").val(ui.item.modeName);

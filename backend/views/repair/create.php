@@ -37,7 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'modelInv' => $modelInv,
                     'modelAccess' => $modelAccess,
                     'modelRepairAccess' => $modelRepairAccess,
-                    'isOk' => $isOk
+                    'isOk' => $isOk,
+                    'invNewItem' => $invNewItem
     		    ]) ?>
 
     		</div>

@@ -238,8 +238,8 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                             <table class="table table-bordered">
                                 <tbody>
                                     <tr>
-                                        <td>Entrada</td>
-                                        <td>Nº <?php echo $modelRepair->id_repair;?></td>
+                                        <td>Entrega</td>
+                                        <td>Nº <?php echo $modelRepair->getDeliveryId($modelRepair->id_repair);?></td>
                                     </tr>
                                     <tr>
                                         <td>Data</td>

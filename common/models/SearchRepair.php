@@ -38,7 +38,7 @@ class SearchRepair extends Repair
         return [
             [['id_repair', 'type_id', 'client_id', 'inve_id', 'status_id', 'user_id', 'store_id', 'priority', 'status'], 'integer'],
             //add other modules tables to safe
-            [['repair_desc', 'date_entry', 'date_close', 'obs', 'client', 'cliContact', 'equip', 'brand', 'model', 'sn', 'username','status_id', 'datediffRepair', 'datediffDeliver'], 'safe'],
+            [['repair_desc', 'repair_done_desc', 'date_entry', 'date_close', 'obs', 'client', 'cliContact', 'equip', 'brand', 'model', 'sn', 'username','status_id', 'datediffRepair', 'datediffDeliver'], 'safe'],
             [['workPrice', 'maxBudget', 'total'], 'number'],
         ];
     }
@@ -79,32 +79,36 @@ class SearchRepair extends Repair
        
         $query->innerJoin('models','inventory.model_id = models.id_model');
 
-
-        if (!isset($params['SearchRepair']['status_id']) || $params['SearchRepair']['status_id']!=6){
-            $query->andFilterWhere(['not',['repair.status_id'=>6]]);
-        }
+        $seeAllStatus = false;
 
         //FILTER ACCORDING TO VIEW TYPE
         switch($viewType){
-            case 1:
+            case "repairs":
                 $query->andFilterWhere(['not',['repair.status_id'=>5]]);
                 $query->andFilterWhere([
                     'repair.status' => 1
                 ]);
                 break;
-            case 3:
+            case "fastsearch":
+                $query->andFilterWhere([
+                    'repair.status' => 1
+                ]);
+
+                $seeAllStatus=true;
+                break;
+            case "warranty":
                 $query->andWhere('repair.date_entry <= Date_Sub(Now(), Interval 25 Day)');
                 $query->andFilterWhere([
                     'repair.status' => 1
                 ]);
                 break;
-            case 4:
+            case "topickup":
                 $query->andWhere('repair.date_repaired < Date_Sub(Now(), Interval 90 Day)');
                 $query->andFilterWhere([
                     'repair.status' => 1
                 ]);
                 break;
-            case 5:
+            case "deleted":
                 $query->andFilterWhere(['repair.status'=>0]);
                 break;
             default:
@@ -112,6 +116,10 @@ class SearchRepair extends Repair
                     'repair.status' => 1
                 ]);
                 break;
+        }
+
+        if ((!isset($params['SearchRepair']['status_id']) || $params['SearchRepair']['status_id']!=6) && !$seeAllStatus){
+            $query->andFilterWhere(['not',['repair.status_id'=>6]]);
         }
 
         $dataProvider = new ActiveDataProvider([
@@ -178,11 +186,12 @@ class SearchRepair extends Repair
             //'repair.priority' => $this->priority,
             //'repair.budget' => $this->budget,
             //'repair.maxBudget' => $this->maxBudget,
-           // 'repair.total' => $this->total,
+            'repair.total' => $this->total,
             'inventory.inveSN'=>$this->sn
         ]);
 
         $query->andFilterWhere(['like', 'repair_desc', $this->repair_desc])
+        ->andFilterWhere(['like', 'repair_done_desc', $this->repair_done_desc])
         ->andFilterWhere(['like', 'obs', $this->obs])
         ->andFilterWhere(['like', 'date_entry', $this->date_entry])
         ->andFilterWhere(['like', 'date_close', $this->date_close]);

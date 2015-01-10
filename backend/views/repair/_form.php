@@ -72,10 +72,33 @@ use kartik\datecontrol\DateControl;
             <!--EQUIPMENT-->
             <div class="row equipList">
 
-                <?= $form->field($modelEquip, 'equipDesc', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required'],])->textInput()->label('Equipamentos') ?>
-                <input type="hidden" name="equipId" id="equipId" value="<?= (isset($modelEquip->id_equip) && is_numeric($modelEquip->id_equip)) ? $modelEquip->id_equip : 'new' ?>"/>
-                <?= $form->field($modelBrands, 'brandName', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->textInput()->label('Marcas') ?>
-                <input type="hidden" name="brandId" id="brandId" value="<?= (isset($modelBrands->id_brand) && is_numeric($modelBrands->id_brand)) ? $modelBrands->id_brand : 'new' ?>"/>
+                <?php
+                 
+                $equipShow = (isset($invNewItem['equip']) && $invNewItem['equip']==1) ? "checked" : "";
+
+                $brandShow = (isset($invNewItem['brand']) && $invNewItem['brand']==1) ? "checked" : "";
+                            
+              
+                ?>
+
+                <div class="col-lg-3 col-xs-12 col-sm-6 col-md-3">
+                    <?= $form->field($modelEquip, 'equipDesc', ['options' => ['class' => 'required'],])->textInput()->label('Equipamentos') ?>
+                    <input type="hidden" name="equipId" id="equipId" value="<?= (isset($modelEquip->id_equip) && is_numeric($modelEquip->id_equip)) ? $modelEquip->id_equip : 'new' ?>"/>
+                    
+                    <input type="checkBox" name="equipNew" id="equipNew" class="invCheckbox" <?php echo $equipShow;?>/>
+                    <label for="equipNew">Novo equipamento</label>
+                </div>
+                
+                <div class="col-lg-3 col-xs-12 col-sm-6 col-md-3">
+                    <?= $form->field($modelBrands, 'brandName', ['options' => ['class' => 'required']])->textInput()->label('Marcas') ?>
+                    <input type="hidden" name="brandId" id="brandId" value="<?= (isset($modelBrands->id_brand) && is_numeric($modelBrands->id_brand)) ? $modelBrands->id_brand : 'new' ?>"/>
+                    
+                    <input type="checkBox" name="brandNew" id="brandNew" class="invCheckbox" <?php echo $brandShow;?> />
+                    <label for="brandNew">Nova marca</label>
+                </div>
+                    
+                
+                
                 <?= $form->field($modelModels, 'modelName', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->textInput()->label('Modelos') ?>
                 <input type="hidden" name="modelId" id="modelId" value="<?= (isset($modelModels->id_model) && is_numeric($modelModels->id_model)) ? $modelModels->id_model : 'new' ?>"/>
 
@@ -147,7 +170,14 @@ use kartik\datecontrol\DateControl;
                             <?= $form->field($modelAccess, 'id_accessories', ['options' => ['class' => 'clearPad']])->checkboxList($accessories,['unselect'=> 0,'separator'=>'<br/>','class'=>'checkboxList'])->label("Acessórios") ?>
                         </label>
                     </div>
-                    <?= $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-4 col-xs-4 col-sm-4 col-md-4']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("") ?>
+                    <?php 
+                        if (isset($modelAccess->id_accessories) && in_array(3,$modelAccess->id_accessories)){
+                           echo $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-4 col-xs-4 col-sm-4 col-md-4','style'=>'display:block']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("");
+                        }else{
+                           echo $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-4 col-xs-4 col-sm-4 col-md-4']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("");
+                        }
+                    ?> 
+
                 </div>            
             </div>
         </div>                
@@ -195,7 +225,7 @@ use kartik\datecontrol\DateControl;
         });
 
         //LOAD BRANDS
-        $("#equipID").on('change',function(){
+        /*$("#equipID").on('change',function(){
             $("#modelID").attr("disabled", "disabled");
 
             if ($('option:selected', $(this)).text()!="--"){
@@ -274,7 +304,7 @@ use kartik\datecontrol\DateControl;
                 $("#modelID").attr("disabled", "disabled");
             }
 
-        });
+        });*/
         
 
         //AUTOCOMPLETES
@@ -283,7 +313,7 @@ use kartik\datecontrol\DateControl;
 
         $('#client-cliname').autocomplete({
             source: urlDestCli,
-            minLength: 2,
+            minLength: 1,
             select: function(event, ui) {
                 $("#client-cliadress").val(ui.item.address);
                 $("#client-clidoornum").val(ui.item.door);
@@ -320,7 +350,7 @@ use kartik\datecontrol\DateControl;
 
         $('#equipaments-equipdesc').autocomplete({
             source: urlDestEquip,
-            minLength: 2,
+            minLength: 1,
             select: function(event, ui) {
                 $("#equipaments-equipdesc").val(ui.item.equipDesc);
 
@@ -350,7 +380,7 @@ use kartik\datecontrol\DateControl;
 
         $('#brands-brandname').autocomplete({
             source: urlDestBrand,
-            minLength: 2,
+            minLength: 1,
             select: function(event, ui) {
                 console.log(ui);
                 $("#brands-brandname").val(ui.item.brandName);
@@ -381,7 +411,7 @@ use kartik\datecontrol\DateControl;
 
         $('#models-modelname').autocomplete({
             source: urlDestModel,
-            minLength: 2,
+            minLength: 1,
             select: function(event, ui) {
                 console.log(ui);
                 $("#models-modelname").val(ui.item.modeName);

@@ -41,7 +41,14 @@
 				background-color:$topBtn-bg-active-color;
 			}
 
-			
+			.invCheckbox{
+				margin-bottom:30px;
+				& + label{
+					font-weight:normal!important;
+					font-style:normal!important;
+					font-size:0.9em;
+				}
+			}			
 		}
 
 		/*STATUS BUTTONS*/

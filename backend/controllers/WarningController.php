@@ -39,7 +39,7 @@ class WarningController extends Controller
 
     public function actionWarranty(){
 
-    	$viewType = 3;
+    	$viewType = "warranty";
 
     	$searchModel = new SearchRepair();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $viewType);
@@ -52,7 +52,7 @@ class WarningController extends Controller
 
     public function actionPickup(){
 
-    	$viewType = 4;
+    	$viewType = "topickup";
 
     	$searchModel = new SearchRepair();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $viewType);

@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <a href="<?php echo Yii::$app->request->baseUrl;?>/user/index" class="btn btn-default clearBtn">
                         <span>Limpar</span>
                     </a>
+                    <div class="clear"></div>
                 <?php } ?>
 
                 <?= GridView::widget([

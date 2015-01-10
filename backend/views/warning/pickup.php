@@ -42,6 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <a href="<?php echo Yii::$app->request->baseUrl;?>/warning/pickup" class="btn btn-default clearBtn">
                         <span>Limpar</span>
                     </a>
+                    <div class="clear"></div>
                 <?php }
 
                    echo GridView::widget([
@@ -60,7 +61,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'label' => 'Local',
                                 'filter' => ArrayHelper::map(stores::find()->where(['status'=>1])->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc'),
                                 'content' => function($model, $index, $dataColumn) {
-                                    return $model->getStoreDesc()["storeDesc"];
+                                    $text = $model->getStoreDesc($model->id_repair)["storeDesc"];
+                                    $output = $model->abbreviate($text);
+                                    return $output;
                                 },
 
                             ],

@@ -2,12 +2,17 @@ body{
 	font-size: 16px;
 }
 
+.clear{
+    clear:both;
+}
+
 /*ul,
 li{
 	margin:0;
 	padding:0;
 }*/
 
+#collapseOne,
 #collapseFive,
 #collapseSix{
     ul,li{
@@ -30,4 +35,10 @@ li{
 *:-ms-input-placeholder {
     /* IE 10+ */
     font-style: italic;
+}
+
+input[type="checkbox"]:hover,
+label:hover input[type="checkbox"],
+input[type="checkbox"] + label:hover{
+    cursor:pointer;
 }

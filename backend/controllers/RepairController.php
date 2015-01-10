@@ -18,6 +18,7 @@ use common\models\User;
 use common\models\Status;
 use common\models\Parts;
 use common\models\RepairParts;
+use common\models\Delivery;
 
 use common\models\SearchRepair;
 
@@ -37,6 +38,11 @@ date_default_timezone_set("Atlantic/Azores");
  */
 class RepairController extends Controller
 {
+
+    private $customErrorMessages = [
+                "noEquip" => "Equipamento não existe. Marque como novo",
+                "noBrand" => "Esta marca não existe. Marque como nova"
+            ];
 
     /**
      * @inheritdoc
@@ -135,11 +141,13 @@ class RepairController extends Controller
         if (isset($_GET['sd']) && !empty($_GET['sd']) && is_numeric($_GET['sd']) && isset($_GET['a']) && !empty($_GET['a'])){
             $modelRepair = new repair();
             switch($_GET['a']){
+                //new repair
                 case 'n':
                     $requestType = 'newEl';
                     $items = null;
                 break;
 
+                //delivered repair
                 case 'c':
                     $requestType = 'closeEl';
                     $items = $modelRepair->getThisParts($_GET['sd']);
@@ -161,10 +169,11 @@ class RepairController extends Controller
             $items = null;
         }
 
-        if (isset($_GET['list']) && is_numeric($_GET['list']) && $_GET['list']>0){
+        //SET VIEWTYPE
+        if (isset($_GET['list']) && is_string($_GET['list']) && $_GET['list']!=""){
             $viewType = $_GET['list'];
         }else{
-            $viewType = 0;
+            $viewType = null;
         }
         
         $searchModel = new SearchRepair();
@@ -318,22 +327,6 @@ class RepairController extends Controller
         if (isset($_POST['cancelar'])){
             $this->redirect(['index']);
         }else if (isset($_POST['submit'])){
-            
-            /*WAITING CODING LINES*/
-            //$modelAccess->id_accessories = array(2);
-            //
-            //
-            //try saving
-           /* if ($modelRepair->load(Yii::$app->request->post()) && $modelRepair->save()) {
-                //return $this->redirect(['view', 'id' => $modelRepair->id_repair]);
-
-            //if didn't save
-            } else {
-                
-            }*/
-
-            //
-
 
             $connection = \Yii::$app->db;
             $transaction = $connection->beginTransaction();
@@ -341,6 +334,7 @@ class RepairController extends Controller
 
                 $valid = false;
                 $isOk = [];
+                $invNewItem = [];
 
                 //validate client
                 $valid = $modelClient->load(Yii::$app->request->post()) && $modelClient->validate(['cliName','cliAdress','cliDoorNum','cliPostalCode','cliPostalSuffix','cliConFix','cliConMov1','cliConMov2']);
@@ -400,19 +394,53 @@ class RepairController extends Controller
 
                 $valid = $modelRepair->load(Yii::$app->request->post()) && $modelRepair->validate(['repair_desc']) && $valid;
 
+                //check if inventory is new or not
+                if (null == Yii::$app->request->post('equipNew') && Yii::$app->request->post('equipId')=='new'){
+                    $modelEquip->addError("equipDesc", $this->customErrorMessages['noEquip']);
+                    $valid = false;
+                }else if (Yii::$app->request->post('equipId')=='new'){
+                    $invNewItem['equip'] = 1;
+                }
+
+                if (null == Yii::$app->request->post('brandNew')  && Yii::$app->request->post('brandId')=='new'){
+                    $modelBrands->addError("brandName", $this->customErrorMessages['noBrand']);
+                    $valid = false;
+                }else if (Yii::$app->request->post('brandId')=='new'){
+                    $invNewItem['brand'] = 1;
+                }
+
+                //SET ACCESSORIES IF THEY EXIST TO SHOW ON ERRORS
+                if (empty(Yii::$app->request->post('Accessories')['id_accessories'])!=1){
+                    $accessArray = [];
+
+                    for ($accInc=0;$accInc<sizeof(Yii::$app->request->post('Accessories')['id_accessories']);$accInc++){
+
+                        if (Yii::$app->request->post('Accessories')['id_accessories'][$accInc]==3){
+                            $modelRepairAccess->otherDesc = Yii::$app->request->post('RepairAccessory')['otherDesc'];
+                        }else{
+                            //$modelRepairAccess->otherDesc = NULL;
+                        }
+
+                        $accessArray[$accInc] = Yii::$app->request->post('Accessories')['id_accessories'][$accInc];
+                    }
+
+                    $modelAccess->id_accessories = $accessArray;
+                }
+
                 if ($valid){
 
                     //RESOLVE INV ID's
-                    if (Yii::$app->request->post('modelId')!='new' && Yii::$app->request->post('equipId')!="new" && Yii::$app->request->post('brandId')!="new"){
+                    if (Yii::$app->request->post('modelId')!='new' && Yii::$app->request->post('equipId')!="new" && Yii::$app->request->post('brandId')!="new" && null == Yii::$app->request->post('equipNew') && null == Yii::$app->request->post('brandNew')){
                         $modelEquip->id_equip = Yii::$app->request->post('equipId');
                         $modelBrands->id_brand = Yii::$app->request->post('brandId');
                         $modelModels->id_model = Yii::$app->request->post('modelId');
                     }else{
+                        $noModel = false;
+
                         //add equip
-                        if (Yii::$app->request->post('equipId')!="new"){
-                            echo "1";
-                           $modelEquip->id_equip = Yii::$app->request->post('equipId'); 
-                       }else{
+                        if (Yii::$app->request->post('equipId')!="new" && null == Yii::$app->request->post('equipNew')){
+                            $modelEquip->id_equip = Yii::$app->request->post('equipId'); 
+                        }else{
                             $equipArray = [
                                 'id_equip' => NULL,
                                 'isNewRecord' => TRUE,
@@ -420,12 +448,13 @@ class RepairController extends Controller
                                 'status' => 1
                             ];
                             $modelEquip->id_equip = $modelRepair->addModelData($modelEquip,$equipArray);
-                       }
+                        }
 
 
-                       if (Yii::$app->request->post('brandId')!="new"){
+                        if (Yii::$app->request->post('brandId')!="new" && null == Yii::$app->request->post('brandNew')){
                            $modelBrands->id_brand = Yii::$app->request->post('brandId'); 
-                       }else{
+
+                        }else{
                             $brandArray = [
                                 'id_brand' => NULL,
                                 'isNewRecord' => TRUE,
@@ -433,9 +462,11 @@ class RepairController extends Controller
                                 'status' => 1
                             ];
                             $modelBrands->id_brand = $modelRepair->addModelData($modelBrands,$brandArray);
-                       }
-                       
 
+                        }
+
+
+         
                         $modelArray = [
                             'id_model' => NULL,
                             'isNewRecord' => TRUE,
@@ -445,9 +476,11 @@ class RepairController extends Controller
                             'status' => 1
                         ];
                         $modelModels->id_model = $modelRepair->addModelData($modelModels,$modelArray);
+
                         
                     }
-                    
+         
+
                     //ADD INVENTORY
                     $invArray = [
                         'id_inve' => NULL,
@@ -558,7 +591,8 @@ class RepairController extends Controller
                 'modelInv' => $modelInv,
                 'modelAccess' => $modelAccess,
                 'modelRepairAccess' => $modelRepairAccess,
-                'isOk' => $isOk
+                'isOk' => $isOk,
+                'invNewItem' => $invNewItem
             ]);
         }
 
@@ -576,7 +610,8 @@ class RepairController extends Controller
             'modelInv' => $modelInv,
             'modelAccess' => $modelAccess,
             'modelRepairAccess' => $modelRepairAccess,
-            'isOk' => false
+            'isOk' => false,
+            'invNewItem' => false
         ]);     
     }
 
@@ -647,6 +682,7 @@ class RepairController extends Controller
             $transaction = $connection->beginTransaction();
             try {
                 $valid = false;
+                $invNewItem = [];               
                 
 
                 //validate client
@@ -683,7 +719,6 @@ class RepairController extends Controller
 
                 $valid = $modelRepair->load(Yii::$app->request->post()) && $modelRepair->validate(['repair_desc','budget','total']) && $valid;
 
-
                 //validate parts
                 if (isset($_POST['Parts'])){
                     $items=$this->getItemsToUpdate();
@@ -703,16 +738,53 @@ class RepairController extends Controller
                     }
                 }
 
+                //check if inventory is new or not
+                if (null == Yii::$app->request->post('equipNew') && Yii::$app->request->post('equipId')=='new'){
+                    $modelEquip->addError("equipDesc", $this->customErrorMessages['noEquip']);
+                    $valid = false;
+                }else if (Yii::$app->request->post('equipId')=='new'){
+                    $invNewItem['equip'] = 1;
+                }
+
+                if (null == Yii::$app->request->post('brandNew')  && Yii::$app->request->post('brandId')=='new'){
+                    $modelBrands->addError("brandName", $this->customErrorMessages['noBrand']);
+                    $valid = false;
+                }else if (Yii::$app->request->post('brandId')=='new'){
+                    $invNewItem['brand'] = 1;
+                }
+
+
+                //SET ACCESSORIES IF THEY EXIST TO SHOW ON ERRORS
+                if (empty(Yii::$app->request->post('Accessories')['id_accessories'])!=1){
+                    $accessArray = [];
+
+                    for ($accInc=0;$accInc<sizeof(Yii::$app->request->post('Accessories')['id_accessories']);$accInc++){
+
+                        if (Yii::$app->request->post('Accessories')['id_accessories'][$accInc]==3){
+                            $modelRepairAccess->otherDesc = Yii::$app->request->post('RepairAccessory')['otherDesc'];
+                        }else{
+                            //$modelRepairAccess->otherDesc = NULL;
+                        }
+
+                        $accessArray[$accInc] = Yii::$app->request->post('Accessories')['id_accessories'][$accInc];
+                    }
+
+                    $modelAccess->id_accessories = $accessArray;
+                }
+
+
+                
+
                 if ($valid){
 
                     //RESOLVE INV ID's
-                    if (Yii::$app->request->post('modelId')!='new' && Yii::$app->request->post('equipId')!="new" && Yii::$app->request->post('brandId')!="new"){
+                    if (Yii::$app->request->post('modelId')!='new' && Yii::$app->request->post('equipId')!="new" && Yii::$app->request->post('brandId')!="new" && null == Yii::$app->request->post('equipNew') && null == Yii::$app->request->post('brandNew')){
                         $modelEquip->id_equip = Yii::$app->request->post('equipId');
                         $modelBrands->id_brand = Yii::$app->request->post('brandId');
                         $modelModels->id_model = Yii::$app->request->post('modelId');
                     }else{
                         //add equip
-                        if (Yii::$app->request->post('equipId')!="new"){
+                        if (Yii::$app->request->post('equipId')!="new" && null == Yii::$app->request->post('equipNew')){
                            $modelEquip->id_equip = Yii::$app->request->post('equipId'); 
                        }else{
                             $equipArray = [
@@ -724,7 +796,7 @@ class RepairController extends Controller
                             $modelEquip->id_equip = $modelRepair->addModelData($modelEquip,$equipArray);
                        }
 
-                       if (Yii::$app->request->post('brandId')!="new"){
+                       if (Yii::$app->request->post('brandId')!="new" && null == Yii::$app->request->post('brandNew')){
                            $modelBrands->id_brand = Yii::$app->request->post('brandId'); 
                        }else{
                             $brandArray = [
@@ -948,7 +1020,8 @@ class RepairController extends Controller
                 'modelStatus' => $modelStatus,
                 'modelParts' => $modelParts,
                 'isOk' => false,
-                'items' => $items
+                'items' => $items,
+                'invNewItem' => $invNewItem
             ]);
         }else{
 
@@ -973,6 +1046,10 @@ class RepairController extends Controller
 
             //status
             $modelStatus = $modelStatus->findOne($modelRepair->status_id);
+
+            if ($modelStatus->id_status==6){
+                $allStatus = status::find()->where(['status'=>1])->asArray()->all();
+            }
 
             //parts
             $items = $modelRepair->getThisParts($modelRepair->id_repair);
@@ -1000,7 +1077,8 @@ class RepairController extends Controller
             'modelStatus' => $modelStatus,
             'modelParts' => $modelParts,
             'isOk' => false,
-            'items' => $items
+            'items' => $items,
+            'invNewItem' => false
         ]);
     }
 
@@ -1050,11 +1128,22 @@ class RepairController extends Controller
      */
     public function actionSetdeliver($id)
     {
+        //SET DELIVERED
         $statusSet = Status::find()->where(['type'=>3])->orderBy("id_status DESC")->one();
         $obj = $this->findModel($id);
         $obj->status_id = $statusSet->id_status;
         $obj->date_close = date('Y-m-d H:i:s');
         $obj->save();
+
+        //GET DELIVERY ID
+        $obj = Delivery::find()->where(['repair_id'=>$id])->one();
+
+        if ($obj) $obj->delete();
+
+        $delivery = new Delivery();
+        $delivery->repair_id = $id;
+        $delivery->save();
+
         return $this->redirect(['index','sd'=>$id,'a'=>'c']);
     
     }
@@ -1071,6 +1160,28 @@ class RepairController extends Controller
         $obj->save();
         return $this->goBack();
     
+    }
+
+    /**
+     * Recover repair with ajax request
+     * @return json request result message
+     */
+    public function actionRecoverajax(){
+        if (isset($_POST['list']) && $_POST['list']!=""){
+            $listarray = $_POST['list'];
+
+            //removes all projects
+            foreach($listarray as $repair){
+                $obj = repair::find()->where(['id_repair'=>$repair])->one();
+                $obj->status = 1;
+                $obj->save();
+            }
+
+            echo json_encode("done");
+            
+        }else{
+            echo json_encode("error");
+        }
     }
 
     /**
@@ -1107,9 +1218,13 @@ class RepairController extends Controller
      */
     public function isActive($routes = array())
     {
-        if (in_array('repair3',$routes) && isset($_GET['list']) && $_GET['list']==5){
+        if (in_array('fastsearch',$routes) && isset($_GET['list']) && $_GET['list']=="fastsearch"){
             return "activeTop";
-        }else if (in_array('repair2',$routes) && isset($_GET['list']) && $_GET['list']==1){
+        }else if (in_array('begining',$routes) && !isset($_GET['list'])){
+            return "activeTop";
+        }else if (in_array('repair3',$routes) && isset($_GET['list']) && $_GET['list']=="deleted"){
+            return "activeTop";
+        }else if (in_array('repair2',$routes) && isset($_GET['list']) && $_GET['list']=="repairs"){
             return "activeTop";
         }else if (in_array('repair',$routes) && !isset($_GET['list'])){
             return "activeTop";

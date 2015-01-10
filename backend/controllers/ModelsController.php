@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Models;
+use common\models\SearchModels;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -31,7 +32,7 @@ class ModelsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new Models();
+        $searchModel = new SearchModels();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -97,9 +98,49 @@ class ModelsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        $obj = $this->findModel($id);
+
+        $obj->status = 0;
+        $obj->save();
+        return $this->redirect(['index']); 
+
+        /*if (!$existsInv){
+            $obj->status = 0;
+            $obj->save();
+            return $this->redirect(['index']); 
+        }else{
+            Yii::$app->session->setFlash('errorHasRepair','<strong>Impossível remover!</strong><br/>Este equipamento está associada a uma ou mais reparações.');
+            return $this->redirect(['index']); 
+        }*/
+    }
+
+    public function actionDelajax(){
+        if (isset($_POST['list']) && $_POST['list']!=""){
+            $listarray = $_POST['list'];
+
+            $connection = \Yii::$app->db;
+            $transaction = $connection->beginTransaction();
+            try {
+                //removes all projects
+                foreach($listarray as $model){
+                    $obj = models::find()->where(['id_model'=>$model])->one();
+                    $obj->status = 0;
+                    $obj->save(); 
+                    
+                }
+                echo $transaction->commit();
+                echo json_encode("done");
+
+            }catch(Exception $e) {
+                $transaction->rollback();
+                //echo $e->getMessage(); exit;
+                echo json_encode("error");
+            }
+            
+        }else{
+            echo json_encode("error");
+        }
     }
 
     /**
@@ -133,5 +174,16 @@ class ModelsController extends Controller
 
         }
         return json_encode($retrieve); 
+    }
+
+    /**
+     * Checks if the current route matches with given routes
+     * @param array $routes
+     * @return bool
+     */
+    public function isActive($routes = array())
+    {
+        if (in_array('models',$routes))
+        return "activeTop";
     }
 }

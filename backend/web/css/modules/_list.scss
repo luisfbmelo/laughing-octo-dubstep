@@ -13,7 +13,11 @@
 
 				a{
 					display:inline-block;
-					padding-right:5px;
+					padding-right:2px;
+
+					&:first-of-type{
+						padding-left:2px;
+					}
 
 					/* one item */
 					&:first-child:nth-last-child(1) {
@@ -69,6 +73,7 @@
 
 			td:last-of-type{
 				min-width:100px;
+				width:101px;
 			}
 
 			td{

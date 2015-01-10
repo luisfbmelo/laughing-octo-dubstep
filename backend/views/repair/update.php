@@ -43,7 +43,8 @@ $this->params['breadcrumbs'][] = 'Editar';
                     'modelStatus' => $modelStatus,
                     'modelParts' => $modelParts,
                     'isOk' => $isOk,
-                    'items' => $items
+                    'items' => $items,
+                    'invNewItem' => $invNewItem
     		    ]) ?>
 
     		</div>

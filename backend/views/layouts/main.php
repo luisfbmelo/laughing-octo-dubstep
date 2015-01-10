@@ -67,35 +67,47 @@ AppAsset::register($this);
 
                         <!-- Side Menu -->
                         <div class="accordion collapse navbar-collapse clearPad" id="leftMenu">
+                            
+
                             <div class="accordion-group">
-                                <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['repair']); ?>">
-                                    <a class="accordion-toggle" data-parent="#leftMenu" href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['repair/index']); ?>">
-                                          <span class="glyphicon glyphicon-home"></span> 
-                                          <span>Início</span>
+                                <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['begining','fastsearch']); ?>">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseOne">
+                                        <span class="glyphicon glyphicon-cog"></span> 
+                                        <span class="glyphicon glyphicon-<?= (Yii::$app->controller->isActive(['begining','fastsearch']) != "activeTop") ? 'plus' : 'minus' ?> secondGliph"></span>
+                                        <span>Início</span>
                                     </a>
                                 </div>
+                                <div id="collapseOne" class="accordion-body collapse <?= (Yii::$app->controller->isActive(['begining','fastsearch']) == "activeTop") ? 'in"' : ' ' ?>" <?= (Yii::$app->controller->isActive(['begining','fastsearch']) != "activeTop") ? 'style="height:0px;"' : ' ' ?>>
+                                    <div class="accordion-inner">
+                                        <ul>
+                                            <li class="<?php echo Yii::$app->controller->isActive(['begining']); ?>"><a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['/']); ?>">Listagem</a></li>
+                                            <li class="<?php echo Yii::$app->controller->isActive(['fastsearch']); ?>"><a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['repair/index?list=fastsearch']); ?>">Consulta rápida</a></li>
+                                        </ul>                 
+                                    </div>
+                                 </div>
                             </div>
 
                             <div class="accordion-group">
                                 <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['repair2']); ?>">
-                                    <a class="accordion-toggle" data-parent="#leftMenu" href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['repair/index?list=1']); ?>">
+                                    <a class="accordion-toggle" data-parent="#leftMenu" href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['repair/index?list=repairs']); ?>">
                                         <span class="glyphicon glyphicon-wrench"></span> 
                                         <span>Reparações</span>
                                     </a>
                                 </div>
                             </div>
-
+                            
+                            <!-- RESTRICTED -->
+                            <?php if (\Yii::$app->session->get('user.group')==1){ ?>
                             <div class="accordion-group">
                                 <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['repair3']); ?>">
-                                    <a class="accordion-toggle" data-parent="#leftMenu" href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['repair/index?list=5']); ?>">
+                                    <a class="accordion-toggle" data-parent="#leftMenu" href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['repair/index?list=deleted']); ?>">
                                         <span class="glyphicon glyphicon-trash"></span> 
                                         <span>Eliminadas</span>
                                     </a>
                                 </div>
                             </div>
 
-                            <!-- RESTRICTED -->
-                            <?php if (\Yii::$app->session->get('user.group')==1){ ?>
+                            
                             <div class="accordion-group">
                                 <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['user']); ?>">
                                     <a class="accordion-toggle" data-parent="#leftMenu" href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['user/index']); ?>">
@@ -107,17 +119,20 @@ AppAsset::register($this);
                             
 
                             <div class="accordion-group">
-                                <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['status','stores']); ?>">
+                                <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['status','stores', 'equips', 'brands', 'models']); ?>">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseFive">
                                         <span class="glyphicon glyphicon-cog"></span> 
-                                        <span class="glyphicon glyphicon-<?= (Yii::$app->controller->isActive(['status','stores']) != "activeTop") ? 'plus' : 'minus' ?> secondGliph"></span>
+                                        <span class="glyphicon glyphicon-<?= (Yii::$app->controller->isActive(['status','stores', 'equips', 'brands', 'models']) != "activeTop") ? 'plus' : 'minus' ?> secondGliph"></span>
                                         <span>Configurações</span>
                                     </a>
                                 </div>
-                                <div id="collapseFive" class="accordion-body collapse <?= (Yii::$app->controller->isActive(['status','stores']) == "activeTop") ? 'in"' : ' ' ?>" <?= (Yii::$app->controller->isActive(['status','stores']) != "activeTop") ? 'style="height:0px;"' : ' ' ?>>
+                                <div id="collapseFive" class="accordion-body collapse <?= (Yii::$app->controller->isActive(['status','stores', 'equips', 'brands', 'models']) == "activeTop") ? 'in"' : ' ' ?>" <?= (Yii::$app->controller->isActive(['status','stores', 'equips', 'brands', 'models']) != "activeTop") ? 'style="height:0px;"' : ' ' ?>>
                                     <div class="accordion-inner">
                                         <ul>
                                             <li class="<?php echo Yii::$app->controller->isActive(['stores']); ?>"><a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['stores/index']); ?>">Lojas</a></li>
+                                            <li class="<?php echo Yii::$app->controller->isActive(['equips']); ?>"><a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['equipaments/index']); ?>">Equipamentos</a></li>
+                                            <li class="<?php echo Yii::$app->controller->isActive(['brands']); ?>"><a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['brands/index']); ?>">Marcas</a></li>
+                                            <li class="<?php echo Yii::$app->controller->isActive(['models']); ?>"><a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['models/index']); ?>">Modelos</a></li>
                                         </ul>                 
                                     </div>
                                  </div>
@@ -196,6 +211,16 @@ AppAsset::register($this);
         <div class="statusMessage flash-success">
             <div class="glyphicon glyphicon-ok" style="font-size:3em;margin-bottom:0.5em;"></div>
             <div>Elemento eliminado com sucesso.</div>
+            <div class="closeBtn">
+                <span class="glyphicon glyphicon-remove"></span>
+            </div>
+        </div>
+    </div> 
+
+    <div class="statusBox ajaxSuccRec const">
+        <div class="statusMessage flash-success">
+            <div class="glyphicon glyphicon-ok" style="font-size:3em;margin-bottom:0.5em;"></div>
+            <div>Elemento recuperado com sucesso.</div>
             <div class="closeBtn">
                 <span class="glyphicon glyphicon-remove"></span>
             </div>

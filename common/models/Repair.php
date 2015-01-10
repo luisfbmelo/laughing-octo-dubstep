@@ -447,6 +447,13 @@ class Repair extends \yii\db\ActiveRecord
         return $model;
     }
 
+    /**
+     * Check if a given accessory type exists in side a given array
+     * @param  [type] $array [description]
+     * @param  [type] $key   [description]
+     * @param  [type] $val   [description]
+     * @return [type]        [description]
+     */
     static function accessType($array, $key, $val){
 
       //go for all accessories
@@ -491,7 +498,7 @@ class Repair extends \yii\db\ActiveRecord
     }
 
     /**
-     * Get all repairs that are more than 30 days to pickup
+     * Get all repairs that are more than 90 days to pickup
      * @return array     Repair data
      */
     public function getRepairPickup(){
@@ -518,6 +525,11 @@ class Repair extends \yii\db\ActiveRecord
         return $model;
     }
 
+    /**
+     * Get the time passed after the repair enters
+     * @param  int $id repair identifier
+     * @return array     data of the repair
+     */
     public function getRepairTime($id){
         $connection = \Yii::$app->db;
 
@@ -539,6 +551,11 @@ class Repair extends \yii\db\ActiveRecord
         return $model;
     }
 
+    /**
+     * Get the time passed after the repair finishes
+     * @param  int $id repair identifier
+     * @return array     data of the repair
+     */
     public function getTimeToDeliver($id){
         $connection = \Yii::$app->db;
 
@@ -560,6 +577,11 @@ class Repair extends \yii\db\ActiveRecord
         return $model;
     }
 
+    /**
+     * Abbreviate a certain text
+     * @param  string $text Text to abbreviate
+     * @return string       Abbreviated text
+     */
     public function abbreviate($text){
       $output = preg_split( "/( +|do|da)/", $text);
       $finalOutput = "";
@@ -569,6 +591,17 @@ class Repair extends \yii\db\ActiveRecord
       }
 
       return $finalOutput;
+    }
+
+    /**
+     * Returns the delivery id of a given repair
+     * @param  int $id repair identifier
+     * @return object     object with the delivery id
+     */
+    public function getDeliveryid($id){
+      $obj = Delivery::find()->where(['repair_id'=>$id])->one();
+
+      return ($obj) ? $obj->id_delivery : "";
     }
 
     public function beforeDelete()
