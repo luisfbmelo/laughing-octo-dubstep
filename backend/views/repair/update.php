@@ -7,7 +7,7 @@ use yii\widgets\Breadcrumbs;
 /* @var $model common\models\repair */
 
 $this->title = 'Editar reparação: ' . ' ' . $modelRepair->id_repair;
-$this->params['breadcrumbs'][] = ['label' => 'Reparações', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Reparações', 'url' => [\Yii::$app->session->get('lastAction')]];
 $this->params['breadcrumbs'][] = ['label' => $modelRepair->id_repair, 'url' => ['view', 'id' => $modelRepair->id_repair]];
 $this->params['breadcrumbs'][] = 'Editar';
 ?>

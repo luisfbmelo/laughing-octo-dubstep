@@ -83,7 +83,7 @@ class SearchRepair extends Repair
 
         //FILTER ACCORDING TO VIEW TYPE
         switch($viewType){
-            case "repairs":
+            case "pending":
                 $query->andFilterWhere(['not',['repair.status_id'=>5]]);
                 $query->andFilterWhere([
                     'repair.status' => 1

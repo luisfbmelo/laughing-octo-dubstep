@@ -85,6 +85,34 @@ class RepairController extends Controller
             ],
         ];
     }
+/*
+    public function beforeAction($event)
+    {
+
+        if (parent::beforeAction($event)) {
+            echo \Yii::$app->session->get('lastAction');
+            return true;
+        } else {
+            return false;
+        }
+    }*/
+
+    /**
+     * Set the latest action origin in order to set the correct track
+     * @param  [type] $event  [description]
+     * @param  [type] $result [description]
+     * @return [type]         [description]
+     */
+    public function afterAction($event, $result)
+    {
+         
+        if (\Yii::$app->session->get('lastAction')!="update" && \Yii::$app->session->get('lastAction')!="view" && \Yii::$app->session->get('lastAction')!="create" && Yii::$app->controller->action->id!="update" && \Yii::$app->controller->action->id!="view" && Yii::$app->controller->action->id!="create"){
+            \Yii::$app->session->set('lastAction',Yii::$app->controller->action->id);
+        }
+        
+        return $result;
+
+    }
 
     public function actionSearch(){
         /*START MODELS*/
@@ -135,7 +163,7 @@ class RepairController extends Controller
      */
     public function actionIndex()
     {
-        $viewType = 0;
+        $viewType = null;
 
         //RESOLVE FOR PRINTING
         if (isset($_GET['sd']) && !empty($_GET['sd']) && is_numeric($_GET['sd']) && isset($_GET['a']) && !empty($_GET['a'])){
@@ -169,13 +197,6 @@ class RepairController extends Controller
             $items = null;
         }
 
-        //SET VIEWTYPE
-        if (isset($_GET['list']) && is_string($_GET['list']) && $_GET['list']!=""){
-            $viewType = $_GET['list'];
-        }else{
-            $viewType = null;
-        }
-        
         $searchModel = new SearchRepair();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $viewType);
 
@@ -186,6 +207,54 @@ class RepairController extends Controller
             'modelAccess' => $modelAccess,
             'requestType' => $requestType,
             'items' => $items
+        ]);
+    }
+
+    /**
+     * List all repairs with total price
+     */
+    public function actionFastsearch(){
+        $viewType = "fastsearch";
+
+        
+        $searchModel = new SearchRepair();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $viewType);
+
+        return $this->render('fastsearch', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider
+        ]);
+    }
+
+    /**
+     * List all repairs that are pending
+     */
+    public function actionPending(){
+        $viewType = "pending";
+
+        
+        $searchModel = new SearchRepair();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $viewType);
+
+        return $this->render('pending', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider
+        ]);
+    }
+
+    /**
+     * List all repairs that were deleted
+     */
+    public function actionDeleted(){
+        $viewType = "deleted";
+
+        
+        $searchModel = new SearchRepair();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $viewType);
+
+        return $this->render('deleted', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider
         ]);
     }
 
@@ -725,7 +794,6 @@ class RepairController extends Controller
 
                     $c=0;
                     foreach($_POST['Parts'] as $i=>$part){
-                        
 
                         if (empty($part['partDesc']) && empty($part['partCode']) && empty($part['partPrice']) && empty($part['partQuant'])){
 
@@ -1218,15 +1286,13 @@ class RepairController extends Controller
      */
     public function isActive($routes = array())
     {
-        if (in_array('fastsearch',$routes) && isset($_GET['list']) && $_GET['list']=="fastsearch"){
-            return "activeTop";
-        }else if (in_array('begining',$routes) && !isset($_GET['list'])){
-            return "activeTop";
-        }else if (in_array('repair3',$routes) && isset($_GET['list']) && $_GET['list']=="deleted"){
-            return "activeTop";
-        }else if (in_array('repair2',$routes) && isset($_GET['list']) && $_GET['list']=="repairs"){
-            return "activeTop";
-        }else if (in_array('repair',$routes) && !isset($_GET['list'])){
+        $subActions = ['view','update','create'];
+
+        //validate first if this route exist
+        //then validates if that route matches the current action
+        //AND
+        //the current action is one of the subActions
+        if (in_array(Yii::$app->controller->action->id,$routes) || (in_array(Yii::$app->session->get('lastAction'),$routes)) && in_array(Yii::$app->controller->action->id,$subActions)){
             return "activeTop";
         }
         

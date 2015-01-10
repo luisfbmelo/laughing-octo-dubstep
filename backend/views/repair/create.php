@@ -8,7 +8,7 @@ use yii\widgets\Breadcrumbs;
 /* @var $model common\models\repair */
 
 $this->title = 'Nova Reparação';
-$this->params['breadcrumbs'][] = ['label' => 'Reparações', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Reparações', 'url' => [\Yii::$app->session->get('lastAction')]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <section class="col-lg-10 col-xs-12 col-sm-9 col-md-9">

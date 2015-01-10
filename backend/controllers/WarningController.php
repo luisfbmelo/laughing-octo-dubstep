@@ -32,6 +32,23 @@ use yii\filters\VerbFilter;
 
 class WarningController extends Controller
 {
+    /**
+     * Set the latest action origin in order to set the correct track
+     * @param  [type] $event  [description]
+     * @param  [type] $result [description]
+     * @return [type]         [description]
+     */
+    public function afterAction($event, $result)
+    {
+         
+        if (\Yii::$app->session->get('lastAction')!="update" && \Yii::$app->session->get('lastAction')!="view" && \Yii::$app->session->get('lastAction')!="create" && Yii::$app->controller->action->id!="update" && \Yii::$app->controller->action->id!="view" && Yii::$app->controller->action->id!="create"){
+            \Yii::$app->session->set('lastAction',Yii::$app->controller->action->id);
+        }
+        
+        return $result;
+
+    }
+    
     public function actionIndex()
     {
         return $this->render('index');

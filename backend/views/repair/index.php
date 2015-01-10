@@ -17,21 +17,12 @@ setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
 date_default_timezone_set('Atlantic/Azores');
 
 //get user group and define buttons
-if (\Yii::$app->session->get('user.group')!=3 && !(isset($_GET['list']) && $_GET['list']=="deleted")){ 
+if (\Yii::$app->session->get('user.group')!=3){ 
     $template = '{view}{update}{delete}';
-}else if (!(isset($_GET['list']) && $_GET['list']=="deleted")){
-    $template = '{view}{update}';
 }else{
-    $template = '{view}{recover}';
+    $template = '{view}{update}';
 }
 
-if (isset($_GET['list'])){
-    $queryString = "?list=".$_GET['list'];
-    $isFilter = true;
-}else{
-    $queryString ="";
-    $isFilter = false;
-}
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -41,7 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <section class="col-lg-10 col-xs-12 col-sm-8 col-md-8">
-    <?php if (!$isFilter || $_GET['list']=="fastsearch"){?>
     <div class="row hidden-print">
         <div class="col-lg-2 col-xs-4 col-sm-4 col-md-4">
             <a href="<?php echo Url::to(['repair/create']); ?>" class="topBtn">
@@ -67,7 +57,6 @@ $this->params['breadcrumbs'][] = $this->title;
             </a>
         </div>
     </div>
-    <?php } ?>
 
     <div class="row hidden-print">
         <div class="col-lg-12">
@@ -75,193 +64,112 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h1 class="sectionTitle"><?= Html::encode($this->title) ?></h1>  
 
                 <!-- <input type="button" value="Eliminar" class="btn btn-danger deleteBtn"/> -->  
-                <?php if (!isset($_GET['list']) || $_GET['list']!="deleted"){?>
-                    <div class="btn btn-danger deleteBtn">
-                        <span class="glyphicon glyphicon-trash"></span>
-                    </div>
-                <?php }else{ ?>
-                    <div class="btn btn-success recoverBtn">
-                        <span class="glyphicon glyphicon-repeat"></span>
-                    </div>
-                <?php } ?>
+                <div class="btn btn-danger deleteBtn">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </div>
+
 
                 <?php if (isset($_GET['SearchRepair'])){?>
-                    <a href="<?php echo Yii::$app->request->baseUrl;?>/repair/index<?php echo $queryString;?>" class="btn btn-default clearBtn">
+                    <a href="<?php echo Yii::$app->request->baseUrl;?>/repair/index" class="btn btn-default clearBtn">
                         <span>Limpar</span>
                     </a>
                     <div class="clear"></div>
                 <?php } ?>
 
                 <?php 
-                    if (isset($_GET['list']) && $_GET['list']=="fastsearch"){
-                        echo GridView::widget([
-                            'dataProvider' => $dataProvider,
-                            'columns' => [
-                                //['class' => 'yii\grid\SerialColumn'],
-                                ['class' => CheckboxColumn::className()],
+                    
+                    echo GridView::widget([
+                        'dataProvider' => $dataProvider,
+                        'columns' => [
+                            //['class' => 'yii\grid\SerialColumn'],
+                            ['class' => CheckboxColumn::className()],
+                            
+                            'id_repair',
+                            //'type_id',
+                            //'client_id',
+                            //'inve_id',
+                            
+                            [
+                                'attribute' => 'store_id',
+                                'label' => 'Local',
+                                'filter' => ArrayHelper::map(stores::find()->where(['status'=>1])->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc'),
+                                'content' => function($model, $index, $dataColumn) {
+
+                                    $text = $model->getStoreDesc($model->id_repair)["storeDesc"];
+                                    $output = $model->abbreviate($text);
+                                    return $output;
+                                },
+
+                            ],
+                            [
+                                'attribute' => 'equip',
+                                'label' => 'Equipamento',
+                                'content' => function($model, $index, $dataColumn) {
+                                    return $model->getEquipName()["equipDesc"];
+                                },                           
                                 
-                                'id_repair',
+                            ],
+                            [
+                                'attribute' => 'model',
+                                'label' => 'Modelo',
+                                'content' => function($model, $index, $dataColumn) {
+                                    return $model->getModelName()["modelName"];
+                                },                           
+                                
+                            ],
+                            'repair_desc:ntext',
+                            [
+                                //data from other modules tables
+                                'attribute' => 'client',
+                                'label' => 'Cliente',
+                                'value' => 'client.cliName'
 
-                                [
-                                    'attribute' => 'equip',
-                                    'label' => 'Equipamento',
-                                    'content' => function($model, $index, $dataColumn) {
-                                        return $model->getEquipName()["equipDesc"];
-                                    },                           
-                                    
-                                ],
-                                [
-                                    'attribute' => 'model',
-                                    'label' => 'Modelo',
-                                    'content' => function($model, $index, $dataColumn) {
-                                        return $model->getModelName()["modelName"];
-                                    },                           
-                                    
-                                ],
-                                'repair_done_desc:ntext',
-                                [
-                                    //data from other modules tables
-                                    'attribute' => 'client',
-                                    'label' => 'Cliente',
-                                    'value' => 'client.cliName'
-
-                                ],
-                                [
-                                    'attribute' => 'total',
-                                    'label' => 'Total',
-                                    'content' => function($model, $index, $dataColumn) {
-                                        return (!empty($model->total)) ? '<span style="font-weight:bold;">'.$model->total.' €</span>' : "";
-                                    },                           
-                                    
-                                ],
-                                [
-                                    'attribute' => 'status_id',
-                                    'label' => 'Estado',
-                                    'filter' => ArrayHelper::map(status::find()->where(['status'=>1])->asArray()->orderBy('id_status ASC')->all(), 'id_status','statusDesc'),
-                                    'content' => function($model, $index, $dataColumn) {
-                                        return $status = "<div class='status-color'><span class='circle' style='background-color:#".$model->getStatusDesc()['color'].";'></span><span>".$model->getStatusDesc()["statusDesc"]."</span><span class='clearAll'></span></div>";
-                                    },                           
-                                    
-                                ],
-
-
-                                ['class' => 'yii\grid\ActionColumn',
-                                    'template' => $template,
-                                    'buttons'=>[
-                                        'recover' => function ($url, $model) {     
-                                            return Html::a('<span class="glyphicon glyphicon-repeat"></span>', ['recover', 'id' => $model->id_repair], [
-                                                    'data' => [
-                                                        'confirm' => 'Tem a certeza que deseja recuperar esta reparação?',
-                                                        'method' => 'post',
-                                                    ],
-                                                ]);                             
-                                        }
-                                    ],
-                                ],
                             ],
 
-                            /*'rowOptions' => function ($model, $index, $widget, $grid){
-                                return ['class' => 'status_'.$model->status_id];
-                            },*/
-                            'filterModel' => $searchModel,
-                            'headerRowOptions' =>['class'=>'listHeader'],
-                            'options' => [
-                                'class' => 'grid_listing',
-                            ]
-                        ]);
-                    }else{
-                        echo GridView::widget([
-                            'dataProvider' => $dataProvider,
-                            'columns' => [
-                                //['class' => 'yii\grid\SerialColumn'],
-                                ['class' => CheckboxColumn::className()],
+                            [
+                                'attribute' => 'date_entry',
+                                'content' => function($model, $index, $dataColumn){
+                                    return date("Y-m-d", strtotime($model->date_entry));
+                                }
+                            ],
+                            
+                            
+                            [
+                                'attribute' => 'status_id',
+                                'label' => 'Estado',
+                                'filter' => ArrayHelper::map(status::find()->where(['status'=>1])->andWhere(['not',['id_status'=>6]])->asArray()->orderBy('id_status ASC')->all(), 'id_status','statusDesc'),
+                                'content' => function($model, $index, $dataColumn) {
+                                    return $status = "<div class='status-color'><span class='circle' style='background-color:#".$model->getStatusDesc()['color'].";'></span><span>".$model->getStatusDesc()["statusDesc"]."</span><span class='clearAll'></span></div>";
+                                },                           
                                 
-                                'id_repair',
-                                //'type_id',
-                                //'client_id',
-                                //'inve_id',
-                                
-                                [
-                                    'attribute' => 'store_id',
-                                    'label' => 'Local',
-                                    'filter' => ArrayHelper::map(stores::find()->where(['status'=>1])->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc'),
-                                    'content' => function($model, $index, $dataColumn) {
+                            ],
 
-                                        $text = $model->getStoreDesc($model->id_repair)["storeDesc"];
-                                        $output = $model->abbreviate($text);
-                                        return $output;
-                                    },
 
-                                ],
-                                [
-                                    'attribute' => 'equip',
-                                    'label' => 'Equipamento',
-                                    'content' => function($model, $index, $dataColumn) {
-                                        return $model->getEquipName()["equipDesc"];
-                                    },                           
-                                    
-                                ],
-                                [
-                                    'attribute' => 'model',
-                                    'label' => 'Modelo',
-                                    'content' => function($model, $index, $dataColumn) {
-                                        return $model->getModelName()["modelName"];
-                                    },                           
-                                    
-                                ],
-                                'repair_desc:ntext',
-                                [
-                                    //data from other modules tables
-                                    'attribute' => 'client',
-                                    'label' => 'Cliente',
-                                    'value' => 'client.cliName'
-
-                                ],
-
-                                [
-                                    'attribute' => 'date_entry',
-                                    'content' => function($model, $index, $dataColumn){
-                                        return date("Y-m-d", strtotime($model->date_entry));
+                            ['class' => 'yii\grid\ActionColumn',
+                                'template' => $template,
+                                'buttons'=>[
+                                    'recover' => function ($url, $model) {     
+                                        return Html::a('<span class="glyphicon glyphicon-repeat"></span>', ['recover', 'id' => $model->id_repair], [
+                                                'data' => [
+                                                    'confirm' => 'Tem a certeza que deseja recuperar esta reparação?',
+                                                    'method' => 'post',
+                                                ],
+                                            ]);                             
                                     }
                                 ],
-                                
-                                
-                                [
-                                    'attribute' => 'status_id',
-                                    'label' => 'Estado',
-                                    'filter' => ArrayHelper::map(status::find()->where(['status'=>1])->andWhere(['not',['id_status'=>5]])->andWhere(['not',['id_status'=>6]])->asArray()->orderBy('id_status ASC')->all(), 'id_status','statusDesc'),
-                                    'content' => function($model, $index, $dataColumn) {
-                                        return $status = "<div class='status-color'><span class='circle' style='background-color:#".$model->getStatusDesc()['color'].";'></span><span>".$model->getStatusDesc()["statusDesc"]."</span><span class='clearAll'></span></div>";
-                                    },                           
-                                    
-                                ],
-
-
-                                ['class' => 'yii\grid\ActionColumn',
-                                    'template' => $template,
-                                    'buttons'=>[
-                                        'recover' => function ($url, $model) {     
-                                            return Html::a('<span class="glyphicon glyphicon-repeat"></span>', ['recover', 'id' => $model->id_repair], [
-                                                    'data' => [
-                                                        'confirm' => 'Tem a certeza que deseja recuperar esta reparação?',
-                                                        'method' => 'post',
-                                                    ],
-                                                ]);                             
-                                        }
-                                    ],
-                                ],
                             ],
+                        ],
 
-                            /*'rowOptions' => function ($model, $index, $widget, $grid){
-                                return ['class' => 'status_'.$model->status_id];
-                            },*/
-                            'filterModel' => $searchModel,
-                            'headerRowOptions' =>['class'=>'listHeader'],
-                            'options' => [
-                                'class' => 'grid_listing',
-                            ]
-                        ]);
-                    }
+                        /*'rowOptions' => function ($model, $index, $widget, $grid){
+                            return ['class' => 'status_'.$model->status_id];
+                        },*/
+                        'filterModel' => $searchModel,
+                        'headerRowOptions' =>['class'=>'listHeader'],
+                        'options' => [
+                            'class' => 'grid_listing',
+                        ]
+                    ]);
+                    
 
                  ?>
 
