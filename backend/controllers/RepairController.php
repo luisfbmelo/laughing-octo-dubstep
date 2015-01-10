@@ -44,6 +44,8 @@ class RepairController extends Controller
                 "noBrand" => "Esta marca não existe. Marque como nova"
             ];
 
+    private $subActions = ['view','update','create'];
+
     /**
      * @inheritdoc
      */
@@ -106,7 +108,7 @@ class RepairController extends Controller
     public function afterAction($event, $result)
     {
          
-        if (\Yii::$app->session->get('lastAction')!="update" && \Yii::$app->session->get('lastAction')!="view" && \Yii::$app->session->get('lastAction')!="create" && Yii::$app->controller->action->id!="update" && \Yii::$app->controller->action->id!="view" && Yii::$app->controller->action->id!="create"){
+        if (!in_array(\Yii::$app->session->get('lastAction'),$this->subActions) && !in_array(Yii::$app->controller->action->id, $this->subActions)){
             \Yii::$app->session->set('lastAction',Yii::$app->controller->action->id);
         }
         
@@ -1286,13 +1288,12 @@ class RepairController extends Controller
      */
     public function isActive($routes = array())
     {
-        $subActions = ['view','update','create'];
 
         //validate first if this route exist
         //then validates if that route matches the current action
         //AND
         //the current action is one of the subActions
-        if (in_array(Yii::$app->controller->action->id,$routes) || (in_array(Yii::$app->session->get('lastAction'),$routes)) && in_array(Yii::$app->controller->action->id,$subActions)){
+        if (in_array(Yii::$app->controller->action->id,$routes) || (in_array(Yii::$app->session->get('lastAction'),$routes)) && in_array(Yii::$app->controller->action->id,$this->subActions)){
             return "activeTop";
         }
         
