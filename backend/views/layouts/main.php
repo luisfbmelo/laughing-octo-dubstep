@@ -72,7 +72,7 @@ AppAsset::register($this);
                             <div class="accordion-group">
                                 <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['begining','fastsearch']); ?>">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseOne">
-                                        <span class="glyphicon glyphicon-cog"></span> 
+                                        <span class="glyphicon glyphicon-home"></span> 
                                         <span class="glyphicon glyphicon-<?= (Yii::$app->controller->isActive(['begining','fastsearch']) != "activeTop") ? 'plus' : 'minus' ?> secondGliph"></span>
                                         <span>Início</span>
                                     </a>

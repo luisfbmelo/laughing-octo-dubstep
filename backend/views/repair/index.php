@@ -126,7 +126,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'value' => 'client.cliName'
 
                                 ],
-                                'total',
+                                [
+                                    'attribute' => 'total',
+                                    'label' => 'Total',
+                                    'content' => function($model, $index, $dataColumn) {
+                                        return (!empty($model->total)) ? '<span style="font-weight:bold;">'.$model->total.' €</span>' : "";
+                                    },                           
+                                    
+                                ],
                                 [
                                     'attribute' => 'status_id',
                                     'label' => 'Estado',
