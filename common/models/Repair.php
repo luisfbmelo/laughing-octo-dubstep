@@ -75,7 +75,7 @@ class Repair extends \yii\db\ActiveRecord
             'user_id' => 'Utilizador',
             'repair_desc' => 'Problema',
             'date_entry' => 'Entrada',
-            'date_close' => 'Fecho',
+            'date_close' => 'Entrega',
             'date_repaired' => 'Reparado',
             'store_id' => 'Loja',
             'priority' => 'Prioridade',

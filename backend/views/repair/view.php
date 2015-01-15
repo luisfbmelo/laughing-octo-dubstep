@@ -11,6 +11,8 @@ use common\models\Repair;
 $this->title = 'Reparação Nº ' . ' ' . $modelRepair->id_repair;
 if (\Yii::$app->session->get('lastAction')=="warranty" || \Yii::$app->session->get('lastAction')=="pickup"){
     $this->params['breadcrumbs'][] = ['label' => 'Reparações', 'url' => ["warning/".\Yii::$app->session->get('lastAction')]];
+}else if (\Yii::$app->session->get('lastAction')=="repaired" || \Yii::$app->session->get('lastAction')=="delivery" || \Yii::$app->session->get('lastAction')=="entry"){
+    $this->params['breadcrumbs'][] = ['label' => 'Reparações', 'url' => ["/stats/".\Yii::$app->session->get('lastAction')]];
 }else{
     $this->params['breadcrumbs'][] = ['label' => 'Reparações', 'url' => [\Yii::$app->session->get('lastAction')]];
 }

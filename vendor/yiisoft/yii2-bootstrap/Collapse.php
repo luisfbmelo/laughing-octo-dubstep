@@ -53,8 +53,6 @@ class Collapse extends Widget
      * - content: string, required, the content (HTML) of the group
      * - options: array, optional, the HTML attributes of the group
      * - contentOptions: optional, the HTML attributes of the group's content
-     *
-     * ```
      */
     public $items = [];
 
@@ -86,6 +84,7 @@ class Collapse extends Widget
 
     /**
      * Renders collapsible items as specified on [[items]].
+     * @throws InvalidConfigException if label isn't specified
      * @return string the rendering result
      */
     public function renderItems()
@@ -93,7 +92,7 @@ class Collapse extends Widget
         $items = [];
         $index = 0;
         foreach ($this->items as $item) {
-            if (!isset($item['label'])) {
+            if (!array_key_exists('label', $item)) {
                 throw new InvalidConfigException("The 'label' option is required.");
             }
             $header = $item['label'];
@@ -115,7 +114,7 @@ class Collapse extends Widget
      */
     public function renderItem($header, $item, $index)
     {
-        if (isset($item['content'])) {
+        if (array_key_exists('content', $item)) {
             $id = $this->options['id'] . '-collapse' . $index;
             $options = ArrayHelper::getValue($item, 'contentOptions', []);
             $options['id'] = $id;

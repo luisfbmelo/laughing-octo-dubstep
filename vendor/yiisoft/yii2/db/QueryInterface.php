@@ -44,7 +44,7 @@ interface QueryInterface
      * @param string $q the COUNT expression. Defaults to '*'.
      * @param Connection $db the database connection used to execute the query.
      * If this parameter is not given, the `db` application component will be used.
-     * @return integer number of records
+     * @return integer number of records.
      */
     public function count($q = '*', $db = null);
 
@@ -88,7 +88,7 @@ interface QueryInterface
      *
      * - `['type' => 1, 'status' => 2]` generates `(type = 1) AND (status = 2)`.
      * - `['id' => [1, 2, 3], 'status' => 2]` generates `(id IN (1, 2, 3)) AND (status = 2)`.
-     * - `['status' => null] generates `status IS NULL`.
+     * - `['status' => null]` generates `status IS NULL`.
      *
      * A condition in operator format generates the SQL expression according to the specified operator, which
      * can be one of the followings:
@@ -99,9 +99,10 @@ interface QueryInterface
      *   `['and', 'type=1', ['or', 'id=1', 'id=2']]` will generate `type=1 AND (id=1 OR id=2)`.
      *   The method will *not* do any quoting or escaping.
      *
-     * - **or**: similar to the `and` operator except that the operands are concatenated using `OR`.
+     * - **or**: similar to the `and` operator except that the operands are concatenated using `OR`. For example,
+     *   `['or', ['type' => [7, 8, 9]], ['id' => [1, 2, 3]]` will generate `(type IN (7, 8, 9) OR (id IN (1, 2, 3)))`.
      *
-     * - **not**: this will take only one operator and build the negation of it by prefixing the query string with `NOT`.
+     * - **not**: this will take only one operand and build the negation of it by prefixing the query string with `NOT`.
      *   For example `['not', ['attribute' => null]]` will result in the condition `NOT (attribute IS NULL)`.
      *
      * - **between**: operand 1 should be the column name, and operand 2 and 3 should be the

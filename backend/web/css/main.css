@@ -23,7 +23,9 @@ li{
 #collapseFive ul,
 #collapseFive li,
 #collapseSix ul,
-#collapseSix li {
+#collapseSix li,
+#collapseSeven ul,
+#collapseSeven li {
   padding: 0;
   margin: 0; }
 
@@ -199,7 +201,7 @@ Status Message
 }*/
 .brandHeader {
   background-color: #414957;
-  padding: 20px;
+  padding: 10px;
   color: white;
   border-bottom: 1px solid #899cbc; }
 
@@ -270,9 +272,9 @@ Status Message
   margin: 0 !important; }
 
 .menuBox {
-  min-height: -webkit-calc(100% - 110px);
-  min-height: -moz-calc(100% - 110px);
-  min-height: calc(100% - 110px); }
+  min-height: -webkit-calc(100% - 91px);
+  min-height: -moz-calc(100% - 91px);
+  min-height: calc(100% - 91px); }
   .menuBox .menuContainer {
     background-color: #6f7d94;
     height: 100%; }
@@ -394,11 +396,14 @@ a.topBtn {
   a.topBtn:hover {
     background-color: #fcfcfc !important; }
 
-.deleteBtn, .addBtn, .recoverBtn {
+.deleteBtn, .addBtn, .recoverBtn, .dateBtn {
   margin-bottom: 15px; }
-  .deleteBtn *, .addBtn *, .recoverBtn * {
+  .deleteBtn *, .addBtn *, .recoverBtn *, .dateBtn * {
     padding: 0 !important;
     font-size: 1em !important; }
+
+.dateBtn {
+  display: none; }
 
 .clearBtn {
   display: inline-block;
@@ -505,6 +510,17 @@ a.topBtn {
   display: inline-block;
   margin-left: 15px;
   overflow: hidden; }
+
+.dateSelection {
+  float: left;
+  margin-bottom: 15px; }
+  .dateSelection .input-group-addon {
+    padding: 0 12px !important; }
+  .dateSelection .dateBtn {
+    width: 100%;
+    margin-top: 10px; }
+  .dateSelection #dateForm .form-control:hover {
+    cursor: pointer; }
 
 .repairFields {
   margin: 0 !important; }

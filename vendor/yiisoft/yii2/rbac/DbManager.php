@@ -36,9 +36,10 @@ use yii\di\Instance;
 class DbManager extends BaseManager
 {
     /**
-     * @var Connection|string the DB connection object or the application component ID of the DB connection.
+     * @var Connection|array|string the DB connection object or the application component ID of the DB connection.
      * After the DbManager object is created, if you want to change this property, you should only assign it
      * with a DB connection object.
+     * Starting from version 2.0.2, this can also be a configuration array for creating the object.
      */
     public $db = 'db';
     /**
@@ -183,7 +184,7 @@ class DbManager extends BaseManager
     {
         if (!$this->supportsCascadeUpdate()) {
             $this->db->createCommand()
-                ->delete($this->itemChildTable, ['or', 'parent=:name', 'child=:name'], [':name' => $item->name])
+                ->delete($this->itemChildTable, ['or', '[[parent]]=:name', '[[child]]=:name'], [':name' => $item->name])
                 ->execute();
             $this->db->createCommand()
                 ->delete($this->assignmentTable, ['item_name' => $item->name])
@@ -285,7 +286,7 @@ class DbManager extends BaseManager
     {
         if (!$this->supportsCascadeUpdate()) {
             $this->db->createCommand()
-                ->delete($this->itemTable, ['rule_name' => $rule->name])
+                ->update($this->itemTable, ['rule_name' => null], ['rule_name' => $rule->name])
                 ->execute();
         }
 
@@ -348,8 +349,8 @@ class DbManager extends BaseManager
 
         $query = (new Query)->select('b.*')
             ->from(['a' => $this->assignmentTable, 'b' => $this->itemTable])
-            ->where('a.item_name=b.name')
-            ->andWhere(['a.user_id' => (string)$userId]);
+            ->where('{{a}}.[[item_name]]={{b}}.[[name]]')
+            ->andWhere(['a.user_id' => (string) $userId]);
 
         $roles = [];
         foreach ($query->all($this->db) as $row) {
@@ -391,7 +392,7 @@ class DbManager extends BaseManager
 
         $query = (new Query)->select('item_name')
             ->from($this->assignmentTable)
-            ->where(['user_id' => (string)$userId]);
+            ->where(['user_id' => (string) $userId]);
 
         $childrenList = $this->getChildrenList();
         $result = [];
@@ -482,7 +483,7 @@ class DbManager extends BaseManager
         }
 
         $row = (new Query)->from($this->assignmentTable)
-            ->where(['user_id' => (string)$userId, 'item_name' => $roleName])
+            ->where(['user_id' => (string) $userId, 'item_name' => $roleName])
             ->one($this->db);
 
         if ($row === false) {
@@ -507,7 +508,7 @@ class DbManager extends BaseManager
 
         $query = (new Query)
             ->from($this->assignmentTable)
-            ->where(['user_id' => (string)$userId]);
+            ->where(['user_id' => (string) $userId]);
 
         $assignments = [];
         foreach ($query->all($this->db) as $row) {
@@ -584,7 +585,7 @@ class DbManager extends BaseManager
         $query = (new Query)
             ->select(['name', 'type', 'description', 'rule_name', 'data', 'created_at', 'updated_at'])
             ->from([$this->itemTable, $this->itemChildTable])
-            ->where(['parent' => $name, 'name' => new Expression('child')]);
+            ->where(['parent' => $name, 'name' => new Expression('[[child]]')]);
 
         $children = [];
         foreach ($query->all($this->db) as $row) {
@@ -644,7 +645,7 @@ class DbManager extends BaseManager
         }
 
         return $this->db->createCommand()
-            ->delete($this->assignmentTable, ['user_id' => (string)$userId, 'item_name' => $role->name])
+            ->delete($this->assignmentTable, ['user_id' => (string) $userId, 'item_name' => $role->name])
             ->execute() > 0;
     }
 
@@ -658,7 +659,7 @@ class DbManager extends BaseManager
         }
 
         return $this->db->createCommand()
-            ->delete($this->assignmentTable, ['user_id' => (string)$userId])
+            ->delete($this->assignmentTable, ['user_id' => (string) $userId])
             ->execute() > 0;
     }
 

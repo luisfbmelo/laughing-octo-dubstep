@@ -29,6 +29,9 @@ class SearchRepair extends Repair
     //repair custom
     public $datediffRepair;
     public $datediffDeliver;
+    public $date_range;
+    public $dateIntBegin;
+    public $dateIntEnd;
 
     /**
      * @inheritdoc
@@ -38,7 +41,7 @@ class SearchRepair extends Repair
         return [
             [['id_repair', 'type_id', 'client_id', 'inve_id', 'status_id', 'user_id', 'store_id', 'priority', 'status'], 'integer'],
             //add other modules tables to safe
-            [['repair_desc', 'repair_done_desc', 'date_entry', 'date_close', 'obs', 'client', 'cliContact', 'equip', 'brand', 'model', 'sn', 'username','status_id', 'datediffRepair', 'datediffDeliver'], 'safe'],
+            [['repair_desc', 'repair_done_desc', 'date_entry', 'date_close', 'date_repaired', 'obs', 'client', 'cliContact', 'equip', 'brand', 'model', 'sn', 'username','status_id', 'datediffRepair', 'datediffDeliver', 'dateIntBegin', 'dateIntEnd', 'date_range'], 'safe'],
             [['workPrice', 'maxBudget', 'total'], 'number'],
         ];
     }
@@ -81,6 +84,9 @@ class SearchRepair extends Repair
 
         $seeAllStatus = false;
 
+        //order default
+        $order = ['date_entry'=>SORT_DESC];
+
         //FILTER ACCORDING TO VIEW TYPE
         switch($viewType){
             case "pending":
@@ -111,6 +117,52 @@ class SearchRepair extends Repair
             case "deleted":
                 $query->andFilterWhere(['repair.status'=>0]);
                 break;
+
+            case "entry":
+
+                if (isset($params['SearchRepair']['date_range'])){
+                    $dates = $this->getSeperateDates(urldecode($params['SearchRepair']['date_range']));
+                    $query->andWhere('date_entry BETWEEN \''.date("Y-m-d", strtotime($dates[0])).'\' AND \''.date("Y-m-d", strtotime($dates[1])).'\'');
+                }
+
+                $query->andFilterWhere([
+                    'repair.status' => 1
+                ]);
+
+                $order = ['date_entry'=>SORT_ASC];
+                
+                
+                break;
+            case "repaired":
+
+                if (isset($params['SearchRepair']['date_range'])){
+                    $dates = $this->getSeperateDates(urldecode($params['SearchRepair']['date_range']));
+                    $query->andWhere('date_repaired BETWEEN \''.date("Y-m-d", strtotime($dates[0])).'\' AND \''.date("Y-m-d", strtotime($dates[1])).'\'');
+                }
+
+                $query->andFilterWhere([
+                    'repair.status' => 1
+                ]);
+                
+                $query->andFilterWhere(['repair.status_id'=>5]);
+                $order = ['date_repaired'=>SORT_ASC];
+                
+                break;
+            case "delivery":
+
+                if (isset($params['SearchRepair']['date_range'])){
+                    $dates = $this->getSeperateDates(urldecode($params['SearchRepair']['date_range']));
+                    $query->andWhere('date_close BETWEEN \''.date("Y-m-d", strtotime($dates[0])).'\' AND \''.date("Y-m-d", strtotime($dates[1])).'\'');
+                }
+
+                $query->andFilterWhere([
+                    'repair.status' => 1
+                ]);                
+
+                $seeAllStatus=true;
+                $order = ['date_close'=>SORT_ASC];
+                
+                break;
             default:
                 $query->andFilterWhere([
                     'repair.status' => 1
@@ -118,13 +170,15 @@ class SearchRepair extends Repair
                 break;
         }
 
+        //set to hide delivered repairs by default
+        //if in contrary, it will display the delivered
         if ((!isset($params['SearchRepair']['status_id']) || $params['SearchRepair']['status_id']!=6) && !$seeAllStatus){
             $query->andFilterWhere(['not',['repair.status_id'=>6]]);
         }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort'=> ['defaultOrder' => ['date_entry'=>SORT_DESC]],
+            'sort'=> ['defaultOrder' => $order],
             'pagination' => [
                 'pageSize' => 20,
             ],
@@ -213,5 +267,11 @@ class SearchRepair extends Repair
         $query->andFilterWhere(['like', 'user.username', $this->username]);
 
         return $dataProvider;
+    }
+
+    public function getSeperateDates($dates){
+        $splitDate = explode("a", $dates);
+        $datesReturn = [$splitDate[0],$splitDate[1]];
+        return $datesReturn;
     }
 }

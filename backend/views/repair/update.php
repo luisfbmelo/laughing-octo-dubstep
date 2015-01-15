@@ -9,9 +9,12 @@ use yii\widgets\Breadcrumbs;
 $this->title = 'Editar reparação: ' . ' ' . $modelRepair->id_repair;
 if (\Yii::$app->session->get('lastAction')=="warranty" || \Yii::$app->session->get('lastAction')=="pickup"){
     $this->params['breadcrumbs'][] = ['label' => 'Reparações', 'url' => ["warning/".\Yii::$app->session->get('lastAction')]];
+}else if (\Yii::$app->session->get('lastAction')=="repaired" || \Yii::$app->session->get('lastAction')=="delivery" || \Yii::$app->session->get('lastAction')=="entry"){
+    $this->params['breadcrumbs'][] = ['label' => 'Reparações', 'url' => ["/stats/".\Yii::$app->session->get('lastAction')]];
 }else{
     $this->params['breadcrumbs'][] = ['label' => 'Reparações', 'url' => [\Yii::$app->session->get('lastAction')]];
 }
+
 $this->params['breadcrumbs'][] = ['label' => $modelRepair->id_repair, 'url' => ['view', 'id' => $modelRepair->id_repair]];
 $this->params['breadcrumbs'][] = 'Editar';
 ?>

@@ -1,5 +1,5 @@
 .menuBox,{
-    @include min-calc("height", "100% - #{110px}");
+    @include min-calc("height", "100% - #{91px}");
     .menuContainer{
         background-color: $menu-item-bg;
         height:100%;

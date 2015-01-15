@@ -29,7 +29,7 @@ AppAsset::register($this);
                 
                 <nav class="row brandHeader hidden-print">
                     <div class="col-lg-5 col-xs-10 col-sm-5 col-md-5">
-                        <a href="/"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt="" class="src"></a>
+                        <a href="/"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt="" class="img-responsive"></a>
                     </div>
 
                     <div class="col-lg-2 col-xs-2 col-sm-2 col-md-2">
@@ -159,12 +159,31 @@ AppAsset::register($this);
                             </div>
 
                             <div class="accordion-group">
-                                <div class="accordion-heading">
-                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#">
+                                <div class="accordion-heading <?php echo Yii::$app->controller->isActive(['entry','repaired','delivery']); ?>">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseSeven">
                                         <span class="glyphicon glyphicon-stats"></span> 
+                                        <span class="glyphicon glyphicon-<?= (Yii::$app->controller->isActive(['entry','repaired','delivery']) != "activeTop") ? 'plus' : 'minus' ?> secondGliph"></span>
                                         <span>Estatísticas</span>
                                     </a>
                                 </div>
+                                <div id="collapseSeven" class="accordion-body collapse <?= (Yii::$app->controller->isActive(['entry','repaired','delivery']) == "activeTop") ? 'in"' : ' ' ?>" <?= (Yii::$app->controller->isActive(['entry','repaired','delivery']) != "activeTop") ? 'style="height:0px;"' : ' ' ?>>
+                                    
+                                    <?php
+                                        $dates = [date("d-m-Y"),date("d-m-Y",strtotime("+1 month"))];
+                                    ?>
+
+                                    <div class="accordion-inner">
+                                        <ul>
+                                            <li class="<?php echo Yii::$app->controller->isActive(['entry']); ?>"><a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['stats/entry?SearchRepair%5Bdate_range%5D='.$dates[0].'+a+'.$dates[1].'']); ?>">Entradas</a></li>
+                                        </ul>  
+                                        <ul>
+                                            <li class="<?php echo Yii::$app->controller->isActive(['repaired']); ?>"><a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['stats/repaired?SearchRepair%5Bdate_range%5D='.$dates[0].'+a+'.$dates[1].'']); ?>">Reparados</a></li>
+                                        </ul> 
+                                        <ul>
+                                            <li class="<?php echo Yii::$app->controller->isActive(['delivery']); ?>"><a href="<?php echo Yii::$app->urlManager->createAbsoluteUrl(['stats/delivery?SearchRepair%5Bdate_range%5D='.$dates[0].'+a+'.$dates[1].'']); ?>">Entregas</a></li>
+                                        </ul>                
+                                    </div>
+                                 </div>
                             </div>
                             <?php } ?>
                         </div>
