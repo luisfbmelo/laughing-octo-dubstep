@@ -29,6 +29,8 @@ use yii\web\Controller;
 
 use yii\filters\VerbFilter;
 
+date_default_timezone_set("Atlantic/Azores");
+
 class StatsController extends Controller
 {
 
@@ -98,7 +100,7 @@ class StatsController extends Controller
         ]);
     }
 
-    private function hasDates(){
+    public static function hasDates(){
     	//set default date values
     	$searchModel = new SearchRepair();
 		if (isset(Yii::$app->request->queryParams['SearchRepair']['date_range'])){

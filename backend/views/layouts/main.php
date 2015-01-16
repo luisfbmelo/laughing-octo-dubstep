@@ -5,8 +5,12 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 
+use backend\controllers\StatsController;
+
 /* @var $this \yii\web\View */
 /* @var $content string */
+setlocale(LC_ALL, "pt_BR", "pt_BR.iso-8859-1", "pt_BR.utf-8", "portuguese");
+date_default_timezone_set('Atlantic/Azores');
 
 AppAsset::register($this);
 ?>
@@ -169,7 +173,7 @@ AppAsset::register($this);
                                 <div id="collapseSeven" class="accordion-body collapse <?= (Yii::$app->controller->isActive(['entry','repaired','delivery']) == "activeTop") ? 'in"' : ' ' ?>" <?= (Yii::$app->controller->isActive(['entry','repaired','delivery']) != "activeTop") ? 'style="height:0px;"' : ' ' ?>>
                                     
                                     <?php
-                                        $dates = [date("d-m-Y"),date("d-m-Y",strtotime("+1 month"))];
+                                        $dates = StatsController::hasDates();
                                     ?>
 
                                     <div class="accordion-inner">

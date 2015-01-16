@@ -129,6 +129,7 @@ class SearchRepair extends Repair
                     'repair.status' => 1
                 ]);
 
+                $seeAllStatus=true;
                 $order = ['date_entry'=>SORT_ASC];
                 
                 
@@ -144,7 +145,7 @@ class SearchRepair extends Repair
                     'repair.status' => 1
                 ]);
                 
-                $query->andFilterWhere(['repair.status_id'=>5]);
+                $seeAllStatus=true;
                 $order = ['date_repaired'=>SORT_ASC];
                 
                 break;
