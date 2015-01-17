@@ -95,6 +95,7 @@ class SearchRepair extends Repair
                     'repair.status' => 1
                 ]);
                 break;
+
             case "fastsearch":
                 $query->andFilterWhere([
                     'repair.status' => 1
@@ -102,18 +103,23 @@ class SearchRepair extends Repair
 
                 $seeAllStatus=true;
                 break;
+
             case "warranty":
-                $query->andWhere('repair.date_entry <= Date_Sub(Now(), Interval 25 Day)');
+                $query->andWhere('repair.date_entry <= Date_Sub(Now(), Interval 24 Day)');
+                $query->andWhere('repair.status_id<6');
                 $query->andFilterWhere([
                     'repair.status' => 1
                 ]);
                 break;
+
             case "topickup":
-                $query->andWhere('repair.date_repaired < Date_Sub(Now(), Interval 90 Day)');
+                $query->andWhere('repair.date_repaired < Date_Sub(Now(), Interval 89 Day)');
+                $query->andWhere('repair.status_id<6');
                 $query->andFilterWhere([
                     'repair.status' => 1
                 ]);
                 break;
+
             case "deleted":
                 $query->andFilterWhere(['repair.status'=>0]);
                 break;
@@ -168,6 +174,7 @@ class SearchRepair extends Repair
                 $query->andFilterWhere([
                     'repair.status' => 1
                 ]);
+                $seeAllStatus=true;
                 break;
         }
 

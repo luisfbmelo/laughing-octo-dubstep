@@ -137,7 +137,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'attribute' => 'status_id',
                                 'label' => 'Estado',
-                                'filter' => ArrayHelper::map(status::find()->where(['status'=>1])->andWhere(['not',['id_status'=>6]])->asArray()->orderBy('id_status ASC')->all(), 'id_status','statusDesc'),
+                                //'filter' => ArrayHelper::map(status::find()->where(['status'=>1])->andWhere(['not',['id_status'=>6]])->asArray()->orderBy('id_status ASC')->all(), 'id_status','statusDesc'),
+                                'filter' => ArrayHelper::map(status::find()->where(['status'=>1])->asArray()->orderBy('id_status ASC')->all(), 'id_status','statusDesc'),
                                 'content' => function($model, $index, $dataColumn) {
                                     return $status = "<div class='status-color'><span class='circle' style='background-color:#".$model->getStatusDesc()['color'].";'></span><span>".$model->getStatusDesc()["statusDesc"]."</span><span class='clearAll'></span></div>";
                                 },                           

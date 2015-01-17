@@ -488,7 +488,7 @@ class Repair extends \yii\db\ActiveRecord
               repair Inner Join
               client On repair.client_id = client.id_client
             Where
-              (30-DATEDIFF(NOW(),repair.date_entry)) = 5
+              (30-DATEDIFF(NOW(),repair.date_entry)) = 5 AND repair.status_id<6 AND repair.status=1
             Order By
               repair.date_entry');
 
@@ -516,7 +516,7 @@ class Repair extends \yii\db\ActiveRecord
               repair Inner Join
               client On repair.client_id = client.id_client
             Where
-              (DATEDIFF(NOW(),repair.date_repaired)) = 90
+              (DATEDIFF(NOW(),repair.date_repaired)) = 90 AND repair.status_id<6 AND repair.status=1
             Order By
               repair.date_entry');
 
@@ -598,7 +598,7 @@ class Repair extends \yii\db\ActiveRecord
      * @param  int $id repair identifier
      * @return object     object with the delivery id
      */
-    public function getDeliveryid($id){
+    public static function getDeliveryid($id){
       $obj = Delivery::find()->where(['repair_id'=>$id])->one();
 
       return ($obj) ? $obj->id_delivery : "";

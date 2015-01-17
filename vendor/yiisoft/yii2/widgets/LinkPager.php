@@ -85,12 +85,12 @@ class LinkPager extends Widget
      * @var string|boolean the text label for the "first" page button. Note that this will NOT be HTML-encoded.
      * Default is false that means the "first" page button will not be displayed.
      */
-    public $firstPageLabel = false;
+    public $firstPageLabel = "Primeiro";
     /**
      * @var string|boolean the text label for the "last" page button. Note that this will NOT be HTML-encoded.
      * Default is false that means the "last" page button will not be displayed.
      */
-    public $lastPageLabel = false;
+    public $lastPageLabel = "Último";
     /**
      * @var boolean whether to register link tags in the HTML header for prev, next, first and last page.
      * Defaults to `false` to avoid conflicts when multiple pagers are used on one page.

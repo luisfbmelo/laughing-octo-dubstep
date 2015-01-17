@@ -26,7 +26,7 @@ if (\Yii::$app->session->get('user.group')!=3){
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Equipamentos por levantar...';
+$this->title = 'Equipamentos reparados por levantar...';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

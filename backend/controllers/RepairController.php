@@ -40,8 +40,8 @@ class RepairController extends Controller
 {
 
     private $customErrorMessages = [
-                "noEquip" => "Equipamento não existe. Marque como novo",
-                "noBrand" => "Esta marca não existe. Marque como nova"
+                "noEquip" => "Não existe. Procure um já existente na lista ao escrever ou marque como novo.",
+                "noBrand" => "Não existe. Procure uma já existente na lista ao escrever ou marque como nova."
             ];
 
     private $subActions = ['view','update','create'];
@@ -1355,7 +1355,7 @@ class RepairController extends Controller
 
             //echo $body;       
 
-            $to = "luisfbmelo91@gmail.com";
+            $to = \Yii::$app->params["adminEmail"];
             $from = \Yii::$app->params["adminEmail"];
             $subject = "Garantia a expirar";
 
@@ -1398,7 +1398,7 @@ class RepairController extends Controller
 
             //echo $body;       
 
-            $to = "luisfbmelo91@gmail.com";
+            $to = \Yii::$app->params["adminEmail"];
             $from = \Yii::$app->params["adminEmail"];
             $subject = "Equipamentos por levantar";
 
