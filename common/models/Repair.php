@@ -415,7 +415,8 @@ class Repair extends \yii\db\ActiveRecord
               brands.brandName,
               client.*,
               stores.storeDesc,
-              inventory.inveSN
+              inventory.inveSN,
+              repair_type.typeDesc
             From
               repair Inner Join
               client On client.id_client = repair.client_id Inner Join
@@ -423,7 +424,8 @@ class Repair extends \yii\db\ActiveRecord
               inventory On repair.inve_id = inventory.id_inve Inner Join
               equipaments On inventory.equip_id = equipaments.id_equip Inner Join
               brands On inventory.brand_id = brands.id_brand Inner Join
-              models On inventory.model_id = models.id_model
+              models On inventory.model_id = models.id_model Inner Join
+              repair_type On repair.type_id = repair_type.id_type
             WHERE 
               repair.id_repair=:repairId');
 
@@ -488,7 +490,7 @@ class Repair extends \yii\db\ActiveRecord
               repair Inner Join
               client On repair.client_id = client.id_client
             Where
-              (30-DATEDIFF(NOW(),repair.date_entry)) = 5 AND repair.status_id<6 AND repair.status=1
+              (30-DATEDIFF(NOW(),repair.date_entry)) = 5 AND repair.status_id<6 AND repair.status=1 AND repair.type_id=2
             Order By
               repair.date_entry');
 
@@ -603,6 +605,91 @@ class Repair extends \yii\db\ActiveRecord
 
       return ($obj) ? $obj->id_delivery : "";
     }
+
+    /**
+     * Returns the entry page stats
+     * @param  array $dates initial and end date to use in query
+     * @return object        object with the stat data
+     */
+    public static function getEntryStats($dates){
+        $connection = \Yii::$app->db;
+
+        $repair = $connection
+        ->createCommand('
+          Select
+            COUNT(repair.id_repair) as repairTotal
+          From
+            repair
+          Where
+            repair.date_entry Between :date1 And :date2 And
+            repair.status = 1
+            ');
+
+        $repair->bindValue(':date1', date("Y-m-d", strtotime($dates[0])));
+        $repair->bindValue(':date2', date("Y-m-d", strtotime($dates[1])));
+
+        $model = $repair->queryAll();
+        return $model;
+    }
+
+    /**
+     * Return the complete stats of a repaired or delivered section
+     * @param  array $dates dates to use in query
+     * @param  string $type  the type of field that must be search (date_repaired or date_close)
+     * @return object        object with the stat data
+     */
+    public static function getCompleteStats($dates,$type){
+      switch($type){
+        case "repaired":
+          $column = "repair.date_repaired";
+          break;
+        case "delivered":
+          $column = "repair.date_close";
+      }
+        $connection = \Yii::$app->db;
+
+        //parts data
+        $parts = $connection
+        ->createCommand('
+          Select
+            SUM(parts.partPrice*parts.partQuant) as partsTotal
+          From
+            repair Inner Join
+            repair_parts On repair_parts.repair_id = repair.id_repair Inner Join
+            parts On repair_parts.part_id = parts.id_part
+          Where
+            '.$column.'  Between :date1 And :date2 And
+            repair.status = 1
+            ');
+
+        $parts->bindValue(':date1', date("Y-m-d", strtotime($dates[0])));
+        $parts->bindValue(':date2', date("Y-m-d", strtotime($dates[1])));
+
+        $partsData = $parts->queryAll();
+
+        //repair data
+        $repair = $connection
+        ->createCommand('
+          Select
+            COUNT(repair.id_repair) as repairTotal,
+            SUM(repair.workPrice) as handworkTotal,
+            SUM(repair.total) as allTotal  
+          From
+            repair 
+          Where
+            '.$column.' Between :date1 And :date2 And
+            repair.status = 1
+            ');
+
+        $repair->bindValue(':date1', date("Y-m-d", strtotime($dates[0])));
+        $repair->bindValue(':date2', date("Y-m-d", strtotime($dates[1])));
+
+
+        $repairData = $repair->queryAll();
+
+        return [$partsData,$repairData];
+    }
+
 
     public function beforeDelete()
     {

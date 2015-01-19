@@ -67,7 +67,51 @@ $this->params['breadcrumbs'][] = 'Detalhes';
         ?>
         <!-- visible-print-block -->
         <div class="row">
-            <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 visible-print-block" id="printEntry">
+            <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12" id="printEntry">
+                <!--MAIN HEADER-->
+                <div class="row foote">
+                    <div class="col-lg-6 col-xs-5 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
+                    <div class="col-lg-6 col-xs-7 col-sm-6 col-md-6"> 
+                        <table class="table table-bordered">
+                            <tbody>
+                                 <tr>
+                                    <td>Entrada</td>
+                                    <td>Nº <?php echo $modelRepair->id_repair;?></td>
+                                </tr>
+                                <tr>
+                                    <td>Data</td>
+                                    <td><?php echo date("Y-m-d", strtotime($modelRepair->date_entry));?></td>
+                                </tr>
+                                <tr>
+                                    <td>Local</td>
+                                    <td><?php echo $modelStores->storeDesc;?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row foote contacts">                    
+                    <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3"> 
+                        <table class="table table-bordered">
+                            <tbody>
+                                 <tr>
+                                    <td>Angra</td>
+                                    <td>295216489 / 926652121</td>
+                                </tr>
+                                <tr>
+                                    <td>Praia</td>
+                                    <td>295543359 / 962501518</td>
+                                </tr>
+                                <tr>
+                                    <td>Website</td>
+                                    <td>www.toquereservado.pt</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--END MAIN HEADER-->
+
                 <div class="row header">
                     <div class="col-lg-6 col-xs-5 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
                     <div class="col-lg-6 col-xs-7 col-sm-6 col-md-6"> 
@@ -84,6 +128,10 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                                 <tr>
                                     <td>Local</td>
                                     <td><?php echo $modelStores->storeDesc;?></td>
+                                </tr>
+                                <tr>
+                                    <td>Tipo</td>
+                                    <td><?php echo $modelTypes->typeDesc;?></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -185,28 +233,6 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                         <?php } ?>
 
                         
-                    </div>
-                </div>
-
-                <div class="row foote">
-                    <div class="col-lg-6 col-xs-5 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
-                    <div class="col-lg-6 col-xs-7 col-sm-6 col-md-6"> 
-                        <table class="table table-bordered">
-                            <tbody>
-                                 <tr>
-                                    <td>Entrada</td>
-                                    <td>Nº <?php echo $modelRepair->id_repair;?></td>
-                                </tr>
-                                <tr>
-                                    <td>Data</td>
-                                    <td><?php echo date("Y-m-d", strtotime($modelRepair->date_entry));?></td>
-                                </tr>
-                                <tr>
-                                    <td>Local</td>
-                                    <td><?php echo $modelStores->storeDesc;?></td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>

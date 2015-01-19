@@ -65,10 +65,14 @@ class StatsController extends Controller
     	$searchModel = new SearchRepair();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $viewType);
         
+        //get stats
+        $stats = Repair::getEntryStats($this->hasDates());
+
         return $this->render('entry', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'dates' => $this->hasDates()
+            'dates' => $this->hasDates(),
+            'stats' => $stats
         ]);
     }
 
@@ -78,11 +82,16 @@ class StatsController extends Controller
 
     	$searchModel = new SearchRepair();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $viewType);
-        
+
+        //get stats
+        list($statsParts,$statsRepairs) = Repair::getCompleteStats($this->hasDates(),'repaired');
+
         return $this->render('repaired', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'dates' => $this->hasDates()
+            'dates' => $this->hasDates(),
+            'statsParts' => $statsParts,
+            'statsRepairs' => $statsRepairs
         ]);
     }
 
@@ -92,11 +101,16 @@ class StatsController extends Controller
 
     	$searchModel = new SearchRepair();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $viewType);
+
+        //get stats
+        list($statsParts,$statsRepairs) = Repair::getCompleteStats($this->hasDates(),'delivered');
         
         return $this->render('delivery', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'dates' => $this->hasDates()
+            'dates' => $this->hasDates(),
+            'statsParts' => $statsParts,
+            'statsRepairs' => $statsRepairs
         ]);
     }
 

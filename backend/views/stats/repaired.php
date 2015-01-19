@@ -45,6 +45,86 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row hidden-print">
         <div class="col-lg-12">
              <div class="repair-index">
+                <!--STATS BOX-->
+                <div class="row statBlocks">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="block">
+                            <ul>
+                                <li class="iconContainer">
+                                    <i class="fa fa-gear"></i>
+                                </li>
+
+                                <li class="statsBox">
+                                    <strong>
+                                        <?php echo (int)$statsRepairs[0]['repairTotal'];?>
+                                    </strong>
+                                    <p>
+                                        Reparadas
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="block">
+                            <ul>
+                                <li class="iconContainer">
+                                    <i class="fa fa-cubes"></i>
+                                </li>
+
+                                <li class="statsBox">
+                                    <strong>
+                                        <span class="money"><?php echo (int)$statsParts[0]['partsTotal'];?></span>
+                                    </strong>
+                                    <p>
+                                        Peças
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="block">
+                            <ul>
+                                <li class="iconContainer">
+                                    <i class="fa fa-users"></i>
+                                </li>
+
+                                <li class="statsBox">
+                                    <strong>
+                                        <span class="money"><?php echo (int)$statsRepairs[0]['handworkTotal'];?></span>
+                                    </strong>
+                                    <p>
+                                        Mão de obra
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="block">
+                            <ul>
+                                <li class="iconContainer">
+                                    <i class="fa fa-eur"></i>
+                                </li>
+
+                                <li class="statsBox">
+                                    <strong>
+                                        <span class="money"><?php echo (int)$statsRepairs[0]['allTotal'];?></span>
+                                    </strong>
+                                    <p>
+                                        Total
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--END STATS-->
+                
                 <h1 class="sectionTitle"><?= Html::encode($this->title) ?></h1> 
 
                 <!--SELETOR DE DATA-->

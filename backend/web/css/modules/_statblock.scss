@@ -1,0 +1,70 @@
+.statBlocks{
+	margin-bottom: 30px;
+
+	.block{
+		background:rgb(36, 145, 209);
+		height:100px;
+		margin-top:15px;
+
+		ul{
+			list-style:none;
+			display:block;
+			height:100%;
+			width:100%;
+			margin:0!important;
+			padding:0!important;
+			position:relative;
+
+			li{
+				display:inline-block;
+			}
+		}
+
+		.iconContainer{
+			float:left;
+			height:100%;
+			width:100px;
+			position:relative;
+			background:#1F6F9E;
+
+			i.fa{
+				position:absolute;
+				top:50%;
+				left:50%;
+				font-size:45px;
+				color:white;
+				@include translate(-50%,-50%);
+				line-height: 1px;
+			}
+		}
+
+		.statsBox{			
+			color:white;			
+			width:auto;		
+			position:absolute;
+			top:50%;
+			line-height:30px;
+			margin-left:15px;
+
+			@include translate(0, -50%);	
+
+			strong{
+				display:block;
+				font-size:30px;
+				text-align:left;
+
+				.money:after{
+					content:"€";
+					padding-left:5px;
+				}
+			}
+
+			p{
+				display:block;
+				font-size:18px;
+				text-align:left;
+				margin:0!important;
+			}
+		}
+	}
+}

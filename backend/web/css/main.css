@@ -511,11 +511,15 @@ a.topBtn {
   margin-left: 15px;
   overflow: hidden; }
 
+.form-control {
+  border-radius: 0px !important; }
+
 .dateSelection {
   float: left;
   margin-bottom: 15px; }
   .dateSelection .input-group-addon {
-    padding: 0 12px !important; }
+    padding: 0 12px !important;
+    border-radius: 0px !important; }
   .dateSelection .dateBtn {
     width: 100%;
     margin-top: 10px; }
@@ -716,6 +720,18 @@ a.topBtn {
   text-align: center;
   vertical-align: middle; }
 
+/*.foote{
+	width:100%;
+	position:fixed;
+	bottom:50px;
+}*/
+.contacts {
+  margin-bottom: 30px; }
+  .contacts table {
+    border: none !important; }
+    .contacts table tr, .contacts table td {
+      border: none !important; }
+
 .repairDesc thead tr > td {
   font-size: 0.8em;
   /*background:$dark-blue-bg!important;
@@ -786,3 +802,60 @@ a.topBtn {
   color: #888;
   background-color: #eeeeee !important;
   cursor: default !important; }
+
+.statBlocks {
+  margin-bottom: 30px; }
+  .statBlocks .block {
+    background: #2491d1;
+    height: 100px;
+    margin-top: 15px; }
+    .statBlocks .block ul {
+      list-style: none;
+      display: block;
+      height: 100%;
+      width: 100%;
+      margin: 0 !important;
+      padding: 0 !important;
+      position: relative; }
+      .statBlocks .block ul li {
+        display: inline-block; }
+    .statBlocks .block .iconContainer {
+      float: left;
+      height: 100%;
+      width: 100px;
+      position: relative;
+      background: #1F6F9E; }
+      .statBlocks .block .iconContainer i.fa {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-size: 45px;
+        color: white;
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        line-height: 1px; }
+    .statBlocks .block .statsBox {
+      color: white;
+      width: auto;
+      position: absolute;
+      top: 50%;
+      line-height: 30px;
+      margin-left: 15px;
+      -moz-transform: translate(0, -50%);
+      -ms-transform: translate(0, -50%);
+      -webkit-transform: translate(0, -50%);
+      transform: translate(0, -50%); }
+      .statBlocks .block .statsBox strong {
+        display: block;
+        font-size: 30px;
+        text-align: left; }
+        .statBlocks .block .statsBox strong .money:after {
+          content: "€";
+          padding-left: 5px; }
+      .statBlocks .block .statsBox p {
+        display: block;
+        font-size: 18px;
+        text-align: left;
+        margin: 0 !important; }

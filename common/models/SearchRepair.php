@@ -105,8 +105,8 @@ class SearchRepair extends Repair
                 break;
 
             case "warranty":
-                $query->andWhere('repair.date_entry <= Date_Sub(Now(), Interval 24 Day)');
-                $query->andWhere('repair.status_id<6');
+                $order = ['datediffRepair'=>SORT_ASC];
+                $query->andFilterWhere(['repair.type_id'=>2]);
                 $query->andFilterWhere([
                     'repair.status' => 1
                 ]);
@@ -114,7 +114,7 @@ class SearchRepair extends Repair
 
             case "topickup":
                 $query->andWhere('repair.date_repaired < Date_Sub(Now(), Interval 89 Day)');
-                $query->andWhere('repair.status_id<6');
+                $order = ['datediffDeliver'=>SORT_ASC];
                 $query->andFilterWhere([
                     'repair.status' => 1
                 ]);

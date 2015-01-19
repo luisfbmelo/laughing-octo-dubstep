@@ -45,6 +45,27 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row hidden-print">
         <div class="col-lg-12">
              <div class="repair-index">
+                <div class="row statBlocks">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="block">
+                            <ul>
+                                <li class="iconContainer">
+                                    <i class="fa fa-plus"></i>
+                                </li>
+
+                                <li class="statsBox">
+                                    <strong>
+                                        <?php echo $stats[0]['repairTotal'];?>
+                                    </strong>
+                                    <p>
+                                        Entradas
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
                 <h1 class="sectionTitle"><?= Html::encode($this->title) ?></h1> 
 
                 <!--SELETOR DE DATA-->

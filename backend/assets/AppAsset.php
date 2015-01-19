@@ -24,6 +24,7 @@ class AppAsset extends AssetBundle
         'css/main.css',
         'css/jquery-ui.css',
         'css/colpick.css',
+        '//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'
     ];
     public $js = [
         'https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js',
