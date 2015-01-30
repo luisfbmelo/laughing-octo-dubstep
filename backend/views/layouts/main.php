@@ -33,7 +33,7 @@ AppAsset::register($this);
                 
                 <nav class="row brandHeader hidden-print">
                     <div class="col-lg-5 col-xs-10 col-sm-5 col-md-5">
-                        <a href="/"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt="" class="img-responsive"></a>
+                        <a href="/"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.png" alt="" class="img-responsive"></a>
                     </div>
 
                     <div class="col-lg-2 col-xs-2 col-sm-2 col-md-2">

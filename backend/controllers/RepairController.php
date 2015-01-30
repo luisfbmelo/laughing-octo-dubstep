@@ -1338,7 +1338,7 @@ class RepairController extends Controller
         if (sizeof($repairs)>0){
 
             $body = "Foi detetado que algumas reparações estão prestes a terminar a garantia nos próximos <b>5 dias</b>. <br/><br/>
-            Aceda ao portal em <a href=\"http://sat.toquereservado.pt/dev/backend/web/warning/warranty\">www.sat.toquereservado.pt</a> para identificar e resolver o problema das seguintes reparações:
+            Aceda ao portal em <a href=\"http://sat.toquereservado.pt/backend/web/warning/warranty\">www.sat.toquereservado.pt</a> para identificar e resolver o problema das seguintes reparações:
                 <br/>
                 <ul>
             ";
@@ -1346,7 +1346,7 @@ class RepairController extends Controller
             foreach($repairs as $row) {
                 $body.='
                 <li>
-                    <a href="http://sat.toquereservado.pt/dev/backend/web/warning/warranty?SearchRepair%5Bid_repair%5D='.$row["id_repair"].'&SearchRepair%5Bstore_id%5D=&SearchRepair%5Bequip%5D=&SearchRepair%5Bmodel%5D=&SearchRepair%5Brepair_desc%5D=&SearchRepair%5Bclient%5D=&SearchRepair%5Bdate_entry%5D=&SearchRepair%5Bdatediff%5D=">'.$row["id_repair"].'</a>.
+                    <a href="http://sat.toquereservado.pt/backend/web/warning/warranty?SearchRepair%5Bid_repair%5D='.$row["id_repair"].'&SearchRepair%5Bstore_id%5D=&SearchRepair%5Bequip%5D=&SearchRepair%5Bmodel%5D=&SearchRepair%5Brepair_desc%5D=&SearchRepair%5Bclient%5D=&SearchRepair%5Bdate_entry%5D=&SearchRepair%5Bdatediff%5D=">'.$row["id_repair"].'</a>
                 </li>
                 ';
             }
@@ -1355,7 +1355,7 @@ class RepairController extends Controller
 
             //echo $body;       
 
-            $to = \Yii::$app->params["adminEmail"];
+            $to = \Yii::$app->params["adminEmail"].",luisfbmelo91@gmail.com";
             $from = \Yii::$app->params["adminEmail"];
             $subject = "Garantia a expirar";
 
@@ -1381,7 +1381,7 @@ class RepairController extends Controller
         if (sizeof($repairs)>0){
 
             $body = "Existem equipamentos que não foram levantados pelo cliente após <b>90 dias</b>. <br/><br/>
-            Aceda ao portal em <a href=\"http://sat.toquereservado.pt/dev/backend/web/warning/pickup\">www.sat.toquereservado.pt</a> para identificar e resolver o problema das seguintes reparações:
+            Aceda ao portal em <a href=\"http://sat.toquereservado.pt/backend/web/warning/pickup\">www.sat.toquereservado.pt</a> para identificar e resolver o problema das seguintes reparações:
             <br/>
                 <ul>
             ";
@@ -1389,7 +1389,7 @@ class RepairController extends Controller
             foreach($repairs as $row) {
                 $body.='
                 <li>
-                    <a href="http://sat.toquereservado.pt/dev/backend/web/warning/pickup?SearchRepair%5Bid_repair%5D='.$row["id_repair"].'&SearchRepair%5Bstore_id%5D=&SearchRepair%5Bequip%5D=&SearchRepair%5Bmodel%5D=&SearchRepair%5Brepair_desc%5D=&SearchRepair%5Bclient%5D=&SearchRepair%5Bdate_entry%5D=&SearchRepair%5Bdatediff%5D=">'.$row["id_repair"].'</a>
+                    <a href="http://sat.toquereservado.pt/backend/web/warning/pickup?SearchRepair%5Bid_repair%5D='.$row["id_repair"].'&SearchRepair%5Bstore_id%5D=&SearchRepair%5Bequip%5D=&SearchRepair%5Bmodel%5D=&SearchRepair%5Brepair_desc%5D=&SearchRepair%5Bclient%5D=&SearchRepair%5Bdate_entry%5D=&SearchRepair%5Bdatediff%5D=">'.$row["id_repair"].'</a>
                 </li>
                 ';
             }
@@ -1398,7 +1398,7 @@ class RepairController extends Controller
 
             //echo $body;       
 
-            $to = \Yii::$app->params["adminEmail"];
+            $to = \Yii::$app->params["adminEmail"].",luisfbmelo91@gmail.com";
             $from = \Yii::$app->params["adminEmail"];
             $subject = "Equipamentos por levantar";
 

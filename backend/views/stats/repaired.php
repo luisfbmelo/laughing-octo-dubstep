@@ -30,7 +30,7 @@ if (\Yii::$app->session->get('user.group')!=3){
 }
 
 //set default dates
-$datesDefault = [date("d-m-Y"),date("d-m-Y",strtotime("+1 month"))];
+$datesDefault = [date("d-m-Y",strtotime("-1 month")),date("d-m-Y")];
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -45,13 +45,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row hidden-print">
         <div class="col-lg-12">
              <div class="repair-index">
+                <h1 class="sectionTitle"><?= Html::encode($this->title) ?></h1> 
+
                 <!--STATS BOX-->
                 <div class="row statBlocks">
                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                         <div class="block">
                             <ul>
                                 <li class="iconContainer">
-                                    <i class="fa fa-gear"></i>
+                                    <i class="fa fa-wrench"></i>
                                 </li>
 
                                 <li class="statsBox">
@@ -59,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?php echo (int)$statsRepairs[0]['repairTotal'];?>
                                     </strong>
                                     <p>
-                                        Reparadas
+                                        Reparados
                                     </p>
                                 </li>
                             </ul>
@@ -125,7 +127,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <!--END STATS-->
                 
-                <h1 class="sectionTitle"><?= Html::encode($this->title) ?></h1> 
+                
 
                 <!--SELETOR DE DATA-->
                 

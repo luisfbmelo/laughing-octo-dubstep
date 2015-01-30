@@ -120,7 +120,7 @@ class StatsController extends Controller
 		if (isset(Yii::$app->request->queryParams['SearchRepair']['date_range'])){
 		    $dates = $searchModel->getSeperateDates(urldecode(Yii::$app->request->queryParams['SearchRepair']['date_range']));
 		}else{
-		    $dates = [date("d-m-Y"),date("d-m-Y",strtotime("+1 month"))];
+		    $dates = [date("d-m-Y",strtotime("-1 month")),date("d-m-Y")];
 		}
 
 		return $dates;

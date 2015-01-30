@@ -128,7 +128,7 @@ class SearchRepair extends Repair
 
                 if (isset($params['SearchRepair']['date_range'])){
                     $dates = $this->getSeperateDates(urldecode($params['SearchRepair']['date_range']));
-                    $query->andWhere('date_entry BETWEEN \''.date("Y-m-d", strtotime($dates[0])).'\' AND \''.date("Y-m-d", strtotime($dates[1])).'\'');
+                    $query->andWhere('date_entry BETWEEN \''.date("Y-m-d H:i:s", strtotime($dates[0]." 00:00:00")).'\' AND \''.date("Y-m-d H:i:s", strtotime($dates[1]." 23:59:00")).'\'');
                 }
 
                 $query->andFilterWhere([
@@ -136,7 +136,7 @@ class SearchRepair extends Repair
                 ]);
 
                 $seeAllStatus=true;
-                $order = ['date_entry'=>SORT_ASC];
+                $order = ['date_entry'=>SORT_DESC];
                 
                 
                 break;
@@ -144,30 +144,34 @@ class SearchRepair extends Repair
 
                 if (isset($params['SearchRepair']['date_range'])){
                     $dates = $this->getSeperateDates(urldecode($params['SearchRepair']['date_range']));
-                    $query->andWhere('date_repaired BETWEEN \''.date("Y-m-d", strtotime($dates[0])).'\' AND \''.date("Y-m-d", strtotime($dates[1])).'\'');
+                    $query->andWhere('date_repaired BETWEEN \''.date("Y-m-d H:i:s", strtotime($dates[0]." 00:00:00")).'\' AND \''.date("Y-m-d H:i:s", strtotime($dates[1]." 23:59:00")).'\'');
                 }
 
                 $query->andFilterWhere([
                     'repair.status' => 1
                 ]);
+
+                $query->andWhere('repair.status_id>=5');
                 
                 $seeAllStatus=true;
-                $order = ['date_repaired'=>SORT_ASC];
+                $order = ['date_repaired'=>SORT_DESC];
                 
                 break;
             case "delivery":
 
                 if (isset($params['SearchRepair']['date_range'])){
                     $dates = $this->getSeperateDates(urldecode($params['SearchRepair']['date_range']));
-                    $query->andWhere('date_close BETWEEN \''.date("Y-m-d", strtotime($dates[0])).'\' AND \''.date("Y-m-d", strtotime($dates[1])).'\'');
+                    $query->andWhere('date_close BETWEEN \''.date("Y-m-d H:i:s", strtotime($dates[0]." 00:00:00")).'\' AND \''.date("Y-m-d H:i:s", strtotime($dates[1]." 23:59:00")).'\'');
                 }
 
                 $query->andFilterWhere([
                     'repair.status' => 1
                 ]);                
 
+                $query->andWhere('repair.status_id=6');
+
                 $seeAllStatus=true;
-                $order = ['date_close'=>SORT_ASC];
+                $order = ['date_close'=>SORT_DESC];
                 
                 break;
             default:

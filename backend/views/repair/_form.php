@@ -172,9 +172,9 @@ use kartik\datecontrol\DateControl;
                     </div>
                     <?php 
                         if (isset($modelAccess->id_accessories) && in_array(3,$modelAccess->id_accessories)){
-                           echo $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-4 col-xs-4 col-sm-4 col-md-4','style'=>'display:block']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("");
+                           echo $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-12 col-xs-12 col-sm-12 col-md-12','style'=>'display:block']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("");
                         }else{
-                           echo $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-4 col-xs-4 col-sm-4 col-md-4']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("");
+                           echo $form->field($modelRepairAccess, 'otherDesc', ['options' => ['class' => 'col-lg-12 col-xs-12 col-sm-12 col-md-12']])->textInput(['placeholder'=>'Outro acessório','id'=>'outroAccess'])->label("");
                         }
                     ?> 
 

@@ -625,8 +625,8 @@ class Repair extends \yii\db\ActiveRecord
             repair.status = 1
             ');
 
-        $repair->bindValue(':date1', date("Y-m-d", strtotime($dates[0])));
-        $repair->bindValue(':date2', date("Y-m-d", strtotime($dates[1])));
+        $repair->bindValue(':date1', date("Y-m-d H:i:s", strtotime($dates[0]." 00:00:00")));
+        $repair->bindValue(':date2', date("Y-m-d H:i:s", strtotime($dates[1]." 23:59:00")));
 
         $model = $repair->queryAll();
         return $model;
@@ -639,13 +639,18 @@ class Repair extends \yii\db\ActiveRecord
      * @return object        object with the stat data
      */
     public static function getCompleteStats($dates,$type){
-      switch($type){
-        case "repaired":
-          $column = "repair.date_repaired";
-          break;
-        case "delivered":
-          $column = "repair.date_close";
-      }
+        //set field
+        switch($type){
+          case "repaired":
+            $column = "repair.date_repaired";
+            $statusCond = "repair.status_id>=5";
+            break;
+          case "delivered":
+            $column = "repair.date_close";
+            $statusCond = "repair.status_id=6";
+        }
+
+
         $connection = \Yii::$app->db;
 
         //parts data
@@ -659,11 +664,11 @@ class Repair extends \yii\db\ActiveRecord
             parts On repair_parts.part_id = parts.id_part
           Where
             '.$column.'  Between :date1 And :date2 And
-            repair.status = 1
+            repair.status = 1 AND '.$statusCond.'
             ');
 
-        $parts->bindValue(':date1', date("Y-m-d", strtotime($dates[0])));
-        $parts->bindValue(':date2', date("Y-m-d", strtotime($dates[1])));
+        $parts->bindValue(':date1', date("Y-m-d H:i:s", strtotime($dates[0]." 00:00:00")));
+        $parts->bindValue(':date2', date("Y-m-d H:i:s", strtotime($dates[1]." 23:59:00")));
 
         $partsData = $parts->queryAll();
 
@@ -678,11 +683,11 @@ class Repair extends \yii\db\ActiveRecord
             repair 
           Where
             '.$column.' Between :date1 And :date2 And
-            repair.status = 1
+            repair.status = 1 AND '.$statusCond.'
             ');
 
-        $repair->bindValue(':date1', date("Y-m-d", strtotime($dates[0])));
-        $repair->bindValue(':date2', date("Y-m-d", strtotime($dates[1])));
+        $repair->bindValue(':date1', date("Y-m-d H:i:s", strtotime($dates[0]." 00:00:00")));
+        $repair->bindValue(':date2', date("Y-m-d H:i:s", strtotime($dates[1]." 23:59:00")));
 
 
         $repairData = $repair->queryAll();
