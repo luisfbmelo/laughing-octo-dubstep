@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = 'Detalhes';
         ?>
         <!-- visible-print-block -->
         <div class="row">
-            <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12" id="printEntry">
+            <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 visible-print-block" id="printEntry">
                 <!--MAIN HEADER-->
                 <div class="row foote">
                     <div class="col-lg-6 col-xs-5 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>

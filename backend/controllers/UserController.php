@@ -15,6 +15,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\base\Exception;
+use yii\filters\AccessControl;
 
 date_default_timezone_set("Atlantic/Azores");
 
@@ -26,6 +27,16 @@ class UserController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    // allow authenticated users
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],            
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

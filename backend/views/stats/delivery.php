@@ -183,6 +183,18 @@ $this->params['breadcrumbs'][] = $this->title;
                             //'type_id',
                             //'client_id',
                             //'inve_id',
+                            [
+                                'attribute' => 'store_id',
+                                'label' => 'Local',
+                                'filter' => ArrayHelper::map(stores::find()->where(['status'=>1])->asArray()->orderBy('storeDesc ASC')->all(), 'id_store', 'storeDesc'),
+                                'content' => function($model, $index, $dataColumn) {
+
+                                    $text = $model->getStoreDesc($model->id_repair)["storeDesc"];
+                                    $output = $model->abbreviate($text);
+                                    return $output;
+                                },
+
+                            ],
                             
                             [
                                 'attribute' => 'equip',

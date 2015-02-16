@@ -694,6 +694,8 @@ a.topBtn {
   font-size: 1rem !important; }
 #printEntry img {
   max-with: 100px; }
+#printEntry .foote table tr > td {
+  font-size: 1.3rem !important; }
 
 .header table:first-of-type tbody tr > td,
 .client_data_table table:first-of-type tbody tr > td,

@@ -16,6 +16,8 @@
   font-size: 1rem !important; }
 #printEntry img {
   max-with: 100px; }
+#printEntry .foote table tr > td {
+  font-size: 1.3rem !important; }
 
 .header table:first-of-type tbody tr > td,
 .client_data_table table:first-of-type tbody tr > td,
@@ -42,10 +44,17 @@
   text-align: center;
   vertical-align: middle; }
 
-.foote {
-  position: absolute;
-  bottom: 0;
-  left: 0; }
+/*.foote{
+	width:100%;
+	position:fixed;
+	bottom:50px;
+}*/
+.contacts {
+  margin-bottom: 30px; }
+  .contacts table {
+    border: none !important; }
+    .contacts table tr, .contacts table td {
+      border: none !important; }
 
 .repairDesc thead tr > td {
   font-size: 0.8em;
