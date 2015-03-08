@@ -249,7 +249,7 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                         document.body.innerHTML = printContents;
 
                         window.print();
-                        setTimeout(function () { window.location.href = window.location.href.split('&')[0]; }, 100);
+                        setTimeout(function () { window.location.href = window.location.href.split('&')[0]; }, 500);
 
                         document.body.innerHTML = originalContents;
                     }
@@ -437,7 +437,7 @@ $this->params['breadcrumbs'][] = 'Detalhes';
                             document.body.innerHTML = printContents;
 
                             window.print();
-                            setTimeout(function () { window.location.href = window.location.href.split('&')[0]; }, 100);
+                            setTimeout(function () { window.location.href = window.location.href.split('&')[0]; }, 500);
 
                             document.body.innerHTML = originalContents;
                         }

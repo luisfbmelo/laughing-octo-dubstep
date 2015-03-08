@@ -312,7 +312,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <?php }else{ ?>
                                     <td></td>
                                     <?php } ?>
-                                    <td colspan="3" rowspan="3">asd<?php echo $modelRepair[0]['repair_desc'];?></td>
+                                    <td colspan="3" rowspan="3"><?php echo $modelRepair[0]['repair_desc'];?></td>
                                 </tr>
                                 
                                 <tr>
@@ -368,7 +368,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         document.body.innerHTML = printContents;
 
                         window.print();
-                        setTimeout(function () { window.location.href = window.location.href.split('?')[0]; }, 100);
+                        setTimeout(function () { window.location.href = window.location.href.split('?')[0]; }, 500);
 
                         document.body.innerHTML = originalContents;
                     }
@@ -379,6 +379,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //IF IS A CLOSING ELEMENT
             case "closeEl":
+
         ?>
                 <!-- visible-print-block -->
                 <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 visible-print-block" id="printEntry">
@@ -554,7 +555,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             document.body.innerHTML = printContents;
 
                             window.print();
-                            setTimeout(function () { window.location.href = window.location.href.split('?')[0]; }, 100);
+                            setTimeout(function () { window.location.href = window.location.href.split('?')[0]; }, 500);
 
                             document.body.innerHTML = originalContents;
                         }

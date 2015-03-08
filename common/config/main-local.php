@@ -7,14 +7,26 @@ return [
             'username' => 'root',
             'password' => '',
             'charset' => 'utf8',*/
+
+            /*LOCALHOST*/
             'dsn' => 'mysql:host=localhost;dbname=toque_sta',
             'username' => 'root',
             'password' => '',
             'charset' => 'utf8',
+
+            /*SITE DO TOQUE*/
             /*'dsn' => 'mysql:host=localhost;dbname=toque_sta',
             'username' => 'toque_dev',
             'password' => '$+x96NNkyVVA',
             'charset' => 'utf8',*/
+
+            /*LUISFBMELO*/
+            /*'dsn' => 'mysql:host=localhost;dbname=luisfbme_toque_sta',
+            'username' => 'luisfbme_toque',
+            'password' => 'ps0k+NSe_LHE',
+            'charset' => 'utf8',*/
+
+            
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
