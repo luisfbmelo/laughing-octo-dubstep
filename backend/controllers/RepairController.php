@@ -1355,7 +1355,7 @@ class RepairController extends Controller
 
             //echo $body;       
 
-            $to = \Yii::$app->params["adminEmail"].",luisfbmelo91@gmail.com";
+            $to = \Yii::$app->params["adminEmail"];
             $from = \Yii::$app->params["adminEmail"];
             $subject = "Garantia a expirar";
 
@@ -1398,7 +1398,7 @@ class RepairController extends Controller
 
             //echo $body;       
 
-            $to = \Yii::$app->params["adminEmail"].",luisfbmelo91@gmail.com";
+            $to = \Yii::$app->params["adminEmail"];
             $from = \Yii::$app->params["adminEmail"];
             $subject = "Equipamentos por levantar";
 
