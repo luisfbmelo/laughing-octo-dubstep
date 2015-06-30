@@ -1,0 +1,1930 @@
+2014-11-09 03:37:38 [127.0.0.1][][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "frontend/web/".' in E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('frontend/web/', Array)
+#1 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Unable to resolve the request "frontend/web/".' in E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#2 {main}
+2014-11-09 03:37:38 [127.0.0.1][][-][info][application] $_COOKIE = [
+    '_identity' => '0afea01b4a89a8e54ece0f473a0d022145466462ccbd728f619141ac12538898s:46:\"[2,\"1I9huLHTnJVfTRkI1WDHFbGLSjfBaGVs\",2592000]\";'
+    '_backendCsrf' => '34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s:32:\"vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT\";'
+    'PHPSESSID' => '19i25ngbn1t21kut2c93u9rq56'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/toque/backend/web/'
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_identity=0afea01b4a89a8e54ece0f473a0d022145466462ccbd728f619141ac12538898s%3A46%3A%22%5B2%2C%221I9huLHTnJVfTRkI1WDHFbGLSjfBaGVs%22%2C2592000%5D%22%3B; _backendCsrf=34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s%3A32%3A%22vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT%22%3B; PHPSESSID=19i25ngbn1t21kut2c93u9rq56'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '51808'
+    'REDIRECT_URL' => '/toque/frontend/web/'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/frontend/web/'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415500658.826
+    'REQUEST_TIME' => 1415500658
+]
+2014-11-09 03:40:49 [127.0.0.1][2][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "frontend/web/".' in E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('frontend/web/', Array)
+#1 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Unable to resolve the request "frontend/web/".' in E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#2 {main}
+2014-11-09 03:40:49 [127.0.0.1][2][-][info][application] $_COOKIE = [
+    '_backendCsrf' => '34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s:32:\"vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT\";'
+    '_csrf' => '765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es:32:\"1FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0\";'
+    '_identity' => '39b736a792673de3e760dc6f786ad180f5c7f7b5d1f46deb316b0b465b0cf7c1s:46:\"[2,\"1I9huLHTnJVfTRkI1WDHFbGLSjfBaGVs\",2592000]\";'
+    'PHPSESSID' => '2qmnsp5m0nhgvihau0cp38b9h1'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/toque/backend/web/'
+    '__id' => 2
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s%3A32%3A%22vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT%22%3B; _csrf=765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es%3A32%3A%221FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0%22%3B; _identity=39b736a792673de3e760dc6f786ad180f5c7f7b5d1f46deb316b0b465b0cf7c1s%3A46%3A%22%5B2%2C%221I9huLHTnJVfTRkI1WDHFbGLSjfBaGVs%22%2C2592000%5D%22%3B; PHPSESSID=2qmnsp5m0nhgvihau0cp38b9h1'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '51849'
+    'REDIRECT_URL' => '/toque/frontend/web/'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/frontend/web/'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415500849.436
+    'REQUEST_TIME' => 1415500849
+]
+2014-11-09 04:01:17 [127.0.0.1][][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "frontend/web/".' in E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('frontend/web/', Array)
+#1 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Unable to resolve the request "frontend/web/".' in E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#2 {main}
+2014-11-09 04:01:17 [127.0.0.1][][-][info][application] $_COOKIE = [
+    '_backendCsrf' => '34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s:32:\"vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT\";'
+    '_csrf' => '765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es:32:\"1FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0\";'
+    'PHPSESSID' => 'e3f75mkkkpe3nthpjfb9l0cj32'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/toque/backend/web/'
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s%3A32%3A%22vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT%22%3B; _csrf=765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es%3A32%3A%221FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0%22%3B; PHPSESSID=e3f75mkkkpe3nthpjfb9l0cj32'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '52356'
+    'REDIRECT_URL' => '/toque/frontend/web/'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/frontend/web/'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415502077.446
+    'REQUEST_TIME' => 1415502077
+]
+2014-11-09 04:01:18 [127.0.0.1][][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "frontend/web/".' in E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('frontend/web/', Array)
+#1 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Unable to resolve the request "frontend/web/".' in E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#2 {main}
+2014-11-09 04:01:18 [127.0.0.1][][-][info][application] $_COOKIE = [
+    '_backendCsrf' => '34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s:32:\"vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT\";'
+    '_csrf' => '765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es:32:\"1FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0\";'
+    'PHPSESSID' => 'e3f75mkkkpe3nthpjfb9l0cj32'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/toque/backend/web/'
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s%3A32%3A%22vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT%22%3B; _csrf=765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es%3A32%3A%221FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0%22%3B; PHPSESSID=e3f75mkkkpe3nthpjfb9l0cj32'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '52358'
+    'REDIRECT_URL' => '/toque/frontend/web/'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/frontend/web/'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415502078.132
+    'REQUEST_TIME' => 1415502078
+]
+2014-11-09 04:09:35 [127.0.0.1][][-][error][Exception] exception 'Exception' in E:\webWork\toque\frontend\models\SignupForm.php:55
+Stack trace:
+#0 E:\webWork\toque\frontend\controllers\SiteController.php(123): frontend\models\SignupForm->signup()
+#1 [internal function]: frontend\controllers\SiteController->actionSignup()
+#2 E:\webWork\toque\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#3 E:\webWork\toque\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#4 E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('signup', Array)
+#5 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('site/signup', Array)
+#6 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#8 {main}
+2014-11-09 04:09:34 [127.0.0.1][][-][info][application] $_POST = [
+    '_csrf' => 'MUNvQWFpa2YABSoMJSQaNHRwGHJMERoBSRYnBVkPKTYEMR8gTB44Vg=='
+    'SignupForm' => [
+        'username' => 'alksjd'
+        'email' => 'kajsd@kajsd.pt'
+        'password' => 'okamsdokamsd'
+    ]
+    'signup-button' => ''
+]
+
+$_COOKIE = [
+    '_backendCsrf' => '34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s:32:\"vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT\";'
+    '_csrf' => '765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es:32:\"1FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0\";'
+    'PHPSESSID' => 'vp5973b8jcbd1ac6qpedtelrl0'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/toque/backend/web/'
+    '__id' => null
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '190'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_ORIGIN' => 'http://localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_REFERER' => 'http://localhost/toque/site/signup'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s%3A32%3A%22vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT%22%3B; _csrf=765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es%3A32%3A%221FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0%22%3B; PHPSESSID=vp5973b8jcbd1ac6qpedtelrl0'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '52520'
+    'REDIRECT_URL' => '/toque/site/signup'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/site/signup'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415502574.528
+    'REQUEST_TIME' => 1415502574
+]
+2014-11-09 04:10:45 [127.0.0.1][][-][error][yii\base\UnknownPropertyException] exception 'yii\base\UnknownPropertyException' with message 'Setting unknown property: yii\db\Connection::enableProfiling' in E:\webWork\toque\vendor\yiisoft\yii2\base\Component.php:197
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\BaseYii.php(518): yii\base\Component->__set('enableProfiling', true)
+#1 E:\webWork\toque\vendor\yiisoft\yii2\base\Object.php(105): yii\BaseYii::configure(Object(yii\db\Connection), Array)
+#2 [internal function]: yii\base\Object->__construct(Array)
+#3 E:\webWork\toque\vendor\yiisoft\yii2\di\Container.php(364): ReflectionClass->newInstanceArgs(Array)
+#4 E:\webWork\toque\vendor\yiisoft\yii2\di\Container.php(147): yii\di\Container->build('yii\\db\\Connecti...', Array, Array)
+#5 E:\webWork\toque\vendor\yiisoft\yii2\BaseYii.php(344): yii\di\Container->get('yii\\db\\Connecti...', Array, Array)
+#6 E:\webWork\toque\vendor\yiisoft\yii2\di\ServiceLocator.php(133): yii\BaseYii::createObject(Array)
+#7 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(491): yii\di\ServiceLocator->get('db')
+#8 E:\webWork\toque\vendor\yiisoft\yii2\db\ActiveRecord.php(124): yii\base\Application->getDb()
+#9 E:\webWork\toque\vendor\yiisoft\yii2\db\ActiveQuery.php(305): yii\db\ActiveRecord::getDb()
+#10 E:\webWork\toque\vendor\yiisoft\yii2\db\Query.php(345): yii\db\ActiveQuery->createCommand(NULL)
+#11 E:\webWork\toque\vendor\yiisoft\yii2\validators\UniqueValidator.php(111): yii\db\Query->exists()
+#12 E:\webWork\toque\vendor\yiisoft\yii2\validators\Validator.php(238): yii\validators\UniqueValidator->validateAttribute(Object(frontend\models\SignupForm), 'username')
+#13 E:\webWork\toque\vendor\yiisoft\yii2\base\Model.php(333): yii\validators\Validator->validateAttributes(Object(frontend\models\SignupForm), Array)
+#14 E:\webWork\toque\frontend\models\SignupForm.php(46): yii\base\Model->validate()
+#15 E:\webWork\toque\frontend\controllers\SiteController.php(123): frontend\models\SignupForm->signup()
+#16 [internal function]: frontend\controllers\SiteController->actionSignup()
+#17 E:\webWork\toque\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#18 E:\webWork\toque\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#19 E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('signup', Array)
+#20 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('site/signup', Array)
+#21 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#22 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#23 {main}
+2014-11-09 04:10:45 [127.0.0.1][][-][info][application] $_POST = [
+    '_csrf' => 'MUNvQWFpa2YABSoMJSQaNHRwGHJMERoBSRYnBVkPKTYEMR8gTB44Vg=='
+    'SignupForm' => [
+        'username' => 'alksjd'
+        'email' => 'kajsd@kajsd.pt'
+        'password' => 'okamsdokamsd'
+    ]
+    'signup-button' => ''
+]
+
+$_COOKIE = [
+    '_backendCsrf' => '34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s:32:\"vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT\";'
+    '_csrf' => '765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es:32:\"1FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0\";'
+    'PHPSESSID' => 'vp5973b8jcbd1ac6qpedtelrl0'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/toque/backend/web/'
+    '__id' => null
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '190'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_ORIGIN' => 'http://localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_REFERER' => 'http://localhost/toque/site/signup'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s%3A32%3A%22vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT%22%3B; _csrf=765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es%3A32%3A%221FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0%22%3B; PHPSESSID=vp5973b8jcbd1ac6qpedtelrl0'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '52547'
+    'REDIRECT_URL' => '/toque/site/signup'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/site/signup'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415502645.86
+    'REQUEST_TIME' => 1415502645
+]
+2014-11-09 04:11:36 [127.0.0.1][][-][error][yii\base\UnknownPropertyException] exception 'yii\base\UnknownPropertyException' with message 'Setting unknown property: yii\db\Connection::enableParamLogging' in E:\webWork\toque\vendor\yiisoft\yii2\base\Component.php:197
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\BaseYii.php(518): yii\base\Component->__set('enableParamLogg...', true)
+#1 E:\webWork\toque\vendor\yiisoft\yii2\base\Object.php(105): yii\BaseYii::configure(Object(yii\db\Connection), Array)
+#2 [internal function]: yii\base\Object->__construct(Array)
+#3 E:\webWork\toque\vendor\yiisoft\yii2\di\Container.php(364): ReflectionClass->newInstanceArgs(Array)
+#4 E:\webWork\toque\vendor\yiisoft\yii2\di\Container.php(147): yii\di\Container->build('yii\\db\\Connecti...', Array, Array)
+#5 E:\webWork\toque\vendor\yiisoft\yii2\BaseYii.php(344): yii\di\Container->get('yii\\db\\Connecti...', Array, Array)
+#6 E:\webWork\toque\vendor\yiisoft\yii2\di\ServiceLocator.php(133): yii\BaseYii::createObject(Array)
+#7 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(491): yii\di\ServiceLocator->get('db')
+#8 E:\webWork\toque\vendor\yiisoft\yii2\db\ActiveRecord.php(124): yii\base\Application->getDb()
+#9 E:\webWork\toque\vendor\yiisoft\yii2\db\ActiveQuery.php(305): yii\db\ActiveRecord::getDb()
+#10 E:\webWork\toque\vendor\yiisoft\yii2\db\Query.php(345): yii\db\ActiveQuery->createCommand(NULL)
+#11 E:\webWork\toque\vendor\yiisoft\yii2\validators\UniqueValidator.php(111): yii\db\Query->exists()
+#12 E:\webWork\toque\vendor\yiisoft\yii2\validators\Validator.php(238): yii\validators\UniqueValidator->validateAttribute(Object(frontend\models\SignupForm), 'username')
+#13 E:\webWork\toque\vendor\yiisoft\yii2\base\Model.php(333): yii\validators\Validator->validateAttributes(Object(frontend\models\SignupForm), Array)
+#14 E:\webWork\toque\frontend\models\SignupForm.php(46): yii\base\Model->validate()
+#15 E:\webWork\toque\frontend\controllers\SiteController.php(123): frontend\models\SignupForm->signup()
+#16 [internal function]: frontend\controllers\SiteController->actionSignup()
+#17 E:\webWork\toque\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#18 E:\webWork\toque\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#19 E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('signup', Array)
+#20 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('site/signup', Array)
+#21 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#22 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#23 {main}
+2014-11-09 04:11:36 [127.0.0.1][][-][info][application] $_POST = [
+    '_csrf' => 'MUNvQWFpa2YABSoMJSQaNHRwGHJMERoBSRYnBVkPKTYEMR8gTB44Vg=='
+    'SignupForm' => [
+        'username' => 'alksjd'
+        'email' => 'kajsd@kajsd.pt'
+        'password' => 'okamsdokamsd'
+    ]
+    'signup-button' => ''
+]
+
+$_COOKIE = [
+    '_backendCsrf' => '34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s:32:\"vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT\";'
+    '_csrf' => '765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es:32:\"1FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0\";'
+    'PHPSESSID' => 'vp5973b8jcbd1ac6qpedtelrl0'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/toque/backend/web/'
+    '__id' => null
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '190'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_ORIGIN' => 'http://localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_REFERER' => 'http://localhost/toque/site/signup'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s%3A32%3A%22vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT%22%3B; _csrf=765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es%3A32%3A%221FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0%22%3B; PHPSESSID=vp5973b8jcbd1ac6qpedtelrl0'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '52560'
+    'REDIRECT_URL' => '/toque/site/signup'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/site/signup'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415502696.384
+    'REQUEST_TIME' => 1415502696
+]
+2014-11-09 04:18:52 [127.0.0.1][4][-][error][yii\web\HttpException:403] exception 'yii\web\ForbiddenHttpException' with message 'You are not allowed to perform this action.' in E:\webWork\toque\vendor\yiisoft\yii2\filters\AccessControl.php:150
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\filters\AccessControl.php(133): yii\filters\AccessControl->denyAccess(Object(yii\web\User))
+#1 E:\webWork\toque\vendor\yiisoft\yii2\base\ActionFilter.php(71): yii\filters\AccessControl->beforeAction(Object(yii\base\InlineAction))
+#2 [internal function]: yii\base\ActionFilter->beforeFilter(Object(yii\base\ActionEvent))
+#3 E:\webWork\toque\vendor\yiisoft\yii2\base\Component.php(538): call_user_func(Array, Object(yii\base\ActionEvent))
+#4 E:\webWork\toque\vendor\yiisoft\yii2\base\Controller.php(259): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#5 E:\webWork\toque\vendor\yiisoft\yii2\web\Controller.php(108): yii\base\Controller->beforeAction(Object(yii\base\InlineAction))
+#6 E:\webWork\toque\vendor\yiisoft\yii2\base\Controller.php(149): yii\web\Controller->beforeAction(Object(yii\base\InlineAction))
+#7 E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('signup', Array)
+#8 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('site/signup', Array)
+#9 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#10 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#11 {main}
+2014-11-09 04:18:52 [127.0.0.1][4][-][info][application] $_POST = [
+    '_csrf' => 'QlJEZHN5elRzFAEpNzQLBgdhM1deAQszOgcMIEsfOAR3IDQFXg4pZA=='
+    'SignupForm' => [
+        'username' => 'dcf'
+        'email' => 'kasd@lasd.com'
+        'password' => 'asodkmasodkm'
+    ]
+    'signup-button' => ''
+]
+
+$_COOKIE = [
+    '_backendCsrf' => '34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s:32:\"vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT\";'
+    '_csrf' => '765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es:32:\"1FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0\";'
+    'PHPSESSID' => 'dspfcrn2v67kqrprs3379r1jb0'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/toque/backend/web/'
+    '__id' => 4
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '186'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_ORIGIN' => 'http://localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_REFERER' => 'http://localhost/toque/site/signup'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s%3A32%3A%22vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT%22%3B; _csrf=765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es%3A32%3A%221FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0%22%3B; PHPSESSID=dspfcrn2v67kqrprs3379r1jb0'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '52748'
+    'REDIRECT_URL' => '/toque/site/signup'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/site/signup'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415503132.623
+    'REQUEST_TIME' => 1415503132
+]
+2014-11-09 04:21:01 [127.0.0.1][5][-][error][yii\web\HttpException:403] exception 'yii\web\ForbiddenHttpException' with message 'You are not allowed to perform this action.' in E:\webWork\toque\vendor\yiisoft\yii2\filters\AccessControl.php:150
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\filters\AccessControl.php(133): yii\filters\AccessControl->denyAccess(Object(yii\web\User))
+#1 E:\webWork\toque\vendor\yiisoft\yii2\base\ActionFilter.php(71): yii\filters\AccessControl->beforeAction(Object(yii\base\InlineAction))
+#2 [internal function]: yii\base\ActionFilter->beforeFilter(Object(yii\base\ActionEvent))
+#3 E:\webWork\toque\vendor\yiisoft\yii2\base\Component.php(538): call_user_func(Array, Object(yii\base\ActionEvent))
+#4 E:\webWork\toque\vendor\yiisoft\yii2\base\Controller.php(259): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#5 E:\webWork\toque\vendor\yiisoft\yii2\web\Controller.php(108): yii\base\Controller->beforeAction(Object(yii\base\InlineAction))
+#6 E:\webWork\toque\vendor\yiisoft\yii2\base\Controller.php(149): yii\web\Controller->beforeAction(Object(yii\base\InlineAction))
+#7 E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('signup', Array)
+#8 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('site/signup', Array)
+#9 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#10 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#11 {main}
+2014-11-09 04:21:00 [127.0.0.1][5][-][info][application] $_POST = [
+    '_csrf' => 'eWhNMkhSRGlILgh/DB81OzxbOgFlKjUOAT0FdnA0BjlMGj1TZSUXWQ=='
+    'SignupForm' => [
+        'username' => 'luis'
+        'email' => 'luis@luis.pt'
+        'password' => 'nmincpo'
+    ]
+    'signup-button' => ''
+]
+
+$_COOKIE = [
+    '_backendCsrf' => '34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s:32:\"vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT\";'
+    '_csrf' => '765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es:32:\"1FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0\";'
+    'PHPSESSID' => 'hsf0rt0d6ueplo85ke6814sks5'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 5
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '183'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_ORIGIN' => 'http://localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_REFERER' => 'http://localhost/toque/site/signup'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s%3A32%3A%22vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT%22%3B; _csrf=765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es%3A32%3A%221FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0%22%3B; PHPSESSID=hsf0rt0d6ueplo85ke6814sks5'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '52833'
+    'REDIRECT_URL' => '/toque/site/signup'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/site/signup'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415503260.91
+    'REQUEST_TIME' => 1415503260
+]
+2014-11-09 04:27:02 [127.0.0.1][6][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "frontend/web/".' in E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('frontend/web/', Array)
+#1 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Unable to resolve the request "frontend/web/".' in E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#2 {main}
+2014-11-09 04:27:02 [127.0.0.1][6][-][info][application] $_COOKIE = [
+    '_backendCsrf' => '34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s:32:\"vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT\";'
+    '_csrf' => '765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es:32:\"1FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0\";'
+    'PHPSESSID' => 'h6439g1pa866fh2hfa9lv8h5h0'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 6
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=34ff1cd57a353017164440cf2b40372015d76698d3549a95a8f1a67ac92877a0s%3A32%3A%22vzP9SviQLiyYZaTdjhTsLMzX-VYB-iIT%22%3B; _csrf=765cfd6bdef4808d035fbd28b6bc65c0585749c69dfef4ac526fb24c67078f9es%3A32%3A%221FEMDMqRE3w3-xqgxUHD8fBP5rpa-wS0%22%3B; PHPSESSID=h6439g1pa866fh2hfa9lv8h5h0'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '52947'
+    'REDIRECT_URL' => '/toque/frontend/web/'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/frontend/web/'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415503622.901
+    'REQUEST_TIME' => 1415503622
+]
+2014-11-12 20:52:04 [127.0.0.1][][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "frontend/web/".' in E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('frontend/web/', Array)
+#1 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Unable to resolve the request "frontend/web/".' in E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#2 {main}
+2014-11-12 20:52:04 [127.0.0.1][][-][info][application] $_COOKIE = [
+    'PHPSESSID' => '530ra5l4lpm5kqai3ulamfu3m3'
+    '_backendCsrf' => '06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s:32:\"L3qBaHclgtod649lZeg9Fjgh6x1vicUo\";'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/toque/backend/web/index.php'
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => 'PHPSESSID=530ra5l4lpm5kqai3ulamfu3m3; _backendCsrf=06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s%3A32%3A%22L3qBaHclgtod649lZeg9Fjgh6x1vicUo%22%3B'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '50598'
+    'REDIRECT_URL' => '/toque/frontend/web/'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/frontend/web/'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415821924.581
+    'REQUEST_TIME' => 1415821924
+]
+2014-11-12 20:57:30 [127.0.0.1][][-][error][yii\base\ErrorException:4096] exception 'yii\base\ErrorException' with message 'Argument 1 passed to yii\web\User::login() must be an instance of yii\web\IdentityInterface, instance of common\models\User given, called in E:\webWork\toque\frontend\controllers\SiteController.php on line 124 and defined' in E:\webWork\toque\vendor\yiisoft\yii2\web\User.php:232
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\web\User.php(232): yii\base\ErrorHandler->handleError(4096, 'Argument 1 pass...', 'E:\\webWork\\toqu...', 232, Array)
+#1 E:\webWork\toque\frontend\controllers\SiteController.php(124): yii\web\User->login(Object(common\models\User))
+#2 [internal function]: frontend\controllers\SiteController->actionSignup()
+#3 E:\webWork\toque\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#4 E:\webWork\toque\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#5 E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('signup', Array)
+#6 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('site/signup', Array)
+#7 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#9 {main}
+2014-11-12 20:57:29 [127.0.0.1][][-][info][application] $_POST = [
+    '_csrf' => 'R0dDdFBLbzAJADACBgxceS8EEjMAJQIEDQEJRAd.IgMkEAIBMQIuAQ=='
+    'SignupForm' => [
+        'username' => 'ljkashd'
+        'email' => 'okmasd@olknasd.com'
+        'password' => 'oaksnd'
+    ]
+    'signup-button' => ''
+]
+
+$_COOKIE = [
+    '_backendCsrf' => '06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s:32:\"L3qBaHclgtod649lZeg9Fjgh6x1vicUo\";'
+    '_csrf' => 'f2bc891a0f53adab43542928c2ace93ba8160a34a4b29abcddfeb1e3c2c515f2s:32:\"NGsvVG3IhCQGPnm4JFJ0W5M3cWAuaIA1\";'
+    'PHPSESSID' => 'iuu8fr587n981c6te8l693hei3'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/toque/backend/web/index.php'
+    '__id' => null
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '189'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_ORIGIN' => 'http://localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_REFERER' => 'http://localhost/toque/site/signup'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s%3A32%3A%22L3qBaHclgtod649lZeg9Fjgh6x1vicUo%22%3B; _csrf=f2bc891a0f53adab43542928c2ace93ba8160a34a4b29abcddfeb1e3c2c515f2s%3A32%3A%22NGsvVG3IhCQGPnm4JFJ0W5M3cWAuaIA1%22%3B; PHPSESSID=iuu8fr587n981c6te8l693hei3'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '50707'
+    'REDIRECT_URL' => '/toque/site/signup'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/site/signup'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415822249.525
+    'REQUEST_TIME' => 1415822249
+]
+2014-11-12 20:57:56 [127.0.0.1][][-][error][yii\base\ErrorException:4096] exception 'yii\base\ErrorException' with message 'Argument 1 passed to yii\web\User::login() must be an instance of yii\web\IdentityInterface, instance of common\models\User given, called in E:\webWork\toque\frontend\controllers\SiteController.php on line 124 and defined' in E:\webWork\toque\vendor\yiisoft\yii2\web\User.php:232
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\web\User.php(232): yii\base\ErrorHandler->handleError(4096, 'Argument 1 pass...', 'E:\\webWork\\toqu...', 232, Array)
+#1 E:\webWork\toque\frontend\controllers\SiteController.php(124): yii\web\User->login(Object(common\models\User))
+#2 [internal function]: frontend\controllers\SiteController->actionSignup()
+#3 E:\webWork\toque\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#4 E:\webWork\toque\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#5 E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('signup', Array)
+#6 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('site/signup', Array)
+#7 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#9 {main}
+2014-11-12 20:57:56 [127.0.0.1][][-][info][application] $_POST = [
+    '_csrf' => 'R0dDdFBLbzAJADACBgxceS8EEjMAJQIEDQEJRAd.IgMkEAIBMQIuAQ=='
+    'SignupForm' => [
+        'username' => 'ljkashd'
+        'email' => 'okmasd@olknasd.com'
+        'password' => 'oaksnd'
+    ]
+    'signup-button' => ''
+]
+
+$_COOKIE = [
+    '_backendCsrf' => '06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s:32:\"L3qBaHclgtod649lZeg9Fjgh6x1vicUo\";'
+    '_csrf' => 'f2bc891a0f53adab43542928c2ace93ba8160a34a4b29abcddfeb1e3c2c515f2s:32:\"NGsvVG3IhCQGPnm4JFJ0W5M3cWAuaIA1\";'
+    'PHPSESSID' => 'iuu8fr587n981c6te8l693hei3'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/toque/backend/web/index.php'
+    '__id' => null
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '189'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_ORIGIN' => 'http://localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_REFERER' => 'http://localhost/toque/site/signup'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s%3A32%3A%22L3qBaHclgtod649lZeg9Fjgh6x1vicUo%22%3B; _csrf=f2bc891a0f53adab43542928c2ace93ba8160a34a4b29abcddfeb1e3c2c515f2s%3A32%3A%22NGsvVG3IhCQGPnm4JFJ0W5M3cWAuaIA1%22%3B; PHPSESSID=iuu8fr587n981c6te8l693hei3'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '50724'
+    'REDIRECT_URL' => '/toque/site/signup'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/site/signup'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415822276.173
+    'REQUEST_TIME' => 1415822276
+]
+2014-11-12 20:58:30 [127.0.0.1][][-][error][yii\base\ErrorException:4096] exception 'yii\base\ErrorException' with message 'Argument 1 passed to yii\web\User::login() must be an instance of yii\web\IdentityInterface, instance of common\models\User given, called in E:\webWork\toque\frontend\controllers\SiteController.php on line 124 and defined' in E:\webWork\toque\vendor\yiisoft\yii2\web\User.php:232
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\web\User.php(232): yii\base\ErrorHandler->handleError(4096, 'Argument 1 pass...', 'E:\\webWork\\toqu...', 232, Array)
+#1 E:\webWork\toque\frontend\controllers\SiteController.php(124): yii\web\User->login(Object(common\models\User))
+#2 [internal function]: frontend\controllers\SiteController->actionSignup()
+#3 E:\webWork\toque\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#4 E:\webWork\toque\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#5 E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('signup', Array)
+#6 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('site/signup', Array)
+#7 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#9 {main}
+2014-11-12 20:58:30 [127.0.0.1][][-][info][application] $_POST = [
+    '_csrf' => 'OHBBMHE4UjJ2NzJGJ39he1AzEHchVj8GcjYLACYNHwFbJwBFEHETAw=='
+    'SignupForm' => [
+        'username' => 'asldkj'
+        'email' => 'oajsd@oajsd.com'
+        'password' => 'okasdasdf'
+    ]
+    'signup-button' => ''
+]
+
+$_COOKIE = [
+    '_backendCsrf' => '06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s:32:\"L3qBaHclgtod649lZeg9Fjgh6x1vicUo\";'
+    '_csrf' => 'f2bc891a0f53adab43542928c2ace93ba8160a34a4b29abcddfeb1e3c2c515f2s:32:\"NGsvVG3IhCQGPnm4JFJ0W5M3cWAuaIA1\";'
+    'PHPSESSID' => 'iuu8fr587n981c6te8l693hei3'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/toque/backend/web/index.php'
+    '__id' => null
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '188'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_ORIGIN' => 'http://localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_REFERER' => 'http://localhost/toque/site/signup'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s%3A32%3A%22L3qBaHclgtod649lZeg9Fjgh6x1vicUo%22%3B; _csrf=f2bc891a0f53adab43542928c2ace93ba8160a34a4b29abcddfeb1e3c2c515f2s%3A32%3A%22NGsvVG3IhCQGPnm4JFJ0W5M3cWAuaIA1%22%3B; PHPSESSID=iuu8fr587n981c6te8l693hei3'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '50733'
+    'REDIRECT_URL' => '/toque/site/signup'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/site/signup'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415822310.009
+    'REQUEST_TIME' => 1415822310
+]
+2014-11-12 21:06:45 [127.0.0.1][7][-][error][yii\web\HttpException:403] exception 'yii\web\ForbiddenHttpException' with message 'You are not allowed to perform this action.' in E:\webWork\toque\vendor\yiisoft\yii2\filters\AccessControl.php:150
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\filters\AccessControl.php(133): yii\filters\AccessControl->denyAccess(Object(yii\web\User))
+#1 E:\webWork\toque\vendor\yiisoft\yii2\base\ActionFilter.php(71): yii\filters\AccessControl->beforeAction(Object(yii\base\InlineAction))
+#2 [internal function]: yii\base\ActionFilter->beforeFilter(Object(yii\base\ActionEvent))
+#3 E:\webWork\toque\vendor\yiisoft\yii2\base\Component.php(538): call_user_func(Array, Object(yii\base\ActionEvent))
+#4 E:\webWork\toque\vendor\yiisoft\yii2\base\Controller.php(259): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#5 E:\webWork\toque\vendor\yiisoft\yii2\web\Controller.php(108): yii\base\Controller->beforeAction(Object(yii\base\InlineAction))
+#6 E:\webWork\toque\vendor\yiisoft\yii2\base\Controller.php(149): yii\web\Controller->beforeAction(Object(yii\base\InlineAction))
+#7 E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('signup', Array)
+#8 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('site/signup', Array)
+#9 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#10 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#11 {main}
+2014-11-12 21:06:44 [127.0.0.1][7][-][info][application] $_COOKIE = [
+    '_backendCsrf' => '06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s:32:\"L3qBaHclgtod649lZeg9Fjgh6x1vicUo\";'
+    '_csrf' => 'f2bc891a0f53adab43542928c2ace93ba8160a34a4b29abcddfeb1e3c2c515f2s:32:\"NGsvVG3IhCQGPnm4JFJ0W5M3cWAuaIA1\";'
+    'PHPSESSID' => '6c3db34pu5eio4110jun1ddjk4'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/toque/backend/web/index.php'
+    '__id' => 7
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s%3A32%3A%22L3qBaHclgtod649lZeg9Fjgh6x1vicUo%22%3B; _csrf=f2bc891a0f53adab43542928c2ace93ba8160a34a4b29abcddfeb1e3c2c515f2s%3A32%3A%22NGsvVG3IhCQGPnm4JFJ0W5M3cWAuaIA1%22%3B; PHPSESSID=6c3db34pu5eio4110jun1ddjk4'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '50885'
+    'REDIRECT_URL' => '/toque/site/signup'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/site/signup'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415822804.967
+    'REQUEST_TIME' => 1415822804
+]
+2014-11-12 21:07:11 [127.0.0.1][8][-][error][yii\web\HttpException:403] exception 'yii\web\ForbiddenHttpException' with message 'You are not allowed to perform this action.' in E:\webWork\toque\vendor\yiisoft\yii2\filters\AccessControl.php:150
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\filters\AccessControl.php(133): yii\filters\AccessControl->denyAccess(Object(yii\web\User))
+#1 E:\webWork\toque\vendor\yiisoft\yii2\base\ActionFilter.php(71): yii\filters\AccessControl->beforeAction(Object(yii\base\InlineAction))
+#2 [internal function]: yii\base\ActionFilter->beforeFilter(Object(yii\base\ActionEvent))
+#3 E:\webWork\toque\vendor\yiisoft\yii2\base\Component.php(538): call_user_func(Array, Object(yii\base\ActionEvent))
+#4 E:\webWork\toque\vendor\yiisoft\yii2\base\Controller.php(259): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#5 E:\webWork\toque\vendor\yiisoft\yii2\web\Controller.php(108): yii\base\Controller->beforeAction(Object(yii\base\InlineAction))
+#6 E:\webWork\toque\vendor\yiisoft\yii2\base\Controller.php(149): yii\web\Controller->beforeAction(Object(yii\base\InlineAction))
+#7 E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('signup', Array)
+#8 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('site/signup', Array)
+#9 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#10 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#11 {main}
+2014-11-12 21:07:11 [127.0.0.1][8][-][info][application] $_POST = [
+    '_csrf' => 'Y2dxc2g3eEctIAIFPnBLDgskIDQ4WRVzKSE7Qz8CNXQAMDAGCX45dg=='
+    'SignupForm' => [
+        'username' => 'sadf'
+        'email' => 'asdf@lkajsd.com'
+        'password' => 'okajsdokajsd'
+    ]
+    'signup-button' => ''
+]
+
+$_COOKIE = [
+    '_backendCsrf' => '06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s:32:\"L3qBaHclgtod649lZeg9Fjgh6x1vicUo\";'
+    '_csrf' => 'f2bc891a0f53adab43542928c2ace93ba8160a34a4b29abcddfeb1e3c2c515f2s:32:\"NGsvVG3IhCQGPnm4JFJ0W5M3cWAuaIA1\";'
+    'PHPSESSID' => 'mfup1djgdrcrgapplv3kp47f80'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 8
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '189'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_ORIGIN' => 'http://localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_REFERER' => 'http://localhost/toque/site/signup'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s%3A32%3A%22L3qBaHclgtod649lZeg9Fjgh6x1vicUo%22%3B; _csrf=f2bc891a0f53adab43542928c2ace93ba8160a34a4b29abcddfeb1e3c2c515f2s%3A32%3A%22NGsvVG3IhCQGPnm4JFJ0W5M3cWAuaIA1%22%3B; PHPSESSID=mfup1djgdrcrgapplv3kp47f80'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '50906'
+    'REDIRECT_URL' => '/toque/site/signup'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/site/signup'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415822831.653
+    'REQUEST_TIME' => 1415822831
+]
+2014-11-12 21:08:45 [127.0.0.1][][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "frontend/web/".' in E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('frontend/web/', Array)
+#1 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Unable to resolve the request "frontend/web/".' in E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#2 {main}
+2014-11-12 21:08:45 [127.0.0.1][][-][info][application] $_COOKIE = [
+    '_backendCsrf' => '06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s:32:\"L3qBaHclgtod649lZeg9Fjgh6x1vicUo\";'
+    '_csrf' => 'f2bc891a0f53adab43542928c2ace93ba8160a34a4b29abcddfeb1e3c2c515f2s:32:\"NGsvVG3IhCQGPnm4JFJ0W5M3cWAuaIA1\";'
+    'PHPSESSID' => '3a6u2h26k8dh03njtminrg9ii2'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => null
+    '__returnUrl' => '/toque/backend/web/index.php'
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s%3A32%3A%22L3qBaHclgtod649lZeg9Fjgh6x1vicUo%22%3B; _csrf=f2bc891a0f53adab43542928c2ace93ba8160a34a4b29abcddfeb1e3c2c515f2s%3A32%3A%22NGsvVG3IhCQGPnm4JFJ0W5M3cWAuaIA1%22%3B; PHPSESSID=3a6u2h26k8dh03njtminrg9ii2'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '50947'
+    'REDIRECT_URL' => '/toque/frontend/web/'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/frontend/web/'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415822925.862
+    'REQUEST_TIME' => 1415822925
+]
+2014-11-12 21:18:21 [127.0.0.1][][-][error][yii\base\ErrorException:8] exception 'yii\base\ErrorException' with message 'Undefined variable: role' in E:\webWork\toque\frontend\models\SignupForm.php:53
+Stack trace:
+#0 E:\webWork\toque\frontend\models\SignupForm.php(53): yii\base\ErrorHandler->handleError(8, 'Undefined varia...', 'E:\\webWork\\toqu...', 53, Array)
+#1 E:\webWork\toque\frontend\controllers\SiteController.php(123): frontend\models\SignupForm->signup()
+#2 [internal function]: frontend\controllers\SiteController->actionSignup()
+#3 E:\webWork\toque\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#4 E:\webWork\toque\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#5 E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('signup', Array)
+#6 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('site/signup', Array)
+#7 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#9 {main}
+2014-11-12 21:18:20 [127.0.0.1][][-][info][application] $_POST = [
+    '_csrf' => 'TEllVEVXdU8CDhYiExBGBiQKNBMVORh7Bg8vZBJiOHwvHiQhJB40fg=='
+    'SignupForm' => [
+        'username' => '12345'
+        'email' => 'asdf@klajsd.com'
+        'password' => 'asdasdasd'
+    ]
+    'signup-button' => ''
+]
+
+$_COOKIE = [
+    '_backendCsrf' => '06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s:32:\"L3qBaHclgtod649lZeg9Fjgh6x1vicUo\";'
+    '_csrf' => 'f2bc891a0f53adab43542928c2ace93ba8160a34a4b29abcddfeb1e3c2c515f2s:32:\"NGsvVG3IhCQGPnm4JFJ0W5M3cWAuaIA1\";'
+    'PHPSESSID' => '9e28qockl2gpimc3skpin8n2t3'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => null
+    '__returnUrl' => '/toque/backend/web/index.php'
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '187'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_ORIGIN' => 'http://localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_REFERER' => 'http://localhost/toque/site/signup'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s%3A32%3A%22L3qBaHclgtod649lZeg9Fjgh6x1vicUo%22%3B; _csrf=f2bc891a0f53adab43542928c2ace93ba8160a34a4b29abcddfeb1e3c2c515f2s%3A32%3A%22NGsvVG3IhCQGPnm4JFJ0W5M3cWAuaIA1%22%3B; PHPSESSID=9e28qockl2gpimc3skpin8n2t3'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '51132'
+    'REDIRECT_URL' => '/toque/site/signup'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/site/signup'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415823500.397
+    'REQUEST_TIME' => 1415823500
+]
+2014-11-12 21:18:27 [127.0.0.1][][-][error][yii\base\UnknownPropertyException] exception 'yii\base\UnknownPropertyException' with message 'Setting unknown property: frontend\models\SignupForm::role' in E:\webWork\toque\vendor\yiisoft\yii2\base\Component.php:197
+Stack trace:
+#0 E:\webWork\toque\frontend\models\SignupForm.php(53): yii\base\Component->__set('role', 50)
+#1 E:\webWork\toque\frontend\controllers\SiteController.php(123): frontend\models\SignupForm->signup()
+#2 [internal function]: frontend\controllers\SiteController->actionSignup()
+#3 E:\webWork\toque\vendor\yiisoft\yii2\base\InlineAction.php(55): call_user_func_array(Array, Array)
+#4 E:\webWork\toque\vendor\yiisoft\yii2\base\Controller.php(151): yii\base\InlineAction->runWithParams(Array)
+#5 E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php(455): yii\base\Controller->runAction('signup', Array)
+#6 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('site/signup', Array)
+#7 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#9 {main}
+2014-11-12 21:18:27 [127.0.0.1][][-][info][application] $_POST = [
+    '_csrf' => 'TEllVEVXdU8CDhYiExBGBiQKNBMVORh7Bg8vZBJiOHwvHiQhJB40fg=='
+    'SignupForm' => [
+        'username' => '12345'
+        'email' => 'asdf@klajsd.com'
+        'password' => 'asdasdasd'
+    ]
+    'signup-button' => ''
+]
+
+$_COOKIE = [
+    '_backendCsrf' => '06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s:32:\"L3qBaHclgtod649lZeg9Fjgh6x1vicUo\";'
+    '_csrf' => 'f2bc891a0f53adab43542928c2ace93ba8160a34a4b29abcddfeb1e3c2c515f2s:32:\"NGsvVG3IhCQGPnm4JFJ0W5M3cWAuaIA1\";'
+    'PHPSESSID' => '9e28qockl2gpimc3skpin8n2t3'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => null
+    '__returnUrl' => '/toque/backend/web/index.php'
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '187'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_ORIGIN' => 'http://localhost'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'CONTENT_TYPE' => 'application/x-www-form-urlencoded'
+    'HTTP_REFERER' => 'http://localhost/toque/site/signup'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=06ae0d0fc7cf794ec468300642e3501cd1785b8e327b9924814aa18624fefb68s%3A32%3A%22L3qBaHclgtod649lZeg9Fjgh6x1vicUo%22%3B; _csrf=f2bc891a0f53adab43542928c2ace93ba8160a34a4b29abcddfeb1e3c2c515f2s%3A32%3A%22NGsvVG3IhCQGPnm4JFJ0W5M3cWAuaIA1%22%3B; PHPSESSID=9e28qockl2gpimc3skpin8n2t3'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '51134'
+    'REDIRECT_URL' => '/toque/site/signup'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'POST'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/site/signup'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415823507.229
+    'REQUEST_TIME' => 1415823507
+]
+2014-11-14 22:12:52 [127.0.0.1][2][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "backend/webimg/logo.jpg".' in E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('backend/webimg/...', Array)
+#1 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Unable to resolve the request "backend/webimg/logo.jpg".' in E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#2 {main}
+2014-11-14 22:12:52 [127.0.0.1][2][-][info][application] $_COOKIE = [
+    '_backendCsrf' => 'ce1b706981852300588e36f910d8df511f229db5062cbc643dbc1ba60ec5c8f7s:32:\"wc8avEsQhca4hX7abOve9Gh2x46FbALr\";'
+    'PHPSESSID' => 'lsqg8ih4g5j1enm56do6nihrd6'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/toque/backend/web/'
+    '__id' => 2
+    'user.group' => 1
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'HTTP_REFERER' => 'http://localhost/toque/backend/web/repair/index?sd=13&a=n'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=ce1b706981852300588e36f910d8df511f229db5062cbc643dbc1ba60ec5c8f7s%3A32%3A%22wc8avEsQhca4hX7abOve9Gh2x46FbALr%22%3B; PHPSESSID=lsqg8ih4g5j1enm56do6nihrd6'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '52983'
+    'REDIRECT_URL' => '/toque/backend/webimg/logo.jpg'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/backend/webimg/logo.jpg'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415999572.018
+    'REQUEST_TIME' => 1415999572
+]
+2014-11-14 22:12:52 [127.0.0.1][2][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "backend/webimg/logo.jpg".' in E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('backend/webimg/...', Array)
+#1 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Unable to resolve the request "backend/webimg/logo.jpg".' in E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#2 {main}
+2014-11-14 22:12:52 [127.0.0.1][2][-][info][application] $_COOKIE = [
+    '_backendCsrf' => 'ce1b706981852300588e36f910d8df511f229db5062cbc643dbc1ba60ec5c8f7s:32:\"wc8avEsQhca4hX7abOve9Gh2x46FbALr\";'
+    'PHPSESSID' => 'lsqg8ih4g5j1enm56do6nihrd6'
+    '_csrf' => '42c3391a07f75de290211a6fc90f326392b878f3e35e93a9f1f8a8843385b9e5s:32:\"7ZT4JMBgfMiHAAMpsd9Tyo8f53O2-2wP\";'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/toque/backend/web/'
+    '__id' => 2
+    'user.group' => 1
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_ACCEPT' => 'image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+    'HTTP_REFERER' => 'http://localhost/toque/backend/web/repair/index?sd=13&a=n'
+    'HTTP_ACCEPT_ENCODING' => 'gzip,deflate,sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=ce1b706981852300588e36f910d8df511f229db5062cbc643dbc1ba60ec5c8f7s%3A32%3A%22wc8avEsQhca4hX7abOve9Gh2x46FbALr%22%3B; PHPSESSID=lsqg8ih4g5j1enm56do6nihrd6; _csrf=42c3391a07f75de290211a6fc90f326392b878f3e35e93a9f1f8a8843385b9e5s%3A32%3A%227ZT4JMBgfMiHAAMpsd9Tyo8f53O2-2wP%22%3B'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '52983'
+    'REDIRECT_URL' => '/toque/backend/webimg/logo.jpg'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/backend/webimg/logo.jpg'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1415999572.276
+    'REQUEST_TIME' => 1415999572
+]
+2014-12-30 00:10:13 [127.0.0.1][1][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "asd".' in E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('asd', Array)
+#1 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Unable to resolve the request "asd".' in E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#2 {main}
+2014-12-30 00:10:13 [127.0.0.1][1][-][info][application] $_COOKIE = [
+    '_backendCsrf' => '5bb0f2027ccb975156e6ec431cecfac7fc70a46fa0d173f8bf0364d3a72a87fes:32:\"giAg2_D8keaJEc_G7SloZPCyt3oFrDu_\";'
+    'PHPSESSID' => '3sftluq0i4avb8o9nlvugpjlf5'
+    '_csrf' => 'b15866d1fdb2ec7f0f2a8e4bc7c13e25a5c624fb9e4f5fcb144df73896908cfbs:32:\"dc68opxPZnDrFUa1eOOSQAJBV99D0map\";'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/toque/backend/web/repair/index'
+    'user.group' => 1
+    'user.name' => 'admin'
+    'user.store' => 1
+    '__id' => 1
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=5bb0f2027ccb975156e6ec431cecfac7fc70a46fa0d173f8bf0364d3a72a87fes%3A32%3A%22giAg2_D8keaJEc_G7SloZPCyt3oFrDu_%22%3B; PHPSESSID=3sftluq0i4avb8o9nlvugpjlf5; _csrf=b15866d1fdb2ec7f0f2a8e4bc7c13e25a5c624fb9e4f5fcb144df73896908cfbs%3A32%3A%22dc68opxPZnDrFUa1eOOSQAJBV99D0map%22%3B'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '51940'
+    'REDIRECT_URL' => '/toque/asd'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/asd'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1419894613.355
+    'REQUEST_TIME' => 1419894613
+]
+2014-12-30 00:28:04 [127.0.0.1][1][-][error][yii\web\HttpException:404] exception 'yii\base\InvalidRouteException' with message 'Unable to resolve the request "Jango".' in E:\webWork\toque\vendor\yiisoft\yii2\base\Module.php:461
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php(83): yii\base\Module->runAction('Jango', Array)
+#1 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#2 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next exception 'yii\web\NotFoundHttpException' with message 'Unable to resolve the request "Jango".' in E:\webWork\toque\vendor\yiisoft\yii2\web\Application.php:95
+Stack trace:
+#0 E:\webWork\toque\vendor\yiisoft\yii2\base\Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#1 E:\webWork\toque\index.php(18): yii\base\Application->run()
+#2 {main}
+2014-12-30 00:28:03 [127.0.0.1][1][-][info][application] $_COOKIE = [
+    '_backendCsrf' => '5bb0f2027ccb975156e6ec431cecfac7fc70a46fa0d173f8bf0364d3a72a87fes:32:\"giAg2_D8keaJEc_G7SloZPCyt3oFrDu_\";'
+    '_csrf' => 'b15866d1fdb2ec7f0f2a8e4bc7c13e25a5c624fb9e4f5fcb144df73896908cfbs:32:\"dc68opxPZnDrFUa1eOOSQAJBV99D0map\";'
+    'PHPSESSID' => 'obtk0lja10cpu7cs6a292ck2n1'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__returnUrl' => '/toque/'
+    '__id' => 1
+    'user.group' => 1
+    'user.name' => 'admin'
+    'user.store' => 1
+]
+
+$_SERVER = [
+    'REDIRECT_MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'REDIRECT_MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'REDIRECT_OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'REDIRECT_PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'REDIRECT_PHPRC' => '\\xampp\\php'
+    'REDIRECT_TMP' => '\\xampp\\tmp'
+    'REDIRECT_STATUS' => '200'
+    'MIBDIRS' => 'C:/xampp/php/extras/mibs'
+    'MYSQL_HOME' => '\\xampp\\mysql\\bin'
+    'OPENSSL_CONF' => 'C:/xampp/apache/bin/openssl.cnf'
+    'PHP_PEAR_SYSCONF_DIR' => '\\xampp\\php'
+    'PHPRC' => '\\xampp\\php'
+    'TMP' => '\\xampp\\tmp'
+    'HTTP_HOST' => 'localhost'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, sdch'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.8,pt-PT;q=0.6,pt;q=0.4'
+    'HTTP_COOKIE' => '_backendCsrf=5bb0f2027ccb975156e6ec431cecfac7fc70a46fa0d173f8bf0364d3a72a87fes%3A32%3A%22giAg2_D8keaJEc_G7SloZPCyt3oFrDu_%22%3B; _csrf=b15866d1fdb2ec7f0f2a8e4bc7c13e25a5c624fb9e4f5fcb144df73896908cfbs%3A32%3A%22dc68opxPZnDrFUa1eOOSQAJBV99D0map%22%3B; PHPSESSID=obtk0lja10cpu7cs6a292ck2n1'
+    'PATH' => 'C:\\Ruby193\\bin;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files (x86)\\PC Connectivity Solution\\;C:\\Program Files\\Common Files\\Microsoft Shared\\Windows Live;C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\Windows Live;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Intel\\DMIX;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files\\TortoiseSVN\\bin;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\AndroidDev\\apache-ant\\bin;C:\\AndroidDev\\phonegap\\lib\\android\\bin;C:\\Program Files\\Java\\jdk1.7.0_17\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Program Files (x86)\\Microsoft SQL Server\\100\\DTS\\Binn\\;C:\\Program Files (x86)\\QuickTime Alternative\\QTSystem\\;C:\\xampp\\php;C:\\AndroidDev\\apacheant\\bin;C:\\AndroidDev\\SDK\\sdk\\platform-tools;C:\\AndroidDev\\SDK\\sdk\\tools;C:\\Users\\LUISME~1\\AppData\\Roaming\\npm\\node_modules\\n\\bin;C:\\Program Files\\nodejs;C:\\ProgramData\\ComposerSetup\\bin;'
+    'SystemRoot' => 'C:\\Windows'
+    'COMSPEC' => 'C:\\Windows\\system32\\cmd.exe'
+    'PATHEXT' => '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.RB;.RBW'
+    'WINDIR' => 'C:\\Windows'
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15 Server at localhost Port 80</address>
+'
+    'SERVER_SOFTWARE' => 'Apache/2.4.10 (Win32) OpenSSL/1.0.1i PHP/5.5.15'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_ADDR' => '127.0.0.1'
+    'SERVER_PORT' => '80'
+    'REMOTE_ADDR' => '127.0.0.1'
+    'DOCUMENT_ROOT' => 'E:/webWork'
+    'REQUEST_SCHEME' => 'http'
+    'CONTEXT_PREFIX' => ''
+    'CONTEXT_DOCUMENT_ROOT' => 'E:/webWork'
+    'SERVER_ADMIN' => 'postmaster@localhost'
+    'SCRIPT_FILENAME' => 'E:/webWork/toque/index.php'
+    'REMOTE_PORT' => '56972'
+    'REDIRECT_URL' => '/toque/Jango'
+    'GATEWAY_INTERFACE' => 'CGI/1.1'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'REQUEST_METHOD' => 'GET'
+    'QUERY_STRING' => ''
+    'REQUEST_URI' => '/toque/Jango'
+    'SCRIPT_NAME' => '/toque/index.php'
+    'PHP_SELF' => '/toque/index.php'
+    'REQUEST_TIME_FLOAT' => 1419895683.989
+    'REQUEST_TIME' => 1419895683
+]
