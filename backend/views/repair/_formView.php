@@ -87,12 +87,6 @@ use kartik\datecontrol\DateControl;
                 <!--ADDRESS-->
                 <?= $form->field($modelClient, 'cliAdress', ['options' => ['class' => 'col-lg-12']])->textArea(['rows' => 4,'readonly'=>'readonly']) ?>
             </div>
-
-            <div class="row">
-                <?= $form->field($modelClient, 'cliDoorNum', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput(['readonly'=>'readonly']) ?>
-                <?= $form->field($modelClient, 'cliPostalCode', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput(['readonly'=>'readonly']) ?>
-                <?= $form->field($modelClient, 'cliPostalSuffix', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput(['readonly'=>'readonly']) ?>
-            </div>
             
             <div class="row">
                 <!--CONTACTS-->

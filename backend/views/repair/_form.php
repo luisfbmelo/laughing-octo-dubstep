@@ -42,12 +42,6 @@ use kartik\datecontrol\DateControl;
                 <!--ADDRESS-->
                 <?= $form->field($modelClient, 'cliAdress', ['options' => ['class' => 'col-lg-12']])->textArea(['rows' => 4]) ?>
             </div>  
-
-            <div class="row">
-                <?= $form->field($modelClient, 'cliDoorNum', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
-                <?= $form->field($modelClient, 'cliPostalCode', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
-                <?= $form->field($modelClient, 'cliPostalSuffix', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput(['value'=>'000']) ?>
-            </div>  
           
             <div class="row">
                 <!--CONTACTS-->
@@ -201,11 +195,11 @@ use kartik\datecontrol\DateControl;
         $("#typeID").on('change',function(){
             var state = $(this).val();
             var desc = $('option:selected', $(this)).val();
-            console.log(desc);
+            //console.log(desc);
 
             if (desc==1){
                 $(".normalType").toggle(0,function(){
-                    console.log($(".normalType").css("display"));
+                    //console.log($(".normalType").css("display"));
                     if ($(".normalType").css("display")=="none"){
                         state="hidden";
                     }else{
@@ -338,9 +332,16 @@ use kartik\datecontrol\DateControl;
             }
 
             //say it's a new client
-        }).on('change',function(){
-            $("[id^='client-']:not('#client-cliname')").val(null);
-            $("#clientDataHidden").val("new");
+        }).on('keyup',function(){
+            var val = $(this).val();
+
+            //if value change
+            if( $(this).data('last') != val ){
+                $("[id^='client-']:not('#client-cliname')").val(null);
+                $("#clientDataHidden").val("new");
+            }
+
+            $(this).data('last',val);  
 
         });
 
@@ -358,7 +359,7 @@ use kartik\datecontrol\DateControl;
                 $("#equipId").val(ui.item.id);
             },
             response: function( event, ui ) {
-                console.log(ui);
+                //console.log("response:", ui);
             },
      
             html: true, // optional (jquery.ui.autocomplete.html.js required)
@@ -369,8 +370,15 @@ use kartik\datecontrol\DateControl;
             }
 
             //say it's a new client
-        }).on('change',function(){
-            $("#equipId").val("new");
+        }).on('keyup',function(){
+            var val = $(this).val();
+
+            //if value change
+            if( $(this).data('last') != val ){
+                $("#equipId").val("new");
+            }
+
+            $(this).data('last',val);             
 
         });
 
@@ -382,7 +390,7 @@ use kartik\datecontrol\DateControl;
             source: urlDestBrand,
             minLength: 1,
             select: function(event, ui) {
-                console.log(ui);
+                //console.log(ui);
                 $("#brands-brandname").val(ui.item.brandName);
 
                 //say that it must be updated only
@@ -400,8 +408,15 @@ use kartik\datecontrol\DateControl;
             }
 
             //say it's a new client
-        }).on('change',function(){
-            $("#brandId").val("new");
+        }).on('keyup',function(){
+            var val = $(this).val();
+
+            //if value change
+            if( $(this).data('last') != val ){
+                $("#brandId").val("new");
+            }
+
+            $(this).data('last',val); 
 
         });
 
@@ -413,7 +428,7 @@ use kartik\datecontrol\DateControl;
             source: urlDestModel,
             minLength: 1,
             select: function(event, ui) {
-                console.log(ui);
+                //console.log(ui);
                 $("#models-modelname").val(ui.item.modeName);
 
                 //say that it must be updated only
@@ -437,8 +452,16 @@ use kartik\datecontrol\DateControl;
             }
 
             //say it's a new client
-        }).on('change',function(){
-            $("#modelId").val("new");
+        }).on('keyup',function(){
+            var val = $(this).val();
+
+            //if value change
+            if( $(this).data('last') != val ){
+                $("#modelId").val("new");
+            }
+
+            $(this).data('last',val);           
+            
 
         });
 

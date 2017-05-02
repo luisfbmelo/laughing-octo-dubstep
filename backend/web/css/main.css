@@ -8,7 +8,6 @@
 /*Text colors*/
 /*Border line colors*/
 /*Status colors*/
-/*$status3: #FFFF00;*/
 body {
   font-size: 16px; }
 
@@ -496,7 +495,7 @@ a.topBtn {
     .grid_listing tbody tr td .status-color.status_2 .circle, .partsInsert tbody tr td .status-color.status_2 .circle, .formTable tbody tr td .status-color.status_2 .circle {
       background-color: #fac090; }
     .grid_listing tbody tr td .status-color.status_3 .circle, .partsInsert tbody tr td .status-color.status_3 .circle, .formTable tbody tr td .status-color.status_3 .circle {
-      background-color: #f0f000; }
+      background-color: yellow; }
     .grid_listing tbody tr td .status-color.status_4 .circle, .partsInsert tbody tr td .status-color.status_4 .circle, .formTable tbody tr td .status-color.status_4 .circle {
       background-color: #92d050; }
     .grid_listing tbody tr td .status-color.status_5 .circle, .partsInsert tbody tr td .status-color.status_5 .circle, .formTable tbody tr td .status-color.status_5 .circle {
@@ -590,50 +589,29 @@ a.topBtn {
           margin-right: 10px;
           position: absolute;
           left: 0;
-          top: 2px;
           bottom: 1px;
+          box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, 0.8);
           border-radius: 8px; }
-        .repairFields form .statusButtons .statusContainer label:after {
-          content: "";
-          width: 8px;
-          height: 8px;
-          position: absolute;
-          top: 6px;
-          left: 4px;
-          background: white;
-          border-radius: 50%;
-          transition: all 200ms linear; }
         .repairFields form .statusButtons .statusContainer label.status_1:before {
-          border: 2px solid #000; }
+          background-color: #fff; }
         .repairFields form .statusButtons .statusContainer label.status_2:before {
-          border: 2px solid #8db4e3; }
+          background-color: #8db4e3; }
         .repairFields form .statusButtons .statusContainer label.status_3:before {
-          border: 2px solid #fac090; }
+          background-color: #fac090; }
         .repairFields form .statusButtons .statusContainer label.status_4:before {
-          border: 2px solid #f0f000; }
+          background-color: yellow; }
         .repairFields form .statusButtons .statusContainer label.status_5:before {
-          border: 2px solid #92d050; }
+          background-color: #92d050; }
         .repairFields form .statusButtons .statusContainer label.status_6:before {
-          border: 2px solid #7f7f7f; }
+          background-color: #7f7f7f; }
         .repairFields form .statusButtons .statusContainer input[type=radio] {
           display: none; }
-        .repairFields form .statusButtons .statusContainer input[type=radio]:checked + label:after {
-          width: 8px;
-          height: 8px;
-          top: 6px !important;
-          left: 4px !important; }
-        .repairFields form .statusButtons .statusContainer input[type=radio]:checked + label.status_1:after {
-          background: #000; }
-        .repairFields form .statusButtons .statusContainer input[type=radio]:checked + label.status_2:after {
-          background: #8db4e3; }
-        .repairFields form .statusButtons .statusContainer input[type=radio]:checked + label.status_3:after {
-          background: #fac090; }
-        .repairFields form .statusButtons .statusContainer input[type=radio]:checked + label.status_4:after {
-          background: #f0f000; }
-        .repairFields form .statusButtons .statusContainer input[type=radio]:checked + label.status_5:after {
-          background: #92d050; }
-        .repairFields form .statusButtons .statusContainer input[type=radio]:checked + label.status_6:after {
-          background: #7f7f7f; }
+        .repairFields form .statusButtons .statusContainer input[type=radio]:checked + label:before {
+          content: "\2022";
+          color: #000;
+          font-size: 30px;
+          text-align: center;
+          line-height: 18px; }
     .repairFields form .field-accessories-id_accessories > .help-block {
       display: none; }
     .repairFields form .field-repairaccessory-otherdesc, .repairFields form .field-repairaccessory-otherdesc label {

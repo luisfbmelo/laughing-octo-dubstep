@@ -103,8 +103,6 @@
 					&:hover{
 						cursor:pointer;
 					}
-
-
 				}
 
 				label:before {  
@@ -117,45 +115,33 @@
 				    margin-right: 10px;  
 				    position: absolute;  
 				    left: 0;  
-				    top: 2px;
 				    bottom: 1px;   
+				    box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);  
 				    border-radius: 8px;  
 				}
 
-				label:after {
-				  content: "";
-				  width: 8px;
-				  height: 8px;
-				  position: absolute;
-				  top: 6px;
-				  left: 4px;
-				  background: white;
-				  border-radius: 50%;
-				  transition: all 200ms linear;
-				}
-
 				label.status_1:before{
-					border: 2px solid #000;			    		    			
+					background-color:#fff;			    		    			
 	    		}
 
 				label.status_2:before{
-					border: 2px solid $status1;			    		    			
+					background-color:$status1;			    		    			
 	    		}
 
 	    		label.status_3:before{
-					border: 2px solid $status2;			    		    			
+					background-color:$status2;			    		    			
 	    		}
 
 	    		label.status_4:before{
-					border: 2px solid $status3;			    		    			
+					background-color:$status3;			    		    			
 	    		}
 
 	    		label.status_5:before{
-					border: 2px solid $status4;			    		    			
+					background-color:$status4;			    		    			
 	    		}
 
 	    		label.status_6:before{
-					border: 2px solid $status5;			    		    			
+					background-color:$status5;			    		    			
 	    		}
 				
 
@@ -163,37 +149,13 @@
 				    display: none;  
 				} 
 
-				input[type=radio]:checked + label:after {  
-				  	width: 8px;
-				  	height: 8px;
-				  	top:6px!important;
-				  	left:4px!important;
-				} 
-
-				input[type=radio]:checked + label.status_1:after {  
-				  	background: #000;
+				input[type=radio]:checked + label:before {  
+				    content: "\2022";  
+				    color: #000;  
+				    font-size: 30px;  
+				    text-align: center;  
+				    line-height: 18px;  
 				}  
-
-				input[type=radio]:checked + label.status_2:after {  
-				  	background: $status1;
-				} 
-
-				input[type=radio]:checked + label.status_3:after {  
-				  	background: $status2;
-				} 
-
-				input[type=radio]:checked + label.status_4:after {  
-				  	background: $status3;
-				} 
-
-				input[type=radio]:checked + label.status_5:after {  
-				  	background: $status4;
-				} 
-
-				input[type=radio]:checked + label.status_6:after {  
-				  	background: $status5;
-				} 
-
 			}
 		}
 
@@ -263,5 +225,6 @@
 		background-color: #ddd !important;
 		color: #aaa;
 		font-style: italic;
+
 	}
 }

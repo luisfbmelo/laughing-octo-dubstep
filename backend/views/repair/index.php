@@ -198,7 +198,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <td>Nº <?php echo $modelRepair[0]['id_repair'];?></td>
                                 </tr>
                                 <tr>
-                                    <td>Data</td>
+                                    <td>Data de entrada</td>
                                     <td><?php echo date("Y-m-d", strtotime($modelRepair[0]['date_entry']));?></td>
                                 </tr>
                                 <tr>
@@ -209,6 +209,73 @@ $this->params['breadcrumbs'][] = $this->title;
                         </table>
                     </div>
                 </div>
+
+                <div class="row repair_details_table">
+                    <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>Equipamento</td>
+                                    <td><?php echo $modelRepair[0]['equipDesc'];?></td>
+                                    <td><?php echo $modelRepair[0]['brandName'];?></td>
+                                    <td><?php echo $modelRepair[0]['modelName'];?></td>
+                                    <td><?php echo $modelRepair[0]['inveSN'];?></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Bateria</td>
+                                    <?php //print_r($modelAccess[1]['accessory']['accessType']);
+                                    $key = repair::accessType($modelAccess,'accessType',1);
+                                    $key1 = repair::accessType($modelAccess,'accessType',2);
+                                    $key2 = repair::accessType($modelAccess,'accessType',3);
+                                    
+                                    if (isset($modelAccess) && is_numeric($key)){?>
+                                    <td><span class="glyphicon glyphicon-ok-sign"></span></td>
+                                    <?php }else{ ?>
+                                    <td></td>
+                                    <?php } ?>
+                                    <td colspan="3" rowspan="3"><?php echo $modelRepair[0]['repair_desc'];?></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Carregador</td>
+                                    <td>
+                                        <?php if (isset($modelAccess) && is_numeric($key2)){?>
+                                        <span class="glyphicon glyphicon-ok-sign"></span>
+                                        <?php } ?>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Outro</td>
+                                    <?php if (isset($modelAccess) && is_numeric($key1)){?>
+                                    <td><?php echo $modelAccess[$key1]['otherDesc'];?></td>
+                                    <?php }else{ ?>
+                                    <td></td>
+                                    <?php } ?>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+
+                        <?php if (!empty($modelRepair[0]['obs'])){ ?>
+                            <table class="table table-bordered repairDesc">
+                                <thead>                    
+                                    <tr>
+                                        <td>Observações</td>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td><?php echo $modelRepair[0]['obs'];?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <?php } ?>
+                    </div>
+                </div>
+
                 <div class="row foote contacts">                    
                     <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3"> 
                         <table class="table table-bordered" style="text-align:center;">
@@ -216,10 +283,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                  <tr>
                                     <td>Angra</td>
                                     <td>295216489 / 926652121</td>
-                                </tr>
-                                <tr>
-                                    <td>Praia</td>
-                                    <td>295543359 / 962501518</td>
                                 </tr>
                                 <tr>
                                     <td>Website</td>
@@ -231,6 +294,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     
                 </div>
                 <!--END MAIN HEADER-->
+
+                <hr style="border:none;border-top: 1px solid #bbbbbb;"/>
 
                 <div class="row header">
                     <div class="col-lg-6 col-xs-5 col-sm-6 col-md-6"><img src="<?php echo Yii::$app->request->baseUrl;?>/img/logo.jpg" alt=""></div>
@@ -393,8 +458,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <td>Nº <?php echo Repair::getDeliveryId($modelRepair[0]['id_repair']);?></td>
                                     </tr>
                                     <tr>
-                                        <td>Data</td>
-                                        <td><?php echo date("Y-m-d", strtotime($modelRepair[0]['date_entry']));?></td>
+                                        <td>Data de entrega</td>
+                                        <td><?php echo date("Y-m-d", strtotime($modelRepair[0]['date_close']));?></td>
                                     </tr>
                                     <tr>
                                         <td>Local</td>

@@ -55,12 +55,6 @@ use yii\helpers\ArrayHelper;
             </div>
 
             <div class="row">
-                <?= $form->field($modelClient, 'cliDoorNum', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
-                <?= $form->field($modelClient, 'cliPostalCode', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
-                <?= $form->field($modelClient, 'cliPostalSuffix', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
-            </div>
-            
-            <div class="row">
                 <!--CONTACTS-->
                 <?= $form->field($modelClient, 'cliConFix', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
                 <?= $form->field($modelClient, 'cliConMov1', ['options' => ['class' => 'col-lg-4 col-xs-12 col-sm-4 col-md-4']])->textInput() ?>
@@ -531,9 +525,16 @@ use yii\helpers\ArrayHelper;
             }
 
             //say it's a new client
-        }).on('change',function(){
-            $("[id^='client-']:not('#client-cliname')").val(null);
-            $("#clientDataHidden").val("new");
+        }).on('keyup',function(){
+            var val = $(this).val();
+
+            //if value change
+            if( $(this).data('last') != val ){
+                $("[id^='client-']:not('#client-cliname')").val(null);
+                $("#clientDataHidden").val("new");
+            }
+
+            $(this).data('last',val);            
 
         });
 
@@ -562,8 +563,16 @@ use yii\helpers\ArrayHelper;
             }
 
             //say it's a new client
-        }).on('change',function(){
-            $("#equipId").val("new");
+        }).on('keyup',function(){
+           
+            var val = $(this).val();
+
+            //if value change
+            if( $(this).data('last') != val ){
+                $("#equipId").val("new");
+            }
+
+            $(this).data('last',val);  
 
         });
 
@@ -593,9 +602,15 @@ use yii\helpers\ArrayHelper;
             }
 
             //say it's a new client
-        }).on('change',function(){
-            $("#brandId").val("new");
+        }).on('keyup',function(){
+            var val = $(this).val();
 
+            //if value change
+            if( $(this).data('last') != val ){
+                $("#brandId").val("new");
+            }
+
+            $(this).data('last',val); 
         });
 
         //models
@@ -631,7 +646,14 @@ use yii\helpers\ArrayHelper;
 
             //say it's a new client
         }).on('change',function(){
-            $("#modelId").val("new");
+            var val = $(this).val();
+
+            //if value change
+            if( $(this).data('last') != val ){
+                $("#modelId").val("new");
+            }
+
+            $(this).data('last',val); 
 
         });
 
