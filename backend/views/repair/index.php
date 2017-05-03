@@ -221,40 +221,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <td><?php echo $modelRepair[0]['modelName'];?></td>
                                     <td><?php echo $modelRepair[0]['inveSN'];?></td>
                                 </tr>
-
-                                <tr>
-                                    <td>Bateria</td>
-                                    <?php //print_r($modelAccess[1]['accessory']['accessType']);
-                                    $key = repair::accessType($modelAccess,'accessType',1);
-                                    $key1 = repair::accessType($modelAccess,'accessType',2);
-                                    $key2 = repair::accessType($modelAccess,'accessType',3);
-                                    
-                                    if (isset($modelAccess) && is_numeric($key)){?>
-                                    <td><span class="glyphicon glyphicon-ok-sign"></span></td>
-                                    <?php }else{ ?>
-                                    <td></td>
-                                    <?php } ?>
-                                    <td colspan="3" rowspan="3"><?php echo $modelRepair[0]['repair_desc'];?></td>
-                                </tr>
-                                
-                                <tr>
-                                    <td>Carregador</td>
-                                    <td>
-                                        <?php if (isset($modelAccess) && is_numeric($key2)){?>
-                                        <span class="glyphicon glyphicon-ok-sign"></span>
-                                        <?php } ?>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>Outro</td>
-                                    <?php if (isset($modelAccess) && is_numeric($key1)){?>
-                                    <td><?php echo $modelAccess[$key1]['otherDesc'];?></td>
-                                    <?php }else{ ?>
-                                    <td></td>
-                                    <?php } ?>
-                                </tr>
-                                
                             </tbody>
                         </table>
 

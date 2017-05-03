@@ -1,7 +1,3 @@
-# index files
-/index.php
-/index-test.php
-
 # yii console command
 /yii
 
@@ -20,10 +16,10 @@ nbproject
 Thumbs.db
 
 # composer vendor dir
-/vendor
+#/vendor
 
 # composer itself is not needed
-composer.phar
+#composer.phar
 
 # Mac DS_Store Files
 .DS_Store
@@ -33,8 +29,7 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 
-# Critical folders
-/backend/config
-/common/config
-/bd
-/Design
+# bootstrap files
+#/index.php
+#/index-test.php
+
