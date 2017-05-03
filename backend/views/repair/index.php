@@ -248,7 +248,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <tbody>
                                  <tr>
                                     <td>Angra</td>
-                                    <td>295216489 / 926652121</td>
+                                    <td>295216489 / 932312600</td>
                                 </tr>
                                 <tr>
                                     <td>Website</td>
