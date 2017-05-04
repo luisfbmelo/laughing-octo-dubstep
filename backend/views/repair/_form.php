@@ -76,7 +76,10 @@ use kartik\datecontrol\DateControl;
                 ?>
 
                 <div class="col-lg-3 col-xs-12 col-sm-6 col-md-3">
-                    <?= $form->field($modelEquip, 'equipDesc', ['options' => ['class' => 'required'],])->textInput()->label('Equipamentos') ?>
+                    <?= $form->field($modelEquip, 'equipDesc', ['options' => [
+                        'class' => 'required',
+                        'data-last' => isset($modelEquip->equipDesc) ? $modelEquip->equipDesc : ''
+                    ],])->textInput()->label('Equipamentos') ?>
                     <input type="hidden" name="equipId" id="equipId" value="<?= (isset($modelEquip->id_equip) && is_numeric($modelEquip->id_equip)) ? $modelEquip->id_equip : 'new' ?>"/>
                     
                     <input type="checkBox" name="equipNew" id="equipNew" class="invCheckbox" <?php echo $equipShow;?>/>
@@ -335,13 +338,18 @@ use kartik\datecontrol\DateControl;
         }).on('keyup',function(){
             var val = $(this).val();
 
+            if (!$(this).data('last') && $(this).parent().data('last')){
+                $(this).data('last', $(this).parent().data('last'));
+            }
+
             //if value change
-            if( $(this).data('last') != val ){
+            if($(this).data('last') && $(this).data('last') != val ){
                 $("[id^='client-']:not('#client-cliname')").val(null);
                 $("#clientDataHidden").val("new");
             }
 
             $(this).data('last',val);  
+            $(this).parent().data('last', val);
 
         });
 
@@ -371,14 +379,7 @@ use kartik\datecontrol\DateControl;
 
             //say it's a new client
         }).on('keyup',function(){
-            var val = $(this).val();
-
-            //if value change
-            if( $(this).data('last') != val ){
-                $("#equipId").val("new");
-            }
-
-            $(this).data('last',val);             
+            globalFuncs.setIfNew($(this), $("#equipId"));           
 
         });
 
@@ -409,14 +410,7 @@ use kartik\datecontrol\DateControl;
 
             //say it's a new client
         }).on('keyup',function(){
-            var val = $(this).val();
-
-            //if value change
-            if( $(this).data('last') != val ){
-                $("#brandId").val("new");
-            }
-
-            $(this).data('last',val); 
+            globalFuncs.setIfNew($(this), $("#brandId"));
 
         });
 
@@ -453,16 +447,7 @@ use kartik\datecontrol\DateControl;
 
             //say it's a new client
         }).on('keyup',function(){
-            var val = $(this).val();
-
-            //if value change
-            if( $(this).data('last') != val ){
-                $("#modelId").val("new");
-            }
-
-            $(this).data('last',val);           
-            
-
+            globalFuncs.setIfNew($(this), $("#modelId"));
         });
 
         //OTHER DESC SHOWUP

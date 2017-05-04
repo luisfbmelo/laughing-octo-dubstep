@@ -1,3 +1,5 @@
+var globalFuncs = {};
+
 $(document).ready(function(){
 	/*Ajust menu size*/
 	function setFullHeight(parent,target){
@@ -58,4 +60,23 @@ $(document).ready(function(){
 		'</tr>';
 		$(".partsInsert tbody tr:last").after(content);
 	});
+
+	/**
+	 * CHECK IF IT IS GOING TO BE NEW OR NOT
+	 */	
+	globalFuncs.setIfNew = function(el, destEl){
+		var val = el.val();
+
+		if (!el.data('last') && el.parent().data('last')){
+			el.data('last', el.parent().data('last'));
+		}
+
+        //if value change
+        if(el.data('last') && el.data('last') != val ){
+            destEl.val("new");
+        }
+
+        el.data('last',val);
+        el.parent().data('last', val);
+	}
 });

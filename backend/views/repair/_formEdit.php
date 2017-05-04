@@ -45,7 +45,10 @@ use yii\helpers\ArrayHelper;
             
             <div class="row">
                <!--CLIENT INITIAL DATA-->
-                <?= $form->field($modelClient, 'cliName', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6'],])->textInput() ?>
+                <?= $form->field($modelClient, 'cliName', ['options' => [
+                    'class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6',
+                    'data-last' => isset($modelClient->cliName) ? $modelClient->cliName : ''
+                ],])->textInput() ?>
                 <?= $form->field($modelStores, 'id_store', ['options' => ['class' => 'col-lg-6 col-xs-12 col-sm-6 col-md-6']])->dropDownList($stores,['id'=>'storesId','prompt'=>'--'])->label('Loja')?> 
             </div>
             
@@ -85,7 +88,10 @@ use yii\helpers\ArrayHelper;
                 ?>
 
                 <div class="col-lg-3 col-xs-12 col-sm-6 col-md-3">
-                    <?= $form->field($modelEquip, 'equipDesc', ['options' => ['class' => 'required'],])->textInput()->label('Equipamentos') ?>
+                    <?= $form->field($modelEquip, 'equipDesc', ['options' => [
+                        'class' => 'required',
+                        'data-last' => isset($modelEquip->equipDesc) ? $modelEquip->equipDesc : ''
+                    ],])->textInput()->label('Equipamentos') ?>
                     <input type="hidden" name="equipId" id="equipId" value="<?= (isset($modelEquip->id_equip) && is_numeric($modelEquip->id_equip)) ? $modelEquip->id_equip : 'new' ?>"/>
                     
                     <input type="checkBox" name="equipNew" id="equipNew" class="invCheckbox" <?php echo $equipShow;?>/>
@@ -93,14 +99,20 @@ use yii\helpers\ArrayHelper;
                 </div>
                 
                 <div class="col-lg-3 col-xs-12 col-sm-6 col-md-3">
-                    <?= $form->field($modelBrands, 'brandName', ['options' => ['class' => 'required']])->textInput()->label('Marcas') ?>
+                    <?= $form->field($modelBrands, 'brandName', ['options' => [
+                        'class' => 'required',
+                        'data-last' => isset($modelBrands->brandName) ? $modelBrands->brandName : ''
+                    ]])->textInput()->label('Marcas') ?>
                     <input type="hidden" name="brandId" id="brandId" value="<?= (isset($modelBrands->id_brand) && is_numeric($modelBrands->id_brand)) ? $modelBrands->id_brand : 'new' ?>"/>
                     
                     <input type="checkBox" name="brandNew" id="brandNew" class="invCheckbox" <?php echo $brandShow;?> />
                     <label for="brandNew">Nova marca</label>
                 </div>
 
-                <?= $form->field($modelModels, 'modelName', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required']])->textInput()->label('Modelos') ?>
+                <?= $form->field($modelModels, 'modelName', ['options' => [
+                    'class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3 required',
+                    'data-last' => isset($modelModels->modelName) ? $modelModels->modelName : ''
+                ]])->textInput()->label('Modelos') ?>
                 <input type="hidden" name="modelId" id="modelId" value="<?= $modelModels->id_model ?>"/>
 
                 <?= $form->field($modelInv, 'inveSN', ['options' => ['class' => 'col-lg-3 col-xs-12 col-sm-6 col-md-3']])->textInput() ?>
@@ -528,13 +540,18 @@ use yii\helpers\ArrayHelper;
         }).on('keyup',function(){
             var val = $(this).val();
 
+            if (!$(this).data('last') && $(this).parent().data('last')){
+                $(this).data('last', $(this).parent().data('last'));
+            }
+
             //if value change
-            if( $(this).data('last') != val ){
+            if($(this).data('last') && $(this).data('last') != val ){
                 $("[id^='client-']:not('#client-cliname')").val(null);
                 $("#clientDataHidden").val("new");
             }
 
-            $(this).data('last',val);            
+            $(this).data('last',val);    
+            $(this).parent().data('last', val);        
 
         });
 
@@ -564,15 +581,7 @@ use yii\helpers\ArrayHelper;
 
             //say it's a new client
         }).on('keyup',function(){
-           
-            var val = $(this).val();
-
-            //if value change
-            if( $(this).data('last') != val ){
-                $("#equipId").val("new");
-            }
-
-            $(this).data('last',val);  
+           globalFuncs.setIfNew($(this), $("#equipId"));
 
         });
 
@@ -603,14 +612,7 @@ use yii\helpers\ArrayHelper;
 
             //say it's a new client
         }).on('keyup',function(){
-            var val = $(this).val();
-
-            //if value change
-            if( $(this).data('last') != val ){
-                $("#brandId").val("new");
-            }
-
-            $(this).data('last',val); 
+            globalFuncs.setIfNew($(this), $("#brandId"));
         });
 
         //models
@@ -645,15 +647,8 @@ use yii\helpers\ArrayHelper;
             }
 
             //say it's a new client
-        }).on('change',function(){
-            var val = $(this).val();
-
-            //if value change
-            if( $(this).data('last') != val ){
-                $("#modelId").val("new");
-            }
-
-            $(this).data('last',val); 
+        }).on('keyup',function(){
+            globalFuncs.setIfNew($(this), $("#modelId"));
 
         });
 
@@ -661,11 +656,7 @@ use yii\helpers\ArrayHelper;
         $('#accessories-id_accessories input[type=checkbox]').change(function(){
             if($(this).val()==3){
                 var el = $(".field-repairaccessory-otherdesc");
-
-
                 el.toggle();
-                
-                
             }
         });
     });

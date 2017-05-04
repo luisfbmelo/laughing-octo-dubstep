@@ -82,7 +82,15 @@
 
 .contacts{
 	
-	margin-bottom:30px;
+	&:not(.foote){
+		margin-bottom:30px;
+	}
+
+	&.foote{
+		table{
+			margin-bottom:0;
+		}
+	}
 
 	table{
 		border:none!important;

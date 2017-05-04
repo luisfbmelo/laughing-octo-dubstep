@@ -19,7 +19,6 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        '//normalize-css.googlecode.com/svn/trunk/normalize.css',
         'css/site.css',
         'css/main.css',
         'css/jquery-ui.css',

@@ -1,7 +1,7 @@
-@charset "CP850";
+@charset "UTF-8";
+/*Fonts*/
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
 @import url(http://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic);
-/*Fonts*/
 /*Background colors*/
 /*Background images*/
 /*Buttons*/
@@ -491,15 +491,15 @@ a.topBtn {
       border-radius: 50%;
       margin-right: 5px; }
     .grid_listing tbody tr td .status-color.status_1 .circle, .partsInsert tbody tr td .status-color.status_1 .circle, .formTable tbody tr td .status-color.status_1 .circle {
-      background-color: #8db4e3; }
+      background-color: #8DB4E3; }
     .grid_listing tbody tr td .status-color.status_2 .circle, .partsInsert tbody tr td .status-color.status_2 .circle, .formTable tbody tr td .status-color.status_2 .circle {
-      background-color: #fac090; }
+      background-color: #FAC090; }
     .grid_listing tbody tr td .status-color.status_3 .circle, .partsInsert tbody tr td .status-color.status_3 .circle, .formTable tbody tr td .status-color.status_3 .circle {
-      background-color: yellow; }
+      background-color: #FFFF00; }
     .grid_listing tbody tr td .status-color.status_4 .circle, .partsInsert tbody tr td .status-color.status_4 .circle, .formTable tbody tr td .status-color.status_4 .circle {
-      background-color: #92d050; }
+      background-color: #92D050; }
     .grid_listing tbody tr td .status-color.status_5 .circle, .partsInsert tbody tr td .status-color.status_5 .circle, .formTable tbody tr td .status-color.status_5 .circle {
-      background-color: #7f7f7f; }
+      background-color: #7F7F7F; }
 
 .partsInsert .form-group, .formTable .form-group {
   margin-bottom: 0 !important; }
@@ -595,15 +595,15 @@ a.topBtn {
         .repairFields form .statusButtons .statusContainer label.status_1:before {
           background-color: #fff; }
         .repairFields form .statusButtons .statusContainer label.status_2:before {
-          background-color: #8db4e3; }
+          background-color: #8DB4E3; }
         .repairFields form .statusButtons .statusContainer label.status_3:before {
-          background-color: #fac090; }
+          background-color: #FAC090; }
         .repairFields form .statusButtons .statusContainer label.status_4:before {
-          background-color: yellow; }
+          background-color: #FFFF00; }
         .repairFields form .statusButtons .statusContainer label.status_5:before {
-          background-color: #92d050; }
+          background-color: #92D050; }
         .repairFields form .statusButtons .statusContainer label.status_6:before {
-          background-color: #7f7f7f; }
+          background-color: #7F7F7F; }
         .repairFields form .statusButtons .statusContainer input[type=radio] {
           display: none; }
         .repairFields form .statusButtons .statusContainer input[type=radio]:checked + label:before {
@@ -687,7 +687,7 @@ a.topBtn {
     text-align: center;
     font-weight: bold !important; }
     #printEntry * .priceTag:after {
-      content: "€";
+      content: "Γé¼";
       padding-left: 5px; }
 #printEntry tr td {
   padding: 2px !important;
@@ -727,12 +727,14 @@ a.topBtn {
 	position:fixed;
 	bottom:50px;
 }*/
-.contacts {
+.contacts:not(.foote) {
   margin-bottom: 30px; }
-  .contacts table {
+.contacts.foote table {
+  margin-bottom: 0; }
+.contacts table {
+  border: none !important; }
+  .contacts table tr, .contacts table td {
     border: none !important; }
-    .contacts table tr, .contacts table td {
-      border: none !important; }
 
 .repairDesc thead tr > td {
   font-size: 0.8em;
@@ -802,7 +804,7 @@ a.topBtn {
 .viewField .form-control[readonly],
 .viewField fieldset[disabled] .form-control {
   color: #888;
-  background-color: #eeeeee !important;
+  background-color: #eee !important;
   cursor: default !important; }
 
 .statBlocks {
@@ -854,10 +856,12 @@ a.topBtn {
         font-size: 30px;
         text-align: left; }
         .statBlocks .block .statsBox strong .money:after {
-          content: "€";
+          content: "Γé¼";
           padding-left: 5px; }
       .statBlocks .block .statsBox p {
         display: block;
         font-size: 18px;
         text-align: left;
         margin: 0 !important; }
+
+/*# sourceMappingURL=main.css.map */
