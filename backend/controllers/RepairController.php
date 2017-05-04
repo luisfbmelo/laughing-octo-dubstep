@@ -391,7 +391,14 @@ class RepairController extends Controller
         //
         //  Set "Telemóvel" as default equipment
         //
-        $modelEquip = equipaments::find()->where(['like', 'equipDesc', 'Telemovel'])->one();
+        $getDefaultEquip = equipaments::find()->where([
+            'and',
+            ['status'=> 1], 
+            ['like', 'equipDesc', 'Telemovel']
+            
+        ])->one();
+
+        $modelEquip = $getDefaultEquip==null ? $modelEquip : $getDefaultEquip;
 
         //set defaults
         $modelStores->id_store = Yii::$app->session->get('user.store');
